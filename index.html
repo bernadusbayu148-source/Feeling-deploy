@@ -365,28 +365,44 @@
       return `<span class="rank-badge" style="${style}">${rank}</span>`;
     }
 
-    function render(){
-      // Tampilkan tabel mulai peringkat #4 (hindari duplikat podium)
-      const startIndex = Math.min(3, state.filtered.length);
-      const limit = state.limit===0 ? state.filtered.length - startIndex : state.limit;
-      const slice = state.filtered.slice(startIndex, startIndex + limit);
 
-      if (slice.length===0){
-        el.body.innerHTML = `<tr><td colspan="4" class="empty">Tidak ada data.</td></tr>`;
-        return;
-      }
+<script>
+  function render(){
+    const isSearching = !!state.query.trim();
 
-      const rowsHtml = slice.map((r) => {
-        const key = String(r["No Member"] ?? "").trim();
-        const rank = state.rankMap[key] ?? "-"; // gunakan peringkat global
-        const point = Number(r["Point"] ?? 0).toLocaleString("id-ID");
-        return `
-          <tr>
-            <td>${rankBadge(rank)}</td>
-            <td class="mono">${r["No Member"] ?? ""}</td>
-            <td>${r["Nama"] ?? ""}</td>
-            <td class="mono"><b>${point}</b></td>
-          </tr>
+    // Jika mencari, tampilkan semua hasil (mulai dari index 0).
+    // Jika tidak mencari, buang 3 teratas dari tabel (karena sudah tampil di podium).
+    const startIndex = isSearching ? 0 : Math.min(3, state.filtered.length);
+
+    // Hitung limit dengan memperhatikan startIndex
+    const remaining = Math.max(state.filtered.length - startIndex, 0);
+    const limit = state.limit === 0 ? remaining : Math.min(state.limit, remaining);
+
+    const slice = state.filtered.slice(startIndex, startIndex + limit);
+
+    if (slice.length === 0){
+      el.body.innerHTML = `<tr><td colspan="4" class="empty">Tidak ada data.</td></tr>`;
+      return;
+    }
+
+    const rowsHtml = slice.map((r) => {
+      const key = String(r["No Member"] ?? "").trim();
+      const rank = state.rankMap[key] ?? "-"; // peringkat global dari dataset penuh
+      const point = Number(r["Point"] ?? 0).toLocaleString("id-ID");
+      return `
+        <tr>
+          <td>${rankBadge(rank)}</td>
+          <td class="mono">${r["No Member"] ?? ""}</td>
+          <td>${r["Nama"] ?? ""}</td>
+          <td class="mono"><b>${point}</b></td>
+        </tr>
+      `;
+    }).join("");
+
+    el.body.innerHTML = rowsHtml;
+  }
+</script>
+
         `;
       }).join("");
 
