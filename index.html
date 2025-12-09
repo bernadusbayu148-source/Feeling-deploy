@@ -189,14 +189,24 @@
       border: 1px solid #f59e0b;
       box-shadow: 0 2px 6px rgba(0,0,0,.15);
     }
-    .podium-card.second .podium-avatar {
-      background: linear-gradient(135deg, #eeeeee, #9ca3af 60%, #d1d5db);
-      border-color: #e9e9e9;
+   
+    .podium-card.second .podium-badge {
+      position: absolute; top: -10px; right: -10px;
+      background: linear-gradient(90deg,#9ca3af,#d1d5db); /* silver gradient */
+      color: #1f2937; /* abu gelap agar kontras */
+      font-weight: 800; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid #9ca3af;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
     }
-    .podium-card.third .podium-avatar {
-      background: linear-gradient(135deg, #f0e2ff, #a855f7 60%, #c084fc);
-      border-color: #eadcff;
+    .podium-card.third .podium-badge {
+      position: absolute; top: -10px; right: -10px;
+      background: linear-gradient(90deg,#a855f7,#c084fc); /* violet gradient */
+      color: #ffffff;
+      font-weight: 800; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid #a855f7;      
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
     }
+
     .podium-meta {
       margin-top: 10px;
       color: var(--muted);
@@ -280,6 +290,7 @@
     <!-- Podium 3 teratas -->
     <section class="podium" aria-label="Klasemen 3 teratas">
       <div class="podium-wrap">
+        
         <!-- Juara 2 -->
         <article class="podium-card second">
           <div class="podium-avatar" aria-hidden="true"></div>
@@ -288,6 +299,8 @@
           <div class="podium-trophy">
             <span class="trophy-icon">🏆</span> <span id="podium2-point">0</span> poin
           </div>
+          <!-- Tambahan badge #2 -->
+          <div class="podium-badge">#2</div>
         </article>
 
         <!-- Juara 1 -->
@@ -309,6 +322,8 @@
           <div class="podium-trophy">
             <span class="trophy-icon">🏆</span> <span id="podium3-point">0</span> poin
           </div>
+          <!-- Tambahan badge #3 -->
+          <div class="podium-badge">#3</div>
         </article>
       </div>
       <div class="podium-meta" id="podiumMeta" aria-live="polite"></div>
