@@ -213,11 +213,25 @@
       font-size: 0.95rem;
       text-align: center;
     }
+    
+/* Hilangkan media query yang menumpuk kartu jadi satu kolom */
     @media (max-width: 900px) {
-      .podium-wrap { grid-template-columns: 1fr; }
-      .podium-card.first { transform: none; }
+      .podium-wrap { grid-template-columns: 1fr 1.2fr 1fr; }
+      .podium-card.first { transform: translateY(-8px); }
     }
-
+    
+    /* Biar 3 kolom selalu ada dan menyusut proporsional */
+    .podium-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 14px;
+    }
+    
+    /* Izinkan kartu menyusut, tapi kasih batas minimum supaya tetap terbaca */
+    .podium-card {
+      min-width: 200px;       /* jangan kurang dari ini agar teks masih nyaman */
+      padding: 14px;          /* sedikit kurangi padding di layar sempit */
+    }
     /* ===== Table ===== */
     .card{
       background:var(--card);
