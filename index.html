@@ -8,21 +8,25 @@
 
   <style>
     :root {
-      --bg:#0f172a;
-      --text:#e5e7eb;
-      --muted:#94a3b8;
-      --accent:#6366f1;
-      --accent2:#22d3ee;
-      --border:#1f2937;
-      --card:#0b1220;
-      --thead:#0f172a;
+      /* === Palet Light Theme (sesuai permintaan) === */
+      --bg:#FFFFFF;       /* Background utama */
+      --text:#222222;     /* Teks utama (gelap untuk kontras) */
+      --muted:#555555;    /* Teks sekunder */
+      --accent:#D21F3C;   /* Merah utama */
+      --accent2:#F75353;  /* Merah aksen kedua (lebih muda) */
+      --border:#C33F3F;   /* Merah gelap untuk border */
+      --card:#f9f9f9;     /* Warna kartu */
+      --thead:#f0f0f0;    /* Header tabel */
+
+      /* Tambahan warna netral */
+      --neutral:#eaeaea;
     }
 
     html, body { height: 100%; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(1000px 400px at 10% 0%, #111827 30%, #0b1020 70%), var(--bg);
+      background: var(--bg);
       color: var(--text);
     }
 
@@ -33,6 +37,7 @@
       font-weight:800;
       font-size:clamp(24px,4vw,36px);
       letter-spacing:-.02em;
+      /* Gradien headline mengikuti aksen merah */
       background:linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
@@ -42,21 +47,24 @@
       display:grid; grid-template-columns:1fr auto auto; gap:8px; margin-bottom:16px; align-items:center;
     }
     .controls input, .controls select, .controls button{
-      background:var(--card); color:var(--text);
+      background:#ffffff; color:var(--text);
       border:1px solid var(--border); border-radius:8px; padding:10px 12px; outline:none;
     }
+    .controls input::placeholder{ color:#777; }
     .controls button{
-      cursor:pointer; background:linear-gradient(90deg, #4f46e5, #06b6d4);
-      border:none; font-weight:600;
+      cursor:pointer; 
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      border:none; font-weight:600; color:#fff;
     }
+    .controls button:hover{ filter:brightness(0.95); }
 
-    /* ====== PODIUM ====== */
+    /* ====== PODIUM (Light Theme) ====== */
     .podium {
       margin: 12px 0 20px;
       padding: 16px;
       border-radius: 16px;
-      background: radial-gradient(1200px 400px at 50% -20%, #0d152b 20%, #0b1220 60%);
-      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+      border: 1px solid var(--neutral);
     }
     .podium-wrap {
       display: grid;
@@ -66,47 +74,52 @@
     }
     .podium-card {
       position: relative;
-      background: #0e172a;
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid var(--neutral);
       border-radius: 16px;
       padding: 16px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
     }
     .podium-card .podium-avatar {
       width: 84px; height: 84px; margin: 0 auto 10px; border-radius: 12px;
-      background: linear-gradient(135deg, #1e293b, #0ea5e9 60%, #22d3ee);
-      border: 1px solid #243447;
+      background: linear-gradient(135deg, #ffd1d8, var(--accent) 60%, var(--accent2));
+      border: 1px solid #ffd6dc;
     }
     .podium-card .podium-name { margin: 6px 0 2px; font-weight: 700; }
     .podium-card .podium-member { margin: 0 0 10px; color: var(--muted); font-size: 0.95rem; }
     .podium-card .podium-trophy {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 8px 12px; border-radius: 999px;
-      background: #0b1220; border: 1px solid var(--border);
+      background: #fff; border: 1px solid var(--neutral); color: var(--text);
     }
     .trophy-icon { font-size: 1.1rem; }
 
     .podium-card.first {
       transform: translateY(-8px);
-      background: #0b1220;
-      border: 1px solid #334155;
+      background: #fff;
+      border: 1px solid var(--neutral);
+      box-shadow: 0 10px 28px rgba(0,0,0,.08);
     }
     .podium-card.first .podium-avatar {
       width: 96px; height: 96px;
-      background: linear-gradient(135deg, #1e293b, #f59e0b 60%, #f97316);
+      background: linear-gradient(135deg, #ffe9cc, #f59e0b 60%, #f97316);
+      border-color: #ffe1b8;
     }
     .podium-card.first .podium-badge {
       position: absolute; top: -10px; right: -10px;
       background: linear-gradient(90deg,#f59e0b,#f97316);
-      color: #0b1220; font-weight: 800; padding: 8px 12px; border-radius: 999px;
-      border: 1px solid #a16207;
+      color: #fff; font-weight: 800; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid #f59e0b;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
     }
     .podium-card.second .podium-avatar {
-      background: linear-gradient(135deg, #1e293b, #9ca3af 60%, #d1d5db);
+      background: linear-gradient(135deg, #eeeeee, #9ca3af 60%, #d1d5db);
+      border-color: #e9e9e9;
     }
     .podium-card.third .podium-avatar {
-      background: linear-gradient(135deg, #1e293b, #a855f7 60%, #c084fc);
+      background: linear-gradient(135deg, #f0e2ff, #a855f7 60%, #c084fc);
+      border-color: #eadcff;
     }
     .podium-meta {
       margin-top: 10px;
@@ -119,30 +132,38 @@
       .podium-card.first { transform: none; }
     }
 
-    /* ====== TABEL ====== */
+    /* ====== TABEL (Light Theme) ====== */
     .card{
       background:var(--card);
-      border:1px solid var(--border);
+      border:1px solid var(--neutral);
       border-radius:14px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      box-shadow:0 8px 24px rgba(0,0,0,.06);
     }
     table{ width:100%; border-collapse:collapse; }
     thead th{
       text-align:left; font-weight:700; padding:12px 14px;
-      background:var(--thead); border-bottom:1px solid var(--border);
+      background:var(--thead); border-bottom:1px solid var(--neutral);
       position:sticky; top:0; z-index:1;
+      color:#333;
     }
-    tbody td{ padding:12px 14px; border-bottom:1px solid var(--border); }
-    tbody tr:nth-child(odd){ background:rgba(255,255,255,.02); }
+    tbody td{ padding:12px 14px; border-bottom:1px solid var(--neutral); }
+    tbody tr:nth-child(odd){ background:#fff; }
+    tbody tr:nth-child(even){ background:#fcfcfc; }
 
     .rank-badge{
       display:inline-block; min-width:36px; text-align:center;
       padding:6px 10px; border-radius:999px; font-weight:700;
-      color:#0b1220; background:#f59e0b;
+      color:#ffffff; 
+      background: var(--accent); /* default badge */
+      border: 1px solid #c71c38;
     }
     .mono{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; }
     .footer{ color:var(--muted); font-size:12px; padding:12px; text-align:right; }
-    .empty{ padding:24px; text-align:center; color:var(--muted); }
+    .empty{ padding:24px; text-align:center; color:#777; }
+
+    /* Link & focus */
+    a { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
   </style>
 </head>
 <body>
@@ -357,15 +378,15 @@
 
     function rankBadge(rank){
       const styles=[
-        "background:linear-gradient(90deg,#f59e0b,#f97316);color:#0b1220;", // 1
-        "background:linear-gradient(90deg,#9ca3af,#d1d5db);color:#0b1220;", // 2
-        "background:linear-gradient(90deg,#c084fc,#a855f7);color:#0b1220;"  // 3
+        "background:linear-gradient(90deg,#f59e0b,#f97316);color:#ffffff;", // 1 (emas)
+        "background:linear-gradient(90deg,#9ca3af,#d1d5db);color:#333333;", // 2 (perak)
+        "background:linear-gradient(90deg,#a855f7,#c084fc);color:#ffffff;"  // 3 (ungu)
       ];
-      const style=styles[rank-1]||"background:#374151;color:#e5e7eb;";
+      const style=styles[rank-1]||`background:${getComputedStyle(document.documentElement).getPropertyValue('--accent')};color:#ffffff;`;
       return `<span class="rank-badge" style="${style}">${rank}</span>`;
     }
 
-    // ===== Perbaikan pencarian: saat mencari, jangan buang top-3 dari tabel =====
+    /* ===== Perbaikan pencarian: saat mencari, jangan buang top-3 dari tabel ===== */
     function render(){
       const isSearching = !!state.query.trim();
 
@@ -434,4 +455,3 @@
     fetchSheet();
   </script>
 </body>
-</html>
