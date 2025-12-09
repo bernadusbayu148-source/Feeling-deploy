@@ -8,18 +8,23 @@
 
   <style>
     :root {
-      /* === Palet Light Theme (sesuai permintaan) === */
-      --bg:#FFFFFF;       /* Background utama */
-      --text:#222222;     /* Teks utama (gelap untuk kontras) */
-      --muted:#555555;    /* Teks sekunder */
-      --accent:#D21F3C;   /* Merah utama */
-      --accent2:#F75353;  /* Merah aksen kedua (lebih muda) */
-      --border:#C33F3F;   /* Merah gelap untuk border */
-      --card:#f9f9f9;     /* Warna kartu */
-      --thead:#f0f0f0;    /* Header tabel */
+      /* === Palet Merah (sesuai permintaan) === */
+      --bg:#FFFFFF;
+      --text:#222222;
+      --muted:#666666;
+      --accent:#D21F3C;   /* merah utama */
+      --accent2:#F75353;  /* merah cerah */
+      --accent3:#C33F3F;  /* merah gelap */
+      --border:#dcdcdc;
+      --card:#f9f9f9;
+      --thead:#f5f5f5;
+      --neutral:#efefef;
 
-      /* Tambahan warna netral */
-      --neutral:#eaeaea;
+      /* Tambahan */
+      --success:#16a34a;  /* hijau untuk pesan sukses */
+      --warn:#f59e0b;     /* emas untuk badge #1 */
+      --silver:#9ca3af;   /* perak untuk badge #2 */
+      --violet:#a855f7;   /* ungu untuk badge #3 */
     }
 
     html, body { height: 100%; }
@@ -30,35 +35,78 @@
       color: var(--text);
     }
 
-    .container{ max-width:1000px; margin:40px auto; padding:0 16px; }
+    .container{ max-width:1120px; margin:40px auto; padding:0 16px; }
 
     header h1{
       margin:0 0 8px;
       font-weight:800;
       font-size:clamp(24px,4vw,36px);
       letter-spacing:-.02em;
-      /* Gradien headline mengikuti aksen merah */
       background:linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     header p{ margin:0 0 18px; color:var(--muted); }
 
+    /* ===== Controls ===== */
     .controls{
-      display:grid; grid-template-columns:1fr auto auto; gap:8px; margin-bottom:16px; align-items:center;
+      display:grid; grid-template-columns:1fr auto auto; gap:10px; margin-bottom:16px; align-items:center;
     }
-    .controls input, .controls select, .controls button{
-      background:#ffffff; color:var(--text);
-      border:1px solid var(--border); border-radius:8px; padding:10px 12px; outline:none;
+    .controls input, .controls select{
+      background:#fff; color:var(--text);
+      border:1px solid var(--accent3); border-radius:10px; padding:10px 12px; outline:none;
     }
-    .controls input::placeholder{ color:#777; }
-    .controls button{
-      cursor:pointer; 
-      background:linear-gradient(90deg, var(--accent), var(--accent2));
-      border:none; font-weight:600; color:#fff;
-    }
-    .controls button:hover{ filter:brightness(0.95); }
+    .controls input::placeholder{ color:#888; }
 
-    /* ====== PODIUM (Light Theme) ====== */
+    .btn{
+      border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:700;
+    }
+    .btn-primary{
+      color:#fff; border:none;
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .btn-primary:hover{ filter:brightness(0.96); }
+    .btn-outline{
+      background:#fff; color:var(--accent); border:2px solid var(--accent);
+    }
+    .btn-outline:hover{ background:#ffecec; }
+
+    /* ===== Alert Banner ===== */
+    .alert{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px; border:1px solid var(--accent3);
+      background: linear-gradient(180deg, #fff 0%, #ffecee 100%);
+      color: var(--accent3); margin-bottom:12px;
+    }
+    .alert .dot{ width:10px; height:10px; border-radius:999px; background: var(--accent3); }
+
+    /* ===== Accent Divider ===== */
+    .divider{
+      height:4px; border-radius:999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 8px 0 16px;
+    }
+
+    /* ===== Stat Tiles ===== */
+    .stats{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:16px;
+    }
+    .stat-card{
+      background:#fff; border:1px solid var(--border); border-radius:14px; padding:16px;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+    }
+    .stat-title{ color:var(--muted); margin:0 0 6px; font-size:.95rem; }
+    .stat-value{ font-weight:800; font-size:1.4rem; margin:0; }
+    .stat-bar{
+      margin-top:10px; width:100%; height:10px; border-radius:999px; background:#ffe3e6; overflow:hidden;
+      border:1px solid #ffd6da;
+    }
+    .stat-bar .fill{
+      height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2));
+      width:0%;
+      transition: width .6s ease;
+    }
+
+    /* ===== Podium ===== */
     .podium {
       margin: 12px 0 20px;
       padding: 16px;
@@ -68,7 +116,7 @@
     }
     .podium-wrap {
       display: grid;
-      grid-template-columns: 1fr 1.2fr 1fr; /* 2-1-3 layout: juara 2 – 1 – 3 */
+      grid-template-columns: 1fr 1.2fr 1fr; /* 2-1-3 layout */
       gap: 14px;
       align-items: end;
     }
@@ -81,6 +129,20 @@
       text-align: center;
       box-shadow: 0 8px 24px rgba(0,0,0,.06);
     }
+    /* Background aksen merah per posisi */
+    .podium-card.first::before,
+    .podium-card.second::before,
+    .podium-card.third::before{
+      content:""; position:absolute; inset:-1px; border-radius:16px; z-index:-1;
+      background: radial-gradient(600px 220px at 50% -20%, rgba(210,31,60,.15), rgba(247,83,83,.06) 70%);
+    }
+    .podium-card.second::before{
+      background: radial-gradient(600px 220px at 50% -20%, rgba(195,63,63,.18), rgba(247,83,83,.08) 70%);
+    }
+    .podium-card.third::before{
+      background: radial-gradient(600px 220px at 50% -20%, rgba(247,83,83,.18), rgba(210,31,60,.08) 70%);
+    }
+
     .podium-card .podium-avatar {
       width: 84px; height: 84px; margin: 0 auto 10px; border-radius: 12px;
       background: linear-gradient(135deg, #ffd1d8, var(--accent) 60%, var(--accent2));
@@ -132,19 +194,29 @@
       .podium-card.first { transform: none; }
     }
 
-    /* ====== TABEL (Light Theme) ====== */
+    /* ===== Chips / Badges ===== */
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin: 6px 0 12px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px; font-weight:600; font-size:.9rem;
+      background:#fff; border:1px solid var(--accent3); color:var(--accent);
+    }
+    .chip .dot{ width:10px; height:10px; border-radius:999px; background:var(--accent); }
+
+    /* ===== Table ===== */
     .card{
       background:var(--card);
       border:1px solid var(--neutral);
       border-radius:14px; overflow:hidden;
       box-shadow:0 8px 24px rgba(0,0,0,.06);
     }
+    .table-accent{
+      height:6px; background:linear-gradient(90deg, var(--accent), var(--accent2)); }
     table{ width:100%; border-collapse:collapse; }
     thead th{
       text-align:left; font-weight:700; padding:12px 14px;
       background:var(--thead); border-bottom:1px solid var(--neutral);
-      position:sticky; top:0; z-index:1;
-      color:#333;
+      position:sticky; top:0; z-index:1; color:#333;
     }
     tbody td{ padding:12px 14px; border-bottom:1px solid var(--neutral); }
     tbody tr:nth-child(odd){ background:#fff; }
@@ -153,15 +225,14 @@
     .rank-badge{
       display:inline-block; min-width:36px; text-align:center;
       padding:6px 10px; border-radius:999px; font-weight:700;
-      color:#ffffff; 
+      color:#ffffff;
       background: var(--accent); /* default badge */
-      border: 1px solid #c71c38;
+      border: 1px solid var(--accent3);
     }
     .mono{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; }
     .footer{ color:var(--muted); font-size:12px; padding:12px; text-align:right; }
     .empty{ padding:24px; text-align:center; color:#777; }
 
-    /* Link & focus */
     a { color: var(--accent); }
     :focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
   </style>
@@ -173,7 +244,32 @@
       <p>Data diambil dari Google Sheets (kolom: <strong>No Member</strong>, <strong>Nama</strong>, <strong>Point</strong>).</p>
     </header>
 
-    <!-- ====== PODIUM 3 TERATAS ====== -->
+    <!-- Alert contoh (opsional) -->
+    <div class="alert" id="alertInfo" style="display:none;">
+      <span class="dot" aria-hidden="true"></span>
+      <div><strong>Info:</strong> Mode pencarian aktif.</div>
+    </div>
+
+    <!-- Stat tiles -->
+    <section class="stats" aria-label="Ringkasan">
+      <article class="stat-card">
+        <p class="stat-title">Total Member</p>
+        <h3 class="stat-value" id="statTotal">0</h3>
+        <div class="stat-bar"><div class="fill" id="barTotal" style="width:0%"></div></div>
+      </article>
+      <article class="stat-card">
+        <p class="stat-title">Rata-rata Poin</p>
+        <h3 class="stat-value" id="statAvg">0</h3>
+        <div class="stat-bar"><div class="fill" id="barAvg" style="width:0%"></div></div>
+      </article>
+      <article class="stat-card">
+        <p class="stat-title">Target Poin Minggu Ini</p>
+        <h3 class="stat-value" id="statTarget">5.000</h3>
+        <div class="stat-bar"><div class="fill" id="barTarget" style="width:0%"></div></div>
+      </article>
+    </section>
+
+    <!-- Podium 3 teratas -->
     <section class="podium" aria-label="Klasemen 3 teratas">
       <div class="podium-wrap">
         <!-- Juara 2 -->
@@ -210,7 +306,17 @@
       <div class="podium-meta" id="podiumMeta" aria-live="polite"></div>
     </section>
 
-    <!-- ====== KONTROL ====== -->
+    <!-- Chips status -->
+    <div class="chips">
+      <span class="chip"><span class="dot"></span> Terbaru</span>
+      <span class="chip"><span class="dot" style="background:var(--accent2)"></span> Pencarian aktif</span>
+      <span class="chip"><span class="dot" style="background:var(--accent3)"></span> Aksen merah</span>
+    </div>
+
+    <!-- Divider aksen -->
+    <div class="divider"></div>
+
+    <!-- Kontrol -->
     <div class="controls" role="region" aria-label="Filter dan aksi">
       <input id="searchBox" type="search" placeholder="Cari nama atau No Member…" aria-label="Cari" />
       <select id="limitSelect" aria-label="Tampilkan">
@@ -219,11 +325,12 @@
         <option value="50">Top 50</option>
         <option value="0">Semua</option>
       </select>
-      <button id="refreshBtn" aria-label="Muat ulang data">Muat Ulang</button>
+      <button id="refreshBtn" class="btn btn-primary" aria-label="Muat ulang data">Muat Ulang</button>
     </div>
 
-    <!-- ====== TABEL LEADERBOARD ====== -->
+    <!-- Tabel -->
     <div class="card" role="region" aria-label="Tabel leaderboard">
+      <div class="table-accent" aria-hidden="true"></div>
       <table id="board">
         <thead>
           <tr>
@@ -238,6 +345,12 @@
         </tbody>
       </table>
       <div class="footer" id="meta" aria-live="polite"></div>
+    </div>
+
+    <!-- Aksi tambahan -->
+    <div style="margin-top:12px; display:flex; gap:10px;">
+      <button class="btn btn-primary" id="btnExport">Export CSV</button>
+      <button class="btn btn-outline" id="btnReset">Reset Pencarian</button>
     </div>
   </div>
 
@@ -260,6 +373,15 @@
       search: document.getElementById("searchBox"),
       limit: document.getElementById("limitSelect"),
       refresh: document.getElementById("refreshBtn"),
+      alert: document.getElementById("alertInfo"),
+      statTotal: document.getElementById("statTotal"),
+      statAvg: document.getElementById("statAvg"),
+      statTarget: document.getElementById("statTarget"),
+      barTotal: document.getElementById("barTotal"),
+      barAvg: document.getElementById("barAvg"),
+      barTarget: document.getElementById("barTarget"),
+      btnExport: document.getElementById("btnExport"),
+      btnReset: document.getElementById("btnReset"),
     };
 
     // ===== Fetch main =====
@@ -364,6 +486,9 @@
       applyFilter();
       render();
       el.meta.textContent = `Sumber: ${source} • ${state.filtered.length} baris • ${new Date().toLocaleString("id-ID")}`;
+
+      // Update stat tiles
+      updateStats();
     }
 
     function applyFilter(){
@@ -374,30 +499,29 @@
             String(r["No Member"]).toLowerCase().includes(q) ||
             String(r["Nama"]).toLowerCase().includes(q)
           );
+
+      // Toggle alert
+      if (el.alert){
+        el.alert.style.display = q ? "flex" : "none";
+      }
     }
 
     function rankBadge(rank){
       const styles=[
-        "background:linear-gradient(90deg,#f59e0b,#f97316);color:#ffffff;", // 1 (emas)
-        "background:linear-gradient(90deg,#9ca3af,#d1d5db);color:#333333;", // 2 (perak)
-        "background:linear-gradient(90deg,#a855f7,#c084fc);color:#ffffff;"  // 3 (ungu)
+        "background:linear-gradient(90deg,#f59e0b,#f97316);color:#ffffff;", // 1
+        "background:linear-gradient(90deg,#9ca3af,#d1d5db);color:#333333;", // 2
+        "background:linear-gradient(90deg,#a855f7,#c084fc);color:#ffffff;"  // 3
       ];
-      const style=styles[rank-1]||`background:${getComputedStyle(document.documentElement).getPropertyValue('--accent')};color:#ffffff;`;
+      const style=styles[rank-1]||`background:${getComputedStyle(document.documentElement).getPropertyValue('--accent')};color:#ffffff;border:1px solid var(--accent3);`;
       return `<span class="rank-badge" style="${style}">${rank}</span>`;
     }
 
-    /* ===== Perbaikan pencarian: saat mencari, jangan buang top-3 dari tabel ===== */
+    // ===== Render tabel (pencarian: tampilkan semua; umum: buang top-3) =====
     function render(){
       const isSearching = !!state.query.trim();
-
-      // Jika mencari, tampilkan semua hasil mulai index 0.
-      // Jika tidak mencari, buang 3 teratas (sudah tampil di podium).
       const startIndex = isSearching ? 0 : Math.min(3, state.filtered.length);
-
-      // Hitung limit dengan memperhatikan startIndex
       const remaining = Math.max(state.filtered.length - startIndex, 0);
       const limit = state.limit === 0 ? remaining : Math.min(state.limit, remaining);
-
       const slice = state.filtered.slice(startIndex, startIndex + limit);
 
       if (slice.length===0){
@@ -407,7 +531,7 @@
 
       const rowsHtml = slice.map((r) => {
         const key = String(r["No Member"] ?? "").trim();
-        const rank = state.rankMap[key] ?? "-"; // peringkat global dari dataset penuh
+        const rank = state.rankMap[key] ?? "-";
         const point = Number(r["Point"] ?? 0).toLocaleString("id-ID");
         return `
           <tr>
@@ -446,12 +570,45 @@
       if (meta) meta.textContent = `Teratas saat ini • diperbarui ${new Date().toLocaleString("id-ID")}`;
     }
 
+    // ===== Stats =====
+    function updateStats(){
+      const total = state.rows.length;
+      const avg = total ? (state.rows.reduce((s,r)=>s+Number(r["Point"]||0),0) / total) : 0;
+      const target = 5000; // contoh target
+
+      el.statTotal.textContent = total.toLocaleString("id-ID");
+      el.statAvg.textContent = Math.round(avg).toLocaleString("id-ID");
+
+      // progress bars (dummy rumus)
+      el.barTotal.style.width = Math.min(100, (total/100)*100) + "%";  // jika total member > 100, penuh
+      el.barAvg.style.width   = Math.min(100, (avg/5000)*100) + "%";
+      el.barTarget.style.width= Math.min(100, (avg/target)*100) + "%";
+    }
+
+    // ===== Export CSV (client-side dari state.filtered) =====
+    function exportCSV(){
+      const headers = ["Peringkat","No Member","Nama","Point"];
+      const lines = [headers.join(",")];
+      state.filtered.forEach(r=>{
+        const rank = state.rankMap[String(r["No Member"]||"").trim()] ?? "-";
+        lines.push([rank, r["No Member"], r["Nama"], r["Point"]].join(","));
+      });
+      const blob = new Blob([lines.join("\n")], {type:"text/csv;charset=utf-8;"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "leaderboard.csv"; a.click();
+      URL.revokeObjectURL(url);
+    }
+
     // Events
     el.search.addEventListener("input",(e)=>{ state.query=e.target.value; applyFilter(); render(); });
     el.limit.addEventListener("change",(e)=>{ state.limit=Number(e.target.value); render(); });
     el.refresh.addEventListener("click",()=>{ fetchSheet(); });
+    el.btnExport.addEventListener("click", exportCSV);
+    el.btnReset.addEventListener("click", ()=>{ el.search.value=""; state.query=""; applyFilter(); render(); });
 
     // Init
     fetchSheet();
   </script>
 </body>
+</html>
