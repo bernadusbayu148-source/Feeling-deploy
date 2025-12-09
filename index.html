@@ -63,6 +63,45 @@
     }
     .btn-primary:hover{ filter:brightness(0.96); }
 
+    /* ===== Panel Info Hasil Pencarian ===== */
+    .search-info{
+      margin: 6px 0 12px;
+      padding: 12px;
+      border: 1px solid var(--accent3);
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff 0%, #ffecee 100%);
+      color: var(--text);
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+    .search-items{
+      display: grid;
+      gap: 8px;
+    }
+    .search-item{
+      display: grid;
+      grid-template-columns: 100px 1fr 140px 180px; /* Rank | Nama & No | Point | Gap ke #1 */
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      align-items: center;
+    }
+    .search-item .rank{ font-weight: 800; color: var(--accent3); }
+    .search-item .name{ font-weight: 700; }
+    .search-item .member{ color: var(--muted); font-weight: 600; }
+    .search-item .points,
+    .search-item .gap{
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
+    .search-item .gap{ color: var(--accent); font-weight: 700; }
+    @media (max-width: 900px){
+      .search-item{ grid-template-columns: 90px 1fr; }
+      .search-item .points,
+      .search-item .gap{ margin-top: 6px; }
+    }
+
     /* ===== Podium ===== */
     .podium {
       margin: 12px 0 20px;
@@ -158,8 +197,7 @@
       border-radius:14px; overflow:hidden;
       box-shadow:0 8px 24px rgba(0,0,0,.06);
     }
-    .table-accent{
-      height:6px; background:linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .table-accent{ height:6px; background:linear-gradient(90deg, var(--accent), var(--accent2)); }
     table{ width:100%; border-collapse:collapse; }
     thead th{
       text-align:left; font-weight:700; padding:12px 14px;
@@ -191,6 +229,21 @@
       <h1>Feeling Leaderboard</h1>
       <p>Data diambil dari Google Sheets (kolom: <strong>No Member</strong>, <strong>Nama</strong>, <strong>Point</strong>).</p>
     </header>
+
+    <!-- Kontrol -->
+    <div class="controls" role="region" aria-label="Filter dan aksi">
+      <input id="searchBox" type="search" placeholder="Cari nama atau No Member…" aria-label="Cari" />
+      <select id="limitSelect" aria-label="Tampilkan">
+        <option value="10" selected>Top 10</option>
+        <option value="25">Top 25</option>
+        <option value="50">Top 50</option>
+        <option value="0">Semua</option>
+      </select>
+      <button id="refreshBtn" class="btn btn-primary" aria-label="Muat ulang data">Muat Ulang</button>
+    </div>
+
+    <!-- Panel Info Hasil Pencarian -->
+    <div id="searchInfo" class="search-info" aria-live="polite" style="display:none;"></div>
 
     <!-- Podium 3 teratas -->
     <section class="podium" aria-label="Klasemen 3 teratas">
@@ -228,18 +281,6 @@
       </div>
       <div class="podium-meta" id="podiumMeta" aria-live="polite"></div>
     </section>
-
-    <!-- Kontrol -->
-    <div class="controls" role="region" aria-label="Filter dan aksi">
-      <input id="searchBox" type="search" placeholder="Cari nama atau No Member…" aria-label="Cari" />
-      <select id="limitSelect" aria-label="Tampilkan">
-        <option value="7" selected>Top 10</option>
-        <option value="22">Top 25</option>
-        <option value="47">Top 50</option>
-        <option value="0">Semua</option>
-      </select>
-      <button id="refreshBtn" class="btn btn-primary" aria-label="Muat ulang data">Muat Ulang</button>
-    </div>
 
     <!-- Tabel -->
     <div class="card" role="region" aria-label="Tabel leaderboard">
@@ -280,6 +321,7 @@
       search: document.getElementById("searchBox"),
       limit: document.getElementById("limitSelect"),
       refresh: document.getElementById("refreshBtn"),
+      info: document.getElementById("searchInfo"),
     };
 
     // ===== Fetch main =====
@@ -406,13 +448,55 @@
       return `<span class="rank-badge" style="${style}">${rank}</span>`;
     }
 
-    // ===== Render tabel (pencarian: tampilkan semua; umum: buang top-3) =====
+    // ===== Render tabel + Panel info hasil pencarian =====
     function render(){
       const isSearching = !!state.query.trim();
+
+      // Nilai poin peringkat #1 untuk menghitung gap
+      const top1Points = Number(state.rows[0]?.["Point"] ?? 0);
+
+      // Render Panel Info jika sedang mencari
+      if (isSearching){
+        if (state.filtered.length === 0){
+          el.info.style.display = "none";
+        } else {
+          const itemsHtml = state.filtered.map(r => {
+            const no   = String(r["No Member"] ?? "").trim();
+            const nama = String(r["Nama"] ?? "").trim();
+            const pts  = Number(r["Point"] ?? 0);
+            const rank = state.rankMap[no] ?? "-";
+            const gap  = Math.max(top1Points - pts, 0);
+
+            return `
+              <div class="search-item">
+                <div class="rank">#${rank}</div>
+                <div>
+                  <div class="name">${nama}</div>
+                  <div class="member">${no}</div>
+                </div>
+                <div class="points"><b>${pts.toLocaleString("id-ID")}</b> poin</div>
+                <div class="gap">Selisih ke #1: <b>${gap.toLocaleString("id-ID")}</b> poin</div>
+              </div>
+            `;
+          }).join("");
+
+          el.info.innerHTML = `
+            <div style="font-weight:700; margin-bottom:8px;">
+              Hasil pencarian untuk: "<span style="color:var(--accent3)">${state.query.trim()}</span>"
+            </div>
+            <div class="search-items">${itemsHtml}</div>
+          `;
+          el.info.style.display = "block";
+        }
+      } else {
+        el.info.style.display = "none";
+      }
+
+      // TABEL: jika mencari tampilkan dari index 0; jika tidak, buang top-3 (karena sudah di podium)
       const startIndex = isSearching ? 0 : Math.min(3, state.filtered.length);
-      const remaining = Math.max(state.filtered.length - startIndex, 0);
-      const limit = state.limit === 0 ? remaining : Math.min(state.limit, remaining);
-      const slice = state.filtered.slice(startIndex, startIndex + limit);
+      const remaining  = Math.max(state.filtered.length - startIndex, 0);
+      const limit      = state.limit === 0 ? remaining : Math.min(state.limit, remaining);
+      const slice      = state.filtered.slice(startIndex, startIndex + limit);
 
       if (slice.length===0){
         el.body.innerHTML = `<tr><td colspan="4" class="empty">Tidak ada data.</td></tr>`;
@@ -420,8 +504,8 @@
       }
 
       const rowsHtml = slice.map((r) => {
-        const key = String(r["No Member"] ?? "").trim();
-        const rank = state.rankMap[key] ?? "-";
+        const key   = String(r["No Member"] ?? "").trim();
+        const rank  = state.rankMap[key] ?? "-";
         const point = Number(r["Point"] ?? 0).toLocaleString("id-ID");
         return `
           <tr>
@@ -469,4 +553,3 @@
     fetchSheet();
   </script>
 </body>
-</html>
