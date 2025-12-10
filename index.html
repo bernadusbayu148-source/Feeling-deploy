@@ -3,32 +3,21 @@
 <head>
   <meta charset=\"UTF-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-  <title>Snippet Icon Crown Podium (CSS-only)</title>
+  <title>Feeling Family — Leaderboard</title>
+  <!-- Tambahan CSS: ikon crown untuk podium 1/2/3 (emas/perak/perunggu). -->
   <style>
-    /* === Tambahkan block CSS ini ke file HTML kamu === */
-    /* Tidak perlu mengubah HTML/JS yang ada. */
-
-    /* Posisi dasar untuk pseudo-element pada tiap slot podium */
-    .podium .slot {
-      position: relative;
-      overflow: visible; /* memastikan icon tidak terpotong border radius */
-    }
-
-    /* Selector alternatif jika tidak ada class .slot: target tiga elemen pertama di dalam .podium */
+    /* === Crown icons untuk podium (CSS-only, tidak mengubah HTML/JS lain) === */
+    .podium .slot { position: relative; overflow: visible; }
     .podium > * { position: relative; }
 
     @supports (-webkit-mask-image: url("data:image/svg+xml;utf8,<svg></svg>")) or (mask-image: url("data:image/svg+xml;utf8,<svg></svg>")) {
-      /* Base icon via SVG data-URI dengan masking agar mudah diwarnai */
       .podium .slot::before,
       .podium > :nth-child(1)::before,
       .podium > :nth-child(2)::before,
       .podium > :nth-child(3)::before {
         content: "";
         position: absolute;
-        top: 10px;        /* ubah sesuai kebutuhan */
-        left: 12px;       /* ubah sesuai kebutuhan */
-        width: 28px;      /* ukuran icon */
-        height: 20px;
+        top: 10px; left: 12px; width: 28px; height: 20px;
         -webkit-mask-image: url("data:image/svg+xml;utf8,\
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
             <path d='M3 7l3.5 3 3-4 3.5 4 3.5-3 2.5 7H4.5L3 7zm3.5 11h11a1 1 0 0 0 1-1v-2H5.5v2a1 1 0 0 0 1 1z'/>\
@@ -37,54 +26,64 @@
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
             <path d='M3 7l3.5 3 3-4 3.5 4 3.5-3 2.5 7H4.5L3 7zm3.5 11h11a1 1 0 0 0 1-1v-2H5.5v2a1 1 0 0 0 1 1z'/>\
           </svg>");
-        background-color: #000; /* default, akan diubah di bawah */
-        opacity: 0.95;
+        background-color: #000; opacity: 0.95;
       }
-
-      /* Warna sesuai peringkat: gunakan class jika ada, fallback ke :nth-child */
-      .podium .slot.gold::before, .podium > :nth-child(1)::before { background-color: #f59e0b; } /* emas */
+      .podium .slot.gold::before,   .podium > :nth-child(1)::before { background-color: #f59e0b; } /* emas */
       .podium .slot.silver::before, .podium > :nth-child(2)::before { background-color: #c0c0c0; } /* perak */
       .podium .slot.bronze::before, .podium > :nth-child(3)::before { background-color: #cd7f32; } /* perunggu */
     }
-
-    /* Fallback untuk browser tanpa support mask-image: gunakan emoji */
     @supports not ((-webkit-mask-image: none) or (mask-image: none)) {
       .podium .slot::before,
       .podium > :nth-child(1)::before,
       .podium > :nth-child(2)::before,
       .podium > :nth-child(3)::before {
-        content: "\ud83d\udc51"; /* emoji crown */
-        position: absolute;
-        top: 8px; left: 12px; font-size: 18px;
+        content: "\ud83d\udc51"; position: absolute; top: 8px; left: 12px; font-size: 18px;
       }
-      .podium .slot.gold::before, .podium > :nth-child(1)::before { color: #f59e0b; }
+      .podium .slot.gold::before,   .podium > :nth-child(1)::before { color: #f59e0b; }
       .podium .slot.silver::before, .podium > :nth-child(2)::before { color: #c0c0c0; }
       .podium .slot.bronze::before, .podium > :nth-child(3)::before { color: #cd7f32; }
     }
   </style>
 </head>
 <body>
-  <main style=\"max-width:800px;margin:24px auto;padding:0 12px;font-family:system-ui\">
-    <h1 style=\"font-size:20px;margin:0 0 8px\">Snippet Icon Crown Podium</h1>
-    <p style=\"color:#6b7280\">Salin blok <code>&lt;style&gt;</code> di atas ke file HTML kamu. Tidak perlu mengubah HTML/JS yang ada.</p>
-    <hr style=\"border:none;border-top:1px solid #e5e7eb;margin:16px 0\" />
+  <header>
+    <h1>Feeling Family</h1>
+    <h2>Feeling Leaderboard</h2>
+    <p>Data diambil dari Google Sheets (kolom: No Member, Nama, Point).</p>
+  </header>
 
-    <details>
-      <summary><strong>Contoh struktur podium (opsional untuk preview)</strong></summary>
-      <p>Jika HTML kamu memiliki kontainer <code>.podium</code> dengan tiga anak (slot), ikon akan muncul otomatis di tiga kotak pertama.</p>
-      <div class=\"podium\" style=\"display:grid;grid-template-columns:repeat(3,1fr);gap:12px\">
-        <div class=\"slot\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:16px\">
-          <div>#1</div><div>Nama #1</div><div>🏆 5121 poin</div>
-        </div>
-        <div class=\"slot\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:16px\">
-          <div>#2</div><div>Nama #2</div><div>🏆 4915 poin</div>
-        </div>
-        <div class=\"slot\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:16px\">
-          <div>#3</div><div>Nama #3</div><div>🏆 4910 poin</div>
-        </div>
+  <main>
+    <!-- Podium: tiga kotak top 3 (struktur mengikuti file asli) -->
+    <div class=\"podium\" style=\"display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;margin:16px 0\">
+      <div class=\"slot gold\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
+        <div class=\"rank\">#1</div>
+        <div id=\"podium1Name\">—</div>
+        <div id=\"podium1Point\">🏆 0 poin</div>
       </div>
-      <p style=\"color:#6b7280;margin-top:8px\">Pada produksi, kamu sudah punya markup sendiri; contoh di atas hanya untuk melihat posisi ikon.</p>
-    </details>
+      <div class=\"slot silver\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
+        <div class=\"rank\">#2</div>
+        <div id=\"podium2Name\">—</div>
+        <div id=\"podium2Point\">🏆 0 poin</div>
+      </div>
+      <div class=\"slot bronze\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
+        <div class=\"rank\">#3</div>
+        <div id=\"podium3Name\">—</div>
+        <div id=\"podium3Point\">🏆 0 poin</div>
+      </div>
+    </div>
+
+    <!-- Tabel leaderboard sesuai file asli -->
+    <table>
+      <tr>
+        <th>Peringkat</th>
+        <th>No Member</th>
+        <th>Nama</th>
+        <th>Point</th>
+      </tr>
+      <tr>
+        <td colspan=\"4\">Memuat data…</td>
+      </tr>
+    </table>
   </main>
 </body>
 </html>
