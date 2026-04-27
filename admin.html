@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Manupi</title>
+
+  https://cdn.tailwindcss.com
+  assets/css/tailwind-config.jsscript>
+
+  https://fonts.googleapis.com/css2?family=Newsreader&family=Manrope&display=swap
+</head>
+
+<body class="bg-background text-on-background font-body">
+
+<div class="max-w-5xl mx-auto px-6 py-10">
+
+  <h1 class="text-3xl font-serif mb-6">Admin Panel</h1>
+
+  <!-- LOGIN -->
+  <div id="login-section" class="space-y-4 max-w-md">
+    <input id="email" type="email" placeholder="Email admin" class="w-full p-3 border rounded" />
+    <input id="password" type="password" placeholder="Password" class="w-full p-3 border rounded" />
+    <button id="login-btn" class="w-full bg-primary text-white py-3 rounded">Login</button>
+  </div>
+
+  <!-- ADMIN CONTENT -->
+  <div id="admin-section" class="hidden space-y-10">
+
+    <!-- ADD MEMBER -->
+    <section>
+      <h2 class="text-xl font-serif mb-3">Tambah Member</h2>
+      <input id="member-name" placeholder="Nama member" class="w-full p-2 border rounded mb-2" />
+      <input id="member-phone" placeholder="No WhatsApp" class="w-full p-2 border rounded mb-2" />
+      <button id="add-member-btn" class="bg-primary text-white px-4 py-2 rounded">Simpan</button>
+    </section>
+
+    <!-- ADD POINT -->
+    <section>
+      <h2 class="text-xl font-serif mb-3">Tambah Point</h2>
+      <select id="member-select" class="w-full p-2 border rounded mb-2"></select>
+      <input id="point-value" type="number" placeholder="Jumlah point (+/-)" class="w-full p-2 border rounded mb-2" />
+      <input id="point-note" placeholder="Catatan" class="w-full p-2 border rounded mb-2" />
+      <button id="add-point-btn" class="bg-primary text-white px-4 py-2 rounded">Tambah Point</button>
+    </section>
+
+    <!-- MEMBER LIST -->
+    <section>
+      <h2 class="text-xl font-serif mb-3">Daftar Member</h2>
+      <div id="member-list" class="space-y-2 text-sm"></div>
+    </section>
+
+  </div>
+</div>
+
+assets/js/admin.jsscript>
+</body>
+</html>
