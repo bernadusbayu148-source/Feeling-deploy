@@ -1,32 +1,111 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu – Rumah Kopi Manupi</>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu - Rumah Kopi Manupi</title>
+  <meta name="description" content="Menu Rumah Kopi Manupi." />
 
-  https://cdn.tailwindcss.com</script>
-  assets/css/tailwind-config.js</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body class="bg-secondary text-primary font-inter">
-<!-- NAVBAR (SAMA) -->
-<nav class="fixed top-0 left-0 w-full bg-secondary z-50">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <h1 class="font-playfair">Rumah Kopi Manupi</h1>
-    <button id="mobile-menu-btn">
-      <span id="menu-icon" class="material-icons">menu</span>
-    </button>
-  </div>
-  <div id="mobile-menu" class="hidden px-4 pb-4">
-    <a href="index.html" class="blockenu.html" class="ion.htmlLocation</a>
-  </div>
-</nav>
+<body class="page-shell font-inter">
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-secondary/95 nav-backdrop border-b border-primary/5">
+    <div class="section-wrap px-5 md:px-8 py-5 flex items-center justify-between">
+      <a href="index.html" class="font-playfair text-[22px] md:text-[24px] leading-none">
+        Rumah Kopi Manupi
+      </a>
 
-<section class="pt-32 max-w-6xl mx-auto px-6">
-  <h2 class="font-playfair text-3xl mb-8">Our Menu</h2>
+      <button id="mobile-menu-btn" aria-label="Buka menu navigasi" class="inline-flex items-center justify-center">
+        <span id="menu-icon" class="material-icons text-[32px] leading-none">menu</span>
+      </button>
+    </div>
 
-  <img
-    src="URL_GAMBAR_MENU_ASLI_ANDA"
-    class="w-full rounded-lg"
-    loading="
+    <div id="mobile-menu" class="hidden section-wrap px-5 md:px-8 pb-5">
+      <div class="flex flex-col gap-3 text-base">
+        <a href="index.html">Home</a>
+        <a href="menu.html" class="menu-link-active">Menu</a>
+        <a href="location.html">Location</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="pt-[84px]">
+    <div class="hero-block hero-menu"></div>
+  </header>
+
+  <!-- MENU CONTENT -->
+  <main>
+    <section class="section-wrap px-5 md:px-8 py-16 md:py-20">
+      <div class="max-w-3xl mb-12">
+        <h1 class="font-playfair text-[40px] md:text-[56px] leading-[1.08] mb-4">
+          Our Menu
+        </h1>
+        <p class="text-[18px] leading-[1.8] text-primary/90">
+          Pilih signature coffee, non-coffee, dan makanan pendamping favorit Anda.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-1 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">Espresso Blend</h2>
+          <p class="text-primary/80 mb-3">Kopi pekat dengan karakter seimbang.</p>
+          <p class="font-semibold">Rp 22.000</p>
+        </article>
+
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-2 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">Cafe Latte</h2>
+          <p class="text-primary/80 mb-3">Perpaduan espresso dan susu yang lembut.</p>
+          <p class="font-semibold">Rp 28.000</p>
+        </article>
+
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-3 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">Manual Brew</h2>
+          <p class="text-primary/80 mb-3">Seduhan manual untuk rasa yang lebih clean.</p>
+          <p class="font-semibold">Rp 30.000</p>
+        </article>
+
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-4 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">Matcha Latte</h2>
+          <p class="text-primary/80 mb-3">Pilihan non-coffee dengan rasa creamy.</p>
+          <p class="font-semibold">Rp 30.000</p>
+        </article>
+
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-5 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">Croissant Butter</h2>
+          <p class="text-primary/80 mb-3">Teman ideal untuk secangkir kopi pagi Anda.</p>
+          <p class="font-semibold">Rp 24.000</p>
+        </article>
+
+        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
+          <div class="image-card menu-photo-6 mb-4"></div>
+          <h2 class="font-playfair text-2xl mb-2">House Dessert</h2>
+          <p class="text-primary/80 mb-3">Penutup manis untuk melengkapi pengalaman.</p>
+          <p class="font-semibold">Rp 32.000</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="section-wrap px-5 md:px-8 py-10 text-center text-primary/70 text-sm">
+    © 2026 Rumah Kopi Manupi
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
