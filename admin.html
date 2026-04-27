@@ -1,18 +1,102 @@
-<!DOCTYPE html>at visit, tambah visit, atau hapus visit/member.
+<!DOCTYPE html>"
+            type="button"
+            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Visit
+          </button>
+
+          <p id="visit-message" class="text-sm hidden mt-3"></p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-serif text-primary mb-2">Riwayat Visit</h3>
+          <div id="member-log-list" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <!-- ADD MEMBER -->
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
+
+        <div class="space-y-4">
+          <div>
+            <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
+            <input
+              id="member-name"
+              type="text"
+              placeholder="Contoh: Bayu"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <div>
+            <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
+            <input
+              id="member-phone"
+              type="text"
+              placeholder="Contoh: 08123456789"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <button
+            id="add-member-btn"
+            type="button"
+            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Member
+          </button>
+
+          <p id="member-message" class="text-sm hidden"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Admin JS -->
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>
+``
+<html class="light" lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Manupi</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <!-- HEADER -->
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
+      <p class="text-sm text-stone-500">
+        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
       </p>
     </div>
 
     <!-- STATUS BAR -->
-    <div
-      id="status-bar"
-      class="hidden mb-6 rounded-2xl border border-stone-200 bg-white/80 px-5 py-4"
-    >
+    <div id="status-bar" class="hidden mb-6 rounded-2xl border border-stone-200 bg-white/80 px-5 py-4">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-stone-400">Admin Login</p>
           <p id="admin-email-display" class="text-sm font-medium text-primary">-</p>
         </div>
-
         <button
           id="logout-btn"
           type="button"
@@ -24,14 +108,9 @@
     </div>
 
     <!-- LOGIN SECTION -->
-    <section
-      id="login-section"
-      class="max-w-md rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm"
-    >
+    <section id="login-section" class="max-w-md rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm">
       <h2 class="text-2xl font-serif text-primary mb-2">Login Admin</h2>
-      <p class="text-sm text-stone-500 mb-6">
-        Masuk dengan email dan password admin Firebase Authentication.
-      </p>
+      <p class="text-sm text-stone-500 mb-6">Masuk dengan email dan password admin Firebase Authentication.</p>
 
       <div class="space-y-4">
         <div>
@@ -71,9 +150,7 @@
       <!-- SEARCH MEMBER -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
         <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
-        <p class="text-sm text-stone-500 mb-5">
-          Ketik nama member, lalu pilih dari daftar yang muncul.
-        </p>
+        <p class="text-sm text-stone-500 mb-5">Ketik nama member, lalu pilih dari daftar yang muncul.</p>
 
         <div class="relative">
           <input
@@ -132,9 +209,6 @@
 
         <div class="rounded-2xl border border-stone-200 bg-stone-50 p-5">
           <h3 class="text-xl font-serif text-primary mb-2">Tambah Visit</h3>
-          <p class="text-sm text-stone-500 mb-5">
-            Setiap visit akan menambah total point dan total visit.
-          </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -160,99 +234,3 @@
           </div>
 
           <button
-            id="add-visit-btn"
-            type="button"
-            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-          >
-            Simpan Visit
-          </button>
-
-          <p id="visit-message" class="text-sm hidden mt-3"></p>
-        </div>
-
-        <div>
-          <div class="mb-3">
-            <h3 class="text-2xl font-serif text-primary">Riwayat Visit</h3>
-            <p class="text-sm text-stone-500">
-              Hapus satu visit jika ada kesalahan transaksi. Penghapusan visit akan mengurangi total point dan total visit.
-            </p>
-          </div>
-
-          <div id="member-log-list" class="space-y-3"></div>
-        </div>
-      </div>
-
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
-        <p class="text-sm text-stone-500 mb-6">Daftarkan member baru ke sistem loyalty.</p>
-
-        <div class="space-y-4">
-          <div>
-            <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
-            <input
-              id="member-name"
-              type="text"
-              placeholder="Contoh: Bayu"
-              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-            />
-          </div>
-
-          <div>
-            <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
-            <input
-              id="member-phone"
-              type="text"
-              placeholder="Contoh: 08123456789"
-              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-            />
-          </div>
-
-          <button
-            id="add-member-btn"
-            type="button"
-            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-          >
-            Simpan Member
-          </button>
-
-          <p id="member-message" class="text-sm hidden"></p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Admin JS (WAJIB module) -->
-  <script type="module" src="assets/js/admin.js"></script>
-</body>
-</html>
-
-<html class="light" lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel – Manupi</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <!-- Tailwind Config (setelah Tailwind CDN) -->
-  <script src="assets/css/tailwind-config.js"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-
-<body class="bg-background text-on-background font-body min-h-screen">
-  <div class="max-w-6xl mx-auto px-6 py-10">
-    <!-- HEADER -->
-    <div class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
-      <p class="text-sm text-stone-500">
