@@ -1,4 +1,28 @@
-<!DOCTYPE html>-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
+<!DOCTYPE html>"></p>
+      </div>
+    </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="admin-section" class="hidden space-y-8 mt-8">
+      <!-- SEARCH MEMBER -->
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
+        <p class="text-sm text-stone-500 mb-5">
+          Ketik nama member, lalu pilih dari daftar yang muncul.
+        </p>
+
+        <div class="relative">
+          <input
+            id="member-search"
+            type="text"
+            placeholder="Ketik nama member..."
+            autocomplete="off"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+
+          <div
+            id="member-suggestions"
+            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
           ></div>
         </div>
 
@@ -19,8 +43,8 @@
 
           <button
             id="delete-member-btn"
-            class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
             type="button"
+            class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
           >
             Hapus Member
           </button>
@@ -76,8 +100,8 @@
 
           <button
             id="add-visit-btn"
-            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
             type="button"
+            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
           >
             Simpan Visit
           </button>
@@ -129,8 +153,8 @@
 
           <button
             id="add-member-btn"
-            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
             type="button"
+            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
           >
             Simpan Member
           </button>
@@ -153,7 +177,7 @@
   <title>Admin Panel – Manupi</title>
 
   <!-- Tailwind -->
-  https://cdn.tailwindcss.com?plugins=forms,container-queries</script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/css/tailwind-config.js"></script>
 
   <!-- Fonts -->
@@ -191,8 +215,8 @@
 
         <button
           id="logout-btn"
-          class="inline-flex items-center justify-center rounded-xl bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-200 transition"
           type="button"
+          class="inline-flex items-center justify-center rounded-xl bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-200 transition"
         >
           Logout
         </button>
@@ -215,7 +239,7 @@
           <input
             id="email"
             type="email"
-            placeholder="admin@manupi.com"
+            placeholder="passwordkamu.com"
             class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
           />
         </div>
@@ -232,33 +256,8 @@
 
         <button
           id="login-btn"
-          class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
           type="button"
+          class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
         >
           Login
         </button>
-
-        <p id="login-message" class="text-sm hidden"></p>
-      </div>
-    </section>
-
-    <!-- ADMIN SECTION -->
-    <section id="admin-section" class="hidden space-y-8 mt-8">
-      <!-- SEARCH MEMBER -->
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
-        <p class="text-sm text-stone-500 mb-5">
-          Ketik nama member, lalu pilih dari daftar yang muncul.
-        </p>
-
-        <div class="relative">
-          <input
-            id="member-search"
-            type="text"
-            placeholder="Ketik nama member..."
-            autocomplete="off"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-
-          <div
-            id="member-suggestions"
