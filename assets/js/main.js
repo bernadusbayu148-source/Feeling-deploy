@@ -6,9 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (button && menu && icon) {
     button.addEventListener('click', () => {
       menu.classList.toggle('hidden');
-      icon.textContent = menu.classList.contains('hidden')
-        ? 'menu'
-        : 'close';
+      icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    });
+
+    const menuLinks = menu.querySelectorAll('a');
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        icon.textContent = 'menu';
+      });
     });
   }
 });
