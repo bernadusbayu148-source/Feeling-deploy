@@ -27,7 +27,7 @@
     <div class="mb-8">
       <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
       <p class="text-sm text-stone-500">
-        Kelola member, point, dan riwayat perubahan point.
+        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
       </p>
     </div>
 
@@ -95,124 +95,163 @@
 
     <!-- ADMIN SECTION -->
     <section id="admin-section" class="hidden space-y-8 mt-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- ADD MEMBER -->
-        <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-          <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
-          <p class="text-sm text-stone-500 mb-6">
-            Daftarkan member baru ke sistem loyalty.
-          </p>
+      <!-- SEARCH MEMBER -->
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
+        <p class="text-sm text-stone-500 mb-5">
+          Ketik nama member, lalu pilih dari daftar yang muncul.
+        </p>
 
-          <div class="space-y-4">
-            <div>
-              <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
-              <input
-                id="member-name"
-                type="text"
-                placeholder="Contoh: Bayu"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-              />
-            </div>
+        <div class="relative">
+          <input
+            id="member-search"
+            type="text"
+            placeholder="Ketik nama member..."
+            autocomplete="off"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
 
-            <div>
-              <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
-              <input
-                id="member-phone"
-                type="text"
-                placeholder="Contoh: 08123456789"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-              />
-            </div>
+          <div
+            id="member-suggestions"
+            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
+          ></div>
+        </div>
 
-            <button
-              id="add-member-btn"
-              class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-            >
-              Simpan Member
-            </button>
+        <p id="search-message" class="text-sm hidden mt-3"></p>
+      </div>
 
-            <p id="member-message" class="text-sm hidden"></p>
+      <!-- MEMBER DETAIL -->
+      <div
+        id="member-detail-section"
+        class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6"
+      >
+        <!-- HEADER DETAIL -->
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div>
+            <h2 id="detail-member-name" class="text-3xl font-serif text-primary">-</h2>
+            <p id="detail-member-phone" class="text-sm text-stone-500 mt-1">-</p>
+          </div>
+
+          <button
+            id="delete-member-btn"
+            class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
+          >
+            Hapus Member
+          </button>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Point</p>
+            <p id="detail-total-points" class="text-2xl font-semibold text-primary">0 pts</p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Visit</p>
+            <p id="detail-total-visits" class="text-2xl font-semibold text-primary">0 visit</p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Status</p>
+            <p id="detail-status" class="text-2xl font-semibold text-primary">Aktif</p>
           </div>
         </div>
 
-        <!-- ADD POINT -->
-        <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-          <h2 class="text-2xl font-serif text-primary mb-2">Tambah / Kurangi Point</h2>
-          <p class="text-sm text-stone-500 mb-6">
-            Semua perubahan point akan masuk ke riwayat/log.
+        <!-- ADD VISIT -->
+        <div class="rounded-2xl border border-stone-200 bg-stone-50 p-5">
+          <h3 class="text-xl font-serif text-primary mb-2">Tambah Visit</h3>
+          <p class="text-sm text-stone-500 mb-5">
+            Setiap visit akan menambah total point dan total visit.
           </p>
 
-          <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label for="member-select" class="block text-sm font-medium mb-2">Pilih Member</label>
-              <select
-                id="member-select"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-              >
-                <option value="">-- Pilih member --</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="point-value" class="block text-sm font-medium mb-2">Jumlah Point</label>
+              <label for="visit-points" class="block text-sm font-medium mb-2">Point Visit</label>
               <input
-                id="point-value"
+                id="visit-points"
                 type="number"
-                placeholder="Contoh: 10 atau -5"
+                min="1"
+                placeholder="Contoh: 25"
                 class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
               />
             </div>
 
             <div>
-              <label for="point-note" class="block text-sm font-medium mb-2">Catatan</label>
+              <label for="visit-note" class="block text-sm font-medium mb-2">Catatan</label>
               <input
-                id="point-note"
+                id="visit-note"
                 type="text"
-                placeholder="Contoh: Visit ke-5"
+                placeholder="Contoh: Visit ke-3"
                 class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
               />
             </div>
-
-            <button
-              id="add-point-btn"
-              class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-            >
-              Simpan Perubahan Point
-            </button>
-
-            <p id="point-message" class="text-sm hidden"></p>
           </div>
+
+          <button
+            id="add-visit-btn"
+            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Visit
+          </button>
+
+          <p id="visit-message" class="text-sm hidden mt-3"></p>
+        </div>
+
+        <!-- VISIT HISTORY -->
+        <div>
+          <div class="mb-3">
+            <h3 class="text-2xl font-serif text-primary">Riwayat Visit</h3>
+            <p class="text-sm text-stone-500">
+              Hapus satu visit jika ada kesalahan transaksi. Penghapusan visit akan mengurangi total point dan total visit.
+            </p>
+          </div>
+
+          <div id="member-log-list" class="space-y-3"></div>
         </div>
       </div>
 
-      <!-- MEMBER LIST -->
+      <!-- ADD MEMBER -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <div class="mb-4">
-          <h2 class="text-2xl font-serif text-primary">Daftar Member</h2>
-          <p class="text-sm text-stone-500">
-            Total point dan total visit setiap member.
-          </p>
+        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
+        <p class="text-sm text-stone-500 mb-6">
+          Daftarkan member baru ke sistem loyalty.
+        </p>
+
+        <div class="space-y-4">
+          <div>
+            <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
+            <input
+              id="member-name"
+              type="text"
+              placeholder="Contoh: Bayu"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <div>
+            <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
+            <input
+              id="member-phone"
+              type="text"
+              placeholder="Contoh: 08123456789"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <button
+            id="add-member-btn"
+            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Member
+          </button>
+
+          <p id="member-message" class="text-sm hidden"></p>
         </div>
-
-        <div id="member-list" class="space-y-3"></div>
-      </div>
-
-      <!-- POINT LOG -->
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <div class="mb-4">
-          <h2 class="text-2xl font-serif text-primary">Riwayat Point</h2>
-          <p class="text-sm text-stone-500">
-            Audit trail semua perubahan point.
-          </p>
-        </div>
-
-        <div id="point-log-list" class="space-y-3"></div>
       </div>
     </section>
   </div>
 
-  <!-- ADMIN SCRIPT -->
   <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
-``
