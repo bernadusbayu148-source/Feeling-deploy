@@ -1,0 +1,90 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.page-shell {
+  background-color: #F5F3E8;
+  color: #2F4F4F;
+}
+
+.section-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-block {
+  width: 100%;
+  min-height: 72vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+}
+
+.image-card {
+  width: 100%;
+  min-height: 260px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+}
+
+.map-frame {
+  width: 100%;
+  min-height: 420px;
+  border: 0;
+  border-radius: 1rem;
+}
+
+/* ===== PHOTO MAPPING ===== */
+/* Anda cukup menaruh file gambar sesuai nama berikut di folder assets/images */
+
+.hero-home {
+  background-image:
+    linear-gradient(rgba(245, 243, 232, 0.08), rgba(245, 243, 232, 0.08)),
+    url("../images/home-hero.jpg");
+}
+
+.hero-menu {
+  background-image:
+    linear-gradient(rgba(245, 243, 232, 0.08), rgba(245, 243, 232, 0.08)),
+    url("../images/menu-hero.jpg");
+}
+
+.hero-location {
+  background-image:
+    linear-gradient(rgba(245, 243, 232, 0.08), rgba(245, 243, 232, 0.08)),
+    url("../images/location-hero.jpg");
+}
+
+.menu-photo-1 { background-image: url("../images/menu-1.jpg"); }
+.menu-photo-2 { background-image: url("../images/menu-2.jpg"); }
+.menu-photo-3 { background-image: url("../images/menu-3.jpg"); }
+.menu-photo-4 { background-image: url("../images/menu-4.jpg"); }
+.menu-photo-5 { background-image: url("../images/menu-5.jpg"); }
+.menu-photo-6 { background-image: url("../images/menu-6.jpg"); }
+
+.nav-backdrop {
+  backdrop-filter: blur(10px);
+}
+
+.menu-link-active {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 768px) {
+  .hero-block {
+    min-height: 62vh;
+  }
+
+  .image-card {
+    min-height: 220px;
+  }
+}
