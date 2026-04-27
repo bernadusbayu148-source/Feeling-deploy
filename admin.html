@@ -1,209 +1,4 @@
-<!DOCTYPE html>        >
-          Login
-        </button>
-
-        <p id="login-message" class="text-sm hidden"></p>
-      </div>
-    </section>
-
-    <!-- ADMIN SECTION -->
-    <section id="admin-section" class="hidden space-y-8 mt-8">
-      <!-- SEARCH MEMBER -->
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
-        <p class="text-sm text-stone-500 mb-5">
-          Ketik nama member, lalu pilih dari daftar yang muncul.
-        </p>
-
-        <div class="relative">
-          <input
-            id="member-search"
-            type="text"
-            placeholder="Ketik nama member..."
-            autocomplete="off"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-
-          <div
-            id="member-suggestions"
-            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
-          ></div>
-        </div>
-
-        <p id="search-message" class="text-sm hidden mt-3"></p>
-      </div>
-
-      <!-- MEMBER DETAIL -->
-      <div
-        id="member-detail-section"
-        class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6"
-      >
-        <!-- HEADER DETAIL -->
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          <div>
-            <h2 id="detail-member-name" class="text-3xl font-serif text-primary">-</h2>
-            <p id="detail-member-phone" class="text-sm text-stone-500 mt-1">-</p>
-          </div>
-
-          <button
-            id="delete-member-btn"
-            type="button"
-            class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
-          >
-            Hapus Member
-          </button>
-        </div>
-
-        <!-- SUMMARY -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
-            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Point</p>
-            <p id="detail-total-points" class="text-2xl font-semibold text-primary">0 pts</p>
-          </div>
-
-          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
-            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Visit</p>
-            <p id="detail-total-visits" class="text-2xl font-semibold text-primary">0 visit</p>
-          </div>
-
-          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
-            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Status</p>
-            <p id="detail-status" class="text-2xl font-semibold text-primary">Aktif</p>
-          </div>
-        </div>
-
-        <!-- ADD VISIT -->
-        <div class="rounded-2xl border border-stone-200 bg-stone-50 p-5">
-          <h3 class="text-xl font-serif text-primary mb-2">Tambah Visit</h3>
-          <p class="text-sm text-stone-500 mb-5">
-            Setiap visit akan menambah total point dan total visit.
-          </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="visit-points" class="block text-sm font-medium mb-2">Point Visit</label>
-              <input
-                id="visit-points"
-                type="number"
-                min="1"
-                placeholder="Contoh: 25"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-              />
-            </div>
-
-            <div>
-              <label for="visit-note" class="block text-sm font-medium mb-2">Catatan</label>
-              <input
-                id="visit-note"
-                type="text"
-                placeholder="Contoh: Visit ke-3"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-              />
-            </div>
-          </div>
-
-          <button
-            id="add-visit-btn"
-            type="button"
-            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-          >
-            Simpan Visit
-          </button>
-
-          <p id="visit-message" class="text-sm hidden mt-3"></p>
-        </div>
-
-        <!-- VISIT HISTORY -->
-        <div>
-          <div class="mb-3">
-            <h3 class="text-2xl font-serif text-primary">Riwayat Visit</h3>
-            <p class="text-sm text-stone-500">
-              Hapus satu visit jika ada kesalahan transaksi. Penghapusan visit akan mengurangi total point dan total visit.
-            </p>
-          </div>
-
-          <div id="member-log-list" class="space-y-3"></div>
-        </div>
-      </div>
-
-      <!-- ADD MEMBER -->
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
-        <p class="text-sm text-stone-500 mb-6">
-          Daftarkan member baru ke sistem loyalty.
-        </p>
-
-        <div class="space-y-4">
-          <div>
-            <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
-            <input
-              id="member-name"
-              type="text"
-              placeholder="Contoh: Bayu"
-              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-            />
-          </div>
-
-          <div>
-            <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
-            <input
-              id="member-phone"
-              type="text"
-              placeholder="Contoh: 08123456789"
-              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-            />
-          </div>
-
-          <button
-            id="add-member-btn"
-            type="button"
-            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-          >
-            Simpan Member
-          </button>
-
-          <p id="member-message" class="text-sm hidden"></p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Admin JS -->
-  <script type="module" src="assets/js/admin.js"></script>
-</body>
-</html>
-``
-<html class="light" lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel – Manupi</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <!-- Tailwind Config (harus setelah Tailwind CDN) -->
-  <script src="assets/css/tailwind-config.js"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-
-<body class="bg-background text-on-background font-body min-h-screen">
-  <div class="max-w-6xl mx-auto px-6 py-10">
-    <!-- HEADER -->
-    <div class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
-      <p class="text-sm text-stone-500">
-        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
+<!DOCTYPE html>at visit, tambah visit, atau hapus visit/member.
       </p>
     </div>
 
@@ -263,3 +58,201 @@
           id="login-btn"
           type="button"
           class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+        >
+          Login
+        </button>
+
+        <p id="login-message" class="text-sm hidden"></p>
+      </div>
+    </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="admin-section" class="hidden space-y-8 mt-8">
+      <!-- SEARCH MEMBER -->
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
+        <p class="text-sm text-stone-500 mb-5">
+          Ketik nama member, lalu pilih dari daftar yang muncul.
+        </p>
+
+        <div class="relative">
+          <input
+            id="member-search"
+            type="text"
+            placeholder="Ketik nama member..."
+            autocomplete="off"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+
+          <div
+            id="member-suggestions"
+            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
+          ></div>
+        </div>
+
+        <p id="search-message" class="text-sm hidden mt-3"></p>
+      </div>
+
+      <!-- MEMBER DETAIL -->
+      <div
+        id="member-detail-section"
+        class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6"
+      >
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div>
+            <h2 id="detail-member-name" class="text-3xl font-serif text-primary">-</h2>
+            <p id="detail-member-phone" class="text-sm text-stone-500 mt-1">-</p>
+          </div>
+
+          <button
+            id="delete-member-btn"
+            type="button"
+            class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition"
+          >
+            Hapus Member
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Point</p>
+            <p id="detail-total-points" class="text-2xl font-semibold text-primary">0 pts</p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Visit</p>
+            <p id="detail-total-visits" class="text-2xl font-semibold text-primary">0 visit</p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+            <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Status</p>
+            <p id="detail-status" class="text-2xl font-semibold text-primary">Aktif</p>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-stone-200 bg-stone-50 p-5">
+          <h3 class="text-xl font-serif text-primary mb-2">Tambah Visit</h3>
+          <p class="text-sm text-stone-500 mb-5">
+            Setiap visit akan menambah total point dan total visit.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="visit-points" class="block text-sm font-medium mb-2">Point Visit</label>
+              <input
+                id="visit-points"
+                type="number"
+                min="1"
+                placeholder="Contoh: 25"
+                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+              />
+            </div>
+
+            <div>
+              <label for="visit-note" class="block text-sm font-medium mb-2">Catatan</label>
+              <input
+                id="visit-note"
+                type="text"
+                placeholder="Contoh: Visit ke-3"
+                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+              />
+            </div>
+          </div>
+
+          <button
+            id="add-visit-btn"
+            type="button"
+            class="w-full mt-4 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Visit
+          </button>
+
+          <p id="visit-message" class="text-sm hidden mt-3"></p>
+        </div>
+
+        <div>
+          <div class="mb-3">
+            <h3 class="text-2xl font-serif text-primary">Riwayat Visit</h3>
+            <p class="text-sm text-stone-500">
+              Hapus satu visit jika ada kesalahan transaksi. Penghapusan visit akan mengurangi total point dan total visit.
+            </p>
+          </div>
+
+          <div id="member-log-list" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
+        <p class="text-sm text-stone-500 mb-6">Daftarkan member baru ke sistem loyalty.</p>
+
+        <div class="space-y-4">
+          <div>
+            <label for="member-name" class="block text-sm font-medium mb-2">Nama Member</label>
+            <input
+              id="member-name"
+              type="text"
+              placeholder="Contoh: Bayu"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <div>
+            <label for="member-phone" class="block text-sm font-medium mb-2">No. WhatsApp</label>
+            <input
+              id="member-phone"
+              type="text"
+              placeholder="Contoh: 08123456789"
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+          </div>
+
+          <button
+            id="add-member-btn"
+            type="button"
+            class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          >
+            Simpan Member
+          </button>
+
+          <p id="member-message" class="text-sm hidden"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Admin JS (WAJIB module) -->
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>
+``
+<html class="light" lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Manupi</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config (setelah Tailwind CDN) -->
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <!-- HEADER -->
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
+      <p class="text-sm text-stone-500">
