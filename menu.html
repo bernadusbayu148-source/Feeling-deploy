@@ -1,109 +1,202 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu - Rumah Kopi Manupi</title>
-  <meta name="description" content="Menu Rumah Kopi Manupi." />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Menu | Manupi Coffee Shop</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/css/tailwind-config.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body class="page-shell font-inter">
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 w-full z-50 bg-secondary/95 nav-backdrop border-b border-primary/5">
-    <div class="section-wrap px-5 md:px-8 py-5 flex items-center justify-between">
-      <a href="index.html" class="font-playfair text-[22px] md:text-[24px] leading-none">
-        Rumah Kopi Manupi
+<body class="bg-background text-on-background">
+  <!-- HEADER -->
+  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
+    <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
+      <a class="text-xl font-serif italic text-emerald-900" href="index.html">
+        <img
+          alt="Manupi Logo"
+          class="h-9 md:h-12 w-auto object-contain"
+          src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
+        />
       </a>
 
-      <button id="mobile-menu-btn" aria-label="Buka menu navigasi" class="inline-flex items-center justify-center">
-        <span id="menu-icon" class="material-icons text-[32px] leading-none">menu</span>
-      </button>
-    </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Home</a>
+        <a class="text-emerald-900 font-bold border-b border-emerald-900 pb-0.5 uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Menu</a>
+        <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="location.html">Location</a>
+      </nav>
 
-    <div id="mobile-menu" class="hidden section-wrap px-5 md:px-8 pb-5">
-      <div class="flex flex-col gap-3 text-base">
-        <a href="index.html">Home</a>
-        <a href="menu.html" class="menu-link-active">Menu</a>
-        <a href="location.html">Location</a>
+      <div class="flex items-center gap-2 md:gap-4">
+        <button
+          id="mobile-menu-btn"
+          aria-label="Toggle mobile menu"
+          class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
+        >
+          <span id="menu-icon" class="material-symbols-outlined text-xl">menu</span>
+        </button>
       </div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="pt-[84px]">
-    <div class="hero-block hero-menu"></div>
   </header>
 
-  <!-- MENU CONTENT -->
-  <main>
-    <section class="section-wrap px-5 md:px-8 py-16 md:py-20">
-      <div class="max-w-3xl mb-12">
-        <h1 class="font-playfair text-[40px] md:text-[56px] leading-[1.08] mb-4">
-          Our Menu
+  <!-- MOBILE MENU -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
+  >
+    <div class="flex flex-col px-8 py-6 gap-6">
+      <a href="index.html" class="text-stone-500 hover:text-emerald-800 transition-colors border-b border-stone-200 pb-2 uppercase tracking-widest text-sm">Home</a>
+      <a href="menu.html" class="text-emerald-900 font-bold border-b border-emerald-900/20 pb-2 uppercase tracking-widest text-sm">Menu</a>
+      <a href="location.html" class="text-stone-500 hover:text-emerald-800 transition-colors pb-2 uppercase tracking-widest text-sm">Location</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+    <!-- HERO -->
+    <section class="mb-12 md:mb-16 text-center md:text-left flex flex-col md:flex-row items-center gap-6 md:gap-12">
+      <div class="flex-1 space-y-4">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">BOTANICAL BREWS</span>
+        <h1 class="text-5xl md:text-7xl font-serif text-primary leading-tight">
+          Curated <br />
+          for the Soul
         </h1>
-        <p class="text-[18px] leading-[1.8] text-primary/90">
-          Pilih signature coffee, non-coffee, dan makanan pendamping favorit Anda.
+        <p class="text-base text-on-surface-variant max-w-sm mx-auto md:mx-0 leading-relaxed">
+          A sensory journey through the heart of Banjarbaru. Every cup is a conversation between city precision and nature's wild grace.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-1 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">Espresso Blend</h2>
-          <p class="text-primary/80 mb-3">Kopi pekat dengan karakter seimbang.</p>
-          <p class="font-semibold">Rp 22.000</p>
-        </article>
-
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-2 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">Cafe Latte</h2>
-          <p class="text-primary/80 mb-3">Perpaduan espresso dan susu yang lembut.</p>
-          <p class="font-semibold">Rp 28.000</p>
-        </article>
-
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-3 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">Manual Brew</h2>
-          <p class="text-primary/80 mb-3">Seduhan manual untuk rasa yang lebih clean.</p>
-          <p class="font-semibold">Rp 30.000</p>
-        </article>
-
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-4 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">Matcha Latte</h2>
-          <p class="text-primary/80 mb-3">Pilihan non-coffee dengan rasa creamy.</p>
-          <p class="font-semibold">Rp 30.000</p>
-        </article>
-
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-5 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">Croissant Butter</h2>
-          <p class="text-primary/80 mb-3">Teman ideal untuk secangkir kopi pagi Anda.</p>
-          <p class="font-semibold">Rp 24.000</p>
-        </article>
-
-        <article class="bg-white/60 rounded-2xl p-4 shadow-soft">
-          <div class="image-card menu-photo-6 mb-4"></div>
-          <h2 class="font-playfair text-2xl mb-2">House Dessert</h2>
-          <p class="text-primary/80 mb-3">Penutup manis untuk melengkapi pengalaman.</p>
-          <p class="font-semibold">Rp 32.000</p>
-        </article>
+      <div class="flex-1 w-full md:max-w-md aspect-[4/3] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative group">
+        <img
+          alt="Artisan Coffee"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeDTDvqIv78nkO0d6f4D-3Z5w9g_1ZOZa3edG8rP7DsjLPWAALyMX26l1w72E0k-ANjCXe5nQczMfUZqrf48Bc5Ifc9jAqQQGW_379b4-28wOyaDSLJ52ekAJbL_C1ZvqB34zFGdGA4Sn1DU6wX_W00LhltUnpIlHrOX7gvSiTFLB23L3PSUBCoLYIobx0pTKi2iCKhyxUVWWhm3GXsuJP2Frsxl_jbVRe53oRKn3dKnToji_bZnCOnxjFoJxOtbegSs_J1Y10AKoW"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-60"></div>
       </div>
     </section>
+
+    <!-- FILTER -->
+    <div class="flex overflow-x-auto no-scrollbar gap-2 mb-10 justify-start md:justify-center sticky top-[73px] z-30 bg-background/80 backdrop-blur-md py-3 -mx-4 px-4 md:mx-0">
+      <button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary-container text-on-primary-container text-xs font-bold shadow-md transition-transform active:scale-95">
+        All Offerings
+      </button>
+      <button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface text-xs hover:bg-surface-variant transition-all">
+        Coffee
+      </button>
+      <button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface text-xs hover:bg-surface-variant transition-all">
+        Non-Coffee
+      </button>
+      <button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface text-xs hover:bg-surface-variant transition-all">
+        Snacks
+      </button>
+    </div>
+
+    <!-- COFFEE SECTION -->
+    <div class="mb-16">
+      <div class="flex flex-row justify-between items-center gap-4 mb-8">
+        <h2 class="text-3xl md:text-4xl font-serif text-primary">Coffee</h2>
+        <div class="h-px flex-1 bg-outline-variant/50"></div>
+        <span class="uppercase tracking-widest text-[10px] text-secondary hidden sm:inline">
+          Manual &amp; Espresso
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <!-- ITEM 1 -->
+        <div class="group">
+          <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-surface-container-low shadow-sm">
+            <img
+              alt="Signature Latte"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU-6AQKV5wiKNrv386rCCYLF_PtbsaIAoiiWbT7O4i-VFkBg8Xs7N7r-ujdDBrkHgMZblgCzloIbBgeEYNLsnp87y6wGja3CtdIZ1ML2vE5olpwjbSFh50wCg5cAB5WE854DYo2t6HYe3AJGCGhNQcre4uZLIUOf_GqbPRDlQNpdGNbhcOCIq9B2lhHOFkzeKapjNDu6d9bgFpC27Op5XCH0aMpVQhl13htrCgViFVrbwwjWqohn0mSAbahZ_O6Mm2_iF9wSJM_XrX"
+            />
+          </div>
+          <div class="flex justify-between items-baseline mb-1 gap-3">
+            <h3 class="text-base md:text-lg font-serif text-on-surface leading-snug">Signature Latte</h3>
+            <span class="text-primary font-bold text-sm">42k</span>
+          </div>
+          <p class="text-xs text-on-surface-variant leading-relaxed opacity-80">
+            Local botanical syrup &amp; edible petals.
+          </p>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="group">
+          <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-surface-container-low shadow-sm">
+            <img
+              alt="Origin V60"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT2Ui6QtXNl-d6WVJ1JO4s_vIpJ5MCXBSRpfHl8e3Cv9HkZrpwwZ30nFFlZTlM3u7Efgbxx3-EovWkajYr_WZuPjNhJCAuNdjH4d4zZyR_TYq0ilJ-jpdksvwaIRxr-0eXuJttIEXAE3T6tZ3i4y1fbyidwv8OeTrDNgNZ8yLPVAq17PKHyTPAwG06sXekXgW9kQWqP-jjIJNVsURzr3nt-bDOaACvjgGTFEFp4i0zPKlKjZRUBwDbQaxghBYFjk_sotIlch5O-8D1"
+            />
+          </div>
+          <div class="flex justify-between items-baseline mb-1 gap-3">
+            <h3 class="text-base md:text-lg font-serif text-on-surface leading-snug">Origin V60</h3>
+            <span class="text-primary font-bold text-sm">38k</span>
+          </div>
+          <p class="text-xs text-on-surface-variant leading-relaxed opacity-80">
+            Rotating local single origin beans.
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="section-wrap px-5 md:px-8 py-10 text-center text-primary/70 text-sm">
-    © 2026 Rumah Kopi Manupi
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
+    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
+      <div class="space-y-6">
+        <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
+          <img
+            alt="Manupi Logo"
+            class="h-10 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
+          />
+        </a>
+
+        <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
+          © 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="flex flex-col gap-4">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="index.html">Home</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm font-bold" href="menu.html">Menu</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="location.html">Location</a>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="#">Email</a>
+        </div>
+
+        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
+          <a class="bg-stone-200/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
+            <h5 class="font-serif text-emerald-900 text-sm mb-1">The Greenhouse</h5>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />
+              Kec. Banjarbaru Utara, Kalimantan Selatan 70711
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script src="assets/js/main.js" defer></script>
