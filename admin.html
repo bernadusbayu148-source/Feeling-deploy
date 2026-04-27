@@ -1,121 +1,4 @@
-<!DOCTYPE html>
-<html class="light" lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel – Manupi</title>
-
-  <!-- Tailwind -->
-  https://cdn.tailwindcss.com?plugins=forms,container-queries</script>
-  <script src="assets/css/tailwind-config.js"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-
-<body class="bg-background text-on-background font-body min-h-screen">
-  <div class="max-w-6xl mx-auto px-6 py-10">
-    <!-- HEADER -->
-    <div class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
-      <p class="text-sm text-stone-500">
-        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
-      </p>
-    </div>
-
-    <!-- STATUS BAR -->
-    <div
-      id="status-bar"
-      class="hidden mb-6 rounded-2xl border border-stone-200 bg-white/80 px-5 py-4"
-    >
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div>
-          <p class="text-xs uppercase tracking-[0.18em] text-stone-400">Admin Login</p>
-          <p id="admin-email-display" class="text-sm font-medium text-primary">-</p>
-        </div>
-
-        <button
-          id="logout-btn"
-          class="inline-flex items-center justify-center rounded-xl bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-200 transition"
-          type="button"
-        >
-          Logout
-        </button>
-      </div>
-    </div>
-
-    <!-- LOGIN SECTION -->
-    <section
-      id="login-section"
-      class="max-w-md rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm"
-    >
-      <h2 class="text-2xl font-serif text-primary mb-2">Login Admin</h2>
-      <p class="text-sm text-stone-500 mb-6">
-        Masuk dengan email dan password admin Firebase Authentication.
-      </p>
-
-      <div class="space-y-4">
-        <div>
-          <label for="email" class="block text-sm font-medium mb-2">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="admin@manupi.com"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-        </div>
-
-        <div>
-          <label for="password" class="block text-sm font-medium mb-2">Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-        </div>
-
-        <button
-          id="login-btn"
-          class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
-          type="button"
-        >
-          Login
-        </button>
-
-        <p id="login-message" class="text-sm hidden"></p>
-      </div>
-    </section>
-
-    <!-- ADMIN SECTION -->
-    <section id="admin-section" class="hidden space-y-8 mt-8">
-      <!-- SEARCH MEMBER -->
-      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
-        <p class="text-sm text-stone-500 mb-5">
-          Ketik nama member, lalu pilih dari daftar yang muncul.
-        </p>
-
-        <div class="relative">
-          <input
-            id="member-search"
-            type="text"
-            placeholder="Ketik nama member..."
-            autocomplete="off"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-
-          <div
-            id="member-suggestions"
-            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
+<!DOCTYPE html>-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
           ></div>
         </div>
 
@@ -258,6 +141,124 @@
     </section>
   </div>
 
+  <!-- Admin JS -->
   <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
+``
+<html class="light" lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Manupi</title>
+
+  <!-- Tailwind -->
+  https://cdn.tailwindcss.com?plugins=forms,container-queries</script>
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <!-- HEADER -->
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
+      <p class="text-sm text-stone-500">
+        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
+      </p>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div
+      id="status-bar"
+      class="hidden mb-6 rounded-2xl border border-stone-200 bg-white/80 px-5 py-4"
+    >
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div>
+          <p class="text-xs uppercase tracking-[0.18em] text-stone-400">Admin Login</p>
+          <p id="admin-email-display" class="text-sm font-medium text-primary">-</p>
+        </div>
+
+        <button
+          id="logout-btn"
+          class="inline-flex items-center justify-center rounded-xl bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-200 transition"
+          type="button"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <section
+      id="login-section"
+      class="max-w-md rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm"
+    >
+      <h2 class="text-2xl font-serif text-primary mb-2">Login Admin</h2>
+      <p class="text-sm text-stone-500 mb-6">
+        Masuk dengan email dan password admin Firebase Authentication.
+      </p>
+
+      <div class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="admin@manupi.com"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium mb-2">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+        </div>
+
+        <button
+          id="login-btn"
+          class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+          type="button"
+        >
+          Login
+        </button>
+
+        <p id="login-message" class="text-sm hidden"></p>
+      </div>
+    </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="admin-section" class="hidden space-y-8 mt-8">
+      <!-- SEARCH MEMBER -->
+      <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
+        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
+        <p class="text-sm text-stone-500 mb-5">
+          Ketik nama member, lalu pilih dari daftar yang muncul.
+        </p>
+
+        <div class="relative">
+          <input
+            id="member-search"
+            type="text"
+            placeholder="Ketik nama member..."
+            autocomplete="off"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+
+          <div
+            id="member-suggestions"
