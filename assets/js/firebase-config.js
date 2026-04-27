@@ -3,13 +3,13 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-aut
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 export const firebaseConfig = {
-  apiKey: "API_KEY_ANDA",
-  authDomain: "PROJECT_ID.firebaseapp.com",
+  apiKey: "AIzaSyCs6TaK4wUa-Xf0JkbL4my61JxJlX5CMUM",
+  authDomain: "manupi-web.firebaseapp.com",
   databaseURL: "https://PROJECT_ID.firebaseio.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "APP_ID"
+  projectId: "manupi-web",
+  storageBucket: "manupi-web.firebasestorage.app",
+  messagingSenderId: "399169759168",
+  appId: "1:399169759168:web:7f16f4bfe23f9b989aca25"
 };
 
 export const app = initializeApp(firebaseConfig);
