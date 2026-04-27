@@ -1,89 +1,64 @@
 <!DOCTYPE html>
-<html lang=\"id\">
+<html lang="id">
 <head>
-  <meta charset=\"UTF-8\" />
-  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-  <title>Feeling Family — Leaderboard</title>
-  <!-- Tambahan CSS: ikon crown untuk podium 1/2/3 (emas/perak/perunggu). -->
-  <style>
-    /* === Crown icons untuk podium (CSS-only, tidak mengubah HTML/JS lain) === */
-    .podium .slot { position: relative; overflow: visible; }
-    .podium > * { position: relative; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    @supports (-webkit-mask-image: url("data:image/svg+xml;utf8,<svg></svg>")) or (mask-image: url("data:image/svg+xml;utf8,<svg></svg>")) {
-      .podium .slot::before,
-      .podium > :nth-child(1)::before,
-      .podium > :nth-child(2)::before,
-      .podium > :nth-child(3)::before {
-        content: "";
-        position: absolute;
-        top: 10px; left: 12px; width: 28px; height: 20px;
-        -webkit-mask-image: url("data:image/svg+xml;utf8,\
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
-            <path d='M3 7l3.5 3 3-4 3.5 4 3.5-3 2.5 7H4.5L3 7zm3.5 11h11a1 1 0 0 0 1-1v-2H5.5v2a1 1 0 0 0 1 1z'/>\
-          </svg>");
-        mask-image: url("data:image/svg+xml;utf8,\
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
-            <path d='M3 7l3.5 3 3-4 3.5 4 3.5-3 2.5 7H4.5L3 7zm3.5 11h11a1 1 0 0 0 1-1v-2H5.5v2a1 1 0 0 0 1 1z'/>\
-          </svg>");
-        background-color: #000; opacity: 0.95;
-      }
-      .podium .slot.gold::before,   .podium > :nth-child(1)::before { background-color: #f59e0b; } /* emas */
-      .podium .slot.silver::before, .podium > :nth-child(2)::before { background-color: #c0c0c0; } /* perak */
-      .podium .slot.bronze::before, .podium > :nth-child(3)::before { background-color: #cd7f32; } /* perunggu */
-    }
-    @supports not ((-webkit-mask-image: none) or (mask-image: none)) {
-      .podium .slot::before,
-      .podium > :nth-child(1)::before,
-      .podium > :nth-child(2)::before,
-      .podium > :nth-child(3)::before {
-        content: "\ud83d\udc51"; position: absolute; top: 8px; left: 12px; font-size: 18px;
-      }
-      .podium .slot.gold::before,   .podium > :nth-child(1)::before { color: #f59e0b; }
-      .podium .slot.silver::before, .podium > :nth-child(2)::before { color: #c0c0c0; }
-      .podium .slot.bronze::before, .podium > :nth-child(3)::before { color: #cd7f32; }
-    }
-  </style>
+  <title>Rumah Kopi Manupi</title>
+  <meta name="description" content="Rumah Kopi Manupi Banjarbaru – A breath of fresh coffee." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>Feeling Family</h1>
-    <h2>Feeling Leaderboard</h2>
-    <p>Data diambil dari Google Sheets (kolom: No Member, Nama, Point).</p>
-  </header>
 
-  <main>
-    <!-- Podium: tiga kotak top 3 (struktur mengikuti file asli) -->
-    <div class=\"podium\" style=\"display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;margin:16px 0\">
-      <div class=\"slot gold\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
-        <div class=\"rank\">#1</div>
-        <div id=\"podium1Name\">—</div>
-        <div id=\"podium1Point\">🏆 0 poin</div>
-      </div>
-      <div class=\"slot silver\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
-        <div class=\"rank\">#2</div>
-        <div id=\"podium2Name\">—</div>
-        <div id=\"podium2Point\">🏆 0 poin</div>
-      </div>
-      <div class=\"slot bronze\" style=\"border:1px solid #e5e7eb;border-radius:12px;padding:12px\">
-        <div class=\"rank\">#3</div>
-        <div id=\"podium3Name\">—</div>
-        <div id=\"podium3Point\">🏆 0 poin</div>
-      </div>
-    </div>
+<body class="bg-secondary text-primary font-inter">
 
-    <!-- Tabel leaderboard sesuai file asli -->
-    <table>
-      <tr>
-        <th>Peringkat</th>
-        <th>No Member</th>
-        <th>Nama</th>
-        <th>Point</th>
-      </tr>
-      <tr>
-        <td colspan=\"4\">Memuat data…</td>
-      </tr>
-    </table>
-  </main>
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 w-full bg-secondary z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="font-playfair text-xl">Rumah Kopi Manupi</h1>
+
+    <button id="mobile-menu-btn" aria-label="Menu">
+      <span id="menu-icon" class="material-icons">menu</span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden bg-secondary px-4 pb-4">
+    <a href="index.html" class="block py-2">Home</a>
+    <a href="menu.html" class="block py-2">Menu</a>
+    <a href="location.html" class="block py-2">Location</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+section class="pt-32">
+  <img
+    src="URL_GAMBAR_ASLI_ANDA"
+    alt="Rumah Kopi Manupi"
+    class="w-full h-[80vh] object-cover"
+    loading="lazy"
+  />
+</section>
+
+<!-- CONTENT -->
+<section class="max-w-5xl mx-auto px-6 py-16">
+  <h2 class="font-playfair text-3xl mb-6">
+    A Breath of Fresh Coffee
+  </h2>
+  <p>
+    Rumah Kopi Manupi menawarkan pengalaman minum kopi yang tenang, modern,
+    dan menyatu dengan alam.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-10 text-sm opacity-70">
+  © 2026 Rumah Kopi Manupi
+</footer>
+
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
