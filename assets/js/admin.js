@@ -6,22 +6,15 @@ const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
 let allMembers = [];
 let selectedMemberId = null;
 
-// --- FUNGSI LOADING UI ---
+// --- LOADING UI ---
 function toggleLoading(isLoading, btn) {
-  const globalOverlay = document.getElementById("global-loading");
+  const overlay = document.getElementById("global-loading");
   if (isLoading) {
-    if(btn) {
-      btn.disabled = true;
-      btn.dataset.originalText = btn.innerHTML;
-      btn.innerHTML = `<span class="animate-pulse italic">Memproses...</span>`;
-    }
-    globalOverlay?.classList.remove("hidden");
+    if(btn) { btn.disabled = true; btn.dataset.txt = btn.innerHTML; btn.innerHTML = "Memproses..."; }
+    overlay?.classList.remove("hidden");
   } else {
-    if(btn) {
-      btn.disabled = false;
-      btn.innerHTML = btn.dataset.originalText || btn.innerHTML;
-    }
-    globalOverlay?.classList.add("hidden");
+    if(btn) { btn.disabled = false; btn.innerHTML = btn.dataset.txt || btn.innerHTML; }
+    overlay?.classList.add("hidden");
   }
 }
 
@@ -35,22 +28,17 @@ async function callApi(action, payload = {}) {
   } catch (error) { return { ok: false, error: "Koneksi gagal." }; }
 }
 
-// LOGOUT
-document.getElementById("logout-btn")?.addEventListener("click", () => {
-  localStorage.clear();
-  window.location.href = "admin-login.html";
-});
+document.getElementById("logout-btn")?.addEventListener("click", () => { localStorage.clear(); window.location.href = "admin-login.html"; });
 
 async function refreshMemberList() {
   const res = await callApi("listMembers");
   if (res.ok) allMembers = res.data;
 }
 
-// LOAD HISTORY
 async function loadVisitHistory(memberId) {
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
-  logList.innerHTML = "<p class='text-xs text-stone-400 p-4 text-center animate-pulse'>Memuat...</p>";
+  logList.innerHTML = "<p class='text-xs p-4 text-center animate-pulse'>Memuat riwayat...</p>";
   const res = await callApi("listVisits", { memberId });
   if (res.ok && res.data.length > 0) {
     logList.innerHTML = res.data.map(v => {
@@ -62,84 +50,54 @@ async function loadVisitHistory(memberId) {
           <p class="text-[11px] text-stone-400 font-medium">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
           <span class="text-[9px] font-mono text-stone-300 block mt-1">${v.visitId}</span>
         </div>
-        <button onclick="window.promptEditVisit('${v.visitId}', ${v.pointsAdded})" 
-                class="px-3 py-1.5 bg-stone-100 text-primary text-[10px] font-bold rounded-xl hover:bg-primary hover:text-white transition uppercase tracking-wider">
-          Edit
-        </button>
+        <button onclick="window.promptEditVisit('${v.visitId}', ${v.pointsAdded})" class="px-3 py-1.5 bg-stone-100 text-primary text-[10px] font-bold rounded-xl hover:bg-primary hover:text-white transition uppercase tracking-wider">Edit</button>
       </div>`;
     }).join("");
   } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
-// EDIT POPUP (WINDOW SCOPE)
 window.promptEditVisit = async function(visitId, oldPoints) {
   const newPoints = prompt(`Ubah poin (gunakan minus untuk redeem):`, oldPoints);
   if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
-
   toggleLoading(true);
-  const res = await callApi("editVisit", { 
-    payload: { visitId, memberId: selectedMemberId, newPoints: parseInt(newPoints) } 
-  });
+  const res = await callApi("editVisit", { payload: { visitId, memberId: selectedMemberId, newPoints: parseInt(newPoints) } });
   toggleLoading(false);
-
-  if (res.ok) {
-    await refreshMemberList();
-    const updated = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updated) selectMember(updated);
-  } else { alert("Gagal: " + res.error); }
+  if (res.ok) { await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
 };
 
-// SIMPAN VISIT & REDEEM
+// --- TAMBAH VISIT & REDEEM ---
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
   const btn = document.getElementById("add-visit-btn");
   if (!selectedMemberId) return;
-  const pts = parseInt(pointsInput.value);
-  if (isNaN(pts) || pts === 0) return;
 
-  const currentMember = allMembers.find(m => m.memberId === selectedMemberId);
-  if (pts < 0 && Math.abs(pts) > currentMember.totalPoints) {
-    alert("Poin member tidak mencukupi!");
-    return;
-  }
+  // Pembersihan Input Teks agar hanya angka & minus
+  let cleanVal = pointsInput.value.replace(/[^0-9-]/g, '');
+  const pts = parseInt(cleanVal);
+  if (isNaN(pts) || pts === 0) { alert("Masukkan angka valid!"); return; }
+
+  const cur = allMembers.find(m => m.memberId === selectedMemberId);
+  if (pts < 0 && Math.abs(pts) > cur.totalPoints) { alert("Poin tidak cukup!"); return; }
 
   toggleLoading(true, btn);
-  const res = await callApi("addVisit", { 
-    memberId: selectedMemberId,
-    payload: { memberId: selectedMemberId, points: pts, adminId: ADMIN_ID } 
-  });
+  const res = await callApi("addVisit", { memberId: selectedMemberId, payload: { memberId: selectedMemberId, points: pts, adminId: ADMIN_ID } });
   toggleLoading(false, btn);
 
-  if (res.ok) {
-    pointsInput.value = "1";
-    await refreshMemberList();
-    const updated = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updated) selectMember(updated);
-  }
+  if (res.ok) { pointsInput.value = "1"; await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
 });
 
-// TAMBAH MEMBER
+// --- TAMBAH MEMBER ---
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
-  const nameEl = document.getElementById("member-name");
-  const phoneEl = document.getElementById("member-phone");
-  const btn = document.getElementById("add-member-btn");
+  const nameEl = document.getElementById("member-name"), phoneEl = document.getElementById("member-phone"), btn = document.getElementById("add-member-btn");
   if (!nameEl.value || !phoneEl.value) return;
-
   toggleLoading(true, btn);
   const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
   toggleLoading(false, btn);
-
-  if (res.ok) {
-    nameEl.value = ""; phoneEl.value = "";
-    await refreshMemberList();
-    alert("Berhasil didaftarkan!");
-  } else { alert(res.error); }
+  if (res.ok) { nameEl.value = ""; phoneEl.value = ""; await refreshMemberList(); alert("Member didaftarkan!"); } else { alert(res.error); }
 });
 
-// PENCARIAN & SELEKSI
-const searchInput = document.getElementById("member-search");
-const suggestionsEl = document.getElementById("member-suggestions");
-
+// --- PENCARIAN & SELEKSI ---
+const searchInput = document.getElementById("member-search"), suggestionsEl = document.getElementById("member-suggestions");
 searchInput?.addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase().trim();
   suggestionsEl.innerHTML = "";
@@ -149,7 +107,7 @@ searchInput?.addEventListener("input", (e) => {
     filtered.slice(0, 5).forEach(m => {
       const div = document.createElement("div");
       div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm";
-      div.innerHTML = `<p class="font-bold text-primary">${m.name}</p><p class="text-[10px] text-stone-400 font-medium">${m.memberId} • ${m.phone}</p>`;
+      div.innerHTML = `<p class="font-bold text-primary">${m.name}</p><p class="text-[10px] text-stone-400">${m.memberId} • ${m.phone}</p>`;
       div.onclick = () => selectMember(m);
       suggestionsEl.appendChild(div);
     });
@@ -169,7 +127,6 @@ function selectMember(member) {
   loadVisitHistory(member.memberId);
 }
 
-// HAPUS
 document.getElementById("delete-member-btn")?.addEventListener("click", async () => {
   if (!selectedMemberId || !confirm("Hapus permanen?")) return;
   toggleLoading(true);
