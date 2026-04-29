@@ -14,7 +14,6 @@
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
-
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
@@ -22,7 +21,7 @@
   <div class="max-w-xl mx-auto px-6 py-12">
     <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Login</h1>
     <p class="text-sm text-stone-500 mb-8">
-      Masukkan token admin Anda. Token disimpan di browser (localStorage) untuk sesi berikutnya.
+      Masukkan <b>Admin ID</b> dan <b>Token</b>. Token disimpan di browser (localStorage) sampai Anda hapus manual.
     </p>
 
     <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm">
@@ -32,10 +31,10 @@
           <input
             id="admin-id"
             type="text"
-            placeholder="Contoh: admin1"
+            placeholder="admin1"
             class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
           />
-          <p class="text-xs text-stone-500 mt-2">Gunakan ID unik per admin (mis: admin1, admin2, admin3).</p>
+          <p class="text-xs text-stone-500 mt-2">Contoh: admin1 / admin2 / admin3</p>
         </div>
 
         <div>
@@ -46,7 +45,6 @@
             placeholder="Masukkan token..."
             class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
           />
-          <p class="text-xs text-stone-500 mt-2">Token berbeda untuk tiap admin (A2).</p>
         </div>
 
         <button
@@ -68,15 +66,11 @@
         <p id="login-msg" class="text-sm hidden mt-2"></p>
       </div>
     </div>
-
-    <div class="mt-6 text-xs text-stone-500">
-      <p><span class="font-semibold">Catatan:</span> Token ini hanya tersimpan di browser perangkat ini.</p>
-    </div>
   </div>
 
   <script>
-    const KEY_TOKEN = "manupi_adminToken";
     const KEY_ADMIN_ID = "manupi_adminId";
+    const KEY_TOKEN = "manupi_adminToken";
 
     const adminIdEl = document.getElementById("admin-id");
     const tokenEl = document.getElementById("admin-token");
@@ -84,18 +78,16 @@
 
     function showMsg(text, type = "success") {
       msgEl.textContent = text;
-      msgEl.classList.remove("hidden", "text-red-600", "text-emerald-700", "text-stone-500");
+      msgEl.classList.remove("hidden", "text-red-600", "text-emerald-700");
       msgEl.classList.add(type === "error" ? "text-red-600" : "text-emerald-700");
     }
 
-    // Prefill jika sudah ada
     const savedId = localStorage.getItem(KEY_ADMIN_ID);
     if (savedId) adminIdEl.value = savedId;
 
     document.getElementById("save-token-btn").addEventListener("click", () => {
       const adminId = adminIdEl.value.trim();
       const token = tokenEl.value.trim();
-
       if (!adminId) return showMsg("Admin ID wajib diisi.", "error");
       if (!token) return showMsg("Token wajib diisi.", "error");
 
@@ -103,9 +95,7 @@
       localStorage.setItem(KEY_TOKEN, token);
 
       showMsg("Token tersimpan. Mengalihkan ke Admin Panel...");
-      setTimeout(() => {
-        window.location.href = "admin.html";
-      }, 600);
+      setTimeout(() => (location.href = "admin.html"), 500);
     });
 
     document.getElementById("clear-token-btn").addEventListener("click", () => {
@@ -113,9 +103,8 @@
       localStorage.removeItem(KEY_TOKEN);
       adminIdEl.value = "";
       tokenEl.value = "";
-      showMsg("Token tersimpan berhasil dihapus.", "success");
+      showMsg("Token tersimpan berhasil dihapus.");
     });
   </script>
 </body>
 </html>
-``
