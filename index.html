@@ -208,7 +208,7 @@
         </div>
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
           <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
+          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.google.com" target="_blank">
             <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
             <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
               JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
@@ -220,11 +220,12 @@
   </footer>
 
   <script src="main.js"></script>
-  
+
   <script>
+    // URL Web App yang sudah ditambahkan doGet()
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
 
-    let allLeaderboardData = []; // Menyimpan semua data dari Spreadsheet
+    let allLeaderboardData = [];
 
     async function fetchLeaderboard() {
       try {
@@ -235,17 +236,13 @@
         
         const result = await response.json();
         
-        // Pastikan response sukses dan memiliki data
         if (result.ok && result.data) {
-          // Menyimpan urutan ranking dan membuat avatar inisial
           allLeaderboardData = result.data.map((item, index) => ({ 
             ...item, 
             rank: index + 1,
-            // Generate gambar inisial nama menggunakan UI Avatars dengan warna tema Manupi
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
           
-          // Hanya re-render jika kolom search sedang kosong
           const searchInput = document.getElementById('search-member');
           if (searchInput && !searchInput.value) {
             renderLeaderboard(allLeaderboardData);
@@ -255,12 +252,11 @@
         console.error('Error fetching leaderboard:', error);
         const podiumContainer = document.getElementById('podium-container');
         if (podiumContainer) {
-          podiumContainer.innerHTML = '<div class="text-center py-10 text-red-500 font-body text-sm">Gagal memuat data. Periksa koneksi.</div>';
+          podiumContainer.innerHTML = '<div class="text-center py-10 text-red-500 font-body text-sm">Gagal memuat data.</div>';
         }
       }
     }
 
-    // Fungsi Render Tampilan Leaderboard
     function renderLeaderboard(data) {
       const podiumContainer = document.getElementById('podium-container');
       const listContainer = document.getElementById('list-container');
@@ -273,7 +269,7 @@
         return;
       }
 
-      // Render Top 3 (Podium)
+      // Render Top 3
       let podiumHTML = '';
       if(data[0]) {
         podiumHTML += `
@@ -315,7 +311,7 @@
       podiumHTML += `</div>`;
       podiumContainer.innerHTML = podiumHTML;
 
-      // Render Sisa List (Peringkat 4 ke bawah)
+      // Render List
       let listHTML = '';
       for(let i = 3; i < data.length; i++) {
         listHTML += `
@@ -339,14 +335,11 @@
       listContainer.innerHTML = listHTML;
     }
 
-    // Menjalankan event ketika seluruh HTML telah dimuat
     document.addEventListener('DOMContentLoaded', () => {
-      // Event Listener untuk Search Bar
       const searchInput = document.getElementById('search-member');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           const keyword = e.target.value.toLowerCase();
-          
           if (keyword === '') {
             renderLeaderboard(allLeaderboardData);
           } else {
@@ -357,11 +350,7 @@
           }
         });
       }
-
-      // Panggil fetch pertama kali web dimuat
       fetchLeaderboard();
-      
-      // Auto-update setiap 10 detik
       setInterval(fetchLeaderboard, 10000); 
     });
   </script>
