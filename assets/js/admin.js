@@ -4,8 +4,9 @@ const ADMIN_ID = localStorage.getItem("manupi_adminId");
 const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
 
 let allMembers = [];
+// Variabel global untuk menyimpan ID member yang sedang dipilih
+let selectedMemberId = null;
 
-// 1. Fungsi Utama Call API
 async function callApi(action, payload = {}) {
   try {
     const response = await fetch(API_URL, {
@@ -14,21 +15,18 @@ async function callApi(action, payload = {}) {
     });
     return await response.json();
   } catch (error) {
-    console.error("API Error:", error);
     return { ok: false, error: "Gagal terhubung ke server." };
   }
 }
 
-// 2. Fungsi Ambil Data Member (Sync)
 async function refreshMemberList() {
   const res = await callApi("listMembers");
   if (res.ok) {
     allMembers = res.data;
-    console.log("Data member diperbarui:", allMembers.length);
   }
 }
 
-// 3. Logika Pencarian Member
+// --- LOGIKA PENCARIAN ---
 const searchInput = document.getElementById("member-search");
 const suggestionsEl = document.getElementById("member-suggestions");
 
@@ -41,7 +39,6 @@ searchInput?.addEventListener("input", (e) => {
     return;
   }
 
-  // Cari berdasarkan nama atau nomor telepon
   const filtered = allMembers.filter(m => 
     m.name.toLowerCase().includes(keyword) || 
     String(m.phone).includes(keyword) ||
@@ -65,12 +62,14 @@ searchInput?.addEventListener("input", (e) => {
   }
 });
 
-// 4. Fungsi Pilih Member dari Hasil Cari
 function selectMember(member) {
   searchInput.value = member.name;
   suggestionsEl.classList.add("hidden");
   
-  // Tampilkan Detail Section
+  // Simpan ID member ke variabel global
+  selectedMemberId = member.memberId;
+  
+  // Tampilkan Detail
   const detailSec = document.getElementById("member-detail-section");
   detailSec.classList.remove("hidden");
   
@@ -78,12 +77,50 @@ function selectMember(member) {
   document.getElementById("detail-member-phone").textContent = member.phone;
   document.getElementById("detail-total-points").textContent = `${member.totalPoints} pts`;
   document.getElementById("detail-total-visits").textContent = `${member.totalVisits} visit`;
-  
-  // Simpan ID yang dipilih untuk proses tambah visit/hapus
-  window.selectedMemberId = member.memberId;
 }
 
-// 5. Event Listener Tambah Member
+// --- LOGIKA TAMBAH POINT ---
+document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
+  const pointsInput = document.getElementById("points-to-add");
+  const btn = document.getElementById("add-visit-btn");
+
+  if (!selectedMemberId) {
+    alert("Silakan cari dan pilih member terlebih dahulu!");
+    return;
+  }
+
+  const points = parseInt(pointsInput.value);
+  if (isNaN(points) || points <= 0) {
+    alert("Masukkan jumlah point yang valid!");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Memproses...";
+
+  const res = await callApi("addVisit", { 
+    payload: { memberId: selectedMemberId, points: points } 
+  });
+
+  if (res.ok) {
+    alert("Point berhasil ditambahkan!");
+    pointsInput.value = "1"; // Reset input
+    
+    // Refresh data agar angka di layar terupdate
+    await refreshMemberList();
+    
+    // Update tampilan detail dengan data terbaru
+    const updatedMember = allMembers.find(m => m.memberId === selectedMemberId);
+    if (updatedMember) selectMember(updatedMember);
+  } else {
+    alert("Gagal menambah point: " + res.error);
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Tambah Point";
+});
+
+// --- SISTEM PENDAFTARAN ---
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
@@ -105,7 +142,7 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
     showStatus("member-message", `Berhasil! ID: ${res.data.memberId}`, false);
     nameEl.value = "";
     phoneEl.value = "";
-    await refreshMemberList(); // Tarik data terbaru agar bisa langsung dicari
+    await refreshMemberList();
   } else {
     showStatus("member-message", res.error, true);
   }
@@ -121,13 +158,7 @@ function showStatus(elId, message, isError = false) {
   el.classList.remove("hidden", "text-red-600", "text-emerald-600");
   el.classList.add(isError ? "text-red-600" : "text-emerald-600");
   el.classList.remove("hidden");
-  setTimeout(() => el.classList.add("hidden"), isError ? 7000 : 5000);
+  setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
-// Inisialisasi awal
 document.addEventListener("DOMContentLoaded", refreshMemberList);
-
-document.getElementById("logout-btn")?.addEventListener("click", () => {
-  localStorage.clear();
-  window.location.href = "admin-login.html";
-});
