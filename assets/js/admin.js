@@ -20,19 +20,40 @@ async function callApi(action, payload = {}) {
   }
 }
 
-// --- 2. REFRESH DATA DARI SPREADSHEET ---
+// --- 2. REFRESH DATA MEMBER ---
 async function refreshMemberList() {
-  console.log("Mengambil data member terbaru...");
   const res = await callApi("listMembers");
   if (res.ok) {
     allMembers = res.data;
-    console.log("Data berhasil dimuat:", allMembers.length, "member");
-  } else {
-    console.error("Gagal memuat member:", res.error);
   }
 }
 
-// --- 3. LOGIKA PENCARIAN (FIXED) ---
+// --- 3. FUNGSI LOAD HISTORY VISIT ---
+async function loadVisitHistory(memberId) {
+  // ID elemen harus sesuai dengan di HTML Anda (biasanya 'member-log-list')
+  const logList = document.getElementById("member-log-list");
+  if (!logList) return;
+
+  logList.innerHTML = "<p class='text-xs text-stone-400 animate-pulse'>Memuat riwayat...</p>";
+  
+  const res = await callApi("listVisits", { memberId });
+  
+  if (res.ok && res.data.length > 0) {
+    logList.innerHTML = res.data.map(v => `
+      <div class="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100 mb-2">
+        <div>
+          <p class="text-xs font-bold text-primary">+${v.pointsAdded} Points</p>
+          <p class="text-[10px] text-stone-400">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
+        </div>
+        <span class="text-[9px] font-mono text-stone-300">${v.visitId}</span>
+      </div>
+    `).join("");
+  } else {
+    logList.innerHTML = "<p class='text-xs text-stone-400 italic px-2'>Belum ada riwayat kunjungan.</p>";
+  }
+}
+
+// --- 4. LOGIKA PENCARIAN ---
 const searchInput = document.getElementById("member-search");
 const suggestionsEl = document.getElementById("member-suggestions");
 
@@ -45,16 +66,14 @@ searchInput?.addEventListener("input", (e) => {
     return;
   }
 
-  // Filter mencakup Nama, No HP, dan Member ID
-  const filtered = allMembers.filter(m => {
-    const nameMatch = m.name.toLowerCase().includes(keyword);
-    const phoneMatch = String(m.phone).includes(keyword);
-    const idMatch = m.memberId.toLowerCase().includes(keyword);
-    return nameMatch || phoneMatch || idMatch;
-  });
+  const filtered = allMembers.filter(m => 
+    m.name.toLowerCase().includes(keyword) || 
+    String(m.phone).includes(keyword) ||
+    m.memberId.toLowerCase().includes(keyword)
+  );
 
   if (filtered.length > 0) {
-    filtered.slice(0, 8).forEach(m => {
+    filtered.slice(0, 5).forEach(m => {
       const div = document.createElement("div");
       div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm";
       div.innerHTML = `
@@ -66,15 +85,11 @@ searchInput?.addEventListener("input", (e) => {
     });
     suggestionsEl.classList.remove("hidden");
   } else {
-    const noResult = document.createElement("div");
-    noResult.className = "px-4 py-3 text-xs text-stone-400 italic";
-    noResult.textContent = "Member tidak ditemukan...";
-    suggestionsEl.appendChild(noResult);
-    suggestionsEl.classList.remove("hidden");
+    suggestionsEl.classList.add("hidden");
   }
 });
 
-// --- 4. SELECT MEMBER & DETAIL ---
+// --- 5. SELECT MEMBER ---
 function selectMember(member) {
   selectedMemberId = member.memberId;
   searchInput.value = member.name;
@@ -87,11 +102,11 @@ function selectMember(member) {
   document.getElementById("detail-total-points").textContent = `${member.totalPoints} pts`;
   document.getElementById("detail-total-visits").textContent = `${member.totalVisits} visit`;
 
-  // Scroll otomatis ke detail agar admin tahu data sudah terpilih
-  document.getElementById("member-detail-section").scrollIntoView({ behavior: 'smooth' });
+  // PANGGIL HISTORY
+  loadVisitHistory(member.memberId);
 }
 
-// --- 5. SIMPAN VISIT ---
+// --- 6. SIMPAN VISIT (DENGAN AUTO-REFRESH HISTORY) ---
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
   const btn = document.getElementById("add-visit-btn");
@@ -106,13 +121,20 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   const res = await callApi("addVisit", { payload: { memberId: selectedMemberId, points: pts } });
   
   if (res.ok) {
-    showStatus("visit-message", "Poin berhasil ditambahkan!", false);
-    pointsInput.value = "";
-    // Update data di memori
+    showStatus("visit-message", "Berhasil disimpan!", false);
+    pointsInput.value = "1";
+    
+    // Refresh data member (poin total)
     await refreshMemberList();
-    // Update tampilan detail
+    
+    // Update tampilan detail & riwayat secara real-time
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updated) selectMember(updated);
+    if (updated) {
+        document.getElementById("detail-total-points").textContent = `${updated.totalPoints} pts`;
+        document.getElementById("detail-total-visits").textContent = `${updated.totalVisits} visit`;
+        // Muat ulang history agar visit yang baru masuk muncul di daftar
+        loadVisitHistory(selectedMemberId);
+    }
   } else {
     showStatus("visit-message", res.error, true);
   }
@@ -120,7 +142,7 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   btn.textContent = "Simpan Visit";
 });
 
-// --- 6. TAMBAH MEMBER ---
+// --- 7. TAMBAH MEMBER BARU ---
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
@@ -132,8 +154,6 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   }
 
   btn.disabled = true;
-  btn.textContent = "Sedang mendaftarkan...";
-
   const res = await callApi("addMember", { 
     payload: { name: nameEl.value, phone: phoneEl.value } 
   });
@@ -141,12 +161,11 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   if (res.ok) {
     showStatus("member-message", `Berhasil! ID: ${res.data.memberId}`, false);
     nameEl.value = ""; phoneEl.value = "";
-    await refreshMemberList(); // Penting: agar member baru langsung bisa dicari
+    await refreshMemberList();
   } else {
     showStatus("member-message", res.error, true);
   }
   btn.disabled = false;
-  btn.textContent = "Simpan Member";
 });
 
 function showStatus(elId, message, isError = false) {
@@ -159,7 +178,7 @@ function showStatus(elId, message, isError = false) {
   setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
-// Inisialisasi awal saat halaman dibuka
+// Inisialisasi saat halaman dibuka
 document.addEventListener("DOMContentLoaded", refreshMemberList);
 
 document.getElementById("logout-btn")?.addEventListener("click", () => {
