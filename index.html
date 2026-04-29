@@ -48,7 +48,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-background text-on-background antialiased">
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
   
   <nav class="bg-stone-50/80 backdrop-blur-xl text-emerald-900 docked full-width top-0 sticky z-50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
@@ -79,7 +79,7 @@
             An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
 
-          <div class="bg-white p-6 rounded-[2.5rem] shadow-xl w-full max-w-sm border border-stone-100 mt-4">
+          <div class="bg-white p-6 rounded-[2.5rem] shadow-xl w-full max-w-sm border border-stone-100 mt-4 transition-all hover:shadow-2xl">
             <div class="flex items-center gap-3 mb-5">
               <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary">
                 <span class="material-symbols-outlined">loyalty</span>
@@ -118,22 +118,24 @@
     </section>
 
     <section class="py-20 px-8 max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-        <div>
-          <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
-          <h2 class="font-serif text-4xl text-primary mt-2">Community Leaderboard</h2>
-        </div>
-        <div class="relative w-full md:w-80">
-          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">search</span>
-          <input id="search-member" class="w-full pl-12 pr-6 py-4 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-primary/10 text-sm font-body" placeholder="Find a member..." type="text" />
-        </div>
+      <div class="mb-12">
+        <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
+        <h2 class="font-serif text-4xl text-primary mt-2">Community Leaderboard</h2>
       </div>
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div id="podium-container" class="lg:col-span-4 space-y-4">
-          </div>
+           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data...</div>
+        </div>
+        
         <div class="lg:col-span-8">
           <div class="bg-white rounded-[2.5rem] border border-stone-100 shadow-sm overflow-hidden">
+             <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
+              <span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">Top Contributors</span>
+              <span class="font-label text-[8px] uppercase tracking-widest text-stone-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
+              </span>
+            </div>
             <div id="list-container" class="divide-y divide-stone-50">
               </div>
           </div>
@@ -142,11 +144,16 @@
     </section>
   </main>
 
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 py-12 px-8">
+    <div class="max-w-7xl mx-auto text-center md:text-left text-sm text-stone-600">
+      <p>© 2026 Rumah Kopi Manupi Banjarbaru.</p>
+    </div>
+  </footer>
+
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5 (URL ANDA)';
     let allLeaderboardData = [];
 
-    // Fungsi Ambil Data
     async function fetchLeaderboard() {
       try {
         const response = await fetch(API_URL);
@@ -159,23 +166,17 @@
           }));
           renderLeaderboard(allLeaderboardData);
         }
-      } catch (error) { console.error('Error fetching:', error); }
+      } catch (error) { console.error('Error fetching data:', error); }
     }
 
-    // LOGIKA PENCARIAN PADA KOLOM CEK POIN (KARTU PUTIH)
+    // Fungsi Cek Poin di Box Atas
     document.getElementById('btn-check-points').addEventListener('click', () => {
       const input = document.getElementById('check-points-input').value.trim().toLowerCase();
       const resultDiv = document.getElementById('check-result');
-      
-      if (!input) {
-        alert("Silakan masukkan Nama atau ID Member.");
-        return;
-      }
+      if (!input) return;
 
-      // Mencari member berdasarkan Nama atau ID Member
       const member = allLeaderboardData.find(m => 
-        m.name.toLowerCase().includes(input) || 
-        m.memberId.toLowerCase() === input
+        m.memberId.toLowerCase() === input || m.name.toLowerCase().includes(input)
       );
 
       if (member) {
@@ -185,17 +186,16 @@
         document.getElementById('res-points').textContent = member.totalPoints;
         document.getElementById('res-rank').textContent = member.rank;
       } else {
-        alert("Member tidak ditemukan. Pastikan data yang dimasukkan benar.");
+        alert('Member tidak ditemukan.');
         resultDiv.classList.add('hidden');
       }
     });
 
-    // RENDER UI LEADERBOARD
     function renderLeaderboard(data) {
       const podium = document.getElementById('podium-container');
       const list = document.getElementById('list-container');
       
-      // Podium Logic (Top 3)
+      // Top 1
       if(data[0]) {
         podium.innerHTML = `
           <div class="bg-primary p-8 rounded-[2.5rem] text-center text-white shadow-xl relative overflow-hidden">
@@ -219,7 +219,7 @@
         `;
       }
 
-      // List Logic (Rest)
+      // List peringkat 4 ke bawah
       list.innerHTML = data.slice(3, 10).map(m => `
         <div class="px-8 py-5 flex items-center justify-between hover:bg-stone-50 transition-colors">
           <div class="flex items-center gap-5">
@@ -239,15 +239,7 @@
       `).join('');
     }
 
-    // Search Leaderboard Real-time (Filter Bawah)
-    document.getElementById('search-member').addEventListener('input', (e) => {
-      const val = e.target.value.toLowerCase();
-      const filtered = allLeaderboardData.filter(m => m.name.toLowerCase().includes(val) || m.memberId.toLowerCase().includes(val));
-      renderLeaderboard(filtered);
-    });
-
     document.addEventListener('DOMContentLoaded', fetchLeaderboard);
   </script>
-
 </body>
 </html>
