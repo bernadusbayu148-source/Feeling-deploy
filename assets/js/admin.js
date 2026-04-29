@@ -50,7 +50,7 @@ async function loadVisitHistory(memberId) {
   } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
-// EDIT POPUP (Daftarkan ke window)
+// EDIT POPUP (Daftarkan ke window agar bisa dipanggil tombol HTML)
 window.promptEditVisit = async function(visitId, oldPoints) {
   const newPoints = prompt(`Masukkan jumlah poin baru untuk transaksi ${visitId}:`, oldPoints);
   if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
@@ -60,7 +60,7 @@ window.promptEditVisit = async function(visitId, oldPoints) {
   });
 
   if (res.ok) {
-    alert("Poin diperbarui!");
+    alert("Poin dan Log Admin diperbarui!");
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
@@ -123,7 +123,7 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   if (res.ok) {
     nameEl.value = ""; phoneEl.value = "";
     await refreshMemberList();
-    alert("Berhasil!");
+    alert("Berhasil didaftarkan!");
   } else { alert(res.error); }
 });
 
