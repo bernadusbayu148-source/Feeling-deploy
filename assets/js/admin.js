@@ -4,9 +4,9 @@ const ADMIN_ID = localStorage.getItem("manupi_adminId");
 const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
 
 let allMembers = [];
-// Variabel global untuk menyimpan ID member yang sedang dipilih
 let selectedMemberId = null;
 
+// --- 1. CORE API CALL ---
 async function callApi(action, payload = {}) {
   try {
     const response = await fetch(API_URL, {
@@ -19,40 +19,32 @@ async function callApi(action, payload = {}) {
   }
 }
 
-async function refreshMemberList() {
+// --- 2. INITIALIZATION & REFRESH ---
+async function init() {
   const res = await callApi("listMembers");
   if (res.ok) {
     allMembers = res.data;
   }
 }
 
-// --- LOGIKA PENCARIAN ---
+// --- 3. SEARCH LOGIC ---
 const searchInput = document.getElementById("member-search");
 const suggestionsEl = document.getElementById("member-suggestions");
 
 searchInput?.addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase().trim();
   suggestionsEl.innerHTML = "";
-
-  if (keyword.length < 2) {
-    suggestionsEl.classList.add("hidden");
-    return;
-  }
+  if (keyword.length < 2) { suggestionsEl.classList.add("hidden"); return; }
 
   const filtered = allMembers.filter(m => 
-    m.name.toLowerCase().includes(keyword) || 
-    String(m.phone).includes(keyword) ||
-    m.memberId.toLowerCase().includes(keyword)
+    m.name.toLowerCase().includes(keyword) || m.phone.includes(keyword) || m.memberId.toLowerCase().includes(keyword)
   );
 
   if (filtered.length > 0) {
     filtered.slice(0, 5).forEach(m => {
       const div = document.createElement("div");
-      div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 transition";
-      div.innerHTML = `
-        <p class="font-bold text-primary text-sm">${m.name}</p>
-        <p class="text-[10px] text-stone-400 uppercase tracking-wider">${m.memberId} • ${m.phone}</p>
-      `;
+      div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm";
+      div.innerHTML = `<p class="font-bold text-primary">${m.name}</p><p class="text-[10px] text-stone-400">${m.memberId} • ${m.phone}</p>`;
       div.onclick = () => selectMember(m);
       suggestionsEl.appendChild(div);
     });
@@ -62,93 +54,105 @@ searchInput?.addEventListener("input", (e) => {
   }
 });
 
-function selectMember(member) {
+// --- 4. SELECT MEMBER & LOAD VISITS ---
+async function selectMember(member) {
+  selectedMemberId = member.memberId;
   searchInput.value = member.name;
   suggestionsEl.classList.add("hidden");
-  
-  // Simpan ID member ke variabel global
-  selectedMemberId = member.memberId;
-  
-  // Tampilkan Detail
-  const detailSec = document.getElementById("member-detail-section");
-  detailSec.classList.remove("hidden");
-  
+
+  // Update UI Detail
+  document.getElementById("member-detail-section").classList.remove("hidden");
   document.getElementById("detail-member-name").textContent = member.name;
   document.getElementById("detail-member-phone").textContent = member.phone;
   document.getElementById("detail-total-points").textContent = `${member.totalPoints} pts`;
   document.getElementById("detail-total-visits").textContent = `${member.totalVisits} visit`;
+
+  // Load Visit History
+  loadVisitHistory(member.memberId);
 }
 
-// --- LOGIKA TAMBAH POINT ---
+async function loadVisitHistory(memberId) {
+  const logList = document.getElementById("member-log-list");
+  logList.innerHTML = "<p class='text-xs text-stone-400 animate-pulse'>Memuat riwayat...</p>";
+  
+  const res = await callApi("listVisits", { memberId });
+  if (res.ok && res.data.length > 0) {
+    logList.innerHTML = res.data.map(v => `
+      <div class="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100">
+        <div>
+          <p class="text-xs font-bold text-primary">${v.pointsAdded} Points</p>
+          <p class="text-[10px] text-stone-400">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
+        </div>
+        <span class="text-[9px] font-mono text-stone-300">${v.visitId}</span>
+      </div>
+    `).join("");
+  } else {
+    logList.innerHTML = "<p class='text-xs text-stone-400 italic'>Belum ada riwayat kunjungan.</p>";
+  }
+}
+
+// --- 5. FUNGSI SIMPAN VISIT ---
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
-  const pointsInput = document.getElementById("points-to-add");
+  const pointsInput = document.getElementById("visit-points");
   const btn = document.getElementById("add-visit-btn");
+  const msg = document.getElementById("visit-message");
 
-  if (!selectedMemberId) {
-    alert("Silakan cari dan pilih member terlebih dahulu!");
-    return;
-  }
-
-  const points = parseInt(pointsInput.value);
-  if (isNaN(points) || points <= 0) {
-    alert("Masukkan jumlah point yang valid!");
-    return;
-  }
+  if (!selectedMemberId) { alert("Pilih member dulu!"); return; }
+  const pts = parseInt(pointsInput.value);
+  if (isNaN(pts) || pts <= 0) { alert("Masukkan poin valid!"); return; }
 
   btn.disabled = true;
-  btn.textContent = "Memproses...";
+  btn.textContent = "Menyimpan...";
 
-  const res = await callApi("addVisit", { 
-    payload: { memberId: selectedMemberId, points: points } 
-  });
-
+  const res = await callApi("addVisit", { payload: { memberId: selectedMemberId, points: pts } });
+  
   if (res.ok) {
-    alert("Point berhasil ditambahkan!");
-    pointsInput.value = "1"; // Reset input
-    
-    // Refresh data agar angka di layar terupdate
-    await refreshMemberList();
-    
-    // Update tampilan detail dengan data terbaru
-    const updatedMember = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updatedMember) selectMember(updatedMember);
+    showStatus("visit-message", "Visit berhasil disimpan!", false);
+    pointsInput.value = "";
+    // Refresh data member & log
+    await init();
+    const updated = allMembers.find(m => m.memberId === selectedMemberId);
+    if (updated) selectMember(updated);
   } else {
-    alert("Gagal menambah point: " + res.error);
+    showStatus("visit-message", res.error, true);
   }
-
   btn.disabled = false;
-  btn.textContent = "Tambah Point";
+  btn.textContent = "Simpan Visit";
 });
 
-// --- SISTEM PENDAFTARAN ---
+// --- 6. FUNGSI TAMBAH MEMBER ---
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
   const btn = document.getElementById("add-member-btn");
 
-  if (!nameEl.value || !phoneEl.value) {
-    showStatus("member-message", "Nama dan Nomor wajib diisi!", true);
-    return;
-  }
+  if (!nameEl.value || !phoneEl.value) { showStatus("member-message", "Data tidak lengkap!", true); return; }
 
   btn.disabled = true;
-  btn.textContent = "Menyimpan...";
-
-  const res = await callApi("addMember", { 
-    payload: { name: nameEl.value, phone: phoneEl.value } 
-  });
+  const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
 
   if (res.ok) {
     showStatus("member-message", `Berhasil! ID: ${res.data.memberId}`, false);
-    nameEl.value = "";
-    phoneEl.value = "";
-    await refreshMemberList();
+    nameEl.value = ""; phoneEl.value = "";
+    await init();
   } else {
     showStatus("member-message", res.error, true);
   }
-
   btn.disabled = false;
-  btn.textContent = "Simpan Member";
+});
+
+// --- 7. FUNGSI HAPUS MEMBER ---
+document.getElementById("delete-member-btn")?.addEventListener("click", async () => {
+  if (!selectedMemberId) return;
+  if (!confirm("Hapus member ini secara permanen? Data point & riwayat akan hilang.")) return;
+
+  const res = await callApi("deleteMember", { memberId: selectedMemberId });
+  if (res.ok) {
+    alert("Member berhasil dihapus.");
+    location.reload();
+  } else {
+    alert(res.error);
+  }
 });
 
 function showStatus(elId, message, isError = false) {
@@ -161,4 +165,9 @@ function showStatus(elId, message, isError = false) {
   setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
-document.addEventListener("DOMContentLoaded", refreshMemberList);
+document.addEventListener("DOMContentLoaded", init);
+
+document.getElementById("logout-btn")?.addEventListener("click", () => {
+  localStorage.clear();
+  window.location.href = "admin-login.html";
+});
