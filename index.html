@@ -10,53 +10,46 @@
     content="Rumah Kopi Manupi menawarkan pengalaman minum kopi yang tenang, modern, dan menyatu dengan alam."
   />
 
-  <!-- Tailwind config (untuk CDN, config harus diload SEBELUM tailwindcdn) -->
+  <!-- Fonts (preconnect) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+  />
+
+  <!-- Tailwind config MUST be loaded BEFORE Tailwind CDN -->
   <script src="assets/css/tailwind-config.js"></script>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    rel="stylesheet"
-  />
-
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Optional: favicon (hindari 404 favicon.ico) -->
-  <!-- Kalau kamu belum punya, hapus baris ini atau tambahkan file favicon di path ini -->
-  <!-- <link rel="icon" href="assets/favicon.ico"ax-w-7xl mx-auto">
-
+  <!-- Optional favicon (hapus kalau belum ada file-nya) -->
+  <!-- <link rel="icon" href="assets/favicon.ico"x-w-7xl mx-auto">
       <!-- Brand -->
       <a href="index.html" class="flex items-center gap-3">
         <img
           src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
-          alt="Logo Manupi"
-          class="w-10 h-10 rounded-full object-cover border border-stone-200"
-          loading="lazy"
+          alt="Manupi"
+          class="w-9 h-9 rounded-full object-cover border border-stone-200"
         />
         <span class="text-xl md:text-2xl font-serif italic text-emerald-900">Manupi</span>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex gap-8 items-center">
-        <a href="index.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-          Home
-        </a>
-        <a href="menu.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-          Menu
-        </a>
-        <a href="location.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-          Location
-        </a>
+      <nav class="hidden md:flex gap-8 items-center text-sm">
+        <a href="index.html" class="text-emerald-900 hover:text-emerald-700 transition">Home</a>
+        <a href="menu.html" class="text-emerald-900 hover:text-emerald-700 transition">Menu</a>
+        <a href="location.html" class="text-emerald-900 hover:text-emerald-700 transition">Location</a>
       </nav>
 
       <!-- Mobile Button -->
@@ -70,7 +63,6 @@
           <span id="menu-icon" class="material-symbols-outlined">menu</span>
         </button>
       </div>
-
     </div>
   </header>
 
@@ -79,22 +71,15 @@
     id="mobile-menu"
     class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
   >
-    <div class="flex flex-col px-8 py-6 gap-6">
-      <a href="index.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-        Home
-      </a>
-      <a href="menu.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-        Menu
-      </a>
-      <a href="location.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
-        Location
-      </a>
+    <div class="flex flex-col px-8 py-6 gap-6 text-sm">
+      <a href="index.html" class="text-emerald-900 hover:text-emerald-700 transition">Home</a>
+      <a href="menu.html" class="text-emerald-900 hover:text-emerald-700 transition">Menu</a>
+      <a href="location.html" class="text-emerald-900 hover:text-emerald-700 transition">Location</a>
     </div>
   </div>
 
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-
     <!-- HERO -->
     <section class="pt-6 md:pt-12 pb-16 md:pb-24">
       <div class="max-w-3xl">
@@ -114,7 +99,7 @@
         <div class="mt-8 flex flex-wrap gap-3">
           <a
             href="menu.html"
-            class="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-emerald-900 text-white text-sm hover:bg-emerald-950 transition"
+            class="inline-flex items-center gap-2 rounded-full bg-primary text-white px-5 py-3 text-sm shadow-sm hover:opacity-95 transition"
           >
             <span>See Menu</span>
             <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -122,7 +107,7 @@
 
           <a
             href="location.html"
-            class="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-white border border-stone-200 text-stone-700 text-sm hover:bg-stone-50 transition"
+            class="inline-flex items-center gap-2 rounded-full bg-surface-container text-on-background border border-outline-variant px-5 py-3 text-sm hover:bg-surface-container-high transition"
           >
             <span>Visit Us</span>
             <span class="material-symbols-outlined text-base">north_east</span>
@@ -150,6 +135,7 @@
             search
           </span>
           <input
+            id="memberSearch"
             type="text"
             placeholder="Find a Member..."
             class="w-full rounded-xl border border-stone-200 bg-white/70 py-3 pl-11 pr-4 text-sm placeholder:text-stone-400 focus:border-emerald-700 focus:ring-0"
@@ -157,18 +143,18 @@
         </label>
       </div>
 
-      <!-- Featured Leader -->
+      <!-- Featured Leader (boleh diganti dinamis dari JS) -->
       <div class="rounded-3xl bg-primary p-6 md:p-8 text-white shadow-lg mb-5">
         <div class="flex flex-col items-center text-center">
           <div class="w-20 h-20 rounded-full bg-white/90 mb-4 shadow-inner"></div>
           <span class="material-symbols-outlined text-white/80 text-lg mb-2">workspace_premium</span>
-          <h3 class="font-serif text-3xl">Kaskas</h3>
-          <p class="text-xs uppercase tracking-[0.2em] text-white/80 mt-2">Rank 1 • 14 Visits</p>
+          <h3 class="font-serif text-3xl" id="featuredName">Kaskas</h3>
+          <p class="text-xs uppercase tracking-[0.2em] text-white/80 mt-2" id="featuredMeta">Rank 1 • 14 Visits</p>
         </div>
       </div>
 
       <!-- Secondary Members -->
-      <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="grid grid-cols-2 gap-4 mb-6" id="secondaryMembers">
         <div class="rounded-2xl bg-stone-100 p-5 text-center">
           <div class="w-12 h-12 rounded-full bg-white border border-stone-200 mx-auto mb-3"></div>
           <h4 class="font-medium text-sm text-on-surface">Bayu</h4>
@@ -191,30 +177,11 @@
           <span class="text-[10px] text-stone-400">This Month</span>
         </div>
 
-        <div class="divide-y divide-stone-200">
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">4</span>
-              <span>Naufal</span>
-            </div>
-            <span class="font-semibold text-primary">16 visits</span>
+        <div class="divide-y divide-stone-200" id="topContributors">
+          <div class="px-5 py-4 text-xs text-stone-500" id="loadingState">
+            Mengambil data dari Firestore...
           </div>
-
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">5</span>
-              <span>Am</span>
-            </div>
-            <span class="font-semibold text-primary">12 visits</span>
-          </div>
-
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">6</span>
-              <span>Hanifah</span>
-            </div>
-            <span class="font-semibold text-primary">4 visits</span>
-          </div>
+          <!-- leaderboard.js bisa mengganti isi div ini -->
         </div>
       </div>
     </section>
@@ -269,11 +236,15 @@
           </p>
         </div>
 
-        <!-- Card 4 (FIX: dulu hanya URL teks) -->
-        <div
-          class="rounded-3xl overflow-hidden border border-stone-200 bg-stone-100 h-48 bg-cover bg-center"
-          style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80');"
-        ></div>
+        <!-- Card 4 (gambar, bukan URL teks) -->
+        <div class="rounded-3xl overflow-hidden border border-stone-200 bg-stone-100">
+          <img
+            src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80"
+            alt="Coffee"
+            class="h-48 w-full object-cover"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
 
@@ -287,27 +258,24 @@
 
         <a
           href="location.html"
-          class="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-white text-primary text-sm font-medium hover:bg-stone-100 transition"
+          class="inline-flex items-center gap-2 rounded-full bg-white text-primary px-6 py-3 text-sm font-semibold hover:bg-white/95 transition"
         >
           <span>Visit the Greenhouse</span>
           <span class="material-symbols-outlined text-base">arrow_forward</span>
         </a>
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
-
       <div class="space-y-6">
         <a href="index.html" class="flex items-center gap-3">
           <img
             src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
-            alt="Logo Manupi"
-            class="w-10 h-10 rounded-full object-cover border border-stone-200"
-            loading="lazy"
+            alt="Manupi"
+            class="w-9 h-9 rounded-full object-cover border border-stone-200"
           />
           <span class="text-xl font-serif italic text-emerald-900">Manupi</span>
         </a>
@@ -320,30 +288,30 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a href="index.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Home</a>
-          <a href="menu.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Menu</a>
-          <a href="location.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Location</a>
+          <a class="text-sm text-stone-700 hover:text-stone-900 transition" href="index.html">Home</a>
+          <a class="text-sm text-stone-700 hover:text-stone-900 transition" href="menu.html">Menu</a>
+          <a class="text-sm text-stone-700 hover:text-stone-900 transition" href="location.html">Location</a>
         </div>
 
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
           <a
+            class="text-sm text-stone-700 hover:text-stone-900 transition"
             href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-stone-700 hover:text-emerald-900 transition"
+            rel="noopener"
           >
             Instagram
           </a>
           <a
+            class="text-sm text-stone-700 hover:text-stone-900 transition"
             href="https://wa.me/6281254913064"
             target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-stone-700 hover:text-emerald-900 transition"
+            rel="noopener"
           >
             WhatsApp
           </a>
-          <a href="#" class="text-sm text-stone-700 hover:text-emerald-900 transition">
+          <a class="text-sm text-stone-700 hover:text-stone-900 transition" href="#">
             Email
           </a>
         </div>
@@ -351,10 +319,10 @@
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
           <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
           <a
+            class="rounded-2xl border border-stone-200 bg-white/70 p-4 hover:bg-white transition"
             href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8"
             target="_blank"
-            rel="noopener noreferrer"
-            class="block p-4 rounded-2xl bg-white/70 border border-stone-200 hover:bg-white transition"
+            rel="noopener"
           >
             <h5 class="font-serif text-emerald-900 text-sm mb-1">The Greenhouse</h5>
             <p class="text-xs text-stone-600 leading-relaxed">
@@ -364,12 +332,15 @@
           </a>
         </div>
       </div>
-
     </div>
   </footer>
 
-  <!-- JS -->
-  <script src="assets/js/main.js" defer></script>
+  <!-- JS (defer supaya tidak mengganggu render) -->
+  <!-- Kalau index kamu pakai Firestore leaderboard, aktifkan 2 baris ini -->
+  <script src="assets/js/firebase-config.js" defer></script>
+  <script src="assets/js/leaderboard.js" defer></script>
 
-  <!-- Kalau kamu memang pakai file ini, aktifkan juga: -->
-  <!-- <script src="assets/js/firebase-config.js" defer
+  <!-- Menu toggle / interaksi UI -->
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
