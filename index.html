@@ -77,12 +77,6 @@
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
             An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
-          <div class="flex gap-4 mt-2">
-            <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold flex items-center gap-2 text-sm">
-              See Menu <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-            <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold text-sm">Visit Us</a>
-          </div>
         </div>
       </div>
     </section>
@@ -97,12 +91,17 @@
         <div class="relative w-full md:w-72">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg">search</span>
           <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body transition-all" placeholder="Find a Member..." type="text" />
+          
+          <div id="search-dropdown" class="hidden absolute left-0 right-0 z-30 mt-2 bg-white rounded-2xl shadow-2xl border border-stone-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+            <div id="search-result-content" class="p-4">
+               </div>
+          </div>
         </div>
       </div>
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div id="podium-container" class="lg:col-span-4 space-y-4">
-           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data dari Spreadsheet...</div>
+           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data...</div>
         </div>
         
         <div class="lg:col-span-8">
@@ -119,51 +118,11 @@
         </div>
       </div>
     </section>
-
-    <section class="py-16 px-8 max-w-7xl mx-auto">
-      <div class="mb-8">
-        <span class="font-label uppercase tracking-widest text-xs text-secondary">Our Essence</span>
-        <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
-          <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
-          </div>
-          <div class="relative z-10">
-            <h3 class="font-serif text-xl text-primary mb-2">Grounded Stability</h3>
-            <p class="font-body text-sm text-secondary leading-relaxed">Bridging earth and urban clarity. Every corner is designed to breathe.</p>
-          </div>
-        </div>
-        <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
-          <div>
-            <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
-            <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
-          </div>
-        </div>
-        <div class="grid grid-rows-2 gap-4">
-          <div class="bg-surface-container-highest rounded-2xl p-6 flex items-center justify-between">
-            <span class="font-serif text-4xl text-primary">100%</span>
-            <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
-          </div>
-          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
-            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
-            <div class="absolute inset-0 bg-primary/20 flex items-center justify-center p-2 text-center">
-              <span class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full font-serif italic text-primary text-[10px]">Brewed for peace</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12 py-12 px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
-      <div class="space-y-4">
-        <img alt="Manupi Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-        <p class="text-sm text-stone-500 max-w-xs">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
-      </div>
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 py-12 px-8">
+    <div class="max-w-7xl mx-auto text-center md:text-left text-xs text-stone-400">
+      <p>© 2026 Rumah Kopi Manupi Banjarbaru.</p>
     </div>
   </footer>
 
@@ -171,7 +130,6 @@
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
-    // 1. Ambil Data Leaderboard
     async function fetchLeaderboard() {
       try {
         const response = await fetch(API_URL);
@@ -183,35 +141,20 @@
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
           
-          // Pastikan jika input kosong, render semua data awal
-          const searchInput = document.getElementById('search-member');
-          if (!searchInput.value) {
-            renderLeaderboard(allLeaderboardData);
-          }
+          // Render tampilan awal
+          renderLeaderboard(allLeaderboardData);
         }
-      } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('podium-container').innerHTML = '<div class="text-sm text-red-500 text-center">Gagal memuat data.</div>';
-      }
+      } catch (error) { console.error('Error fetching data:', error); }
     }
 
-    // 2. Render Tampilan Leaderboard
     function renderLeaderboard(data) {
-      const podiumContainer = document.getElementById('podium-container');
-      const listContainer = document.getElementById('list-container');
-      if (!podiumContainer || !listContainer) return;
-
-      if (data.length === 0) {
-        podiumContainer.innerHTML = '<div class="text-center py-10 text-stone-500 font-body text-sm">Member tidak ditemukan.</div>';
-        listContainer.innerHTML = '';
-        return;
-      }
-
-      // Render Podium (Kiri)
-      let podiumHTML = '';
+      const podium = document.getElementById('podium-container');
+      const list = document.getElementById('list-container');
+      
+      // Render Top 3 (Kiri)
       if(data[0]) {
-        podiumHTML += `
-          <div class="relative bg-primary p-6 rounded-3xl overflow-hidden text-center text-on-primary shadow-lg transition-all">
+        podium.innerHTML = `
+          <div class="relative bg-primary p-6 rounded-[2rem] overflow-hidden text-center text-on-primary shadow-lg">
             <div class="relative z-10 flex flex-col items-center">
               <span class="material-symbols-outlined text-3xl mb-1 text-tertiary-fixed">workspace_premium</span>
               <div class="w-20 h-20 rounded-full border-4 border-tertiary-fixed p-1 mb-3 overflow-hidden bg-white">
@@ -219,77 +162,89 @@
               </div>
               <h3 class="font-serif text-2xl italic truncate w-full px-2">${data[0].name}</h3>
               <p class="text-[10px] font-body opacity-60 mb-2">${data[0].memberId}</p>
-              <p class="font-label text-[10px] uppercase tracking-widest opacity-80 mt-1">Rank ${data[0].rank} • ${data[0].totalPoints} Pts</p>
+              <p class="font-label text-[10px] uppercase tracking-widest opacity-80 mt-1">RANK ${data[0].rank} • ${data[0].totalPoints} PTS</p>
             </div>
-          </div>`;
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            ${[data[1], data[2]].map((m, i) => m ? `
+              <div class="bg-surface-container rounded-3xl p-5 text-center border border-stone-100">
+                <img class="w-12 h-12 mx-auto rounded-full mb-3" src="${m.imageUrl}" />
+                <h4 class="font-serif text-sm text-primary truncate">${m.name}</h4>
+                <p class="text-[8px] font-bold text-secondary uppercase tracking-tighter mt-1">RANK ${i+2} • ${m.totalPoints} PTS</p>
+              </div>
+            ` : '').join('')}
+          </div>
+        `;
       }
-      podiumHTML += `<div class="grid grid-cols-2 gap-3 mt-4">`;
-      [data[1], data[2]].forEach((m) => {
-        if(m) {
-          podiumHTML += `
-            <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20">
-              <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
-                <img class="w-full h-full object-cover rounded-full" src="${m.imageUrl}" />
-              </div>
-              <h4 class="font-serif text-base text-primary truncate">${m.name}</h4>
-              <p class="text-[8px] font-body text-stone-400 mb-1">${m.memberId}</p>
-              <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${m.rank} • ${m.totalPoints} Pts</p>
-            </div>`;
-        }
-      });
-      podiumHTML += `</div>`;
-      podiumContainer.innerHTML = podiumHTML;
 
-      // Render List (Kanan - Mulai dari Rank 4 atau Rank selanjutnya yang ditemukan)
-      let listHTML = '';
-      // Jika data hasil pencarian sedikit, tampilkan semua di list kecuali yang masuk podium
-      const listData = data.length > 3 ? data.slice(3) : []; 
-      
-      listData.forEach(m => {
-        listHTML += `
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-surface-container-lowest transition-colors group">
+      // Render List (Kanan - Selalu Tampil Rank 4-10)
+      list.innerHTML = data.slice(3, 10).map(m => `
+        <div class="px-8 py-5 flex items-center justify-between hover:bg-stone-50 transition-colors">
+          <div class="flex items-center gap-5">
+            <span class="font-serif text-xl text-stone-300 w-6 italic">${m.rank}</span>
             <div class="flex items-center gap-4">
-              <span class="font-serif text-xl text-stone-300 w-6 italic group-hover:text-primary text-center">${m.rank}</span>
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-stone-100 overflow-hidden bg-white">
-                  <img class="w-full h-full object-cover" src="${m.imageUrl}" />
-                </div>
-                <div class="flex items-baseline gap-2">
-                  <h5 class="font-bold text-primary text-sm truncate max-w-[120px]">${m.name}</h5>
-                  <span class="text-[10px] text-stone-400 font-normal uppercase tracking-tighter">${m.memberId}</span>
-                </div>
+              <img class="w-10 h-10 rounded-full" src="${m.imageUrl}" />
+              <div>
+                <h5 class="font-bold text-primary text-sm">${m.name}</h5>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest">${m.memberId}</p>
               </div>
             </div>
-            <div class="text-right">
-              <span class="font-body text-xs font-bold text-primary block">${m.totalPoints} pts</span>
-              <span class="font-body text-[10px] text-stone-400 block">${m.totalVisits || 0} visits</span>
-            </div>
-          </div>`;
-      });
-      listContainer.innerHTML = listHTML;
+          </div>
+          <div class="text-right">
+            <span class="font-bold text-primary text-sm block">${m.totalPoints} pts</span>
+          </div>
+        </div>
+      `).join('');
     }
 
-    // 3. Logika Pencarian Real-time pada Kolom "Find a Member..."
+    // LOGIKA PENCARIAN (Hanya memunculkan Info Box, tidak mengubah Leaderboard)
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('search-member');
-      
+      const dropdown = document.getElementById('search-dropdown');
+      const content = document.getElementById('search-result-content');
+
       searchInput.addEventListener('input', (e) => {
         const keyword = e.target.value.toLowerCase().trim();
         
         if (keyword === "") {
-          renderLeaderboard(allLeaderboardData);
+          dropdown.classList.add("hidden");
+          return;
+        }
+
+        const filtered = allLeaderboardData.filter(m => 
+          m.name.toLowerCase().includes(keyword) || 
+          m.memberId.toLowerCase().includes(keyword)
+        );
+
+        if (filtered.length > 0) {
+          dropdown.classList.remove("hidden");
+          content.innerHTML = filtered.slice(0, 3).map(m => `
+            <div class="flex items-center justify-between p-3 border-b border-stone-50 last:border-0">
+              <div class="flex items-center gap-3">
+                <img class="w-8 h-8 rounded-full" src="${m.imageUrl}" />
+                <div>
+                  <p class="font-bold text-primary text-xs">${m.name}</p>
+                  <p class="text-[9px] text-stone-400 uppercase">${m.memberId} • RANK ${m.rank}</p>
+                </div>
+              </div>
+              <p class="font-bold text-primary text-xs">${m.totalPoints} pts</p>
+            </div>
+          `).join("");
         } else {
-          // Cari berdasarkan Nama ATAU Member ID (RKM...)
-          const filtered = allLeaderboardData.filter(m => 
-            m.name.toLowerCase().includes(keyword) || 
-            m.memberId.toLowerCase().includes(keyword)
-          );
-          renderLeaderboard(filtered);
+          content.innerHTML = `<p class="text-[10px] text-stone-400 text-center py-2 italic">Member tidak ditemukan.</p>`;
+          dropdown.classList.remove("hidden");
+        }
+      });
+
+      // Tutup dropdown jika klik di luar
+      document.addEventListener("click", (e) => {
+        if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.add("hidden");
         }
       });
 
       fetchLeaderboard();
-      setInterval(fetchLeaderboard, 30000); // Auto-update setiap 30 detik
+      setInterval(fetchLeaderboard, 30000); 
     });
   </script>
 </body>
