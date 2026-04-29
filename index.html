@@ -60,19 +60,27 @@
         <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="location.html">Location</a>
       </div>
 
-      <div class="flex md:hidden items-center">
-        <button id="mobile-menu-btn" class="p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full cursor-pointer">
+      <div class="flex md:hidden">
+        <button id="mobile-menu-btn" class="p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full cursor-pointer flex items-center justify-center">
           <span id="menu-icon" class="material-symbols-outlined text-3xl">menu</span>
         </button>
       </div>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden fixed inset-x-0 top-[72px] bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 z-[55] shadow-xl transition-all duration-300">
-    <div class="flex flex-col px-8 py-6 gap-6">
-      <a href="index.html" class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900/20 pb-2 Manrope uppercase tracking-widest text-sm">Home</a>
-      <a href="menu.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors border-b border-stone-200 dark:border-stone-800 pb-2 Manrope uppercase tracking-widest text-sm">Menu</a>
-      <a href="location.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors pb-2 Manrope uppercase tracking-widest text-sm">Location</a>
+  <div id="mobile-menu" class="hidden fixed inset-x-0 top-0 h-screen bg-stone-50/98 dark:bg-stone-950/98 backdrop-blur-2xl z-[70] transition-all duration-300">
+    <div class="flex flex-col h-full">
+      <div class="flex justify-between items-center px-6 py-4 border-b border-stone-100 dark:border-stone-800">
+        <span class="text-xl font-serif italic text-emerald-900 dark:text-emerald-100">Manupi</span>
+        <button id="close-menu-btn" class="p-2 text-emerald-900 dark:text-emerald-500 rounded-full cursor-pointer">
+          <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col px-8 py-10 gap-8">
+        <a href="index.html" class="text-2xl font-body uppercase tracking-widest text-emerald-900 dark:text-emerald-400 font-bold border-b border-stone-100 pb-4">Home</a>
+        <a href="menu.html" class="text-2xl font-body uppercase tracking-widest text-stone-500 dark:text-stone-400 hover:text-emerald-800 pb-4">Menu</a>
+        <a href="location.html" class="text-2xl font-body uppercase tracking-widest text-stone-500 dark:text-stone-400 hover:text-emerald-800 pb-4">Location</a>
+      </div>
     </div>
   </div>
 
@@ -122,40 +130,6 @@
         </div>
       </div>
     </section>
-
-    <section class="py-16 px-8 max-w-7xl mx-auto">
-      <div class="mb-8">
-        <span class="font-label uppercase tracking-widest text-xs text-secondary">Our Essence</span>
-        <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
-          <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
-          </div>
-          <div class="relative z-10">
-            <h3 class="font-serif text-xl text-primary mb-2">Grounded Stability</h3>
-            <p class="font-body text-sm text-secondary leading-relaxed">Bridging earth and urban clarity. Every corner is designed to breathe.</p>
-          </div>
-        </div>
-        <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20">eco</span>
-          <div>
-            <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
-            <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
-          </div>
-        </div>
-        <div class="grid grid-rows-2 gap-4">
-          <div class="bg-surface-container-highest rounded-2xl p-6 flex items-center justify-between">
-            <span class="font-serif text-4xl text-primary">100%</span>
-            <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
-          </div>
-          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
-            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
@@ -178,29 +152,25 @@
           <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__" target="_blank">Instagram</a>
           <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
         </div>
-        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="#">
-            <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
-            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">JL.Irigasi No.08, Banjarbaru Utara.</p>
-          </a>
-        </div>
       </div>
     </div>
   </footer>
 
   <script>
     // FUNGSI MOBILE MENU
-    const btn = document.getElementById('mobile-menu-btn');
+    const openBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    const icon = document.getElementById('menu-icon');
 
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-      icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    openBtn.addEventListener('click', () => {
+      menu.classList.remove('hidden');
     });
 
-    // LOGIKA LEADERBOARD & SEARCH
+    closeBtn.addEventListener('click', () => {
+      menu.classList.add('hidden');
+    });
+
+    // LOGIKA LEADERBOARD
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
@@ -247,13 +217,13 @@
           <div class="bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
             <img class="w-20 h-20 mx-auto rounded-full border-4 border-tertiary-fixed p-1 mb-3 bg-white" src="${data[0].imageUrl}" />
             <h3 class="font-serif text-xl italic">${data[0].name}</h3>
-            <p class="text-[10px] font-bold opacity-60">RANK 1 • ${data[0].totalPoints} PTS</p>
+            <p class="text-[10px] font-bold opacity-60 uppercase">Rank 1 • ${data[0].totalPoints} Pts</p>
           </div>
           <div class="grid grid-cols-2 gap-3 mt-4">
             ${[data[1], data[2]].map((m, i) => m ? `<div class="bg-surface-container rounded-2xl p-4 text-center border border-stone-100">
               <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
               <p class="font-bold text-primary text-xs truncate">${m.name}</p>
-              <p class="text-[8px] text-stone-400">RANK ${i+2} • ${m.totalPoints} PTS</p>
+              <p class="text-[8px] text-stone-400 uppercase font-bold">Rank ${i+2} • ${m.totalPoints} Pts</p>
             </div>` : '').join('')}
           </div>`;
       }
