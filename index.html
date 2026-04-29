@@ -72,14 +72,6 @@
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 fixed w-full z-40 shadow-xl transition-all duration-300">
-    <div class="flex flex-col px-8 py-6 gap-6">
-      <a href="index.html" class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900/20 pb-2 Manrope uppercase tracking-widest text-sm">Home</a>
-      <a href="menu.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors border-b border-stone-200 dark:border-stone-800 pb-2 Manrope uppercase tracking-widest text-sm">Menu</a>
-      <a href="location.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors pb-2 Manrope uppercase tracking-widest text-sm">Location</a>
-    </div>
-  </div>
-
   <main>
     <section class="relative min-h-[70vh] flex items-center overflow-hidden px-8">
       <div class="absolute inset-0 z-0">
@@ -93,11 +85,36 @@
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
             An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
-          <div class="flex gap-4 mt-2">
-            <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-sm w-fit inline-flex">
-              See Menu <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-            <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold transition-all hover:bg-surface-container-high text-sm w-fit inline-flex items-center">Visit Us</a>
+          
+          <div class="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-stone-100 shadow-xl w-full max-w-md mt-4 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-primary">loyalty</span>
+              <h3 class="font-serif text-xl italic text-primary">Cek Poin Member</h3>
+            </div>
+            <div class="flex flex-col gap-3">
+              <input id="check-points-input" type="text" placeholder="Masukkan Nama atau ID RKM..." 
+                class="w-full px-5 py-3.5 bg-stone-50 border border-stone-200 rounded-2xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body">
+              <button id="btn-check-points" class="w-full bg-primary text-on-primary py-3.5 rounded-2xl font-bold text-sm transition-all hover:brightness-110 active:scale-95">
+                Lihat Keuntungan Saya
+              </button>
+            </div>
+
+            <div id="check-result" class="hidden mt-6 pt-6 border-t border-stone-100 animate-fadeIn">
+                <div class="text-center">
+                    <p id="res-name" class="font-serif text-2xl italic text-primary mb-1"></p>
+                    <p id="res-id" class="font-label text-[10px] uppercase tracking-widest text-stone-400 mb-4"></p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-primary/5 p-3 rounded-2xl">
+                            <span class="text-[9px] uppercase text-stone-400 font-bold tracking-widest block mb-1">Total Poin</span>
+                            <span id="res-points" class="text-2xl font-bold text-primary">0</span>
+                        </div>
+                        <div class="bg-primary/5 p-3 rounded-2xl">
+                            <span class="text-[9px] uppercase text-stone-400 font-bold tracking-widest block mb-1">Peringkat</span>
+                            <span id="res-rank" class="text-2xl font-bold text-primary">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
         </div>
       </div>
@@ -129,8 +146,7 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
               </span>
             </div>
-            <div id="list-container" class="divide-y divide-stone-100">
-               </div>
+            <div id="list-container" class="divide-y divide-stone-100"></div>
           </div>
         </div>
       </div>
@@ -172,94 +188,70 @@
         </div>
       </div>
     </section>
-
-    <section class="py-20 px-8">
-      <div class="max-w-4xl mx-auto text-center bg-primary-container rounded-[2.5rem] p-12 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
-        <div class="relative z-10">
-          <h2 class="font-serif text-4xl md:text-5xl text-on-primary-container mb-6">Ready to breathe?</h2>
-          <p class="font-body text-on-primary-container/80 text-base mb-8 max-w-lg mx-auto">Visit our greenhouse in Banjarbaru and rediscover the art of the slow pour.</p>
-          <a href="location.html" class="bg-on-primary-container text-primary px-10 py-4 rounded-xl font-bold hover:shadow-xl transition-all hover:-translate-y-0.5 inline-block">Find Our Location</a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
-    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
-      <div class="space-y-6">
-        <a href="index.html" class="text-xl font-serif text-emerald-900 dark:text-emerald-100 opacity-60 inline-block">
-          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-        </a>
-        <p class="font-body text-sm text-stone-600 dark:text-stone-400 max-w-xs leading-relaxed">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
-        <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm font-bold" href="index.html">Home</a>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="menu.html">Menu</a>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="location.html">Location</a>
-        </div>
-        <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Connect</span>
-          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
-          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
-          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="#">Email</a>
-        </div>
-        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.google.com" target="_blank">
-            <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
-            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
-              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
-            </p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="main.js"></script>
+  <div id="global-loading" class="hidden fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center">
+    <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+  </div>
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
-
     let allLeaderboardData = [];
 
+    // FUNGSI UTAMA AMBIL DATA
     async function fetchLeaderboard() {
       try {
-        const response = await fetch(API_URL, {
-          method: 'GET',
-          redirect: 'follow'
-        });
-        
+        const response = await fetch(API_URL);
         const result = await response.json();
-        
         if (result.ok && result.data) {
           allLeaderboardData = result.data.map((item, index) => ({ 
             ...item, 
             rank: index + 1,
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
-          
           const searchInput = document.getElementById('search-member');
-          if (searchInput && !searchInput.value) {
+          if (!searchInput || !searchInput.value) {
             renderLeaderboard(allLeaderboardData);
           }
         }
-      } catch (error) {
-        console.error('Error fetching leaderboard:', error);
-        const podiumContainer = document.getElementById('podium-container');
-        if (podiumContainer) {
-          podiumContainer.innerHTML = '<div class="text-center py-10 text-red-500 font-body text-sm">Gagal memuat data.</div>';
-        }
-      }
+      } catch (error) { console.error('Error fetching data:', error); }
     }
 
+    // FUNGSI CEK POIN (PENCARIAN)
+    document.getElementById('btn-check-points').addEventListener('click', () => {
+      const input = document.getElementById('check-points-input').value.trim().toLowerCase();
+      const resultDiv = document.getElementById('check-result');
+      const loader = document.getElementById('global-loading');
+
+      if (!input) {
+        alert('Masukkan Nama atau ID Member kamu.');
+        return;
+      }
+
+      loader.classList.remove('hidden');
+      setTimeout(() => {
+        const member = allLeaderboardData.find(m => 
+          m.memberId.toLowerCase() === input || m.name.toLowerCase().includes(input)
+        );
+        loader.classList.add('hidden');
+        if (member) {
+          resultDiv.classList.remove('hidden');
+          document.getElementById('res-name').textContent = member.name;
+          document.getElementById('res-id').textContent = member.memberId;
+          document.getElementById('res-points').textContent = member.totalPoints;
+          document.getElementById('res-rank').textContent = member.rank; 
+          resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          alert('Member tidak ditemukan. Pastikan ID (contoh: RKM001) atau Nama benar.');
+          resultDiv.classList.add('hidden');
+        }
+      }, 600);
+    });
+
+    // RENDER LEADERBOARD
     function renderLeaderboard(data) {
       const podiumContainer = document.getElementById('podium-container');
       const listContainer = document.getElementById('list-container');
-      
       if (!podiumContainer || !listContainer) return;
 
       if (data.length === 0) {
@@ -268,75 +260,55 @@
         return;
       }
 
-      // Render Top 3 (Podium)
       let podiumHTML = '';
       if(data[0]) {
         podiumHTML += `
-          <div class="relative bg-primary p-6 rounded-3xl overflow-hidden text-center text-on-primary shadow-lg transition-all duration-500">
+          <div class="relative bg-primary p-6 rounded-[2rem] overflow-hidden text-center text-on-primary shadow-lg">
             <div class="relative z-10 flex flex-col items-center">
               <span class="material-symbols-outlined text-3xl mb-1 text-tertiary-fixed">workspace_premium</span>
               <div class="w-20 h-20 rounded-full border-4 border-tertiary-fixed p-1 mb-3 overflow-hidden bg-white">
-                <img alt="Top Member" class="w-full h-full object-cover rounded-full" src="${data[0].imageUrl}" />
+                <img class="w-full h-full object-cover rounded-full" src="${data[0].imageUrl}" />
               </div>
               <h3 class="font-serif text-2xl italic truncate w-full px-2">${data[0].name}</h3>
               <p class="text-[10px] font-body opacity-60 mb-2">${data[0].memberId}</p>
               <p class="font-label text-[10px] uppercase tracking-widest opacity-80 mt-1">Rank ${data[0].rank} • ${data[0].totalPoints} Pts</p>
             </div>
-          </div>
-        `;
+          </div>`;
       }
       podiumHTML += `<div class="grid grid-cols-2 gap-3 mt-4">`;
-      if(data[1]) {
-        podiumHTML += `
-          <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20 transition-all duration-500">
-            <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
-              <img alt="Rank" class="w-full h-full object-cover rounded-full" src="${data[1].imageUrl}" />
-            </div>
-            <h4 class="font-serif text-base text-primary truncate">${data[1].name}</h4>
-            <p class="text-[8px] font-body text-stone-400 mb-1">${data[1].memberId}</p>
-            <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${data[1].rank} • ${data[1].totalPoints} Pts</p>
-          </div>
-        `;
-      }
-      if(data[2]) {
-        podiumHTML += `
-          <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20 transition-all duration-500">
-            <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
-              <img alt="Rank" class="w-full h-full object-cover rounded-full" src="${data[2].imageUrl}" />
-            </div>
-            <h4 class="font-serif text-base text-primary truncate">${data[2].name}</h4>
-            <p class="text-[8px] font-body text-stone-400 mb-1">${data[2].memberId}</p>
-            <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${data[2].rank} • ${data[2].totalPoints} Pts</p>
-          </div>
-        `;
-      }
+      [data[1], data[2]].forEach((m) => {
+        if(m) {
+          podiumHTML += `
+            <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20">
+              <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
+                <img class="w-full h-full object-cover rounded-full" src="${m.imageUrl}" />
+              </div>
+              <h4 class="font-serif text-base text-primary truncate">${m.name}</h4>
+              <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${m.rank} • ${m.totalPoints} Pts</p>
+            </div>`;
+        }
+      });
       podiumHTML += `</div>`;
       podiumContainer.innerHTML = podiumHTML;
 
-      // Render Peringkat 4 - 10
       let listHTML = '';
-      const displayLimit = Math.min(data.length, 10);
-      for(let i = 3; i < displayLimit; i++) {
+      for(let i = 3; i < Math.min(data.length, 10); i++) {
         listHTML += `
-          <div class="px-6 py-3 flex items-center justify-between hover:bg-surface-container-lowest transition-colors group">
+          <div class="px-6 py-4 flex items-center justify-between hover:bg-stone-50 transition-colors group">
             <div class="flex items-center gap-4">
-              <span class="font-serif text-xl text-stone-300 w-6 italic group-hover:text-primary transition-colors text-center">${data[i].rank}</span>
+              <span class="font-serif text-xl text-stone-300 w-6 italic group-hover:text-primary text-center">${data[i].rank}</span>
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-stone-100 overflow-hidden bg-white">
-                  <img alt="User" class="w-full h-full object-cover" src="${data[i].imageUrl}" />
-                </div>
-                <div class="flex items-baseline gap-2">
-                  <h5 class="font-bold text-primary text-sm truncate max-w-[120px] sm:max-w-[200px]">${data[i].name}</h5>
-                  <span class="text-[10px] text-stone-400 font-normal">${data[i].memberId}</span>
+                <img class="w-8 h-8 rounded-full bg-stone-100" src="${data[i].imageUrl}" />
+                <div class="flex flex-col">
+                  <h5 class="font-bold text-primary text-sm">${data[i].name}</h5>
+                  <span class="text-[10px] text-stone-400 font-normal uppercase tracking-tighter">${data[i].memberId}</span>
                 </div>
               </div>
             </div>
             <div class="text-right">
               <span class="font-body text-xs font-bold text-primary block">${data[i].totalPoints} pts</span>
-              <span class="font-body text-[10px] text-stone-400 block">${data[i].totalVisits} visits</span>
             </div>
-          </div>
-        `;
+          </div>`;
       }
       listContainer.innerHTML = listHTML;
     }
@@ -346,19 +318,20 @@
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           const keyword = e.target.value.toLowerCase();
-          if (keyword === '') {
-            renderLeaderboard(allLeaderboardData);
-          } else {
-            const filteredData = allLeaderboardData.filter(member => 
-              member.name.toLowerCase().includes(keyword)
-            );
-            renderLeaderboard(filteredData);
-          }
+          const filteredData = allLeaderboardData.filter(m => 
+            m.name.toLowerCase().includes(keyword) || m.memberId.toLowerCase().includes(keyword)
+          );
+          renderLeaderboard(filteredData);
         });
       }
       fetchLeaderboard();
-      setInterval(fetchLeaderboard, 10000); 
+      setInterval(fetchLeaderboard, 30000); 
     });
   </script>
+
+  <style>
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+  </style>
 </body>
 </html>
