@@ -27,7 +27,7 @@ async function refreshMemberList() {
   if (res.ok) allMembers = res.data;
 }
 
-// LOAD HISTORY
+// LOAD RIWAYAT
 async function loadVisitHistory(memberId) {
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
@@ -35,7 +35,7 @@ async function loadVisitHistory(memberId) {
   const res = await callApi("listVisits", { memberId });
   if (res.ok && res.data.length > 0) {
     logList.innerHTML = res.data.map(v => `
-      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm transition">
+      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm transition hover:border-primary">
         <div>
           <p class="text-sm font-bold text-primary">+${v.pointsAdded} Points</p>
           <p class="text-[11px] text-stone-400 font-medium">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
@@ -50,7 +50,7 @@ async function loadVisitHistory(memberId) {
   } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
-// EDIT POPUP (Daftarkan ke window agar bisa dipanggil tombol HTML)
+// POPUP EDIT (WINDOW SCOPE)
 window.promptEditVisit = async function(visitId, oldPoints) {
   const newPoints = prompt(`Masukkan jumlah poin baru untuk transaksi ${visitId}:`, oldPoints);
   if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
@@ -60,7 +60,7 @@ window.promptEditVisit = async function(visitId, oldPoints) {
   });
 
   if (res.ok) {
-    alert("Poin dan Log Admin diperbarui!");
+    alert("Berhasil diperbarui!");
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
@@ -100,22 +100,31 @@ function selectMember(member) {
   loadVisitHistory(member.memberId);
 }
 
-// SIMPAN VISIT
+// SIMPAN VISIT (FIXED: Mengirim adminId)
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
   if (!selectedMemberId) return;
   const pts = parseInt(pointsInput.value);
   if (isNaN(pts) || pts <= 0) return;
-  const res = await callApi("addVisit", { payload: { memberId: selectedMemberId, points: pts } });
+
+  const res = await callApi("addVisit", { 
+    memberId: selectedMemberId, // Untuk kebutuhan API list
+    payload: { 
+      memberId: selectedMemberId, 
+      points: pts,
+      adminId: ADMIN_ID // Pastikan ini dikirim!
+    } 
+  });
+
   if (res.ok) {
-    pointsInput.value = "";
+    pointsInput.value = "1";
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
   }
 });
 
-// TAMBAH MEMBER
+// TAMBAH MEMBER BARU
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
@@ -123,7 +132,7 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   if (res.ok) {
     nameEl.value = ""; phoneEl.value = "";
     await refreshMemberList();
-    alert("Berhasil didaftarkan!");
+    alert("Berhasil!");
   } else { alert(res.error); }
 });
 
