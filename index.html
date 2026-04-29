@@ -220,6 +220,150 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="index.js"></script>
+  
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
+
+    let allLeaderboardData = []; // Menyimpan semua data dari Spreadsheet
+
+    async function fetchLeaderboard() {
+      try {
+        const response = await fetch(API_URL, {
+          method: 'GET',
+          redirect: 'follow'
+        });
+        
+        const result = await response.json();
+        
+        // Pastikan response sukses dan memiliki data
+        if (result.ok && result.data) {
+          // Menyimpan urutan ranking dan membuat avatar inisial
+          allLeaderboardData = result.data.map((item, index) => ({ 
+            ...item, 
+            rank: index + 1,
+            // Generate gambar inisial nama menggunakan UI Avatars dengan warna tema Manupi
+            imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
+          }));
+          
+          // Hanya re-render jika kolom search sedang kosong
+          const searchInput = document.getElementById('search-member');
+          if (searchInput && !searchInput.value) {
+            renderLeaderboard(allLeaderboardData);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+        const podiumContainer = document.getElementById('podium-container');
+        if (podiumContainer) {
+          podiumContainer.innerHTML = '<div class="text-center py-10 text-red-500 font-body text-sm">Gagal memuat data. Periksa koneksi.</div>';
+        }
+      }
+    }
+
+    // Fungsi Render Tampilan Leaderboard
+    function renderLeaderboard(data) {
+      const podiumContainer = document.getElementById('podium-container');
+      const listContainer = document.getElementById('list-container');
+      
+      if (!podiumContainer || !listContainer) return;
+
+      if (data.length === 0) {
+        podiumContainer.innerHTML = '<div class="text-center py-10 text-stone-500 font-body text-sm">Member tidak ditemukan.</div>';
+        listContainer.innerHTML = '';
+        return;
+      }
+
+      // Render Top 3 (Podium)
+      let podiumHTML = '';
+      if(data[0]) {
+        podiumHTML += `
+          <div class="relative bg-primary p-6 rounded-3xl overflow-hidden text-center text-on-primary shadow-lg transition-all duration-500">
+            <div class="relative z-10 flex flex-col items-center">
+              <span class="material-symbols-outlined text-3xl mb-1 text-tertiary-fixed">workspace_premium</span>
+              <div class="w-20 h-20 rounded-full border-4 border-tertiary-fixed p-1 mb-3 overflow-hidden bg-white">
+                <img alt="Top Member" class="w-full h-full object-cover rounded-full" src="${data[0].imageUrl}" />
+              </div>
+              <h3 class="font-serif text-2xl italic truncate w-full px-2">${data[0].name}</h3>
+              <p class="font-label text-[10px] uppercase tracking-widest opacity-80 mt-1">Rank ${data[0].rank} • ${data[0].totalPoints} Pts</p>
+            </div>
+          </div>
+        `;
+      }
+      podiumHTML += `<div class="grid grid-cols-2 gap-3 mt-4">`;
+      if(data[1]) {
+        podiumHTML += `
+          <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20 transition-all duration-500">
+            <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
+              <img alt="Rank" class="w-full h-full object-cover rounded-full" src="${data[1].imageUrl}" />
+            </div>
+            <h4 class="font-serif text-base text-primary truncate">${data[1].name}</h4>
+            <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${data[1].rank} • ${data[1].totalPoints} Pts</p>
+          </div>
+        `;
+      }
+      if(data[2]) {
+        podiumHTML += `
+          <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20 transition-all duration-500">
+            <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
+              <img alt="Rank" class="w-full h-full object-cover rounded-full" src="${data[2].imageUrl}" />
+            </div>
+            <h4 class="font-serif text-base text-primary truncate">${data[2].name}</h4>
+            <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${data[2].rank} • ${data[2].totalPoints} Pts</p>
+          </div>
+        `;
+      }
+      podiumHTML += `</div>`;
+      podiumContainer.innerHTML = podiumHTML;
+
+      // Render Sisa List (Peringkat 4 ke bawah)
+      let listHTML = '';
+      for(let i = 3; i < data.length; i++) {
+        listHTML += `
+          <div class="px-6 py-3 flex items-center justify-between hover:bg-surface-container-lowest transition-colors group">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-xl text-stone-300 w-6 italic group-hover:text-primary transition-colors text-center">${data[i].rank}</span>
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-stone-100 overflow-hidden bg-white">
+                  <img alt="User" class="w-full h-full object-cover" src="${data[i].imageUrl}" />
+                </div>
+                <h5 class="font-bold text-primary text-sm truncate max-w-[120px] sm:max-w-[200px]">${data[i].name}</h5>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-body text-xs font-bold text-primary block">${data[i].totalPoints} pts</span>
+              <span class="font-body text-[10px] text-stone-400 block">${data[i].totalVisits} visits</span>
+            </div>
+          </div>
+        `;
+      }
+      listContainer.innerHTML = listHTML;
+    }
+
+    // Menjalankan event ketika seluruh HTML telah dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      // Event Listener untuk Search Bar
+      const searchInput = document.getElementById('search-member');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const keyword = e.target.value.toLowerCase();
+          
+          if (keyword === '') {
+            renderLeaderboard(allLeaderboardData);
+          } else {
+            const filteredData = allLeaderboardData.filter(member => 
+              member.name.toLowerCase().includes(keyword)
+            );
+            renderLeaderboard(filteredData);
+          }
+        });
+      }
+
+      // Panggil fetch pertama kali web dimuat
+      fetchLeaderboard();
+      
+      // Auto-update setiap 10 detik
+      setInterval(fetchLeaderboard, 10000); 
+    });
+  </script>
 </body>
 </html>
