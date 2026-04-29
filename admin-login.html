@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login – Manupi</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen">
+  <div class="max-w-xl mx-auto px-6 py-12">
+    <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Login</h1>
+    <p class="text-sm text-stone-500 mb-8">
+      Masukkan token admin Anda. Token disimpan di browser (localStorage) untuk sesi berikutnya.
+    </p>
+
+    <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm">
+      <div class="space-y-4">
+        <div>
+          <label for="admin-id" class="block text-sm font-medium mb-2">Admin ID</label>
+          <input
+            id="admin-id"
+            type="text"
+            placeholder="Contoh: admin1"
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+          <p class="text-xs text-stone-500 mt-2">Gunakan ID unik per admin (mis: admin1, admin2, admin3).</p>
+        </div>
+
+        <div>
+          <label for="admin-token" class="block text-sm font-medium mb-2">Token</label>
+          <input
+            id="admin-token"
+            type="password"
+            placeholder="Masukkan token..."
+            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
+          />
+          <p class="text-xs text-stone-500 mt-2">Token berbeda untuk tiap admin (A2).</p>
+        </div>
+
+        <button
+          id="save-token-btn"
+          type="button"
+          class="w-full mt-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition"
+        >
+          Masuk
+        </button>
+
+        <button
+          id="clear-token-btn"
+          type="button"
+          class="w-full rounded-xl bg-stone-100 px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-stone-200 transition"
+        >
+          Hapus Token Tersimpan
+        </button>
+
+        <p id="login-msg" class="text-sm hidden mt-2"></p>
+      </div>
+    </div>
+
+    <div class="mt-6 text-xs text-stone-500">
+      <p><span class="font-semibold">Catatan:</span> Token ini hanya tersimpan di browser perangkat ini.</p>
+    </div>
+  </div>
+
+  <script>
+    const KEY_TOKEN = "manupi_adminToken";
+    const KEY_ADMIN_ID = "manupi_adminId";
+
+    const adminIdEl = document.getElementById("admin-id");
+    const tokenEl = document.getElementById("admin-token");
+    const msgEl = document.getElementById("login-msg");
+
+    function showMsg(text, type = "success") {
+      msgEl.textContent = text;
+      msgEl.classList.remove("hidden", "text-red-600", "text-emerald-700", "text-stone-500");
+      msgEl.classList.add(type === "error" ? "text-red-600" : "text-emerald-700");
+    }
+
+    // Prefill jika sudah ada
+    const savedId = localStorage.getItem(KEY_ADMIN_ID);
+    if (savedId) adminIdEl.value = savedId;
+
+    document.getElementById("save-token-btn").addEventListener("click", () => {
+      const adminId = adminIdEl.value.trim();
+      const token = tokenEl.value.trim();
+
+      if (!adminId) return showMsg("Admin ID wajib diisi.", "error");
+      if (!token) return showMsg("Token wajib diisi.", "error");
+
+      localStorage.setItem(KEY_ADMIN_ID, adminId);
+      localStorage.setItem(KEY_TOKEN, token);
+
+      showMsg("Token tersimpan. Mengalihkan ke Admin Panel...");
+      setTimeout(() => {
+        window.location.href = "admin.html";
+      }, 600);
+    });
+
+    document.getElementById("clear-token-btn").addEventListener("click", () => {
+      localStorage.removeItem(KEY_ADMIN_ID);
+      localStorage.removeItem(KEY_TOKEN);
+      adminIdEl.value = "";
+      tokenEl.value = "";
+      showMsg("Token tersimpan berhasil dihapus.", "success");
+    });
+  </script>
+</body>
+</html>
+``
