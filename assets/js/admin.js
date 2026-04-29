@@ -4,9 +4,6 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2T
 const ADMIN_ID = localStorage.getItem("manupi_adminId");
 const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
 
-let allMembers = [];
-let selectedMemberId = null;
-
 // Fungsi Utama Call API
 async function callApi(action, payload = {}) {
   try {
@@ -25,30 +22,33 @@ async function callApi(action, payload = {}) {
   }
 }
 
-// Inisialisasi: Ambil Daftar Member
-async function init() {
-  const res = await callApi("listMembers");
-  if (res.ok) {
-    allMembers = res.data;
-  }
-}
-
-// Tampilkan Pesan Status
+// Tampilkan Pesan Status (Warna Merah untuk Error, Hijau untuk Sukses)
 function showStatus(elId, message, isError = false) {
   const el = document.getElementById(elId);
+  if (!el) return;
+  
   el.textContent = message;
   el.classList.remove("hidden", "text-red-600", "text-emerald-600");
-  el.classList.add(isError ? "text-red-600" : "text-emerald-600");
+  
+  if (isError) {
+    el.classList.add("text-red-600");
+  } else {
+    el.classList.add("text-emerald-600");
+  }
+  
+  el.classList.remove("hidden");
+  
+  // Sembunyikan pesan otomatis setelah 5 detik
   setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
-// Tambah Member Baru
+// Event Listener Tambah Member Baru
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
-  const name = document.getElementById("member-name").value;
-  const phone = document.getElementById("member-phone").value;
+  const nameEl = document.getElementById("member-name");
+  const phoneEl = document.getElementById("member-phone");
   const btn = document.getElementById("add-member-btn");
 
-  if (!name || !phone) {
+  if (!nameEl.value || !phoneEl.value) {
     showStatus("member-message", "Nama dan Nomor wajib diisi!", true);
     return;
   }
@@ -56,16 +56,18 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   btn.disabled = true;
   btn.textContent = "Menyimpan...";
 
-  const res = await callApi("addMember", { payload: { name, phone } });
+  const res = await callApi("addMember", { 
+    payload: { name: nameEl.value, phone: phoneEl.value } 
+  });
 
   if (res.ok) {
-    showStatus("member-message", `Berhasil! ID: ${res.data.memberId}`);
-    document.getElementById("member-name").value = "";
-    document.getElementById("member-phone").value = "";
-    await init(); // Refresh list
+    showStatus("member-message", `Berhasil! Member terdaftar dengan ID: ${res.data.memberId}`, false);
+    nameEl.value = "";
+    phoneEl.value = "";
+    // Panggil fungsi refresh list jika Anda memilikinya (misal: initMembers())
   } else {
-    // Menampilkan pesan error duplikat dari Code.gs
-    showStatus("member-message", res.error, true);
+    // Menangkap pesan error "sudah terdaftar" dari throw di Code.gs
+    showStatus("member-message", res.error || "Gagal mendaftarkan member", true);
   }
 
   btn.disabled = false;
@@ -78,6 +80,3 @@ document.getElementById("logout-btn")?.addEventListener("click", () => {
   localStorage.removeItem("manupi_adminToken");
   window.location.href = "admin-login.html";
 });
-
-// Jalankan init
-init();
