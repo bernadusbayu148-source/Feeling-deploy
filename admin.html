@@ -205,8 +205,16 @@
   <!-- Admin JS -->
   <script type="module" src="assets/js/admin.js"></script>
 </body>
+  <script>
+  (function () {
+    const token = localStorage.getItem("manupi_adminToken");
+    if (!token) {
+      window.location.href = "admin-login.html";
+    }
+  })();
+</script>
 </html>
-``
+  
 <html class="light" lang="id">
 <head>
   <meta charset="UTF-8" />
