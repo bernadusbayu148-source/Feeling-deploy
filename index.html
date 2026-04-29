@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Rumah Kopi Manupi</title>
-  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -42,16 +40,14 @@
       },
     }
   </script>
-
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
   
-  <nav class="bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl text-emerald-900 dark:text-emerald-500 docked full-width top-0 sticky z-50">
+  <nav class="bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl text-emerald-900 dark:text-emerald-500 docked full-width top-0 sticky z-[60]">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
       <a href="index.html" class="flex items-center gap-3">
         <img alt="Manupi Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
@@ -64,15 +60,15 @@
         <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="location.html">Location</a>
       </div>
 
-      <div class="flex items-center gap-2 md:gap-4">
-        <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
-          <span id="menu-icon" class="material-symbols-outlined">menu</span>
+      <div class="flex md:hidden items-center">
+        <button id="mobile-menu-btn" class="p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full cursor-pointer">
+          <span id="menu-icon" class="material-symbols-outlined text-3xl">menu</span>
         </button>
       </div>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 fixed w-full z-40 shadow-xl transition-all duration-300">
+  <div id="mobile-menu" class="hidden fixed inset-x-0 top-[72px] bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 z-[55] shadow-xl transition-all duration-300">
     <div class="flex flex-col px-8 py-6 gap-6">
       <a href="index.html" class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900/20 pb-2 Manrope uppercase tracking-widest text-sm">Home</a>
       <a href="menu.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors border-b border-stone-200 dark:border-stone-800 pb-2 Manrope uppercase tracking-widest text-sm">Menu</a>
@@ -109,29 +105,18 @@
           <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
           <h2 class="font-serif text-4xl text-primary mt-1">Community Leaderboard</h2>
         </div>
-        
         <div class="relative w-full md:w-72">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg">search</span>
-          <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body transition-all" placeholder="Find a Member..." type="text" />
-          
-          <div id="search-dropdown" class="hidden absolute left-0 right-0 z-30 mt-2 bg-white rounded-2xl shadow-2xl border border-stone-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+          <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body" placeholder="Find a Member..." type="text" />
+          <div id="search-dropdown" class="hidden absolute left-0 right-0 z-30 mt-2 bg-white rounded-2xl shadow-2xl border border-stone-100 overflow-hidden">
             <div id="search-result-content" class="p-4"></div>
           </div>
         </div>
       </div>
-      
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div id="podium-container" class="lg:col-span-4 space-y-4">
-           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data...</div>
-        </div>
+        <div id="podium-container" class="lg:col-span-4 space-y-4"></div>
         <div class="lg:col-span-8">
           <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
-            <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
-              <span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">Top Contributors</span>
-              <span class="font-label text-[8px] uppercase tracking-widest text-stone-400 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
-              </span>
-            </div>
             <div id="list-container" class="divide-y divide-stone-100"></div>
           </div>
         </div>
@@ -154,7 +139,7 @@
           </div>
         </div>
         <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
+          <span class="material-symbols-outlined text-4xl opacity-20">eco</span>
           <div>
             <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
             <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
@@ -197,9 +182,7 @@
           <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
           <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="#">
             <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
-            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
-              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
-            </p>
+            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">JL.Irigasi No.08, Banjarbaru Utara.</p>
           </a>
         </div>
       </div>
@@ -207,86 +190,71 @@
   </footer>
 
   <script>
+    // FUNGSI MOBILE MENU
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('menu-icon');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    });
+
+    // LOGIKA LEADERBOARD & SEARCH
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
-    // 1. Fetch Data
     async function fetchLeaderboard() {
       try {
         const response = await fetch(API_URL);
         const result = await response.json();
         if (result.ok && result.data) {
           allLeaderboardData = result.data.map((item, index) => ({ 
-            ...item, 
-            rank: index + 1,
+            ...item, rank: index + 1,
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
           renderLeaderboard(allLeaderboardData);
         }
-      } catch (error) { console.error('Error fetching data:', error); }
+      } catch (error) { console.error('Error:', error); }
     }
 
-    // 2. Logic Pencarian (Dropdown Info)
     document.getElementById('search-member').addEventListener('input', (e) => {
       const keyword = e.target.value.toLowerCase().trim();
       const dropdown = document.getElementById('search-dropdown');
       const content = document.getElementById('search-result-content');
-
-      if (keyword === "") {
-        dropdown.classList.add("hidden");
-        return;
-      }
-
-      const filtered = allLeaderboardData.filter(m => 
-        m.name.toLowerCase().includes(keyword) || 
-        m.memberId.toLowerCase().includes(keyword)
-      );
-
+      if (keyword === "") { dropdown.classList.add("hidden"); return; }
+      const filtered = allLeaderboardData.filter(m => m.name.toLowerCase().includes(keyword) || m.memberId.toLowerCase().includes(keyword));
       if (filtered.length > 0) {
         dropdown.classList.remove("hidden");
         content.innerHTML = filtered.slice(0, 3).map(m => `
           <div class="flex items-center justify-between p-3 border-b border-stone-50 last:border-0">
             <div class="flex items-center gap-3">
               <img class="w-8 h-8 rounded-full" src="${m.imageUrl}" />
-              <div>
-                <p class="font-bold text-primary text-xs">${m.name}</p>
-                <p class="text-[9px] text-stone-400 uppercase">${m.memberId} • RANK ${m.rank}</p>
-              </div>
+              <div><p class="font-bold text-primary text-xs">${m.name}</p>
+              <p class="text-[9px] text-stone-400 uppercase">${m.memberId} • RANK ${m.rank}</p></div>
             </div>
             <p class="font-bold text-primary text-xs">${m.totalPoints} pts</p>
           </div>
         `).join("");
-      } else {
-        content.innerHTML = `<p class="text-[10px] text-stone-400 text-center py-2 italic">Member tidak ditemukan.</p>`;
-        dropdown.classList.remove("hidden");
-      }
+      } else { dropdown.classList.add("hidden"); }
     });
 
-    // Tutup dropdown klik luar
-    document.addEventListener("click", (e) => {
-      if (!document.getElementById('search-member').contains(e.target)) {
-        document.getElementById('search-dropdown').classList.add("hidden");
-      }
-    });
-
-    // 3. Render Leaderboard (Tampilan Tetap)
     function renderLeaderboard(data) {
       const podium = document.getElementById('podium-container');
       const list = document.getElementById('list-container');
       if(data[0]) {
         podium.innerHTML = `
-          <div class="relative bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
+          <div class="bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
             <img class="w-20 h-20 mx-auto rounded-full border-4 border-tertiary-fixed p-1 mb-3 bg-white" src="${data[0].imageUrl}" />
             <h3 class="font-serif text-xl italic">${data[0].name}</h3>
             <p class="text-[10px] font-bold opacity-60">RANK 1 • ${data[0].totalPoints} PTS</p>
           </div>
           <div class="grid grid-cols-2 gap-3 mt-4">
-            ${[data[1], data[2]].map((m, i) => m ? `
-              <div class="bg-surface-container rounded-2xl p-4 text-center border border-stone-100">
-                <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
-                <h4 class="font-serif text-xs text-primary truncate">${m.name}</h4>
-                <p class="text-[8px] font-bold text-secondary uppercase">RANK ${i+2} • ${m.totalPoints} PTS</p>
-              </div>` : '').join('')}
+            ${[data[1], data[2]].map((m, i) => m ? `<div class="bg-surface-container rounded-2xl p-4 text-center border border-stone-100">
+              <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
+              <p class="font-bold text-primary text-xs truncate">${m.name}</p>
+              <p class="text-[8px] text-stone-400">RANK ${i+2} • ${m.totalPoints} PTS</p>
+            </div>` : '').join('')}
           </div>`;
       }
       list.innerHTML = data.slice(3, 10).map(m => `
