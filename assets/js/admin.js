@@ -27,17 +27,19 @@ async function refreshMemberList() {
   if (res.ok) allMembers = res.data;
 }
 
-// LOAD RIWAYAT
+// LOAD HISTORY (Warna merah untuk redeem/minus)
 async function loadVisitHistory(memberId) {
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
   logList.innerHTML = "<p class='text-xs text-stone-400 p-4 text-center animate-pulse'>Memuat riwayat...</p>";
   const res = await callApi("listVisits", { memberId });
   if (res.ok && res.data.length > 0) {
-    logList.innerHTML = res.data.map(v => `
+    logList.innerHTML = res.data.map(v => {
+      const isMinus = v.pointsAdded < 0;
+      return `
       <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm transition hover:border-primary">
         <div>
-          <p class="text-sm font-bold text-primary">+${v.pointsAdded} Points</p>
+          <p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? '' : '+'}${v.pointsAdded} Points</p>
           <p class="text-[11px] text-stone-400 font-medium">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
           <span class="text-[9px] font-mono text-stone-300 block mt-1">${v.visitId}</span>
         </div>
@@ -45,14 +47,14 @@ async function loadVisitHistory(memberId) {
                 class="px-3 py-1.5 bg-stone-100 text-primary text-[10px] font-bold rounded-xl hover:bg-primary hover:text-white transition uppercase tracking-wider">
           Edit
         </button>
-      </div>
-    `).join("");
+      </div>`;
+    }).join("");
   } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
-// POPUP EDIT (WINDOW SCOPE)
+// EDIT POPUP (WINDOW SCOPE)
 window.promptEditVisit = async function(visitId, oldPoints) {
-  const newPoints = prompt(`Masukkan jumlah poin baru untuk transaksi ${visitId}:`, oldPoints);
+  const newPoints = prompt(`Ubah poin (gunakan minus untuk redeem):`, oldPoints);
   if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
 
   const res = await callApi("editVisit", { 
@@ -60,7 +62,7 @@ window.promptEditVisit = async function(visitId, oldPoints) {
   });
 
   if (res.ok) {
-    alert("Berhasil diperbarui!");
+    alert("Poin dan Log Admin berhasil diperbarui!");
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
@@ -100,20 +102,23 @@ function selectMember(member) {
   loadVisitHistory(member.memberId);
 }
 
-// SIMPAN VISIT (FIXED: Mengirim adminId)
+// SIMPAN VISIT & REDEEM (Mencatat AdminID)
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
   if (!selectedMemberId) return;
   const pts = parseInt(pointsInput.value);
-  if (isNaN(pts) || pts <= 0) return;
+  if (isNaN(pts) || pts === 0) return;
+
+  // Proteksi agar poin tidak minus di dashboard (opsional)
+  const currentMember = allMembers.find(m => m.memberId === selectedMemberId);
+  if (pts < 0 && Math.abs(pts) > currentMember.totalPoints) {
+    alert("Poin member tidak mencukupi untuk redeem!");
+    return;
+  }
 
   const res = await callApi("addVisit", { 
-    memberId: selectedMemberId, // Untuk kebutuhan API list
-    payload: { 
-      memberId: selectedMemberId, 
-      points: pts,
-      adminId: ADMIN_ID // Pastikan ini dikirim!
-    } 
+    memberId: selectedMemberId,
+    payload: { memberId: selectedMemberId, points: pts, adminId: ADMIN_ID } 
   });
 
   if (res.ok) {
@@ -124,7 +129,7 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   }
 });
 
-// TAMBAH MEMBER BARU
+// TAMBAH MEMBER
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
@@ -132,7 +137,7 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   if (res.ok) {
     nameEl.value = ""; phoneEl.value = "";
     await refreshMemberList();
-    alert("Berhasil!");
+    alert("Member berhasil didaftarkan!");
   } else { alert(res.error); }
 });
 
