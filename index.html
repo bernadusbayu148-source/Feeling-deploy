@@ -120,14 +120,12 @@
         </div>
       </div>
 
-      <!-- Search -->
       <div class="mb-6">
         <label class="relative block">
           <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-[18px]">
             search
           </span>
           <input
-            id="lb-search"
             type="text"
             placeholder="Find a Member..."
             class="w-full rounded-xl border border-stone-200 bg-white/70 py-3 pl-11 pr-4 text-sm placeholder:text-stone-400 focus:border-emerald-700 focus:ring-0"
@@ -135,44 +133,32 @@
         </label>
       </div>
 
-      <!-- Featured Leader (Rank 1) -->
+      <!-- Featured Leader -->
       <div class="rounded-3xl bg-primary p-6 md:p-8 text-white shadow-lg mb-5">
         <div class="flex flex-col items-center text-center">
           <div class="w-20 h-20 rounded-full bg-white/90 mb-4 shadow-inner"></div>
           <span class="material-symbols-outlined text-white/80 text-lg mb-2">workspace_premium</span>
-
-          <h3 id="lb-featured-name" class="font-serif text-3xl">-</h3>
-          <p id="lb-featured-id" class="text-[10px] uppercase tracking-[0.2em] text-white/70 mt-2">-</p>
-          <p id="lb-featured-meta" class="text-xs uppercase tracking-[0.2em] text-white/80 mt-2">
-            Rank 1 • 0 pts
-          </p>
+          <h3 class="font-serif text-3xl">Kaskas</h3>
+          <p class="text-xs uppercase tracking-[0.2em] text-white/80 mt-2">Rank 1 • 14 Visits</p>
         </div>
       </div>
 
-      <!-- Secondary Members (Rank 2-3) -->
+      <!-- Secondary Members -->
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div class="rounded-2xl bg-stone-100 p-5 text-center">
           <div class="w-12 h-12 rounded-full bg-white border border-stone-200 mx-auto mb-3"></div>
-
-          <h4 id="lb-2-name" class="font-medium text-sm text-on-surface">-</h4>
-          <p id="lb-2-id" class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">-</p>
-          <p id="lb-2-meta" class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">
-            Rank 2 • 0 pts
-          </p>
+          <h4 class="font-medium text-sm text-on-surface">Bayu</h4>
+          <p class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">Rank 2 • 9 Visits</p>
         </div>
 
         <div class="rounded-2xl bg-stone-100 p-5 text-center">
           <div class="w-12 h-12 rounded-full bg-white border border-stone-200 mx-auto mb-3"></div>
-
-          <h4 id="lb-3-name" class="font-medium text-sm text-on-surface">-</h4>
-          <p id="lb-3-id" class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">-</p>
-          <p id="lb-3-meta" class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">
-            Rank 3 • 0 pts
-          </p>
+          <h4 class="font-medium text-sm text-on-surface">Deis</h4>
+          <p class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">Rank 3 • 7 Visits</p>
         </div>
       </div>
 
-      <!-- Top Contributors (Rank 4-10) -->
+      <!-- Top Contributors -->
       <div class="rounded-2xl border border-stone-200 bg-white/80 overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-stone-200">
           <span class="uppercase tracking-[0.2em] text-[10px] text-stone-400 font-semibold">
@@ -181,8 +167,31 @@
           <span class="text-[10px] text-stone-400">This Month</span>
         </div>
 
-        <p id="lb-status" class="text-xs text-stone-400 px-5 py-3 hidden"></p>
-        <div id="lb-top-list" class="divide-y divide-stone-200"></div>
+        <div class="divide-y divide-stone-200">
+          <div class="flex items-center justify-between px-5 py-4 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="text-stone-400 w-5">4</span>
+              <span>Naufal</span>
+            </div>
+            <span class="font-semibold text-primary">16 visits</span>
+          </div>
+
+          <div class="flex items-center justify-between px-5 py-4 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="text-stone-400 w-5">5</span>
+              <span>Am</span>
+            </div>
+            <span class="font-semibold text-primary">12 visits</span>
+          </div>
+
+          <div class="flex items-center justify-between px-5 py-4 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="text-stone-400 w-5">6</span>
+              <span>Hanifah</span>
+            </div>
+            <span class="font-semibold text-primary">4 visits</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -305,6 +314,5 @@
 
   <!-- JS -->
   assets/js/main.jsscript>
-  assets/js/leaderboard.js?v=1script>
 </body>
 </html>
