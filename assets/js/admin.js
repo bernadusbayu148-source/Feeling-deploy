@@ -1,151 +1,146 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec";
+/******************************
+ * CONFIG & AUTH
+ ******************************/
+const API_VERSION = "2026-04-29-FINAL-LOGGED-UX";
+const SHEET_ADMINS  = "admins";
+const SHEET_MEMBERS = "members";
+const SHEET_VISITS  = "visits";
+const SHEET_META    = "meta";
 
-const ADMIN_ID = localStorage.getItem("manupi_adminId");
-const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
-
-let allMembers = [];
-let selectedMemberId = null;
-
-async function callApi(action, payload = {}) {
+function doPost(e) {
   try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({ action, adminId: ADMIN_ID, token: ADMIN_TOKEN, ...payload })
-    });
-    return await response.json();
-  } catch (error) { return { ok: false, error: "Koneksi gagal." }; }
+    const body = JSON.parse(e.postData.contents);
+    const { action, adminId, token, payload, memberId } = body;
+    if (action !== "ping") {
+      const auth = authenticateAdmin_(adminId, token);
+      if (!auth.ok) return json_({ ok: false, error: auth.error });
+    }
+    switch (action) {
+      case "ping": return json_({ ok: true, data: "PONG" });
+      case "listMembers": return json_({ ok: true, data: listMembers_() });
+      case "addMember": return json_({ ok: true, data: addMember_(payload) });
+      case "listVisits": return json_({ ok: true, data: listVisits_(memberId) });
+      case "addVisit": return json_({ ok: true, data: addVisit_(payload, adminId) });
+      case "editVisit": return json_({ ok: true, data: editVisit_(payload, adminId) });
+      case "deleteMember": return json_({ ok: true, data: deleteMember_(memberId) });
+      default: return json_({ ok: false, error: "Action unknown" });
+    }
+  } catch (err) { return json_({ ok: false, error: String(err) }); }
 }
 
-// LOGOUT
-document.getElementById("logout-btn")?.addEventListener("click", () => {
-  localStorage.clear();
-  window.location.href = "admin-login.html";
-});
-
-async function refreshMemberList() {
-  const res = await callApi("listMembers");
-  if (res.ok) allMembers = res.data;
-}
-
-// LOAD HISTORY (Warna merah untuk redeem/minus)
-async function loadVisitHistory(memberId) {
-  const logList = document.getElementById("member-log-list");
-  if (!logList) return;
-  logList.innerHTML = "<p class='text-xs text-stone-400 p-4 text-center animate-pulse'>Memuat riwayat...</p>";
-  const res = await callApi("listVisits", { memberId });
-  if (res.ok && res.data.length > 0) {
-    logList.innerHTML = res.data.map(v => {
-      const isMinus = v.pointsAdded < 0;
-      return `
-      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm transition hover:border-primary">
-        <div>
-          <p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? '' : '+'}${v.pointsAdded} Points</p>
-          <p class="text-[11px] text-stone-400 font-medium">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
-          <span class="text-[9px] font-mono text-stone-300 block mt-1">${v.visitId}</span>
-        </div>
-        <button onclick="window.promptEditVisit('${v.visitId}', ${v.pointsAdded})" 
-                class="px-3 py-1.5 bg-stone-100 text-primary text-[10px] font-bold rounded-xl hover:bg-primary hover:text-white transition uppercase tracking-wider">
-          Edit
-        </button>
-      </div>`;
-    }).join("");
-  } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
-}
-
-// EDIT POPUP (WINDOW SCOPE)
-window.promptEditVisit = async function(visitId, oldPoints) {
-  const newPoints = prompt(`Ubah poin (gunakan minus untuk redeem):`, oldPoints);
-  if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
-
-  const res = await callApi("editVisit", { 
-    payload: { visitId, memberId: selectedMemberId, newPoints: parseInt(newPoints) } 
-  });
-
-  if (res.ok) {
-    alert("Poin dan Log Admin berhasil diperbarui!");
-    await refreshMemberList();
-    const updated = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updated) selectMember(updated);
-  } else { alert("Gagal: " + res.error); }
-};
-
-// PENCARIAN
-const searchInput = document.getElementById("member-search");
-const suggestionsEl = document.getElementById("member-suggestions");
-
-searchInput?.addEventListener("input", (e) => {
-  const keyword = e.target.value.toLowerCase().trim();
-  suggestionsEl.innerHTML = "";
-  if (keyword.length < 1) { suggestionsEl.classList.add("hidden"); return; }
-  const filtered = allMembers.filter(m => m.name.toLowerCase().includes(keyword) || String(m.phone).includes(keyword) || m.memberId.toLowerCase().includes(keyword));
-  if (filtered.length > 0) {
-    filtered.slice(0, 5).forEach(m => {
-      const div = document.createElement("div");
-      div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm";
-      div.innerHTML = `<p class="font-bold text-primary">${m.name}</p><p class="text-[10px] text-stone-400 font-medium">${m.memberId} • ${m.phone}</p>`;
-      div.onclick = () => selectMember(m);
-      suggestionsEl.appendChild(div);
-    });
-    suggestionsEl.classList.remove("hidden");
-  } else { suggestionsEl.classList.add("hidden"); }
-});
-
-function selectMember(member) {
-  selectedMemberId = member.memberId;
-  searchInput.value = member.name;
-  suggestionsEl.classList.add("hidden");
-  document.getElementById("member-detail-section").classList.remove("hidden");
-  document.getElementById("detail-member-name").textContent = member.name;
-  document.getElementById("detail-member-phone").textContent = member.phone;
-  document.getElementById("detail-total-points").textContent = `${member.totalPoints} pts`;
-  document.getElementById("detail-total-visits").textContent = `${member.totalVisits} visit`;
-  loadVisitHistory(member.memberId);
-}
-
-// SIMPAN VISIT & REDEEM (Mencatat AdminID)
-document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
-  const pointsInput = document.getElementById("visit-points");
-  if (!selectedMemberId) return;
-  const pts = parseInt(pointsInput.value);
-  if (isNaN(pts) || pts === 0) return;
-
-  // Proteksi agar poin tidak minus di dashboard (opsional)
-  const currentMember = allMembers.find(m => m.memberId === selectedMemberId);
-  if (pts < 0 && Math.abs(pts) > currentMember.totalPoints) {
-    alert("Poin member tidak mencukupi untuk redeem!");
-    return;
+function doGet(e) {
+  if (e.parameter.action === "publicLeaderboard") {
+    return json_({ ok: true, data: publicLeaderboard_(100) });
   }
+  return json_({ ok: false, error: "Invalid GET" });
+}
 
-  const res = await callApi("addVisit", { 
-    memberId: selectedMemberId,
-    payload: { memberId: selectedMemberId, points: pts, adminId: ADMIN_ID } 
-  });
-
-  if (res.ok) {
-    pointsInput.value = "1";
-    await refreshMemberList();
-    const updated = allMembers.find(m => m.memberId === selectedMemberId);
-    if (updated) selectMember(updated);
+function addMember_(payload) {
+  const { name, phone } = payload;
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const shMembers = ss.getSheetByName(SHEET_MEMBERS);
+  const shMeta = ss.getSheetByName(SHEET_META);
+  const data = shMembers.getDataRange().getValues();
+  const idx = indexMap_(data[0]);
+  const cleanPhone = (p) => String(p).replace(/\D/g, "").replace(/^(0|62)/, "");
+  const newPhoneClean = cleanPhone(phone);
+  for (let i = 1; i < data.length; i++) {
+    if (cleanPhone(data[i][idx.phone]) === newPhoneClean) {
+      throw "Nomor " + phone + " sudah terdaftar atas nama " + data[i][idx.name];
+    }
   }
-});
+  let lastNo = shMeta.getRange("B1").getValue() || 0;
+  const nextNo = Number(lastNo) + 1;
+  const memberId = "RKM" + String(nextNo).padStart(3, '0');
+  shMembers.appendRow([memberId, name, phone, 0, 0, true, new Date()]);
+  shMeta.getRange("B1").setValue(nextNo);
+  return { memberId, name };
+}
 
-// TAMBAH MEMBER
-document.getElementById("add-member-btn")?.addEventListener("click", async () => {
-  const nameEl = document.getElementById("member-name");
-  const phoneEl = document.getElementById("member-phone");
-  const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
-  if (res.ok) {
-    nameEl.value = ""; phoneEl.value = "";
-    await refreshMemberList();
-    alert("Member berhasil didaftarkan!");
-  } else { alert(res.error); }
-});
+function addVisit_(p, adminId) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const shV = ss.getSheetByName(SHEET_VISITS);
+  const shM = ss.getSheetByName(SHEET_MEMBERS);
+  const vId = "VST-" + Utilities.getUuid().substring(0, 8).toUpperCase();
+  shV.appendRow([vId, p.memberId, p.points, new Date(), adminId]);
+  const mD = shM.getDataRange().getValues();
+  const idx = indexMap_(mD[0]);
+  for (let i = 1; i < mD.length; i++) {
+    if (mD[i][idx.memberId] === p.memberId) {
+      shM.getRange(i+1, idx.totalPoints+1).setValue(Number(mD[i][idx.totalPoints]) + Number(p.points));
+      shM.getRange(i+1, idx.totalVisits+1).setValue(Number(mD[i][idx.totalVisits]) + 1);
+      break;
+    }
+  }
+  return { visitId: vId };
+}
 
-// HAPUS
-document.getElementById("delete-member-btn")?.addEventListener("click", async () => {
-  if (!selectedMemberId || !confirm("Hapus permanen?")) return;
-  const res = await callApi("deleteMember", { memberId: selectedMemberId });
-  if (res.ok) location.reload();
-});
+function editVisit_(payload, adminId) {
+  const { visitId, memberId, newPoints } = payload;
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const shV = ss.getSheetByName(SHEET_VISITS);
+  const shM = ss.getSheetByName(SHEET_MEMBERS);
+  const vData = shV.getDataRange().getValues();
+  let diff = 0, found = false;
+  for (let i = 1; i < vData.length; i++) {
+    if (vData[i][0] === visitId) {
+      diff = Number(newPoints) - Number(vData[i][2]);
+      shV.getRange(i+1, 3).setValue(Number(newPoints));
+      shV.getRange(i+1, 4).setValue(new Date());
+      shV.getRange(i+1, 5).setValue(adminId);
+      found = true;
+      break;
+    }
+  }
+  if (!found) throw "ID Visit tidak ditemukan.";
+  const mData = shM.getDataRange().getValues();
+  const idx = indexMap_(mData[0]);
+  for (let i = 1; i < mData.length; i++) {
+    if (mData[i][idx.memberId] === memberId) {
+      shM.getRange(i+1, idx.totalPoints+1).setValue(Number(mData[i][idx.totalPoints]) + diff);
+      break;
+    }
+  }
+  return true;
+}
 
-document.addEventListener("DOMContentLoaded", refreshMemberList);
+function listMembers_() {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_MEMBERS);
+  const v = sh.getDataRange().getValues();
+  const idx = indexMap_(v[0]);
+  return v.slice(1).map(r => ({ memberId: r[idx.memberId], name: r[idx.name], phone: r[idx.phone], totalPoints: Number(r[idx.totalPoints]) || 0, totalVisits: Number(r[idx.totalVisits]) || 0, active: String(r[idx.active]).toUpperCase() === "TRUE" })).filter(m => m.active && m.memberId !== "");
+}
+
+function listVisits_(id) {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_VISITS);
+  const d = sh.getDataRange().getValues();
+  return d.slice(1).filter(r => r[1] === id).map(r => ({ visitId: r[0], pointsAdded: r[2], timestamp: r[3] })).reverse();
+}
+
+function deleteMember_(id) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const shM = ss.getSheetByName(SHEET_MEMBERS), shV = ss.getSheetByName(SHEET_VISITS);
+  const d = shM.getDataRange().getValues();
+  const idx = indexMap_(d[0]);
+  for (let i = 1; i < d.length; i++) { if (d[i][idx.memberId] === id) { shM.deleteRow(i+1); const vD = shV.getDataRange().getValues(); for (let j = vD.length - 1; j >= 1; j--) { if (vD[j][1] === id) shV.deleteRow(j+1); } return true; } }
+  return false;
+}
+
+function publicLeaderboard_(l) {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_MEMBERS);
+  const v = sh.getDataRange().getValues();
+  const idx = indexMap_(v[0]);
+  return v.slice(1).map(r => ({ memberId: r[idx.memberId], name: r[idx.name], totalPoints: Number(r[idx.totalPoints]) || 0 })).filter(m => m.name !== "").sort((a,b) => b.totalPoints - a.totalPoints).slice(0, l);
+}
+
+function authenticateAdmin_(id, token) {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_ADMINS);
+  const v = sh.getDataRange().getValues();
+  const idx = indexMap_(v[0]);
+  const h = sha256hex_(token);
+  for (let i = 1; i < v.length; i++) { if (v[i][idx.adminId] === id && v[i][idx.tokenHash] === h) return { ok: true }; }
+  return { ok: false, error: "Invalid token" };
+}
+function indexMap_(h) { const m = {}; h.forEach((x, i) => m[x.trim()] = i); return m; }
+function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function sha256hex_(s) { return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, s).map(b => ("0" + (b & 255).toString(16)).slice(-2)).join(""); }
