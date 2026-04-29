@@ -45,29 +45,21 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-background text-on-background antialiased">
   
-  <nav class="bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl text-emerald-900 dark:text-emerald-500 docked full-width top-0 sticky z-50">
+  <nav class="bg-stone-50/80 backdrop-blur-xl text-emerald-900 docked full-width top-0 sticky z-50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
       <a href="index.html" class="flex items-center gap-3">
-        <img alt="Manupi Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-        <span class="text-xl md:text-2xl font-serif italic text-emerald-900 dark:text-emerald-100">Manupi</span>
+        <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+        <span class="text-xl md:text-2xl font-serif italic text-emerald-900">Manupi</span>
       </a>
-      
-      <div class="hidden md:flex items-center gap-8">
-        <a class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900 dark:border-emerald-400 pb-1 Manrope uppercase tracking-widest text-xs" href="index.html">Home</a>
-        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="menu.html">Menu</a>
-        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="location.html">Location</a>
-      </div>
-
-      <div class="flex items-center gap-2 md:gap-4">
-        <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
-          <span id="menu-icon" class="material-symbols-outlined">menu</span>
-        </button>
+      <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest font-label">
+        <a class="text-emerald-900 border-b border-emerald-900 pb-1" href="index.html">Home</a>
+        <a class="text-stone-500 hover:text-emerald-800" href="menu.html">Menu</a>
+        <a class="text-stone-500 hover:text-emerald-800" href="location.html">Location</a>
       </div>
     </div>
   </nav>
@@ -78,6 +70,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
         <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWPbA5v8EUep8FUpI2ITuNqnjJfftorRdSi_300__cPKU77Ik5K0hfvljgxaqNYxmIpH1DtJKk5Q8TfyssmiPMbsmpPwcnal8qI8GvjUyQs7nHxg2HBrGDE-qg9ghcl1UcelOI3CT2KZRgrg6mXaC-UyII2miDWTd5db4ayccpNvlA_as-NVzyWn_21Llxmten9pa1O9bHDaGnWgx5aPA9662y6pgN3ELxNTwnUNws8uHnbw5_oDViwbqLGwsbyx8dGNANyVrmdn9B" />
       </div>
+      
       <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
         <div class="flex flex-col items-start gap-6">
           <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">The Digital Greenhouse</span>
@@ -85,120 +78,75 @@
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
             An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
-          
-          <div class="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-stone-100 shadow-xl w-full max-w-md mt-4 transition-all">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="material-symbols-outlined text-primary">loyalty</span>
-              <h3 class="font-serif text-xl italic text-primary">Cek Poin Member</h3>
+
+          <div class="bg-white p-6 rounded-[2.5rem] shadow-xl w-full max-w-sm border border-stone-100 mt-4">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">loyalty</span>
+              </div>
+              <h3 class="font-serif text-xl text-primary italic">Cek Poin Member</h3>
             </div>
-            <div class="flex flex-col gap-3">
-              <input id="check-points-input" type="text" placeholder="Masukkan Nama atau ID RKM..." 
-                class="w-full px-5 py-3.5 bg-stone-50 border border-stone-200 rounded-2xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body">
-              <button id="btn-check-points" class="w-full bg-primary text-on-primary py-3.5 rounded-2xl font-bold text-sm transition-all hover:brightness-110 active:scale-95">
+            
+            <div class="space-y-3">
+              <input id="check-points-input" type="text" placeholder="Nama atau ID (RKM...)" 
+                class="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-2xl text-sm focus:ring-2 focus:ring-primary/10 outline-none font-body transition-all">
+              <button id="btn-check-points" class="w-full bg-primary text-white py-4 rounded-2xl font-bold text-sm transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-primary/20">
                 Lihat Keuntungan Saya
               </button>
             </div>
 
-            <div id="check-result" class="hidden mt-6 pt-6 border-t border-stone-100 animate-fadeIn">
-                <div class="text-center">
-                    <p id="res-name" class="font-serif text-2xl italic text-primary mb-1"></p>
-                    <p id="res-id" class="font-label text-[10px] uppercase tracking-widest text-stone-400 mb-4"></p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-primary/5 p-3 rounded-2xl">
-                            <span class="text-[9px] uppercase text-stone-400 font-bold tracking-widest block mb-1">Total Poin</span>
-                            <span id="res-points" class="text-2xl font-bold text-primary">0</span>
-                        </div>
-                        <div class="bg-primary/5 p-3 rounded-2xl">
-                            <span class="text-[9px] uppercase text-stone-400 font-bold tracking-widest block mb-1">Peringkat</span>
-                            <span id="res-rank" class="text-2xl font-bold text-primary">-</span>
-                        </div>
-                    </div>
+            <div id="check-result" class="hidden mt-6 pt-6 border-t border-stone-100 animate-in fade-in slide-in-from-top-4 duration-500">
+              <div class="text-center">
+                <h4 id="res-name" class="font-serif text-2xl italic text-primary"></h4>
+                <p id="res-id" class="font-label text-[10px] uppercase tracking-widest text-stone-400 mt-1 mb-5"></p>
+                
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-stone-50 p-4 rounded-3xl">
+                    <span class="text-[8px] font-bold text-stone-400 uppercase tracking-tighter block mb-1">Total Poin</span>
+                    <span id="res-points" class="text-2xl font-bold text-primary">0</span>
+                  </div>
+                  <div class="bg-stone-50 p-4 rounded-3xl">
+                    <span class="text-[8px] font-bold text-stone-400 uppercase tracking-tighter block mb-1">Peringkat</span>
+                    <span id="res-rank" class="text-2xl font-bold text-primary">-</span>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-16 px-8 max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+    <section class="py-20 px-8 max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
           <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
-          <h2 class="font-serif text-4xl text-primary mt-1">Community Leaderboard</h2>
+          <h2 class="font-serif text-4xl text-primary mt-2">Community Leaderboard</h2>
         </div>
-        
-        <div class="relative w-full md:w-72">
-          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg">search</span>
-          <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body transition-all" placeholder="Find a Member..." type="text" />
+        <div class="relative w-full md:w-80">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+          <input id="search-member" class="w-full pl-12 pr-6 py-4 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-primary/10 text-sm font-body" placeholder="Find a member..." type="text" />
         </div>
       </div>
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div id="podium-container" class="lg:col-span-4 space-y-4">
-           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data dari Spreadsheet...</div>
-        </div>
-        
+          </div>
         <div class="lg:col-span-8">
-          <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
-            <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
-              <span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">Top Contributors</span>
-              <span class="font-label text-[8px] uppercase tracking-widest text-stone-400 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
-              </span>
-            </div>
-            <div id="list-container" class="divide-y divide-stone-100"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-16 px-8 max-w-7xl mx-auto">
-      <div class="mb-8">
-        <span class="font-label uppercase tracking-widest text-xs text-secondary">Our Essence</span>
-        <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
-          <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
-          </div>
-          <div class="relative z-10">
-            <h3 class="font-serif text-xl text-primary mb-2">Grounded Stability</h3>
-            <p class="font-body text-sm text-secondary leading-relaxed">Bridging earth and urban clarity. Every corner is designed to breathe.</p>
-          </div>
-        </div>
-        <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
-          <div>
-            <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
-            <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
-          </div>
-        </div>
-        <div class="grid grid-rows-2 gap-4">
-          <div class="bg-surface-container-highest rounded-2xl p-6 flex items-center justify-between">
-            <span class="font-serif text-4xl text-primary">100%</span>
-            <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
-          </div>
-          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
-            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
-            <div class="absolute inset-0 bg-primary/20 flex items-center justify-center p-2 text-center">
-              <span class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full font-serif italic text-primary text-[10px]">Brewed for peace</span>
-            </div>
+          <div class="bg-white rounded-[2.5rem] border border-stone-100 shadow-sm overflow-hidden">
+            <div id="list-container" class="divide-y divide-stone-50">
+              </div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <div id="global-loading" class="hidden fixed inset-0 bg-white/80 backdrop-blur-sm z-[9999] flex items-center justify-center">
-    <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-  </div>
-
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
-    // FUNGSI UTAMA AMBIL DATA
+    // Fungsi Ambil Data
     async function fetchLeaderboard() {
       try {
         const response = await fetch(API_URL);
@@ -209,129 +157,97 @@
             rank: index + 1,
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
-          const searchInput = document.getElementById('search-member');
-          if (!searchInput || !searchInput.value) {
-            renderLeaderboard(allLeaderboardData);
-          }
+          renderLeaderboard(allLeaderboardData);
         }
-      } catch (error) { console.error('Error fetching data:', error); }
+      } catch (error) { console.error('Error fetching:', error); }
     }
 
-    // FUNGSI CEK POIN (PENCARIAN)
+    // LOGIKA PENCARIAN PADA KOLOM CEK POIN (KARTU PUTIH)
     document.getElementById('btn-check-points').addEventListener('click', () => {
       const input = document.getElementById('check-points-input').value.trim().toLowerCase();
       const resultDiv = document.getElementById('check-result');
-      const loader = document.getElementById('global-loading');
-
+      
       if (!input) {
-        alert('Masukkan Nama atau ID Member kamu.');
+        alert("Silakan masukkan Nama atau ID Member.");
         return;
       }
 
-      loader.classList.remove('hidden');
-      setTimeout(() => {
-        const member = allLeaderboardData.find(m => 
-          m.memberId.toLowerCase() === input || m.name.toLowerCase().includes(input)
-        );
-        loader.classList.add('hidden');
-        if (member) {
-          resultDiv.classList.remove('hidden');
-          document.getElementById('res-name').textContent = member.name;
-          document.getElementById('res-id').textContent = member.memberId;
-          document.getElementById('res-points').textContent = member.totalPoints;
-          document.getElementById('res-rank').textContent = member.rank; 
-          resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert('Member tidak ditemukan. Pastikan ID (contoh: RKM001) atau Nama benar.');
-          resultDiv.classList.add('hidden');
-        }
-      }, 600);
+      // Mencari member berdasarkan Nama atau ID Member
+      const member = allLeaderboardData.find(m => 
+        m.name.toLowerCase().includes(input) || 
+        m.memberId.toLowerCase() === input
+      );
+
+      if (member) {
+        resultDiv.classList.remove('hidden');
+        document.getElementById('res-name').textContent = member.name;
+        document.getElementById('res-id').textContent = member.memberId;
+        document.getElementById('res-points').textContent = member.totalPoints;
+        document.getElementById('res-rank').textContent = member.rank;
+      } else {
+        alert("Member tidak ditemukan. Pastikan data yang dimasukkan benar.");
+        resultDiv.classList.add('hidden');
+      }
     });
 
-    // RENDER LEADERBOARD
+    // RENDER UI LEADERBOARD
     function renderLeaderboard(data) {
-      const podiumContainer = document.getElementById('podium-container');
-      const listContainer = document.getElementById('list-container');
-      if (!podiumContainer || !listContainer) return;
-
-      if (data.length === 0) {
-        podiumContainer.innerHTML = '<div class="text-center py-10 text-stone-500 font-body text-sm">Member tidak ditemukan.</div>';
-        listContainer.innerHTML = '';
-        return;
-      }
-
-      let podiumHTML = '';
+      const podium = document.getElementById('podium-container');
+      const list = document.getElementById('list-container');
+      
+      // Podium Logic (Top 3)
       if(data[0]) {
-        podiumHTML += `
-          <div class="relative bg-primary p-6 rounded-[2rem] overflow-hidden text-center text-on-primary shadow-lg">
+        podium.innerHTML = `
+          <div class="bg-primary p-8 rounded-[2.5rem] text-center text-white shadow-xl relative overflow-hidden">
             <div class="relative z-10 flex flex-col items-center">
-              <span class="material-symbols-outlined text-3xl mb-1 text-tertiary-fixed">workspace_premium</span>
-              <div class="w-20 h-20 rounded-full border-4 border-tertiary-fixed p-1 mb-3 overflow-hidden bg-white">
-                <img class="w-full h-full object-cover rounded-full" src="${data[0].imageUrl}" />
-              </div>
-              <h3 class="font-serif text-2xl italic truncate w-full px-2">${data[0].name}</h3>
-              <p class="text-[10px] font-body opacity-60 mb-2">${data[0].memberId}</p>
-              <p class="font-label text-[10px] uppercase tracking-widest opacity-80 mt-1">Rank ${data[0].rank} • ${data[0].totalPoints} Pts</p>
+              <span class="material-symbols-outlined text-tertiary-fixed text-4xl mb-2">workspace_premium</span>
+              <img class="w-24 h-24 rounded-full border-4 border-tertiary-fixed p-1 mb-4 bg-white" src="${data[0].imageUrl}" />
+              <h3 class="font-serif text-2xl italic">${data[0].name}</h3>
+              <p class="text-[10px] font-label opacity-60 uppercase tracking-widest mt-1">${data[0].memberId}</p>
+              <div class="mt-4 bg-white/10 px-4 py-1 rounded-full text-[10px] font-bold">RANK 1 • ${data[0].totalPoints} PTS</div>
             </div>
-          </div>`;
-      }
-      podiumHTML += `<div class="grid grid-cols-2 gap-3 mt-4">`;
-      [data[1], data[2]].forEach((m) => {
-        if(m) {
-          podiumHTML += `
-            <div class="bg-surface-container rounded-2xl p-4 text-center border border-outline-variant/20">
-              <div class="w-12 h-12 mx-auto rounded-full border-2 border-stone-300 p-0.5 mb-2 overflow-hidden bg-white">
-                <img class="w-full h-full object-cover rounded-full" src="${m.imageUrl}" />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            ${[data[1], data[2]].map((m, i) => m ? `
+              <div class="bg-surface-container rounded-3xl p-5 text-center border border-stone-100">
+                <img class="w-12 h-12 mx-auto rounded-full mb-3" src="${m.imageUrl}" />
+                <h4 class="font-serif text-sm text-primary truncate">${m.name}</h4>
+                <p class="text-[8px] font-bold text-secondary uppercase tracking-tighter mt-1">RANK ${i+2} • ${m.totalPoints} PTS</p>
               </div>
-              <h4 class="font-serif text-base text-primary truncate">${m.name}</h4>
-              <p class="font-label text-[8px] uppercase tracking-widest text-secondary">Rank ${m.rank} • ${m.totalPoints} Pts</p>
-            </div>`;
-        }
-      });
-      podiumHTML += `</div>`;
-      podiumContainer.innerHTML = podiumHTML;
+            ` : '').join('')}
+          </div>
+        `;
+      }
 
-      let listHTML = '';
-      for(let i = 3; i < Math.min(data.length, 10); i++) {
-        listHTML += `
-          <div class="px-6 py-4 flex items-center justify-between hover:bg-stone-50 transition-colors group">
+      // List Logic (Rest)
+      list.innerHTML = data.slice(3, 10).map(m => `
+        <div class="px-8 py-5 flex items-center justify-between hover:bg-stone-50 transition-colors">
+          <div class="flex items-center gap-5">
+            <span class="font-serif text-xl text-stone-300 w-6 italic">${m.rank}</span>
             <div class="flex items-center gap-4">
-              <span class="font-serif text-xl text-stone-300 w-6 italic group-hover:text-primary text-center">${data[i].rank}</span>
-              <div class="flex items-center gap-3">
-                <img class="w-8 h-8 rounded-full bg-stone-100" src="${data[i].imageUrl}" />
-                <div class="flex flex-col">
-                  <h5 class="font-bold text-primary text-sm">${data[i].name}</h5>
-                  <span class="text-[10px] text-stone-400 font-normal uppercase tracking-tighter">${data[i].memberId}</span>
-                </div>
+              <img class="w-10 h-10 rounded-full" src="${m.imageUrl}" />
+              <div>
+                <h5 class="font-bold text-primary text-sm">${m.name}</h5>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest">${m.memberId}</p>
               </div>
             </div>
-            <div class="text-right">
-              <span class="font-body text-xs font-bold text-primary block">${data[i].totalPoints} pts</span>
-            </div>
-          </div>`;
-      }
-      listContainer.innerHTML = listHTML;
+          </div>
+          <div class="text-right">
+            <span class="font-bold text-primary text-sm block">${m.totalPoints} pts</span>
+          </div>
+        </div>
+      `).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('search-member');
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          const keyword = e.target.value.toLowerCase();
-          const filteredData = allLeaderboardData.filter(m => 
-            m.name.toLowerCase().includes(keyword) || m.memberId.toLowerCase().includes(keyword)
-          );
-          renderLeaderboard(filteredData);
-        });
-      }
-      fetchLeaderboard();
-      setInterval(fetchLeaderboard, 30000); 
+    // Search Leaderboard Real-time (Filter Bawah)
+    document.getElementById('search-member').addEventListener('input', (e) => {
+      const val = e.target.value.toLowerCase();
+      const filtered = allLeaderboardData.filter(m => m.name.toLowerCase().includes(val) || m.memberId.toLowerCase().includes(val));
+      renderLeaderboard(filtered);
     });
+
+    document.addEventListener('DOMContentLoaded', fetchLeaderboard);
   </script>
 
-  <style>
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
-  </style>
 </body>
 </html>
