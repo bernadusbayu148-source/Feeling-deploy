@@ -109,15 +109,18 @@
           <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
           <h2 class="font-serif text-4xl text-primary mt-1">Community Leaderboard</h2>
         </div>
+        
         <div class="relative w-full md:w-72">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg">search</span>
           <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body transition-all" placeholder="Find a Member..." type="text" />
         </div>
       </div>
+      
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div id="podium-container" class="lg:col-span-4 space-y-4">
            <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data dari Spreadsheet...</div>
         </div>
+        
         <div class="lg:col-span-8">
           <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
             <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
@@ -126,13 +129,95 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
               </span>
             </div>
-            <div id="list-container" class="divide-y divide-stone-100"></div>
+            <div id="list-container" class="divide-y divide-stone-100">
+               </div>
           </div>
         </div>
       </div>
     </section>
 
-    </main>
+    <section class="py-16 px-8 max-w-7xl mx-auto">
+      <div class="mb-8">
+        <span class="font-label uppercase tracking-widest text-xs text-secondary">Our Essence</span>
+        <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
+          <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
+          </div>
+          <div class="relative z-10">
+            <h3 class="font-serif text-xl text-primary mb-2">Grounded Stability</h3>
+            <p class="font-body text-sm text-secondary leading-relaxed">Bridging earth and urban clarity. Every corner is designed to breathe.</p>
+          </div>
+        </div>
+        <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
+          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
+          <div>
+            <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
+            <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
+          </div>
+        </div>
+        <div class="grid grid-rows-2 gap-4">
+          <div class="bg-surface-container-highest rounded-2xl p-6 flex items-center justify-between">
+            <span class="font-serif text-4xl text-primary">100%</span>
+            <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
+          </div>
+          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
+            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
+            <div class="absolute inset-0 bg-primary/20 flex items-center justify-center p-2 text-center">
+              <span class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full font-serif italic text-primary text-[10px]">Brewed for peace</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-8">
+      <div class="max-w-4xl mx-auto text-center bg-primary-container rounded-[2.5rem] p-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
+        <div class="relative z-10">
+          <h2 class="font-serif text-4xl md:text-5xl text-on-primary-container mb-6">Ready to breathe?</h2>
+          <p class="font-body text-on-primary-container/80 text-base mb-8 max-w-lg mx-auto">Visit our greenhouse in Banjarbaru and rediscover the art of the slow pour.</p>
+          <a href="location.html" class="bg-on-primary-container text-primary px-10 py-4 rounded-xl font-bold hover:shadow-xl transition-all hover:-translate-y-0.5 inline-block">Find Our Location</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
+    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
+      <div class="space-y-6">
+        <a href="index.html" class="text-xl font-serif text-emerald-900 dark:text-emerald-100 opacity-60 inline-block">
+          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+        </a>
+        <p class="font-body text-sm text-stone-600 dark:text-stone-400 max-w-xs leading-relaxed">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="flex flex-col gap-4">
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Navigation</span>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm font-bold" href="index.html">Home</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="menu.html">Menu</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="location.html">Location</a>
+        </div>
+        <div class="flex flex-col gap-4">
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Connect</span>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="#">Email</a>
+        </div>
+        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
+          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
+            <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
+            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
+              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="main.js"></script>
   <script src="index.js"></script>
