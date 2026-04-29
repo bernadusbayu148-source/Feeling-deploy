@@ -340,16 +340,44 @@ deleteMemberBtn?.addEventListener("click", hardDeleteMember);
 
 logoutBtn?.addEventListener("click", () => signOut(fbAuth));
 
-searchInput?.addEventListener("input", () => {
+// Saat klik search: otomatis select semua teks (biar tidak nyambung dengan nama lama)
+searchInput?.addEventListener("focus", () => {
+  searchInput.select();
+
+  // optional: tampilkan suggestion dari teks yang ada
   const keyword = searchInput.value.trim();
+  if (keyword) {
+    const results = filterMembers(keyword);
+    renderSuggestions(results);
+  }
+});
+
+// Saat mengetik: reset member yang sedang terpilih (biar bisa cari member lain)
+searchInput?.addEventListener("input", () => {
+  // reset selected member ketika user mulai mengetik nama baru
+  selectedMemberId = null;
+  selectedMemberLogs = [];
+  memberDetailSection?.classList.add("hidden");
+  if (memberLogList) memberLogList.innerHTML = "";
+  hideMsg(visitMessage);
+
+  const keyword = searchInput.value.trim();
+
   if (!keyword) {
     hideMsg(searchMessage);
     renderSuggestions([]);
     return;
   }
+
   const results = filterMembers(keyword);
-  if (!results.length) showMsg(searchMessage, "Tidak ada member yang cocok.", "neutral");
-  else hideMsg(searchMessage);
+
+  if (!results.length) {
+    showMsg(searchMessage, "Tidak ada member yang cocok.", "neutral");
+    renderSuggestions([]);
+    return;
+  }
+
+  hideMsg(searchMessage);
   renderSuggestions(results);
 });
 
