@@ -1,319 +1,183 @@
 <!DOCTYPE html>
-<html class="light" lang="id">
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Rumah Kopi Manupi</title>
-  <meta
-    name="description"
-    content="Rumah Kopi Manupi menawarkan pengalaman minum kopi yang tenang, modern, dan menyatu dengan alam."
-  />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-  />
-
-  <!-- Tailwind (config harus sebelum CDN) -->
-  <script src="assets/css/tailwind-config.js"></script>
+  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css" />
+  
+  <script src="tailwind-config.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-background text-on-background">
-  <!-- NAVBAR -->
-  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
+  
+  <nav class="bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl text-emerald-900 dark:text-emerald-500 docked full-width top-0 sticky z-50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
-      <a href="index.html">
-        <img
-          src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
-          alt="Manupi"
-          width="28"
-          height="28"
-          style="display:inline-block; vertical-align:middle; border-radius:9999px;"
-          loading="lazy"
-          referrerpolicy="no-referrer"
-        />
-        <span class="text-xl md:text-2xl font-serif italic text-emerald-900">Manupi</span>
+      <a href="index.html" class="flex items-center gap-3">
+        <img alt="Manupi Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+        <span class="text-xl md:text-2xl font-serif italic text-emerald-900 dark:text-emerald-100">Manupi</span>
       </a>
-
-      <nav class="hidden md:flex gap-8 items-center">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="location.html">Location</a>
-      </nav>
+      
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900 dark:border-emerald-400 pb-1 Manrope uppercase tracking-widest text-xs" href="index.html">Home</a>
+        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="menu.html">Menu</a>
+        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="location.html">Location</a>
+      </div>
 
       <div class="flex items-center gap-2 md:gap-4">
-        <button
-          id="mobile-menu-btn"
-          aria-label="Toggle mobile menu"
-          class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
-          type="button"
-        >
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
           <span id="menu-icon" class="material-symbols-outlined">menu</span>
         </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- MOBILE MENU -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
-  >
+  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 fixed w-full z-40 shadow-xl transition-all duration-300">
     <div class="flex flex-col px-8 py-6 gap-6">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="location.html">Location</a>
+      <a href="index.html" class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900/20 pb-2 Manrope uppercase tracking-widest text-sm">Home</a>
+      <a href="menu.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors border-b border-stone-200 dark:border-stone-800 pb-2 Manrope uppercase tracking-widest text-sm">Menu</a>
+      <a href="location.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors pb-2 Manrope uppercase tracking-widest text-sm">Location</a>
     </div>
   </div>
 
-  <!-- MAIN -->
-  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-    <!-- HERO -->
-    <section class="pt-6 md:pt-12 pb-16 md:pb-24">
-      <div class="max-w-3xl">
-        <span class="uppercase tracking-[0.22em] text-[10px] text-secondary font-semibold block mb-5">
-          The Digital Greenhouse
-        </span>
-
-        <h1 class="font-serif text-primary text-5xl md:text-7xl leading-[0.95] tracking-tight max-w-2xl">
-          A breath of fresh coffee.
-        </h1>
-
-        <p class="mt-6 text-sm md:text-lg text-on-surface-variant max-w-xl leading-relaxed">
-          An organic escape in the heart of Banjarbaru.
-          Experience the transition from city bustle to lush garden serenity.
-        </p>
-
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="menu.html">
-            <span>See Menu</span>
-            <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </a>
-
-          <a href="location.html">
-            <span>Visit Us</span>
-            <span class="material-symbols-outlined text-base">north_east</span>
-          </a>
-        </div>
+  <main>
+    <section class="relative min-h-[70vh] flex items-center overflow-hidden px-8">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWPbA5v8EUep8FUpI2ITuNqnjJfftorRdSi_300__cPKU77Ik5K0hfvljgxaqNYxmIpH1DtJKk5Q8TfyssmiPMbsmpPwcnal8qI8GvjUyQs7nHxg2HBrGDE-qg9ghcl1UcelOI3CT2KZRgrg6mXaC-UyII2miDWTd5db4ayccpNvlA_as-NVzyWn_21Llxmten9pa1O9bHDaGnWgx5aPA9662y6pgN3ELxNTwnUNws8uHnbw5_oDViwbqLGwsbyx8dGNANyVrmdn9B" />
       </div>
-    </section>
-
-    <!-- COMMUNITY LEADERBOARD -->
-    <section class="pb-20 md:pb-24">
-      <div class="mb-8">
-        <span class="uppercase tracking-[0.22em] text-[10px] text-secondary font-semibold block mb-4">
-          The Greenhouse Circle
-        </span>
-        <div class="flex items-end justify-between gap-4">
-          <h2 class="font-serif text-4xl md:text-5xl text-primary leading-[1.02]">
-            Community<br />Leaderboard
-          </h2>
-        </div>
-      </div>
-
-      <div class="mb-6">
-        <label class="relative block">
-          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-[18px]">
-            search
-          </span>
-          <input
-            type="text"
-            placeholder="Find a Member..."
-            class="w-full rounded-xl border border-stone-200 bg-white/70 py-3 pl-11 pr-4 text-sm placeholder:text-stone-400 focus:border-emerald-700 focus:ring-0"
-          />
-        </label>
-      </div>
-
-      <!-- Featured Leader -->
-      <div class="rounded-3xl bg-primary p-6 md:p-8 text-white shadow-lg mb-5">
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full bg-white/90 mb-4 shadow-inner"></div>
-          <span class="material-symbols-outlined text-white/80 text-lg mb-2">workspace_premium</span>
-          <h3 class="font-serif text-3xl">Kaskas</h3>
-          <p class="text-xs uppercase tracking-[0.2em] text-white/80 mt-2">Rank 1 • 14 Visits</p>
-        </div>
-      </div>
-
-      <!-- Secondary Members -->
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div class="rounded-2xl bg-stone-100 p-5 text-center">
-          <div class="w-12 h-12 rounded-full bg-white border border-stone-200 mx-auto mb-3"></div>
-          <h4 class="font-medium text-sm text-on-surface">Bayu</h4>
-          <p class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">Rank 2 • 9 Visits</p>
-        </div>
-
-        <div class="rounded-2xl bg-stone-100 p-5 text-center">
-          <div class="w-12 h-12 rounded-full bg-white border border-stone-200 mx-auto mb-3"></div>
-          <h4 class="font-medium text-sm text-on-surface">Deis</h4>
-          <p class="text-[10px] uppercase tracking-[0.18em] text-stone-400 mt-1">Rank 3 • 7 Visits</p>
-        </div>
-      </div>
-
-      <!-- Top Contributors -->
-      <div class="rounded-2xl border border-stone-200 bg-white/80 overflow-hidden">
-        <div class="flex items-center justify-between px-5 py-4 border-b border-stone-200">
-          <span class="uppercase tracking-[0.2em] text-[10px] text-stone-400 font-semibold">
-            Top Contributors
-          </span>
-          <span class="text-[10px] text-stone-400">This Month</span>
-        </div>
-
-        <div class="divide-y divide-stone-200">
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">4</span>
-              <span>Naufal</span>
-            </div>
-            <span class="font-semibold text-primary">16 visits</span>
-          </div>
-
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">5</span>
-              <span>Am</span>
-            </div>
-            <span class="font-semibold text-primary">12 visits</span>
-          </div>
-
-          <div class="flex items-center justify-between px-5 py-4 text-sm">
-            <div class="flex items-center gap-3">
-              <span class="text-stone-400 w-5">6</span>
-              <span>Hanifah</span>
-            </div>
-            <span class="font-semibold text-primary">4 visits</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- OUR ESSENCE -->
-    <section class="pb-20 md:pb-24">
-      <div class="mb-8">
-        <span class="uppercase tracking-[0.22em] text-[10px] text-secondary font-semibold block mb-4">
-          Our Essence
-        </span>
-        <h2 class="font-serif text-4xl md:text-5xl text-primary leading-[1.04]">
-          The Urban Botanical
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <!-- Card 1 -->
-        <div class="rounded-3xl overflow-hidden bg-stone-100 border border-stone-200">
-          <div class="h-48 bg-cover bg-center"
-               style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');">
-          </div>
-          <div class="p-6">
-            <h3 class="font-serif text-2xl text-primary mb-2">Grounded Stability</h3>
-            <p class="text-sm text-on-surface-variant leading-relaxed">
-              Balance meets calm urban clarity. Every corner is designed to breathe.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="rounded-3xl overflow-hidden bg-primary text-white">
-          <div class="p-6">
-            <span class="material-symbols-outlined text-white/80 mb-4">eco</span>
-            <h3 class="font-serif text-2xl mb-2">Local Roots</h3>
-            <p class="text-sm text-white/80 leading-relaxed">
-              Celebrating the botanical heritage of Banjarbaru in a modern, green escape.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="rounded-3xl bg-stone-100 border border-stone-200 p-6 min-h-[220px] flex flex-col justify-between">
-          <div class="flex justify-between items-start">
-            <span class="text-5xl font-serif text-primary">100%</span>
-            <span class="uppercase tracking-[0.18em] text-[10px] text-stone-400">
-              Ethical Arabica
-            </span>
-          </div>
-          <p class="text-sm text-on-surface-variant max-w-xs leading-relaxed">
-            Selected beans and thoughtful brewing to keep every sip clean, lush, and memorable.
+      <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
+        <div class="flex flex-col items-start gap-6">
+          <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">The Digital Greenhouse</span>
+          <h1 class="font-serif text-5xl md:text-7xl leading-[0.9] tracking-tight text-primary">A breath of fresh coffee.</h1>
+          <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
+            An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
-        </div>
-
-        <!-- Card 4 (URL → jadi background image, tanpa ubah struktur div) -->
-        <div class="rounded-3xl overflow-hidden border border-stone-200 bg-stone-100"
-             style="background-image:url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80'); background-size:cover; background-position:center;">
-          <!-- kosong: gambar via background -->
+          <div class="flex gap-4 mt-2">
+            <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-sm w-fit inline-flex">
+              See Menu <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold transition-all hover:bg-surface-container-high text-sm w-fit inline-flex items-center">Visit Us</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="pb-16 md:pb-20">
-      <div class="rounded-[2rem] bg-primary text-white px-8 py-12 md:px-12 md:py-16 text-center shadow-lg">
-        <h2 class="font-serif text-4xl md:text-5xl mb-4">Ready to breathe?</h2>
-        <p class="max-w-xl mx-auto text-sm md:text-base text-white/80 leading-relaxed mb-8">
-          Step into the greenhouse and reconnect with a slower, greener rhythm.
-        </p>
+    <section class="py-16 px-8 max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+        <div>
+          <span class="font-label uppercase tracking-widest text-xs text-secondary">The Greenhouse Circle</span>
+          <h2 class="font-serif text-4xl text-primary mt-1">Community Leaderboard</h2>
+        </div>
+        
+        <div class="relative w-full md:w-72">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg">search</span>
+          <input id="search-member" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm font-body transition-all" placeholder="Find a Member..." type="text" />
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div id="podium-container" class="lg:col-span-4 space-y-4">
+           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data dari Spreadsheet...</div>
+        </div>
+        
+        <div class="lg:col-span-8">
+          <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
+            <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
+              <span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">Top Contributors</span>
+              <span class="font-label text-[8px] uppercase tracking-widest text-stone-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Live Update
+              </span>
+            </div>
+            <div id="list-container" class="divide-y divide-stone-100">
+               </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <a href="location.html">
-          <span>Visit the Greenhouse</span>
-          <span class="material-symbols-outlined text-base">arrow_forward</span>
-        </a>
+    <section class="py-16 px-8 max-w-7xl mx-auto">
+      <div class="mb-8">
+        <span class="font-label uppercase tracking-widest text-xs text-secondary">Our Essence</span>
+        <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
+          <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
+          </div>
+          <div class="relative z-10">
+            <h3 class="font-serif text-xl text-primary mb-2">Grounded Stability</h3>
+            <p class="font-body text-sm text-secondary leading-relaxed">Bridging earth and urban clarity. Every corner is designed to breathe.</p>
+          </div>
+        </div>
+        <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
+          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
+          <div>
+            <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
+            <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
+          </div>
+        </div>
+        <div class="grid grid-rows-2 gap-4">
+          <div class="bg-surface-container-highest rounded-2xl p-6 flex items-center justify-between">
+            <span class="font-serif text-4xl text-primary">100%</span>
+            <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
+          </div>
+          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
+            <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
+            <div class="absolute inset-0 bg-primary/20 flex items-center justify-center p-2 text-center">
+              <span class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full font-serif italic text-primary text-[10px]">Brewed for peace</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-8">
+      <div class="max-w-4xl mx-auto text-center bg-primary-container rounded-[2.5rem] p-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
+        <div class="relative z-10">
+          <h2 class="font-serif text-4xl md:text-5xl text-on-primary-container mb-6">Ready to breathe?</h2>
+          <p class="font-body text-on-primary-container/80 text-base mb-8 max-w-lg mx-auto">Visit our greenhouse in Banjarbaru and rediscover the art of the slow pour.</p>
+          <a href="location.html" class="bg-on-primary-container text-primary px-10 py-4 rounded-xl font-bold hover:shadow-xl transition-all hover:-translate-y-0.5 inline-block">Find Our Location</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
+  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
-        <a href="index.html">
-          <img
-            src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
-            alt="Manupi"
-            width="28"
-            height="28"
-            style="display:inline-block; vertical-align:middle; border-radius:9999px;"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-          />
+        <a href="index.html" class="text-xl font-serif text-emerald-900 dark:text-emerald-100 opacity-60 inline-block">
+          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
         </a>
-        <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
-          © 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
-        </p>
+        <p class="font-body text-sm text-stone-600 dark:text-stone-400 max-w-xs leading-relaxed">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
       </div>
-
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
-          <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a href="index.html">Home</a>
-          <a href="menu.html">Menu</a>
-          <a href="location.html">Location</a>
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Navigation</span>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm font-bold" href="index.html">Home</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="menu.html">Menu</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="location.html">Location</a>
         </div>
-
         <div class="flex flex-col gap-4">
-          <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
-          <a href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://wa.me/6281254913064" target="_blank" rel="noreferrer">WhatsApp</a>
-          <a href="#">Email</a>
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Connect</span>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="#">Email</a>
         </div>
-
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
-          <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          <a href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank" rel="noreferrer">
-            <h5 class="font-serif text-emerald-900 text-sm mb-1">The Greenhouse</h5>
-            <p class="text-xs text-stone-600 leading-relaxed">
-              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />
-              Kec. Banjarbaru Utara, Kalimantan Selatan 70711
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
+          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
+            <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
+            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
+              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
             </p>
           </a>
         </div>
@@ -321,27 +185,7 @@
     </div>
   </footer>
 
-  <!-- JS (FIX: sebelumnya salah sehingga main.js tidak jalan) -->
-  assets/js/main.jsscript>
+  <script src="main.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
-``
-<html class="light" lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Rumah Kopi Manupi</title>
-  <meta
-    name="description"
-    content="Rumah Kopi Manupi menawarkan pengalaman minum kopi yang tenang, modern, dan menyatu dengan alam."
-  />
-
-  <!-- Tailwind (config HARUS sebelum CDN) -->
-  assets/css/tailwind-config.js</script>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
