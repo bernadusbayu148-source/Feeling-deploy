@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Rumah Kopi Manupi</title>
-  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -42,7 +40,6 @@
       },
     }
   </script>
-
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -86,7 +83,7 @@
             <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold transition-all hover:bg-surface-container-high text-sm">Visit Us</a>
           </div>
 
-          <div class="bg-white/90 backdrop-blur-md p-6 rounded-[2.5rem] shadow-xl w-full max-w-sm border border-stone-100 mt-2 transition-all">
+          <div class="bg-white/90 backdrop-blur-md p-6 rounded-[2.5rem] shadow-xl w-full max-w-sm border border-stone-100 mt-2">
             <div class="flex items-center gap-3 mb-4">
               <span class="material-symbols-outlined text-primary">loyalty</span>
               <h3 class="font-serif text-lg text-primary italic">Cek Poin Member</h3>
@@ -98,18 +95,16 @@
                 Lihat Keuntungan Saya
               </button>
             </div>
-            <div id="check-result" class="hidden mt-6 pt-6 border-t border-stone-100 animate-in fade-in slide-in-from-top-4 duration-500">
-                <div class="text-center">
-                    <p id="res-name" class="font-serif text-xl italic text-primary mb-1"></p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-primary/5 p-3 rounded-2xl">
-                            <span class="text-[9px] uppercase text-stone-400 font-bold block">Poin</span>
-                            <span id="res-points" class="text-xl font-bold text-primary">0</span>
-                        </div>
-                        <div class="bg-primary/5 p-3 rounded-2xl">
-                            <span class="text-[9px] uppercase text-stone-400 font-bold block">Rank</span>
-                            <span id="res-rank" class="text-xl font-bold text-primary">-</span>
-                        </div>
+            <div id="check-result" class="hidden mt-6 pt-6 border-t border-stone-100 animate-in fade-in slide-in-from-top-4 duration-500 text-center">
+                <p id="res-name" class="font-serif text-xl italic text-primary mb-1"></p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-primary/5 p-3 rounded-2xl">
+                        <span class="text-[9px] uppercase text-stone-400 font-bold block">Poin</span>
+                        <span id="res-points" class="text-xl font-bold text-primary">0</span>
+                    </div>
+                    <div class="bg-primary/5 p-3 rounded-2xl">
+                        <span class="text-[9px] uppercase text-stone-400 font-bold block">Rank</span>
+                        <span id="res-rank" class="text-xl font-bold text-primary">-</span>
                     </div>
                 </div>
             </div>
@@ -136,9 +131,7 @@
       </div>
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div id="podium-container" class="lg:col-span-4 space-y-4">
-           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data...</div>
-        </div>
+        <div id="podium-container" class="lg:col-span-4 space-y-4"></div>
         <div class="lg:col-span-8">
           <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
             <div id="list-container" class="divide-y divide-stone-100"></div>
@@ -153,7 +146,7 @@
         <h2 class="font-serif text-4xl text-primary mt-1">The Urban Botanical</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden group min-h-[200px] flex flex-col justify-end">
+        <div class="bg-surface-container-low rounded-2xl p-8 relative overflow-hidden min-h-[200px] flex flex-col justify-end group">
           <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
             <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOh_GyetoORwnw_swUdrrlIR4i_3SE7b-TftAtfTrx5TV4I-9gTpsyh5cK7lYRCiHgKuoYff3mfwVCSobRbagwMyUw53BYa67Lxh7XTrHt5AjJePDcvookCltpuNesMeTmnSYWBlOc6_pEt1XrTepstemDeLwGtLRQ933Nr9FjUlTiOq_Qjj_Yvd49GYNiFfN5v6RTo66l8OjW24BXNHhxrT86gaTO9XUeqdmnF6FBPgTrYjNK05NpA2lRj0TTru7UqtRazHmZ1fa" />
           </div>
@@ -163,7 +156,7 @@
           </div>
         </div>
         <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
+          <span class="material-symbols-outlined text-4xl opacity-20">eco</span>
           <div>
             <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
             <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
@@ -174,7 +167,7 @@
             <span class="font-serif text-4xl text-primary">100%</span>
             <span class="font-label uppercase text-[10px] tracking-widest text-secondary text-right">Ethical Arabica</span>
           </div>
-          <div class="bg-surface-container rounded-2xl overflow-hidden relative">
+          <div class="bg-surface-container rounded-2xl overflow-hidden">
             <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_xF8TVOL0B-CBobYEgMNf0XW3C3aAXNaubQuT6V0qmqX6sPQTxnuZUNgMXAeqA5RlMoBXaB2O8BorY7b4ocBGEFi1wZRYJ_eVj1Kf9BKP_M7iB3z2xtLVh4nynbBywgD6QWsM9qg1XV2ry_fwa6GDy_RPbkSFntvirx2vEcRvkkoONLXcxrOZ1SnWLtXH03LirDVEgydWYrEy-CJYgfahWW0bJkQc8BCOSocavbaMVqAx_jIo1moxITy5y6As0uee7Fht5q_0ACPV" />
           </div>
         </div>
@@ -182,29 +175,32 @@
     </section>
   </main>
 
-  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
-    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
+  <footer class="bg-emerald-950 text-stone-200 w-full rounded-t-[3rem] mt-12 py-16 px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
       <div class="space-y-6">
-        <a href="index.html" class="text-xl font-serif text-emerald-900 dark:text-emerald-100 opacity-60 inline-block">
-          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-        </a>
-        <p class="font-body text-sm text-stone-600 dark:text-stone-400 max-w-xs leading-relaxed">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
+        <div class="flex items-center gap-3">
+          <img alt="Manupi Logo" class="h-12 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+          <span class="font-serif text-2xl italic text-white">Manupi</span>
+        </div>
+        <p class="font-body text-sm text-stone-400 max-w-xs leading-relaxed">
+          © 2026 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
+        </p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
         <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm font-bold" href="index.html">Home</a>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="menu.html">Menu</a>
-          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="location.html">Location</a>
+          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Navigation</span>
+          <a class="text-sm hover:text-white transition-colors" href="index.html">Home</a>
+          <a class="text-sm hover:text-white transition-colors" href="menu.html">Menu</a>
+          <a class="text-sm hover:text-white transition-colors" href="location.html">Location</a>
         </div>
         <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Connect</span>
-          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__" target="_blank">Instagram</a>
-          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Socials</span>
+          <a class="text-sm hover:text-white transition-colors" href="https://instagram.com/manupi__">Instagram</a>
+          <a class="text-sm hover:text-white transition-colors" href="https://wa.me/6281254913064">WhatsApp</a>
         </div>
         <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">JL.Irigasi No.08, Banjarbaru Utara.</p>
+          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Visit Us</span>
+          <p class="text-xs text-stone-400 leading-relaxed">Jl. Irigasi No.08,<br>Banjarbaru Utara.</p>
         </div>
       </div>
     </div>
@@ -229,21 +225,21 @@
       } catch (error) { console.error('Error:', error); }
     }
 
-    // CEK POIN (KARTU ATAS)
+    // CEK POIN (Hero Section)
     document.getElementById('btn-check-points').addEventListener('click', () => {
       const input = document.getElementById('check-points-input').value.trim().toLowerCase();
       const resultDiv = document.getElementById('check-result');
       if (!input) return;
-      const member = allLeaderboardData.find(m => m.name.toLowerCase().includes(input) || m.memberId.toLowerCase() === input);
-      if (member) {
+      const m = allLeaderboardData.find(x => x.name.toLowerCase().includes(input) || x.memberId.toLowerCase() === input);
+      if (m) {
         resultDiv.classList.remove('hidden');
-        document.getElementById('res-name').textContent = member.name;
-        document.getElementById('res-points').textContent = member.totalPoints;
-        document.getElementById('res-rank').textContent = member.rank;
-      } else { alert("Member tidak ditemukan."); resultDiv.classList.add('hidden'); }
+        document.getElementById('res-name').textContent = m.name;
+        document.getElementById('res-points').textContent = m.totalPoints;
+        document.getElementById('res-rank').textContent = m.rank;
+      } else { alert("Member tidak ditemukan."); }
     });
 
-    // PENCARIAN LEADERBOARD (DROPDOWN)
+    // PENCARIAN LEADERBOARD (Dropdown Info)
     document.getElementById('search-member').addEventListener('input', (e) => {
       const keyword = e.target.value.toLowerCase().trim();
       const dropdown = document.getElementById('search-dropdown');
@@ -275,18 +271,18 @@
           <div class="bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
             <img class="w-20 h-20 mx-auto rounded-full border-4 border-tertiary-fixed p-1 mb-3 bg-white" src="${data[0].imageUrl}" />
             <h3 class="font-serif text-xl italic">${data[0].name}</h3>
-            <p class="text-[10px] font-bold opacity-60">RANK 1 • ${data[0].totalPoints} PTS</p>
+            <p class="text-[10px] font-bold opacity-60 uppercase">Rank 1 • ${data[0].totalPoints} Pts</p>
           </div>
           <div class="grid grid-cols-2 gap-3">
             ${[data[1], data[2]].map((m, i) => m ? `<div class="bg-stone-50 p-4 rounded-2xl text-center border border-stone-100">
               <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
-              <p class="font-bold text-primary text-xs truncate">${m.name}</p>
-              <p class="text-[8px] text-stone-400">RANK ${i+2} • ${m.totalPoints} PTS</p>
+              <p class="font-bold text-primary text-[11px] truncate">${m.name}</p>
+              <p class="text-[8px] text-stone-400 uppercase font-bold">Rank ${i+2} • ${m.totalPoints} Pts</p>
             </div>` : '').join('')}
           </div>`;
       }
       list.innerHTML = data.slice(3, 10).map(m => `
-        <div class="px-6 py-4 flex items-center justify-between hover:bg-stone-50">
+        <div class="px-6 py-4 flex items-center justify-between hover:bg-stone-50 transition-colors">
           <div class="flex items-center gap-4">
             <span class="font-serif italic text-stone-300 text-lg">${m.rank}</span>
             <div class="flex items-center gap-3">
@@ -297,7 +293,6 @@
           <p class="font-bold text-primary text-sm">${m.totalPoints} pts</p>
         </div>`).join('');
     }
-
     document.addEventListener('DOMContentLoaded', fetchLeaderboard);
   </script>
 </body>
