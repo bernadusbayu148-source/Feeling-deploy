@@ -28,9 +28,8 @@ async function refreshMemberList() {
   }
 }
 
-// --- 3. FUNGSI LOAD HISTORY VISIT ---
+// --- 3. FUNGSI LOAD HISTORY VISIT (DIPERBAIKI) ---
 async function loadVisitHistory(memberId) {
-  // ID elemen harus sesuai dengan di HTML Anda (biasanya 'member-log-list')
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
 
@@ -95,14 +94,13 @@ function selectMember(member) {
   searchInput.value = member.name;
   suggestionsEl.classList.add("hidden");
 
-  // Tampilkan UI Detail
   document.getElementById("member-detail-section").classList.remove("hidden");
   document.getElementById("detail-member-name").textContent = member.name;
   document.getElementById("detail-member-phone").textContent = member.phone;
   document.getElementById("detail-total-points").textContent = `${member.totalPoints} pts`;
   document.getElementById("detail-total-visits").textContent = `${member.totalVisits} visit`;
 
-  // PANGGIL HISTORY
+  // Panggil history saat member dipilih
   loadVisitHistory(member.memberId);
 }
 
@@ -122,17 +120,15 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   
   if (res.ok) {
     showStatus("visit-message", "Berhasil disimpan!", false);
-    pointsInput.value = "1";
+    pointsInput.value = "";
     
-    // Refresh data member (poin total)
     await refreshMemberList();
     
-    // Update tampilan detail & riwayat secara real-time
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) {
         document.getElementById("detail-total-points").textContent = `${updated.totalPoints} pts`;
         document.getElementById("detail-total-visits").textContent = `${updated.totalVisits} visit`;
-        // Muat ulang history agar visit yang baru masuk muncul di daftar
+        // Refresh riwayat setelah simpan visit baru
         loadVisitHistory(selectedMemberId);
     }
   } else {
@@ -154,9 +150,7 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   }
 
   btn.disabled = true;
-  const res = await callApi("addMember", { 
-    payload: { name: nameEl.value, phone: phoneEl.value } 
-  });
+  const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
 
   if (res.ok) {
     showStatus("member-message", `Berhasil! ID: ${res.data.memberId}`, false);
@@ -178,7 +172,6 @@ function showStatus(elId, message, isError = false) {
   setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
-// Inisialisasi saat halaman dibuka
 document.addEventListener("DOMContentLoaded", refreshMemberList);
 
 document.getElementById("logout-btn")?.addEventListener("click", () => {
