@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Rumah Kopi Manupi</title>
+  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -40,26 +42,43 @@
       },
     }
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
   
-  <nav class="bg-stone-50/80 backdrop-blur-xl text-emerald-900 docked full-width top-0 sticky z-50">
+  <nav class="bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl text-emerald-900 dark:text-emerald-500 docked full-width top-0 sticky z-50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
       <a href="index.html" class="flex items-center gap-3">
-        <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-        <span class="text-xl md:text-2xl font-serif italic text-emerald-900">Manupi</span>
+        <img alt="Manupi Logo" class="h-10 md:h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+        <span class="text-xl md:text-2xl font-serif italic text-emerald-900 dark:text-emerald-100">Manupi</span>
       </a>
-      <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest font-label">
-        <a class="text-emerald-900 border-b border-emerald-900 pb-1" href="index.html">Home</a>
-        <a class="text-stone-500 hover:text-emerald-800" href="menu.html">Menu</a>
-        <a class="text-stone-500 hover:text-emerald-800" href="location.html">Location</a>
+      
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900 dark:border-emerald-400 pb-1 Manrope uppercase tracking-widest text-xs" href="index.html">Home</a>
+        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="menu.html">Menu</a>
+        <a class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors Manrope uppercase tracking-widest text-xs" href="location.html">Location</a>
+      </div>
+
+      <div class="flex items-center gap-2 md:gap-4">
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-900 dark:text-emerald-500 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
+          <span id="menu-icon" class="material-symbols-outlined">menu</span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-xl border-t border-stone-200 dark:border-stone-800 fixed w-full z-40 shadow-xl transition-all duration-300">
+    <div class="flex flex-col px-8 py-6 gap-6">
+      <a href="index.html" class="text-emerald-900 dark:text-emerald-400 font-bold border-b border-emerald-900/20 pb-2 Manrope uppercase tracking-widest text-sm">Home</a>
+      <a href="menu.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors border-b border-stone-200 dark:border-stone-800 pb-2 Manrope uppercase tracking-widest text-sm">Menu</a>
+      <a href="location.html" class="text-stone-500 dark:text-stone-400 hover:text-emerald-800 transition-colors pb-2 Manrope uppercase tracking-widest text-sm">Location</a>
+    </div>
+  </div>
 
   <main>
     <section class="relative min-h-[70vh] flex items-center overflow-hidden px-8">
@@ -67,7 +86,6 @@
         <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
         <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWPbA5v8EUep8FUpI2ITuNqnjJfftorRdSi_300__cPKU77Ik5K0hfvljgxaqNYxmIpH1DtJKk5Q8TfyssmiPMbsmpPwcnal8qI8GvjUyQs7nHxg2HBrGDE-qg9ghcl1UcelOI3CT2KZRgrg6mXaC-UyII2miDWTd5db4ayccpNvlA_as-NVzyWn_21Llxmten9pa1O9bHDaGnWgx5aPA9662y6pgN3ELxNTwnUNws8uHnbw5_oDViwbqLGwsbyx8dGNANyVrmdn9B" />
       </div>
-      
       <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
         <div class="flex flex-col items-start gap-6">
           <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">The Digital Greenhouse</span>
@@ -75,12 +93,11 @@
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
             An organic escape in the heart of Banjarbaru. Experience the transition from city bustle to lush garden serenity.
           </p>
-          
           <div class="flex gap-4 mt-2">
-            <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-sm">
+            <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-sm w-fit inline-flex">
               See Menu <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
-            <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold transition-all hover:bg-surface-container-high text-sm">Visit Us</a>
+            <a href="location.html" class="bg-surface-variant text-secondary px-8 py-3 rounded-full font-bold transition-all hover:bg-surface-container-high text-sm w-fit inline-flex items-center">Visit Us</a>
           </div>
         </div>
       </div>
@@ -104,7 +121,9 @@
       </div>
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div id="podium-container" class="lg:col-span-4 space-y-4"></div>
+        <div id="podium-container" class="lg:col-span-4 space-y-4">
+           <div class="text-center py-10 text-stone-500 animate-pulse font-body text-sm">Mengambil data...</div>
+        </div>
         <div class="lg:col-span-8">
           <div class="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
             <div class="px-6 py-3 bg-surface-container-low border-b border-stone-100 flex justify-between items-center">
@@ -135,7 +154,7 @@
           </div>
         </div>
         <div class="bg-primary text-on-primary rounded-2xl p-8 flex flex-col justify-between">
-          <span class="material-symbols-outlined text-4xl opacity-20">eco</span>
+          <span class="material-symbols-outlined text-4xl opacity-20" style="font-variation-settings: 'FILL' 1;">eco</span>
           <div>
             <h3 class="font-serif text-xl mb-2 italic">Local Roots</h3>
             <p class="font-body text-xs opacity-80 leading-relaxed">Celebrating the rich botanical heritage of Banjarbaru in a modern digital escape.</p>
@@ -154,32 +173,34 @@
     </section>
   </main>
 
-  <footer class="bg-emerald-950 text-white w-full rounded-t-[3rem] mt-12 py-16 px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+  <footer class="bg-stone-100 dark:bg-stone-900 w-full rounded-t-3xl mt-12">
+    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
-        <div class="flex items-center gap-3">
-          <img alt="Manupi Logo" class="h-12 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
-          <span class="font-serif text-2xl italic text-white">Manupi</span>
-        </div>
-        <p class="font-body text-sm text-stone-400 max-w-xs leading-relaxed">
-          © 2026 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
-        </p>
+        <a href="index.html" class="text-xl font-serif text-emerald-900 dark:text-emerald-100 opacity-60 inline-block">
+          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg" />
+        </a>
+        <p class="font-body text-sm text-stone-600 dark:text-stone-400 max-w-xs leading-relaxed">© 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.</p>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Navigation</span>
-          <a class="text-sm hover:text-stone-300 transition-colors" href="index.html">Home</a>
-          <a class="text-sm hover:text-stone-300 transition-colors" href="menu.html">Menu</a>
-          <a class="text-sm hover:text-stone-300 transition-colors" href="location.html">Location</a>
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Navigation</span>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm font-bold" href="index.html">Home</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="menu.html">Menu</a>
+          <a class="text-emerald-800 dark:text-emerald-300 hover:underline transition-all text-sm" href="location.html">Location</a>
         </div>
         <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Socials</span>
-          <a class="text-sm hover:text-stone-300 transition-colors" href="https://instagram.com/manupi__" target="_blank">Instagram</a>
-          <a class="text-sm hover:text-stone-300 transition-colors" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Connect</span>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__" target="_blank">Instagram</a>
+          <a class="text-stone-600 dark:text-stone-400 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
         </div>
-        <div class="flex flex-col gap-4">
-          <span class="font-label uppercase tracking-widest text-[10px] text-emerald-500 font-bold">Visit Us</span>
-          <p class="text-xs text-stone-400 leading-relaxed">Jl. Irigasi No.08,<br>Banjarbaru Utara.</p>
+        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
+          <span class="font-label uppercase tracking-widest text-xs text-stone-400">Visit</span>
+          <a class="bg-stone-200/50 dark:bg-stone-800/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="#">
+            <h5 class="font-serif text-emerald-900 dark:text-emerald-100 text-sm mb-1">The Greenhouse</h5>
+            <p class="text-xs text-stone-600 dark:text-stone-400 font-body leading-relaxed">
+              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />Kec. Banjarbaru Utara, Kalimantan Selatan 70711
+            </p>
+          </a>
         </div>
       </div>
     </div>
@@ -189,13 +210,15 @@
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
+    // 1. Fetch Data
     async function fetchLeaderboard() {
       try {
         const response = await fetch(API_URL);
         const result = await response.json();
         if (result.ok && result.data) {
           allLeaderboardData = result.data.map((item, index) => ({ 
-            ...item, rank: index + 1,
+            ...item, 
+            rank: index + 1,
             imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=f0edea&color=013a13&bold=true`
           }));
           renderLeaderboard(allLeaderboardData);
@@ -203,13 +226,22 @@
       } catch (error) { console.error('Error fetching data:', error); }
     }
 
-    // PENCARIAN LEADERBOARD (DROPDOWN INFO)
+    // 2. Logic Pencarian (Dropdown Info)
     document.getElementById('search-member').addEventListener('input', (e) => {
       const keyword = e.target.value.toLowerCase().trim();
       const dropdown = document.getElementById('search-dropdown');
       const content = document.getElementById('search-result-content');
-      if (keyword === "") { dropdown.classList.add("hidden"); return; }
-      const filtered = allLeaderboardData.filter(m => m.name.toLowerCase().includes(keyword) || m.memberId.toLowerCase().includes(keyword));
+
+      if (keyword === "") {
+        dropdown.classList.add("hidden");
+        return;
+      }
+
+      const filtered = allLeaderboardData.filter(m => 
+        m.name.toLowerCase().includes(keyword) || 
+        m.memberId.toLowerCase().includes(keyword)
+      );
+
       if (filtered.length > 0) {
         dropdown.classList.remove("hidden");
         content.innerHTML = filtered.slice(0, 3).map(m => `
@@ -224,32 +256,37 @@
             <p class="font-bold text-primary text-xs">${m.totalPoints} pts</p>
           </div>
         `).join("");
-      } else { dropdown.classList.add("hidden"); }
-    });
-
-    // Menutup dropdown jika klik di luar
-    document.addEventListener('click', (e) => {
-      if (!document.getElementById('search-member').contains(e.target)) {
-        document.getElementById('search-dropdown').classList.add('hidden');
+      } else {
+        content.innerHTML = `<p class="text-[10px] text-stone-400 text-center py-2 italic">Member tidak ditemukan.</p>`;
+        dropdown.classList.remove("hidden");
       }
     });
 
+    // Tutup dropdown klik luar
+    document.addEventListener("click", (e) => {
+      if (!document.getElementById('search-member').contains(e.target)) {
+        document.getElementById('search-dropdown').classList.add("hidden");
+      }
+    });
+
+    // 3. Render Leaderboard (Tampilan Tetap)
     function renderLeaderboard(data) {
       const podium = document.getElementById('podium-container');
       const list = document.getElementById('list-container');
       if(data[0]) {
         podium.innerHTML = `
-          <div class="bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
+          <div class="relative bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
             <img class="w-20 h-20 mx-auto rounded-full border-4 border-tertiary-fixed p-1 mb-3 bg-white" src="${data[0].imageUrl}" />
             <h3 class="font-serif text-xl italic">${data[0].name}</h3>
-            <p class="text-[10px] font-bold opacity-60 uppercase">Rank 1 • ${data[0].totalPoints} Pts</p>
+            <p class="text-[10px] font-bold opacity-60">RANK 1 • ${data[0].totalPoints} PTS</p>
           </div>
           <div class="grid grid-cols-2 gap-3 mt-4">
-            ${[data[1], data[2]].map((m, i) => m ? `<div class="bg-stone-50 p-4 rounded-2xl text-center border border-stone-100">
-              <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
-              <p class="font-bold text-primary text-[11px] truncate">${m.name}</p>
-              <p class="text-[8px] text-stone-400 uppercase font-bold">Rank ${i+2} • ${m.totalPoints} Pts</p>
-            </div>` : '').join('')}
+            ${[data[1], data[2]].map((m, i) => m ? `
+              <div class="bg-surface-container rounded-2xl p-4 text-center border border-stone-100">
+                <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
+                <h4 class="font-serif text-xs text-primary truncate">${m.name}</h4>
+                <p class="text-[8px] font-bold text-secondary uppercase">RANK ${i+2} • ${m.totalPoints} PTS</p>
+              </div>` : '').join('')}
           </div>`;
       }
       list.innerHTML = data.slice(3, 10).map(m => `
@@ -264,6 +301,7 @@
           <p class="font-bold text-primary text-sm">${m.totalPoints} pts</p>
         </div>`).join('');
     }
+
     document.addEventListener('DOMContentLoaded', fetchLeaderboard);
   </script>
 </body>
