@@ -10,50 +10,67 @@
     content="Rumah Kopi Manupi menawarkan pengalaman minum kopi yang tenang, modern, dan menyatu dengan alam."
   />
 
-  <!-- Tailwind -->
-  https://cdn.tailwindcss.com?plugins=forms,container-queriesscript>
-  assets/css/tailwind-config.jsscript>
+  <!-- Tailwind config (untuk CDN, config harus diload SEBELUM tailwindcdn) -->
+  <script src="assets/css/tailwind-config.js"></script>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
   <!-- Fonts -->
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap
-  https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Custom CSS -->
-  assets/css/style.css
-</head>
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-<body class="bg-background text-on-background">
-  <!-- NAVBAR -->
-  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
-    <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
-      index.html
-        https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg
+  <!-- Optional: favicon (hindari 404 favicon.ico) -->
+  <!-- Kalau kamu belum punya, hapus baris ini atau tambahkan file favicon di path ini -->
+  <!-- <link rel="icon" href="assets/favicon.ico"ax-w-7xl mx-auto">
+
+      <!-- Brand -->
+      <a href="index.html" class="flex items-center gap-3">
+        <img
+          src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
+          alt="Logo Manupi"
+          class="w-10 h-10 rounded-full object-cover border border-stone-200"
+          loading="lazy"
+        />
         <span class="text-xl md:text-2xl font-serif italic text-emerald-900">Manupi</span>
       </a>
 
+      <!-- Desktop Nav -->
       <nav class="hidden md:flex gap-8 items-center">
-        index.html
+        <a href="index.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
           Home
         </a>
-        menu.html
+        <a href="menu.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
           Menu
         </a>
-        location.html
+        <a href="location.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
           Location
         </a>
       </nav>
 
+      <!-- Mobile Button -->
       <div class="flex items-center gap-2 md:gap-4">
         <button
           id="mobile-menu-btn"
           aria-label="Toggle mobile menu"
           class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
+          type="button"
         >
           <span id="menu-icon" class="material-symbols-outlined">menu</span>
         </button>
       </div>
+
     </div>
   </header>
 
@@ -63,13 +80,13 @@
     class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
   >
     <div class="flex flex-col px-8 py-6 gap-6">
-      index.html
+      <a href="index.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
         Home
       </a>
-      menu.html
+      <a href="menu.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
         Menu
       </a>
-      location.html
+      <a href="location.html" class="text-sm font-medium text-stone-700 hover:text-emerald-900 transition">
         Location
       </a>
     </div>
@@ -77,6 +94,7 @@
 
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+
     <!-- HERO -->
     <section class="pt-6 md:pt-12 pb-16 md:pb-24">
       <div class="max-w-3xl">
@@ -94,12 +112,18 @@
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          menu.html
+          <a
+            href="menu.html"
+            class="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-emerald-900 text-white text-sm hover:bg-emerald-950 transition"
+          >
             <span>See Menu</span>
             <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
 
-          location.html
+          <a
+            href="location.html"
+            class="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-white border border-stone-200 text-stone-700 text-sm hover:bg-stone-50 transition"
+          >
             <span>Visit Us</span>
             <span class="material-symbols-outlined text-base">north_east</span>
           </a>
@@ -209,7 +233,10 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <!-- Card 1 -->
         <div class="rounded-3xl overflow-hidden bg-stone-100 border border-stone-200">
-          <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');"></div>
+          <div
+            class="h-48 bg-cover bg-center"
+            style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');"
+          ></div>
           <div class="p-6">
             <h3 class="font-serif text-2xl text-primary mb-2">Grounded Stability</h3>
             <p class="text-sm text-on-surface-variant leading-relaxed">
@@ -242,10 +269,11 @@
           </p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="rounded-3xl overflow-hidden border border-stone-200 bg-stone-100">
-          https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80
-        </div>
+        <!-- Card 4 (FIX: dulu hanya URL teks) -->
+        <div
+          class="rounded-3xl overflow-hidden border border-stone-200 bg-stone-100 h-48 bg-cover bg-center"
+          style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80');"
+        ></div>
       </div>
     </section>
 
@@ -257,21 +285,33 @@
           Step into the greenhouse and reconnect with a slower, greener rhythm.
         </p>
 
-        location.html
+        <a
+          href="location.html"
+          class="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-white text-primary text-sm font-medium hover:bg-stone-100 transition"
+        >
           <span>Visit the Greenhouse</span>
           <span class="material-symbols-outlined text-base">arrow_forward</span>
         </a>
       </div>
     </section>
+
   </main>
 
   <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
+
       <div class="space-y-6">
-        index.html
-          https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg
+        <a href="index.html" class="flex items-center gap-3">
+          <img
+            src="https://lh3.googleusercontent.com/aida/ADBb0uhsXxeUU02h6HZwie_MnViGgZcANQ1f6viviAu6Nd1Oda3gancN8Krnm1Qo0SWx-gyTp9CzixgdTLdB9tyGCRR4AMfq4I2EgTiP8vglIus5A2PlKWmTzKoRM696XSYYF2uyMsngKavMQwtDHzLCJD8GoLqFjHdrc-bs260f9GFvNPue2dulGpKvLHggL6GlHKyg6ieO0QQ3CadnkibagrHrNwln_rGkobhBio-nBuXm0KX2r6MKaosbedmdEFgXz4vQHiQQT8UyHhg"
+            alt="Logo Manupi"
+            class="w-10 h-10 rounded-full object-cover border border-stone-200"
+            loading="lazy"
+          />
+          <span class="text-xl font-serif italic text-emerald-900">Manupi</span>
         </a>
+
         <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
           © 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
         </p>
@@ -280,27 +320,42 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          index.htmlHome</a>
-          menu.htmlMenu</a>
-          location.htmlLocation</a>
+          <a href="index.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Home</a>
+          <a href="menu.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Menu</a>
+          <a href="location.html" class="text-sm text-stone-700 hover:text-emerald-900 transition">Location</a>
         </div>
 
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
-          https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==
+          <a
+            href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-stone-700 hover:text-emerald-900 transition"
+          >
             Instagram
           </a>
-          https://wa.me/6281254913064
+          <a
+            href="https://wa.me/6281254913064"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-stone-700 hover:text-emerald-900 transition"
+          >
             WhatsApp
           </a>
-          #
+          <a href="#" class="text-sm text-stone-700 hover:text-emerald-900 transition">
             Email
           </a>
         </div>
 
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
           <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
-          https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8
+          <a
+            href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block p-4 rounded-2xl bg-white/70 border border-stone-200 hover:bg-white transition"
+          >
             <h5 class="font-serif text-emerald-900 text-sm mb-1">The Greenhouse</h5>
             <p class="text-xs text-stone-600 leading-relaxed">
               JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />
@@ -309,10 +364,12 @@
           </a>
         </div>
       </div>
+
     </div>
   </footer>
 
   <!-- JS -->
-  assets/js/main.jsscript>
-</body>
-</html>
+  <script src="assets/js/main.js" defer></script>
+
+  <!-- Kalau kamu memang pakai file ini, aktifkan juga: -->
+  <!-- <script src="assets/js/firebase-config.js" defer
