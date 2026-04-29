@@ -16,6 +16,12 @@ async function callApi(action, payload = {}) {
   } catch (error) { return { ok: false, error: "Koneksi gagal." }; }
 }
 
+// FUNGSI LOGOUT
+document.getElementById("logout-btn")?.addEventListener("click", () => {
+  localStorage.clear();
+  window.location.href = "admin-login.html";
+});
+
 async function refreshMemberList() {
   const res = await callApi("listMembers");
   if (res.ok) allMembers = res.data;
@@ -25,24 +31,24 @@ async function refreshMemberList() {
 async function loadVisitHistory(memberId) {
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
-  logList.innerHTML = "<p class='text-xs text-stone-400 animate-pulse'>Memuat riwayat...</p>";
+  logList.innerHTML = "<p class='text-xs text-stone-400 p-4 animate-pulse'>Memuat riwayat...</p>";
   
   const res = await callApi("listVisits", { memberId });
   if (res.ok && res.data.length > 0) {
     logList.innerHTML = res.data.map(v => `
-      <div class="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100 mb-2 hover:border-primary transition cursor-pointer" 
+      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 hover:border-primary transition cursor-pointer group" 
            onclick="promptEditVisit('${v.visitId}', ${v.pointsAdded})">
         <div>
-          <p class="text-xs font-bold text-primary">+${v.pointsAdded} Points</p>
-          <p class="text-[10px] text-stone-400">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
+          <p class="text-sm font-bold text-primary">+${v.pointsAdded} Points</p>
+          <p class="text-[11px] text-stone-400">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
         </div>
         <div class="text-right">
-          <span class="text-[9px] font-mono text-stone-300 block">${v.visitId}</span>
-          <span class="text-[8px] text-primary italic">Klik untuk edit</span>
+          <span class="text-[10px] font-mono text-stone-300 block">${v.visitId}</span>
+          <span class="text-[10px] text-primary opacity-0 group-hover:opacity-100 italic transition">Klik untuk edit</span>
         </div>
       </div>
     `).join("");
-  } else { logList.innerHTML = "<p class='text-xs text-stone-400 italic px-2'>Belum ada riwayat.</p>"; }
+  } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
 async function promptEditVisit(visitId, oldPoints) {
@@ -54,6 +60,7 @@ async function promptEditVisit(visitId, oldPoints) {
   });
 
   if (res.ok) {
+    alert("Poin diperbarui!");
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
@@ -113,12 +120,11 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
-  if (!nameEl.value || !phoneEl.value) return;
   const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
   if (res.ok) {
     nameEl.value = ""; phoneEl.value = "";
     await refreshMemberList();
-    alert("Member berhasil didaftarkan!");
+    alert("Berhasil!");
   } else { alert(res.error); }
 });
 
