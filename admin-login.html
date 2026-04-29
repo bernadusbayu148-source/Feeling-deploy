@@ -5,15 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Login – Manupi</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/css/tailwind-config.js"></script>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
@@ -26,6 +30,7 @@
 
     <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 md:p-8 shadow-sm">
       <div class="space-y-4">
+        <!-- Admin ID -->
         <div>
           <label for="admin-id" class="block text-sm font-medium mb-2">Admin ID</label>
           <input
@@ -37,16 +42,49 @@
           <p class="text-xs text-stone-500 mt-2">Contoh: admin1 / admin2 / admin3</p>
         </div>
 
+        <!-- Token + Eye Toggle -->
         <div>
           <label for="admin-token" class="block text-sm font-medium mb-2">Token</label>
-          <input
-            id="admin-token"
-            type="password"
-            placeholder="Masukkan token..."
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
+
+          <div class="relative">
+            <input
+              id="admin-token"
+              type="password"
+              placeholder="Masukkan token..."
+              class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 pr-12 text-sm focus:border-emerald-700 focus:ring-0"
+            />
+
+            <button
+              id="toggle-token-visibility"
+              type="button"
+              class="absolute inset-y-0 right-0 flex items-center justify-center px-4 text-stone-500 hover:text-stone-700"
+              aria-label="Tampilkan token"
+              title="Tampilkan token"
+            >
+              <!-- Eye icon -->
+              <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-5 w-5">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+
+              <!-- Eye-off icon -->
+              <svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-5 w-5 hidden">
+                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                <path d="M9.9 4.2A10.4 10.4 0 0 1 12 4c6.5 0 10 8 10 8a18.6 18.6 0 0 1-2.4 3.6"></path>
+                <path d="M6.4 6.4A18.6 18.6 0 0 0 2 12s3.5 8 10 8c1.4 0 2.6-.3 3.7-.7"></path>
+                <path d="M2 2l20 20"></path>
+              </svg>
+            </button>
+          </div>
+
+          <p class="text-xs text-stone-500 mt-2">Klik ikon mata untuk menampilkan/menyembunyikan token.</p>
         </div>
 
+        <!-- Buttons -->
         <button
           id="save-token-btn"
           type="button"
@@ -82,12 +120,40 @@
       msgEl.classList.add(type === "error" ? "text-red-600" : "text-emerald-700");
     }
 
+    // Prefill adminId jika tersimpan
     const savedId = localStorage.getItem(KEY_ADMIN_ID);
     if (savedId) adminIdEl.value = savedId;
+
+    // Toggle show/hide token
+    (function () {
+      const toggleBtn = document.getElementById("toggle-token-visibility");
+      const iconEye = document.getElementById("icon-eye");
+      const iconEyeOff = document.getElementById("icon-eye-off");
+
+      if (!toggleBtn || !tokenEl) return;
+
+      toggleBtn.addEventListener("click", () => {
+        const isHidden = tokenEl.type === "password";
+        tokenEl.type = isHidden ? "text" : "password";
+
+        if (iconEye && iconEyeOff) {
+          iconEye.classList.toggle("hidden", isHidden);
+          iconEyeOff.classList.toggle("hidden", !isHidden);
+        }
+
+        toggleBtn.setAttribute("aria-label", isHidden ? "Sembunyikan token" : "Tampilkan token");
+        toggleBtn.setAttribute("title", isHidden ? "Sembunyikan token" : "Tampilkan token");
+
+        tokenEl.focus();
+        const len = tokenEl.value.length;
+        tokenEl.setSelectionRange(len, len);
+      });
+    })();
 
     document.getElementById("save-token-btn").addEventListener("click", () => {
       const adminId = adminIdEl.value.trim();
       const token = tokenEl.value.trim();
+
       if (!adminId) return showMsg("Admin ID wajib diisi.", "error");
       if (!token) return showMsg("Token wajib diisi.", "error");
 
