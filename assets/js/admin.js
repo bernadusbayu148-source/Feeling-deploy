@@ -245,25 +245,42 @@ function loadLogsForMember(memberId) {
 // ===== Actions =====
 async function addMember() {
   hideMsg(memberMessage);
+
   const name = (memberNameInput?.value || "").trim();
   const phone = (memberPhoneInput?.value || "").trim();
 
-  if (!name) return showMsg(memberMessage, "Nama member wajib diisi.", "error");
+  if (!name) {
+    showMsg(memberMessage, "Nama member wajib diisi.", "error");
+    return;
+  }
 
-  await set(push(ref(fbDb, "members")), {
+  // gunakan push agar ID unik
+  const newRef = push(ref(fbDb, "members"));
+  const payload = {
     name,
     phone,
     points: 0,
     visits: 0,
     active: true,
     createdAt: new Date().toISOString()
-  });
+  };
+
+  await set(newRef, payload);
+
+  // ✅ update cache lokal agar langsung bisa dicari tanpa menunggu listener
+  membersCache[newRef.key] = payload;
 
   memberNameInput.value = "";
   memberPhoneInput.value = "";
   showMsg(memberMessage, "Member berhasil ditambahkan.", "success");
-}
 
+  // optional: langsung arahkan search ke member baru
+  if (searchInput) {
+    searchInput.value = name;
+    const results = filterMembers(name);
+    renderSuggestions(results);
+  }
+}
 async function addVisit() {
   hideMsg(visitMessage);
   if (!selectedMemberId) return showMsg(visitMessage, "Pilih member dulu.", "error");
