@@ -16,7 +16,7 @@ async function callApi(action, payload = {}) {
   } catch (error) { return { ok: false, error: "Koneksi gagal." }; }
 }
 
-// FUNGSI LOGOUT
+// LOGOUT
 document.getElementById("logout-btn")?.addEventListener("click", () => {
   localStorage.clear();
   window.location.href = "admin-login.html";
@@ -27,31 +27,31 @@ async function refreshMemberList() {
   if (res.ok) allMembers = res.data;
 }
 
-// --- HISTORY & EDIT ---
+// LOAD HISTORY
 async function loadVisitHistory(memberId) {
   const logList = document.getElementById("member-log-list");
   if (!logList) return;
-  logList.innerHTML = "<p class='text-xs text-stone-400 p-4 animate-pulse text-center'>Memuat riwayat...</p>";
-  
+  logList.innerHTML = "<p class='text-xs text-stone-400 p-4 text-center animate-pulse'>Memuat riwayat...</p>";
   const res = await callApi("listVisits", { memberId });
   if (res.ok && res.data.length > 0) {
     logList.innerHTML = res.data.map(v => `
-      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm hover:border-primary transition">
+      <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 mb-3 shadow-sm transition">
         <div>
           <p class="text-sm font-bold text-primary">+${v.pointsAdded} Points</p>
           <p class="text-[11px] text-stone-400 font-medium">${new Date(v.timestamp).toLocaleString('id-ID')}</p>
           <span class="text-[9px] font-mono text-stone-300 block mt-1">${v.visitId}</span>
         </div>
-        <button onclick="promptEditVisit('${v.visitId}', ${v.pointsAdded})" 
+        <button onclick="window.promptEditVisit('${v.visitId}', ${v.pointsAdded})" 
                 class="px-3 py-1.5 bg-stone-100 text-primary text-[10px] font-bold rounded-xl hover:bg-primary hover:text-white transition uppercase tracking-wider">
           Edit
         </button>
       </div>
     `).join("");
-  } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat kunjungan.</p>"; }
+  } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
 }
 
-async function promptEditVisit(visitId, oldPoints) {
+// EDIT POPUP (Daftarkan ke window)
+window.promptEditVisit = async function(visitId, oldPoints) {
   const newPoints = prompt(`Masukkan jumlah poin baru untuk transaksi ${visitId}:`, oldPoints);
   if (newPoints === null || newPoints.trim() === "" || isNaN(newPoints)) return;
 
@@ -60,14 +60,14 @@ async function promptEditVisit(visitId, oldPoints) {
   });
 
   if (res.ok) {
-    alert("Poin berhasil diperbarui!");
+    alert("Poin diperbarui!");
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
   } else { alert("Gagal: " + res.error); }
-}
+};
 
-// --- PENCARIAN ---
+// PENCARIAN
 const searchInput = document.getElementById("member-search");
 const suggestionsEl = document.getElementById("member-suggestions");
 
@@ -79,7 +79,7 @@ searchInput?.addEventListener("input", (e) => {
   if (filtered.length > 0) {
     filtered.slice(0, 5).forEach(m => {
       const div = document.createElement("div");
-      div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm transition";
+      div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm";
       div.innerHTML = `<p class="font-bold text-primary">${m.name}</p><p class="text-[10px] text-stone-400 font-medium">${m.memberId} • ${m.phone}</p>`;
       div.onclick = () => selectMember(m);
       suggestionsEl.appendChild(div);
@@ -100,41 +100,38 @@ function selectMember(member) {
   loadVisitHistory(member.memberId);
 }
 
-// --- SIMPAN VISIT BARU ---
+// SIMPAN VISIT
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
-  if (!selectedMemberId) { alert("Pilih member dulu!"); return; }
+  if (!selectedMemberId) return;
   const pts = parseInt(pointsInput.value);
-  if (isNaN(pts) || pts <= 0) { alert("Masukkan poin valid!"); return; }
-
+  if (isNaN(pts) || pts <= 0) return;
   const res = await callApi("addVisit", { payload: { memberId: selectedMemberId, points: pts } });
   if (res.ok) {
     pointsInput.value = "";
     await refreshMemberList();
     const updated = allMembers.find(m => m.memberId === selectedMemberId);
     if (updated) selectMember(updated);
-  } else { alert(res.error); }
+  }
 });
 
-// --- TAMBAH MEMBER ---
+// TAMBAH MEMBER
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name");
   const phoneEl = document.getElementById("member-phone");
-  if (!nameEl.value || !phoneEl.value) { alert("Data harus lengkap!"); return; }
   const res = await callApi("addMember", { payload: { name: nameEl.value, phone: phoneEl.value } });
   if (res.ok) {
     nameEl.value = ""; phoneEl.value = "";
     await refreshMemberList();
-    alert("Member berhasil didaftarkan!");
+    alert("Berhasil!");
   } else { alert(res.error); }
 });
 
-// --- HAPUS MEMBER ---
+// HAPUS
 document.getElementById("delete-member-btn")?.addEventListener("click", async () => {
-  if (!selectedMemberId || !confirm("Hapus member ini secara permanen? Seluruh riwayat akan hilang.")) return;
+  if (!selectedMemberId || !confirm("Hapus permanen?")) return;
   const res = await callApi("deleteMember", { memberId: selectedMemberId });
-  if (res.ok) { alert("Dihapus."); location.reload(); }
-  else { alert(res.error); }
+  if (res.ok) location.reload();
 });
 
 document.addEventListener("DOMContentLoaded", refreshMemberList);
