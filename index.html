@@ -47,14 +47,14 @@
 
 <body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container">
   
-  <!-- HEADER (Dari menu.html) -->
+  <!-- HEADER -->
   <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
       <a class="text-xl font-serif italic text-emerald-900" href="index.html">
         <img
           alt="Manupi Logo"
           class="h-9 md:h-12 w-auto object-contain"
-          src="assets/images/logo.jpeg"
+          src="assets/images/logo.png"
         />
       </a>
 
@@ -76,7 +76,7 @@
     </div>
   </header>
 
-  <!-- MOBILE MENU (Dari menu.html) -->
+  <!-- MOBILE MENU -->
   <div
     id="mobile-menu"
     class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
@@ -170,7 +170,7 @@
     </section>
   </main>
 
-  <!-- FOOTER (Dari menu.html) -->
+  <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
@@ -266,6 +266,7 @@
       } else { dropdown.classList.add("hidden"); }
     });
 
+    // FUNGSI INI YANG DIUBAH UNTUK MENAMPILKAN ID
     function renderLeaderboard(data) {
       const podium = document.getElementById('podium-container');
       const list = document.getElementById('list-container');
@@ -273,13 +274,15 @@
         podium.innerHTML = `
           <div class="bg-primary p-6 rounded-[2rem] text-center text-white shadow-lg">
             <img class="w-20 h-20 mx-auto rounded-full border-4 border-tertiary-fixed p-1 mb-3 bg-white" src="${data[0].imageUrl}" />
-            <h3 class="font-serif text-xl italic">${data[0].name}</h3>
+            <h3 class="font-serif text-xl italic leading-tight">${data[0].name}</h3>
+            <p class="text-[10px] uppercase tracking-widest opacity-80 mb-1">${data[0].memberId}</p>
             <p class="text-[10px] font-bold opacity-60">RANK 1 • ${data[0].totalPoints} PTS</p>
           </div>
           <div class="grid grid-cols-2 gap-3 mt-4">
             ${[data[1], data[2]].map((m, i) => m ? `<div class="bg-surface-container rounded-2xl p-4 text-center border border-stone-100">
               <img class="w-10 h-10 mx-auto rounded-full mb-2" src="${m.imageUrl}" />
-              <p class="font-bold text-primary text-xs truncate">${m.name}</p>
+              <p class="font-bold text-primary text-xs truncate leading-tight">${m.name}</p>
+              <p class="text-[9px] text-stone-500 uppercase tracking-widest mb-1">${m.memberId}</p>
               <p class="text-[8px] text-stone-400">RANK ${i+2} • ${m.totalPoints} PTS</p>
             </div>` : '').join('')}
           </div>`;
@@ -287,10 +290,13 @@
       list.innerHTML = data.slice(3, 10).map(m => `
         <div class="px-6 py-4 flex items-center justify-between hover:bg-stone-50 transition-colors">
           <div class="flex items-center gap-4">
-            <span class="font-serif italic text-stone-300 text-lg">${m.rank}</span>
+            <span class="font-serif italic text-stone-300 text-lg w-4 text-center">${m.rank}</span>
             <div class="flex items-center gap-3">
               <img class="w-8 h-8 rounded-full" src="${m.imageUrl}" />
-              <h5 class="font-bold text-primary text-sm">${m.name}</h5>
+              <div class="flex items-center gap-2">
+                <h5 class="font-bold text-primary text-sm">${m.name}</h5>
+                <span class="text-[10px] text-stone-400 font-medium uppercase tracking-wider">${m.memberId}</span>
+              </div>
             </div>
           </div>
           <p class="font-bold text-primary text-sm">${m.totalPoints} pts</p>
