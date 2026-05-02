@@ -75,7 +75,7 @@
               aria-label="Tampilkan token"
               title="Tampilkan token"
             >
-              <!-- Eye icon -->
+              <!-- Eye icon[cite: 2] -->
               <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                    class="h-5 w-5">
@@ -83,7 +83,7 @@
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
 
-              <!-- Eye-off icon -->
+              <!-- Eye-off icon[cite: 2] -->
               <svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                    class="h-5 w-5 hidden">
@@ -121,7 +121,7 @@
   </div>
 
   <script>
-    // PENTING: Ganti URL di bawah ini dengan URL Web App (Deployment) Anda yang terbaru
+    // PENTING: Gunakan URL Web App (Deployment) terbaru Anda
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec";
 
     const KEY_ADMIN_ID = "manupi_adminId";
@@ -143,11 +143,11 @@
       msgEl.classList.remove("hidden");
     }
 
-    // Prefill adminId jika tersimpan
+    // Prefill adminId jika tersimpan[cite: 2]
     const savedId = localStorage.getItem(KEY_ADMIN_ID);
     if (savedId) adminIdEl.value = savedId;
 
-    // Toggle show/hide token[cite: 4]
+    // Toggle show/hide token[cite: 2]
     (function () {
       const toggleBtn = document.getElementById("toggle-token-visibility");
       const iconEye = document.getElementById("icon-eye");
@@ -166,7 +166,7 @@
       });
     })();
 
-    // LOGIKA LOGIN DENGAN VERIFIKASI POST (MENYESUAIKAN KODE.GS TERBARU)
+    // LOGIKA LOGIN DENGAN VERIFIKASI POST
     loginBtn.addEventListener("click", async () => {
       const adminId = adminIdEl.value.trim();
       const token = tokenEl.value.trim();
@@ -176,10 +176,9 @@
 
       loginBtn.disabled = true;
       loginBtn.textContent = "Memverifikasi...";
-      showMsg("Sedang memvalidasi akses ke server...", "process");
+      showMsg("Sedang memvalidasi akses...", "process");
 
       try {
-        // Melakukan verifikasi menggunakan POST sesuai fungsi doPost(e) di kode.gs
         const response = await fetch(SCRIPT_URL, {
           method: "POST",
           body: JSON.stringify({ action: "ping", adminId, token })
@@ -188,7 +187,6 @@
         const result = await response.json();
 
         if (result.ok) {
-          // Jika verifikasi di kode.gs berhasil (authenticateAdmin_ mengembalikan ok: true)[cite: 6]
           localStorage.setItem(KEY_ADMIN_ID, adminId);
           localStorage.setItem(KEY_TOKEN, token);
           showMsg("Akses diterima. Membuka Panel Admin...");
@@ -200,9 +198,8 @@
         }
 
       } catch (err) {
-        // Jika terjadi error koneksi atau CORS (biasanya karena URL Web App salah atau belum Deploy)
         console.error(err);
-        showMsg("Gagal terhubung ke server. Pastikan URL Web App sudah benar.", "error");
+        showMsg("Gagal terhubung ke server. Cek URL Deployment Anda.", "error");
         loginBtn.disabled = false;
         loginBtn.textContent = "Masuk";
       }
