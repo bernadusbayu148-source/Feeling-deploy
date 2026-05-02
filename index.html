@@ -5,6 +5,17 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Rumah Kopi Manupi</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- PENAMBAHAN FONT CHI -->
+  <style>
+    @font-face {
+      font-family: 'Chi';
+      src: url('assets/fonts/Chi-Regular.ttf') format('truetype'); /* Ubah menjadi .otf jika file Anda berekstensi .otf */
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -34,7 +45,8 @@
           fontFamily: {
             "headline": ["Newsreader", "serif"],
             "body": ["Manrope", "sans-serif"],
-            "label": ["Manrope", "sans-serif"]
+            "label": ["Manrope", "sans-serif"],
+            "chi": ["Chi", "cursive"] /* Konfigurasi Tailwind untuk Font Chi */
           }
         },
       },
@@ -91,15 +103,16 @@
   <main>
     <section class="relative min-h-[70vh] flex items-center overflow-hidden px-8">
       <div class="absolute inset-0 z-0">
-        <!-- Gradasi overlay putih agar teks tetap terbaca -->
         <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
-        <!-- Gambar Background Baru -->
-        <img class="w-full h-full object-cover object-center" src="assets/images/bg-manupi.jpeg" alt="Suasana Rumah Kopi Manupi" />
+        <img class="w-full h-full object-cover object-center" src="assets/images/bg-manupi.jpg" alt="Suasana Rumah Kopi Manupi" />
       </div>
       <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
         <div class="flex flex-col items-start gap-6">
           <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">Rumah Kopi Manupi</span>
-          <h1 class="font-serif text-5xl md:text-7xl leading-[0.9] tracking-tight text-primary">#NgopidiAlam</h1>
+          
+          <!-- PERUBAHAN FONT DAN WARNA -->
+          <h1 class="font-chi text-5xl md:text-7xl leading-[0.9] tracking-tight text-white drop-shadow-md">#NgopidiAlam</h1>
+          
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
             Alam menemani, Kopi menyertai,
           </p>
