@@ -81,24 +81,32 @@
         <!-- MENU UTAMA -->
         <div class="flex flex-col items-center group">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
-          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative">
+          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama.jpeg')">
             <img
               alt="Menu Utama Manupi"
               class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               src="assets/images/menu-utama.jpeg"
             />
+            <!-- Indikator klik (Opsional, agar tamu tahu bisa diklik) -->
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
+            </div>
           </div>
         </div>
 
         <!-- MENU PROMO -->
         <div class="flex flex-col items-center group">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Promo</h2>
-          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative">
+          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-promo.jpeg')">
             <img
               alt="Menu Promo Manupi"
               class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               src="assets/images/menu-promo.jpeg"
             />
+             <!-- Indikator klik -->
+             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
+            </div>
           </div>
         </div>
 
@@ -107,8 +115,18 @@
 
   </main>
 
+  <!-- MODAL / LIGHTBOX (POPUP GAMBAR) -->
+  <div id="modal-gambar" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 transition-opacity">
+    <button id="tutup-modal" class="absolute top-4 right-4 md:top-8 md:right-8 text-white hover:text-stone-400 transition-colors p-2 cursor-pointer z-50">
+      <span class="material-symbols-outlined text-3xl md:text-4xl">close</span>
+    </button>
+    <div class="relative w-full max-w-4xl max-h-[90vh] flex justify-center overflow-hidden rounded-xl">
+      <img id="gambar-di-modal" src="" alt="Menu Zoom" class="w-auto h-auto max-w-full max-h-[90vh] object-contain shadow-2xl rounded-xl" />
+    </div>
+  </div>
+
   <!-- FOOTER -->
-  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 relative z-10">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
         <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
@@ -154,5 +172,32 @@
   </footer>
 
   <script src="assets/js/main.js" defer></script>
+  
+  <!-- SCRIPT UNTUK POPUP GAMBAR -->
+  <script>
+    const modal = document.getElementById('modal-gambar');
+    const gambarModal = document.getElementById('gambar-di-modal');
+
+    // Fungsi untuk membuka modal
+    function bukaModal(srcGambar) {
+      gambarModal.src = srcGambar;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
+    }
+
+    // Fungsi untuk menutup modal
+    function tutupModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto'; // Buka kunci scroll
+      gambarModal.src = ''; // Bersihkan src
+    }
+
+    // Event listener untuk klik tombol X atau klik di luar gambar
+    modal.addEventListener('click', function(e) {
+      if (e.target === this || e.target.closest('#tutup-modal')) {
+        tutupModal();
+      }
+    });
+  </script>
 </body>
 </html>
