@@ -6,7 +6,44 @@
   <title>Sajian Tamu | Rumah Kopi Manupi</title>
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="assets/css/tailwind-config.js"></script>
+  
+  <!-- KONFIGURASI WARNA MANUPI -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed": "#cbedb4",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#1e5128",
+            "surface-container-low": "#f6f3f0",
+            "surface-bright": "#fcf9f6",
+            "primary-fixed": "#b8f1b9",
+            "surface-variant": "#e5e2df",
+            "outline-variant": "#c1c9bd",
+            "primary": "#013a13",
+            "secondary-fixed": "#f6decb",
+            "surface-container-highest": "#e5e2df",
+            "on-background": "#1c1c1a",
+            "primary-container": "#1e5128",
+            "on-primary": "#ffffff",
+            "surface-container": "#f0edea",
+            "surface": "#fcf9f6",
+            "background": "#fcf9f6",
+            "on-surface": "#1c1c1a",
+            "secondary": "#6d5b4c"
+          },
+          fontFamily: {
+            "headline": ["Newsreader", "serif"],
+            "body": ["Manrope", "sans-serif"],
+            "label": ["Manrope", "sans-serif"],
+            "chi": ["Chi", "cursive"]
+          }
+        },
+      },
+    }
+  </script>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
@@ -69,7 +106,7 @@
     <section class="mb-12 md:mb-16">
       <!-- Judul Halaman -->
       <div class="text-center mb-12">
-        <span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">RUMAH KOPI MANUPI</span>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">RUMAH KOPI MANUPI</span>
         <h1 class="text-4xl md:text-6xl font-serif text-primary leading-tight mt-3">
           Sajian Istimewa Tamu 
         </h1>
