@@ -91,8 +91,10 @@
   <main>
     <section class="relative min-h-[70vh] flex items-center overflow-hidden px-8">
       <div class="absolute inset-0 z-0">
+        <!-- Gradasi overlay putih agar teks tetap terbaca -->
         <div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10"></div>
-        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWPbA5v8EUep8FUpI2ITuNqnjJfftorRdSi_300__cPKU77Ik5K0hfvljgxaqNYxmIpH1DtJKk5Q8TfyssmiPMbsmpPwcnal8qI8GvjUyQs7nHxg2HBrGDE-qg9ghcl1UcelOI3CT2KZRgrg6mXaC-UyII2miDWTd5db4ayccpNvlA_as-NVzyWn_21Llxmten9pa1O9bHDaGnWgx5aPA9662y6pgN3ELxNTwnUNws8uHnbw5_oDViwbqLGwsbyx8dGNANyVrmdn9B" />
+        <!-- Gambar Background Baru -->
+        <img class="w-full h-full object-cover object-center" src="assets/images/bg-manupi.jpg" alt="Suasana Rumah Kopi Manupi" />
       </div>
       <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
         <div class="flex flex-col items-start gap-6">
@@ -270,7 +272,6 @@
       } else { dropdown.classList.add("hidden"); }
     });
 
-    // FUNGSI INI YANG DIUBAH UNTUK MENAMPILKAN ID
     function renderLeaderboard(data) {
       const podium = document.getElementById('podium-container');
       const list = document.getElementById('list-container');
