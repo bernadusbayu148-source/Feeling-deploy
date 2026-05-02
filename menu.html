@@ -8,14 +8,12 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="assets/css/tailwind-config.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
     rel="stylesheet"
   />
   <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet"
   />
 
@@ -23,168 +21,164 @@
 </head>
 
 <body class="bg-background text-on-background">
+  <!-- HEADER -->
   <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
-      <a class="flex items-center gap-3 group" href="index.html">
-        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center transition-transform group-hover:rotate-12">
-          <span class="material-symbols-outlined text-white text-xl">local_cafe</span>
-        </div>
-        <span class="font-serif text-xl tracking-tight text-primary">Manupi.</span>
+      <a class="text-xl font-serif italic text-emerald-900" href="index.html">
+        <img
+          alt="Manupi Logo"
+          class="h-9 md:h-12 w-auto object-contain"
+          src="assets/images/logo.png"
+        />
       </a>
 
-      <nav class="hidden md:flex gap-8 items-center">
-        <a class="text-stone-400 hover:text-primary transition-colors text-sm font-medium" href="index.html">Beranda</a>
-        <a class="text-primary font-bold text-sm underline underline-offset-8 decoration-2" href="menu.html">Sajian</a>
-        <a class="text-stone-400 hover:text-primary transition-colors text-sm font-medium" href="location.html">Lokasi</a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Halaman Utama</a>
+        <a class="text-emerald-900 font-bold border-b border-emerald-900 pb-0.5 uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Sajian Tamu</a>
+        <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="location.html">Alamat Rumah</a>
       </nav>
 
-      <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-stone-100 transition-colors">
-        <span id="menu-icon" class="material-symbols-outlined text-stone-600">menu</span>
-      </button>
-    </div>
-
-    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-stone-200 p-6 flex flex-col gap-4 shadow-xl">
-      <a class="text-stone-600 font-medium py-2" href="index.html">Beranda</a>
-      <a class="text-primary font-bold py-2 border-l-4 border-primary pl-4" href="menu.html">Sajian Tamu</a>
-      <a class="text-stone-600 font-medium py-2" href="location.html">Lokasi</a>
+      <div class="flex items-center gap-2 md:gap-4">
+        <button
+          id="mobile-menu-btn"
+          aria-label="Toggle mobile menu"
+          class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
+        >
+          <span id="menu-icon" class="material-symbols-outlined text-xl">menu</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 md:px-8 py-12">
-    <div class="mb-16 max-w-2xl">
-      <span class="uppercase tracking-[0.2em] text-[10px] font-bold text-stone-400 mb-4 block">Katalog Menu</span>
-      <h1 class="font-serif text-5xl md:text-6xl text-primary mb-6 leading-tight italic">Sajian untuk Tamu Rumah.</h1>
-      <p class="text-stone-500 leading-relaxed text-lg">
-        Dari biji kopi pilihan hingga camilan hangat, setiap sajian kami buat dengan ketulusan untuk menemani waktu Anda di Manupi.
-      </p>
+  <!-- MOBILE MENU -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[73px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
+  >
+    <div class="flex flex-col px-8 py-6 gap-6">
+      <a href="index.html" class="text-stone-500 hover:text-emerald-800 transition-colors border-b border-stone-200 pb-2 uppercase tracking-widest text-sm">Halaman Utama</a>
+      <a href="menu.html" class="text-emerald-900 font-bold border-b border-emerald-900/20 pb-2 uppercase tracking-widest text-sm">Sajian Tamu</a>
+      <a href="location.html" class="text-stone-500 hover:text-emerald-800 transition-colors pb-2 uppercase tracking-widest text-sm">Alamat Rumah</a>
     </div>
+  </div>
 
-    <div class="mb-20">
-      <div class="flex items-baseline gap-4 mb-8">
-        <h2 class="font-serif text-3xl text-emerald-900 italic">Coffee</h2>
-        <div class="h-px flex-1 bg-stone-200"></div>
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+    <!-- HERO -->
+    <section class="mb-12 md:mb-16 text-center md:text-left flex flex-col md:flex-row items-center gap-6 md:gap-12">
+      <div class="flex-1 space-y-4">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">RUMAH KOPI MANUPI</span>
+        <h1 class="text-5xl md:text-7xl font-serif text-primary leading-tight">
+          Sajian Istimewa Tamu 
+        </h1>
       </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+
+      <div class="flex-1 w-full md:max-w-md aspect-[4/3] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative group">
+        <img
+          alt="Artisan Coffee"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeDTDvqIv78nkO0d6f4D-3Z5w9g_1ZOZa3edG8rP7DsjLPWAALyMX26l1w72E0k-ANjCXe5nQczMfUZqrf48Bc5Ifc9jAqQQGW_379b4-28wOyaDSLJ52ekAJbL_C1ZvqB34zFGdGA4Sn1DU6wX_W00LhltUnpIlHrOX7gvSiTFLB23L3PSUBCoLYIobx0pTKi2iCKhyxUVWWhm3GXsuJP2Frsxl_jbVRe53oRKn3dKnToji_bZnCOnxjFoJxOtbegSs_J1Y10AKoW"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-60"></div>
+      </div>
+    </section>
+
+    <!-- COFFEE SECTION -->
+    <div class="mb-16">
+      <div class="flex flex-row justify-between items-center gap-4 mb-8">
+        <h2 class="text-3xl md:text-4xl font-serif text-primary">Coffee</h2>
+        <div class="h-px flex-1 bg-outline-variant/50"></div>
+        <span class="uppercase tracking-widest text-[10px] text-secondary hidden sm:inline">
+          Manual &amp; Espresso
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <!-- ITEM 1 -->
         <div class="group">
-          <div class="aspect-[4/5] rounded-3xl bg-stone-100 mb-6 overflow-hidden relative">
-            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2070&auto=format&fit=crop" 
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Manupi Signature" />
-            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-              <span class="text-[10px] font-bold text-primary uppercase tracking-widest">Best Seller</span>
-            </div>
+          <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-surface-container-low shadow-sm">
+            <img
+              alt="Signature Latte"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU-6AQKV5wiKNrv386rCCYLF_PtbsaIAoiiWbT7O4i-VFkBg8Xs7N7r-ujdDBrkHgMZblgCzloIbBgeEYNLsnp87y6wGja3CtdIZ1ML2vE5olpwjbSFh50wCg5cAB5WE854DYo2t6HYe3AJGCGhNQcre4uZLIUOf_GqbPRDlQNpdGNbhcOCIq9B2lhHOFkzeKapjNDu6d9bgFpC27Op5XCH0aMpVQhl13htrCgViFVrbwwjWqohn0mSAbahZ_O6Mm2_iF9wSJM_XrX"
+            />
           </div>
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-serif text-xl text-stone-800">Manupi Signature</h3>
-            <span class="font-medium text-primary">28k</span>
+          <div class="flex justify-between items-baseline mb-1 gap-3">
+            <h3 class="text-base md:text-lg font-serif text-on-surface leading-snug">Signature Latte</h3>
+            <span class="text-primary font-bold text-sm">42k</span>
           </div>
-          <p class="text-stone-400 text-sm leading-relaxed">Kopi susu gula aren dengan racikan rahasia rumah yang lembut dan creamy.</p>
+          <p class="text-xs text-on-surface-variant leading-relaxed opacity-80">
+            Local botanical syrup &amp; edible petals.
+          </p>
         </div>
 
+        <!-- ITEM 2 -->
         <div class="group">
-          <div class="aspect-[4/5] rounded-3xl bg-stone-100 mb-6 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1974&auto=format&fit=crop" 
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="V60 Manual Brew" />
+          <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-surface-container-low shadow-sm">
+            <img
+              alt="Origin V60"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT2Ui6QtXNl-d6WVJ1JO4s_vIpJ5MCXBSRpfHl8e3Cv9HkZrpwwZ30nFFlZTlM3u7Efgbxx3-EovWkajYr_WZuPjNhJCAuNdjH4d4zZyR_TYq0ilJ-jpdksvwaIRxr-0eXuJttIEXAE3T6tZ3i4y1fbyidwv8OeTrDNgNZ8yLPVAq17PKHyTPAwG06sXekXgW9kQWqP-jjIJNVsURzr3nt-bDOaACvjgGTFEFp4i0zPKlKjZRUBwDbQaxghBYFjk_sotIlch5O-8D1"
+            />
           </div>
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-serif text-xl text-stone-800">V60 Manual Brew</h3>
-            <span class="font-medium text-primary">25k</span>
+          <div class="flex justify-between items-baseline mb-1 gap-3">
+            <h3 class="text-base md:text-lg font-serif text-on-surface leading-snug">Origin V60</h3>
+            <span class="text-primary font-bold text-sm">38k</span>
           </div>
-          <p class="text-stone-400 text-sm leading-relaxed">Pilihan biji kopi single origin lokal dengan profil rasa yang bersih dan kompleks.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-      <div>
-        <div class="flex items-baseline gap-4 mb-8">
-          <h2 class="font-serif text-3xl text-emerald-900 italic">Non-Coffee</h2>
-          <div class="h-px flex-1 bg-stone-200"></div>
-        </div>
-        <div class="space-y-8">
-          <div class="flex justify-between items-center group cursor-default">
-            <div>
-              <h4 class="font-serif text-lg text-stone-800 group-hover:text-primary transition-colors">Matcha Botanical</h4>
-              <p class="text-xs text-stone-400 uppercase tracking-widest mt-1">Authentic Uji Matcha</p>
-            </div>
-            <span class="font-medium text-primary">30k</span>
-          </div>
-          <div class="flex justify-between items-center group cursor-default">
-            <div>
-              <h4 class="font-serif text-lg text-stone-800 group-hover:text-primary transition-colors">Artisan Chocolate</h4>
-              <p class="text-xs text-stone-400 uppercase tracking-widest mt-1">Single Origin Java Cocoa</p>
-            </div>
-            <span class="font-medium text-primary">28k</span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-baseline gap-4 mb-8">
-          <h2 class="font-serif text-3xl text-emerald-900 italic">Snacks</h2>
-          <div class="h-px flex-1 bg-stone-200"></div>
-        </div>
-        <div class="space-y-8">
-          <div class="flex justify-between items-center group cursor-default">
-            <div>
-              <h4 class="font-serif text-lg text-stone-800 group-hover:text-primary transition-colors">Banana Fritters</h4>
-              <p class="text-xs text-stone-400 uppercase tracking-widest mt-1">Pisang Goreng Wijen & Madu</p>
-            </div>
-            <span class="font-medium text-primary">22k</span>
-          </div>
-          <div class="flex justify-between items-center group cursor-default">
-            <div>
-              <h4 class="font-serif text-lg text-stone-800 group-hover:text-primary transition-colors">French Fries</h4>
-              <p class="text-xs text-stone-400 uppercase tracking-widest mt-1">Hand-cut with Herbs</p>
-            </div>
-            <span class="font-medium text-primary">20k</span>
-          </div>
+          <p class="text-xs text-on-surface-variant leading-relaxed opacity-80">
+            Rotating local single origin beans.
+          </p>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="bg-stone-100 pt-20 pb-10 border-t border-stone-200">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
-        <div class="col-span-2 md:col-span-1">
-          <span class="font-serif text-2xl text-primary block mb-6 italic">Manupi.</span>
-          <p class="text-stone-500 text-sm leading-relaxed max-w-[200px]">
-            Menyediakan ruang teduh dan sajian hangat untuk setiap cerita.
-          </p>
-        </div>
-        
-        <div class="flex flex-col gap-4">
-          <span class="uppercase tracking-widest text-[10px] font-bold text-stone-400">Navigasi</span>
-          <a class="text-stone-600 hover:text-primary transition-all text-sm" href="index.html">Beranda</a>
-          <a class="text-primary font-bold transition-all text-sm" href="menu.html">Sajian Tamu</a>
-          <a class="text-stone-600 hover:text-primary transition-all text-sm" href="location.html">Alamat rumah</a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
+    <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
+      <div class="space-y-6">
+        <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
+          <img
+            alt="Manupi Logo"
+            class="h-10 w-auto object-contain"
+            src="assets/images/logo.png"
+          />
+        </a>
 
-        <div class="flex flex-col gap-4">
-          <span class="uppercase tracking-widest text-[10px] font-bold text-stone-400">Media Sosial</span>
-          <a class="text-stone-600 hover:text-primary transition-all text-sm" href="https://www.instagram.com/manupi__" target="_blank">Instagram</a>
-          <a class="text-stone-600 hover:text-primary transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <span class="uppercase tracking-widest text-[10px] font-bold text-stone-400">Kunjungi Kami</span>
-          <p class="text-stone-600 text-sm leading-relaxed">
-            Jl. Urban Botanical No. 12<br/>
-            Samarinda, Kalimantan Timur
-          </p>
-        </div>
+        <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
+          © 2024 Rumah Kopi Manupi Banjarbaru. Crafted for the digital greenhouse.
+        </p>
       </div>
-      
-      <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-stone-200 gap-6">
-        <p class="text-stone-400 text-[10px] uppercase tracking-[0.2em]">&copy; 2024 Rumah Kopi Manupi. All Rights Reserved.</p>
-        <div class="flex gap-8">
-          <span class="text-stone-400 text-[10px] uppercase tracking-[0.2em]">Crafted with heart</span>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="flex flex-col gap-4">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="index.html">Halaman Utama</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm font-bold" href="menu.html">Sajian Tamu</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="location.html">Alamat rumah</a>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="https://wa.me/6281254913064" target="_blank">WhatsApp</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="#">Email</a>
+        </div>
+
+        <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
+          <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
+          <a class="bg-stone-200/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
+            <h5 class="font-serif text-emerald-900 text-sm mb-1">The Greenhouse</h5>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              JL.Irigasi No.08, RT.001/RW.003, Mentaos<br />
+              Kec. Banjarbaru Utara, Kalimantan Selatan 70711
+            </p>
+          </a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
