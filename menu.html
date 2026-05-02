@@ -64,22 +64,44 @@
 
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-    <!-- HERO -->
-    <section class="mb-12 md:mb-16 text-center md:text-left flex flex-col md:flex-row items-center gap-6 md:gap-12">
-      <div class="flex-1 space-y-4">
+    
+    <!-- DAFTAR MENU -->
+    <section class="mb-12 md:mb-16">
+      <!-- Judul Halaman -->
+      <div class="text-center mb-12">
         <span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">RUMAH KOPI MANUPI</span>
-        <h1 class="text-5xl md:text-7xl font-serif text-primary leading-tight">
+        <h1 class="text-4xl md:text-6xl font-serif text-primary leading-tight mt-3">
           Sajian Istimewa Tamu 
         </h1>
       </div>
 
-      <div class="flex-1 w-full md:max-w-md aspect-[4/3] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative group">
-        <img
-          alt="Artisan Coffee"
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeDTDvqIv78nkO0d6f4D-3Z5w9g_1ZOZa3edG8rP7DsjLPWAALyMX26l1w72E0k-ANjCXe5nQczMfUZqrf48Bc5Ifc9jAqQQGW_379b4-28wOyaDSLJ52ekAJbL_C1ZvqB34zFGdGA4Sn1DU6wX_W00LhltUnpIlHrOX7gvSiTFLB23L3PSUBCoLYIobx0pTKi2iCKhyxUVWWhm3GXsuJP2Frsxl_jbVRe53oRKn3dKnToji_bZnCOnxjFoJxOtbegSs_J1Y10AKoW"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-60"></div>
+      <!-- Grid 2 Gambar -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+        
+        <!-- MENU UTAMA -->
+        <div class="flex flex-col items-center group">
+          <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
+          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative">
+            <img
+              alt="Menu Utama Manupi"
+              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              src="assets/images/menu-utama.jpeg"
+            />
+          </div>
+        </div>
+
+        <!-- MENU PROMO -->
+        <div class="flex flex-col items-center group">
+          <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Promo</h2>
+          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative">
+            <img
+              alt="Menu Promo Manupi"
+              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              src="assets/images/menu-promo.jpeg"
+            />
+          </div>
+        </div>
+
       </div>
     </section>
 
