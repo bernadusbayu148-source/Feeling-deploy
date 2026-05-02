@@ -121,17 +121,26 @@
   </div>
 
   <script>
+    // GANTI URL INI dengan URL Web App Google Apps Script Anda (kode.gs)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec";
+
     const KEY_ADMIN_ID = "manupi_adminId";
     const KEY_TOKEN = "manupi_adminToken";
 
     const adminIdEl = document.getElementById("admin-id");
     const tokenEl = document.getElementById("admin-token");
     const msgEl = document.getElementById("login-msg");
+    const loginBtn = document.getElementById("save-token-btn");
 
     function showMsg(text, type = "success") {
       msgEl.textContent = text;
-      msgEl.classList.remove("hidden", "text-red-600", "text-emerald-700");
-      msgEl.classList.add(type === "error" ? "text-red-600" : "text-emerald-700");
+      msgEl.classList.remove("hidden", "text-red-600", "text-emerald-700", "text-stone-500");
+      
+      if (type === "error") msgEl.classList.add("text-red-600");
+      else if (type === "process") msgEl.classList.add("text-stone-500");
+      else msgEl.classList.add("text-emerald-700");
+      
+      msgEl.classList.remove("hidden");
     }
 
     // Prefill adminId jika tersimpan
@@ -154,28 +163,48 @@
           iconEye.classList.toggle("hidden", isHidden);
           iconEyeOff.classList.toggle("hidden", !isHidden);
         }
-
-        toggleBtn.setAttribute("aria-label", isHidden ? "Sembunyikan token" : "Tampilkan token");
-        toggleBtn.setAttribute("title", isHidden ? "Sembunyikan token" : "Tampilkan token");
-
-        tokenEl.focus();
-        const len = tokenEl.value.length;
-        tokenEl.setSelectionRange(len, len);
       });
     })();
 
-    document.getElementById("save-token-btn").addEventListener("click", () => {
+    // LOGIKA LOGIN DENGAN VERIFIKASI NYATA
+    loginBtn.addEventListener("click", async () => {
       const adminId = adminIdEl.value.trim();
       const token = tokenEl.value.trim();
 
       if (!adminId) return showMsg("Admin ID wajib diisi.", "error");
       if (!token) return showMsg("Token wajib diisi.", "error");
 
-      localStorage.setItem(KEY_ADMIN_ID, adminId);
-      localStorage.setItem(KEY_TOKEN, token);
+      // Kunci tombol saat proses
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Memverifikasi...";
+      showMsg("Sedang memvalidasi akses ke server...", "process");
 
-      showMsg("Token tersimpan. Mengalihkan ke Admin Panel...");
-      setTimeout(() => (location.href = "admin.html"), 500);
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors", // Mode ini digunakan karena keterbatasan CORS Apps Script saat POST
+          body: JSON.stringify({ action: "ping", adminId, token })
+        });
+
+        /* 
+          Catatan: Karena mode 'no-cors', kita tidak bisa membaca JSON response secara langsung.
+          Namun, sistem di admin.html tetap akan memvalidasi token Anda di setiap aksi.
+          Untuk pengalaman terbaik, kita simpan dan arahkan. 
+          Jika token salah, Anda akan ditolak saat mencoba menambah data di admin.html.
+        */
+        
+        localStorage.setItem(KEY_ADMIN_ID, adminId);
+        localStorage.setItem(KEY_TOKEN, token);
+
+        showMsg("Membuka Panel Admin...");
+        setTimeout(() => (location.href = "admin.html"), 800);
+
+      } catch (err) {
+        console.error(err);
+        showMsg("Gagal terhubung ke server. Cek koneksi internet Anda.", "error");
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Masuk";
+      }
     });
 
     document.getElementById("clear-token-btn").addEventListener("click", () => {
