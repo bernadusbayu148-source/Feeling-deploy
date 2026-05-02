@@ -7,7 +7,21 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="assets/css/tailwind-config.js"></script>
+  
+  <!-- KONFIGURASI WARNA MANUPI -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#013a13",
+            "primary-container": "#1e5128",
+            "on-primary": "#ffffff"
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
