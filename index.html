@@ -6,13 +6,14 @@
   <title>Rumah Kopi Manupi</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- PENAMBAHAN FONT CHI -->
+  <!-- PERBAIKAN FONT CHI (.otf) -->
   <style>
     @font-face {
       font-family: 'Chi';
-      src: url('assets/fonts/Chi-Regular.ttf') format('truetype'); /* Ubah menjadi .otf jika file Anda berekstensi .otf */
+      src: url('assets/fonts/Chi-Regular.otf') format('opentype'); 
       font-weight: normal;
       font-style: normal;
+      font-display: swap;
     }
   </style>
 
@@ -46,7 +47,7 @@
             "headline": ["Newsreader", "serif"],
             "body": ["Manrope", "sans-serif"],
             "label": ["Manrope", "sans-serif"],
-            "chi": ["Chi", "cursive"] /* Konfigurasi Tailwind untuk Font Chi */
+            "chi": ["Chi", "cursive"]
           }
         },
       },
@@ -110,7 +111,6 @@
         <div class="flex flex-col items-start gap-6">
           <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">Rumah Kopi Manupi</span>
           
-          <!-- PERUBAHAN FONT DAN WARNA -->
           <h1 class="font-chi text-5xl md:text-7xl leading-[0.9] tracking-tight text-white drop-shadow-md">#NgopidiAlam</h1>
           
           <p class="font-body text-base md:text-lg text-secondary max-w-md leading-relaxed">
