@@ -6,8 +6,8 @@
   <title>Rumah Kopi Manupi</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- PERBAIKAN FONT CHI (.otf) -->
   <style>
+    /* FONT CHI */
     @font-face {
       font-family: 'Chi';
       src: url('assets/fonts/Chi-Regular.otf') format('opentype'); 
@@ -15,6 +15,10 @@
       font-style: normal;
       font-display: swap;
     }
+    
+    /* MENYEMBUNYIKAN SCROLLBAR PADA SLIDER AGAR BERSIH */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 
   <script>
@@ -64,11 +68,7 @@
   <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-3 max-w-7xl mx-auto">
       <a class="text-xl font-serif italic text-emerald-900" href="index.html">
-        <img
-          alt="Manupi Logo"
-          class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100"
-          src="assets/images/logo.png"
-        />
+        <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
       <nav class="hidden md:flex items-center gap-6">
@@ -78,11 +78,7 @@
       </nav>
 
       <div class="flex items-center gap-2 md:gap-4">
-        <button
-          id="mobile-menu-btn"
-          aria-label="Toggle mobile menu"
-          class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
-        >
+        <button id="mobile-menu-btn" aria-label="Toggle mobile menu" class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
           <span id="menu-icon" class="material-symbols-outlined text-xl">menu</span>
         </button>
       </div>
@@ -90,10 +86,7 @@
   </header>
 
   <!-- MOBILE MENU -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[89px] md:top-[105px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
-  >
+  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[89px] md:top-[105px] left-0 right-0 z-40 shadow-xl transition-all duration-300">
     <div class="flex flex-col px-8 py-6 gap-6">
       <a href="index.html" class="text-emerald-900 font-bold border-b border-emerald-900/20 pb-2 uppercase tracking-widest text-sm">Halaman Utama</a>
       <a href="menu.html" class="text-stone-500 hover:text-emerald-800 transition-colors border-b border-stone-200 pb-2 uppercase tracking-widest text-sm">Sajian Tamu</a>
@@ -111,14 +104,11 @@
       <div class="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
         <div class="flex flex-col items-start gap-6">
           <span class="font-label uppercase tracking-[0.2em] text-xs text-primary font-bold">Rumah Kopi Manupi</span>
-          
           <h1 class="font-chi text-5xl md:text-7xl leading-[0.9] tracking-tight text-primary drop-shadow-md">#NgopidiAlam</h1>
-          
           <p class="font-body text-base md:text-lg text-primary max-w-md leading-snug">
             Alam menemani, Kopi menyertai,<br />
             Rumah menanti.
           </p>
-          
           <div class="flex gap-4 mt-2">
             <a href="menu.html" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-sm w-fit inline-flex">
               Sajian Tamu <span class="material-symbols-outlined text-sm">arrow_forward</span>
@@ -154,40 +144,49 @@
       </div>
     </section>
 
-    <!-- THE URBAN BOTANICAL SECTION (MODIFIED WITH 4 IMAGES) -->
-    <section class="py-16 px-8 max-w-7xl mx-auto">
+    <!-- SLIDER / CAROUSEL SECTION -->
+    <section class="py-16 px-6 max-w-7xl mx-auto">
       <div class="mb-8">
         <span class="font-label uppercase tracking-widest text-xs text-secondary">Rumah Manupi</span>
         <h2 class="font-serif text-4xl text-primary mt-1">Tempat Singgah & Pulang</h2>
       </div>
       
-      <!-- GRID 4 GAMBAR BARU -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <!-- GAMBAR 1 (Kiri) -->
-        <div class="bg-surface-container-low rounded-2xl relative overflow-hidden group min-h-[300px] md:min-h-[400px]">
-          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/1_WEB_RKM.jpeg" alt="Kembali ke Rumah" />
-        </div>
-        
-        <!-- GAMBAR 2 (Tengah) -->
-        <div class="bg-primary rounded-2xl relative overflow-hidden group min-h-[300px] md:min-h-[400px]">
-          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/2_WEB_RKM.jpeg" alt="Nuansa Rumah Nenek" />
-        </div>
-        
-        <!-- KOLOM KANAN (Gambar 3 & 4) -->
-        <div class="grid grid-rows-2 gap-4">
-          <!-- GAMBAR 3 (Kanan Atas) -->
-          <div class="bg-surface-container-highest rounded-2xl relative overflow-hidden group min-h-[200px]">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/3_WEB_RKM.jpeg" alt="Wadah Tuk Setiap Perbincangan" />
-          </div>
+      <!-- CAROUSEL WRAPPER -->
+      <div class="relative w-full max-w-sm md:max-w-2xl mx-auto overflow-hidden rounded-[2rem] shadow-2xl">
+        <div id="image-carousel" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
           
-          <!-- GAMBAR 4 (Kanan Bawah) -->
-          <div class="bg-surface-container rounded-2xl overflow-hidden relative group min-h-[200px]">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/4_WEB_RKM.jpeg" alt="Rumah Bagi Siapapun" />
+          <!-- Slide 1 -->
+          <div class="min-w-full snap-center flex-shrink-0 relative h-[450px] md:h-[600px]">
+            <img class="w-full h-full object-cover" src="assets/images/1_WEB_RKM.jpeg" alt="Kembali ke Rumah" />
           </div>
+          <!-- Slide 2 -->
+          <div class="min-w-full snap-center flex-shrink-0 relative h-[450px] md:h-[600px]">
+            <img class="w-full h-full object-cover" src="assets/images/2_WEB_RKM.jpeg" alt="Nuansa Rumah Nenek" />
+          </div>
+          <!-- Slide 3 -->
+          <div class="min-w-full snap-center flex-shrink-0 relative h-[450px] md:h-[600px]">
+            <img class="w-full h-full object-cover" src="assets/images/3_WEB_RKM.jpeg" alt="Wadah Perbincangan" />
+          </div>
+          <!-- Slide 4 -->
+          <div class="min-w-full snap-center flex-shrink-0 relative h-[450px] md:h-[600px]">
+            <img class="w-full h-full object-cover" src="assets/images/4_WEB_RKM.jpeg" alt="Rumah Bagi Siapapun" />
+          </div>
+
         </div>
         
+        <!-- DOT INDICATORS -->
+        <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
+           <div class="w-6 h-1.5 rounded-full bg-white/90 transition-all duration-300" id="dot-0"></div>
+           <div class="w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300" id="dot-1"></div>
+           <div class="w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300" id="dot-2"></div>
+           <div class="w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300" id="dot-3"></div>
+        </div>
       </div>
+      
+      <!-- PETUNJUK GESER -->
+      <p class="text-center text-xs text-stone-400 mt-6 font-body uppercase tracking-widest flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-sm">swipe</span> Geser untuk melihat
+      </p>
     </section>
   </main>
 
@@ -196,13 +195,8 @@
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
         <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
-          <img
-            alt="Manupi Logo"
-            class="h-10 w-auto object-contain"
-            src="assets/images/logo.png"
-          />
+          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="assets/images/logo.png" />
         </a>
-
         <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
           © 2026 Rumah Kopi Manupi Banjarbaru Web | Crafted By Senada CreatLabs.
         </p>
@@ -237,7 +231,7 @@
   </footer>
 
   <script>
-    // FUNGSI MOBILE MENU
+    // ---------------- MOBILE MENU ----------------
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const icon = document.getElementById('menu-icon');
@@ -247,7 +241,64 @@
       icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
     });
 
-    // LOGIKA LEADERBOARD & SEARCH
+    // ---------------- CAROUSEL / SLIDER LOGIC ----------------
+    const carousel = document.getElementById('image-carousel');
+    const dots = [
+      document.getElementById('dot-0'), 
+      document.getElementById('dot-1'), 
+      document.getElementById('dot-2'), 
+      document.getElementById('dot-3')
+    ];
+    let currentIndex = 0;
+    let slideTimer;
+
+    // Fungsi update indikator titik
+    function updateDots(index) {
+      dots.forEach((dot, i) => {
+        if(i === index) {
+          dot.classList.remove('bg-white/40', 'w-1.5');
+          dot.classList.add('bg-white/90', 'w-6');
+        } else {
+          dot.classList.add('bg-white/40', 'w-1.5');
+          dot.classList.remove('bg-white/90', 'w-6');
+        }
+      });
+    }
+
+    // Fungsi geser otomatis
+    function autoScroll() {
+      if(!carousel) return;
+      currentIndex++;
+      if (currentIndex > 3) currentIndex = 0; // Kembali ke gambar pertama
+      
+      carousel.scrollTo({
+        left: carousel.clientWidth * currentIndex,
+        behavior: 'smooth'
+      });
+      updateDots(currentIndex);
+    }
+
+    // Update titik indikator saat digeser manual oleh pengunjung
+    carousel.addEventListener('scroll', () => {
+      const scrollPosition = carousel.scrollLeft;
+      const newIndex = Math.round(scrollPosition / carousel.clientWidth);
+      if(newIndex !== currentIndex && newIndex >= 0 && newIndex <= 3) {
+        currentIndex = newIndex;
+        updateDots(currentIndex);
+      }
+    });
+
+    // Jalankan otomatis setiap 3.5 detik
+    slideTimer = setInterval(autoScroll, 3500);
+
+    // Jeda otomatis jika pengunjung sedang menyentuh layar (swipe manual)
+    carousel.addEventListener('touchstart', () => clearInterval(slideTimer), {passive: true});
+    carousel.addEventListener('touchend', () => slideTimer = setInterval(autoScroll, 3500));
+    carousel.addEventListener('mouseenter', () => clearInterval(slideTimer));
+    carousel.addEventListener('mouseleave', () => slideTimer = setInterval(autoScroll, 3500));
+
+
+    // ---------------- LEADERBOARD LOGIC ----------------
     const API_URL = 'https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec?action=publicLeaderboard';
     let allLeaderboardData = [];
 
