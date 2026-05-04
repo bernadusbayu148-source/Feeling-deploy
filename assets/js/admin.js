@@ -83,7 +83,7 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   const res = await callApi("addVisit", { memberId: selectedMemberId, payload: { memberId: selectedMemberId, points: pts, adminId: ADMIN_ID } });
   toggleLoading(false, btn);
 
-  if (res.ok) { pointsInput.value = "1"; await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
+  if (res.ok) { pointsInput.value = ""; await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
 });
 
 // --- TAMBAH MEMBER ---
