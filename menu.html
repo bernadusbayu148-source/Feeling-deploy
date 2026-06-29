@@ -101,28 +101,28 @@
       </div>
 
       <!-- Grid 2 Gambar -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto items-start">
         
-        <!-- MENU UTAMA (SEKARANG DENGAN SLIDER) -->
+        <!-- MENU UTAMA (DENGAN SLIDER YANG LEBIH RAPI) -->
         <div class="flex flex-col items-center group w-full">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
           
-          <!-- CAROUSEL WRAPPER -->
-          <div class="relative w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl">
-            <div id="menu-utama-carousel" class="flex items-center overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
+          <div class="relative w-full">
+            <!-- CAROUSEL WRAPPER -->
+            <div id="menu-utama-carousel" class="flex items-start overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth gap-4 pb-2">
               
               <!-- Foto 1 -->
-              <div class="min-w-full snap-center flex-shrink-0 relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama-1.jpeg')">
-                <img alt="Menu Utama 1" class="w-full h-auto object-cover" src="assets/images/menu-utama-1.jpeg" />
-                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-1.jpeg')">
+                <img alt="Menu Utama 1" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-1.jpeg" />
+                <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
                 </div>
               </div>
 
               <!-- Foto 2 -->
-              <div class="min-w-full snap-center flex-shrink-0 relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama-2.jpeg')">
-                <img alt="Menu Utama 2" class="w-full h-auto object-cover" src="assets/images/menu-utama-2.jpeg" />
-                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-2.jpeg')">
+                <img alt="Menu Utama 2" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-2.jpeg" />
+                <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
                 </div>
               </div>
@@ -130,9 +130,9 @@
             </div>
 
             <!-- DOT INDICATORS -->
-            <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
-               <div class="w-6 h-1.5 rounded-full bg-white/90 transition-all duration-300" id="dot-menu-0"></div>
-               <div class="w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300" id="dot-menu-1"></div>
+            <div class="flex justify-center gap-2 mt-4 pointer-events-none">
+               <div class="w-6 h-1.5 rounded-full bg-primary/80 transition-all duration-300" id="dot-menu-0"></div>
+               <div class="w-1.5 h-1.5 rounded-full bg-primary/30 transition-all duration-300" id="dot-menu-1"></div>
             </div>
           </div>
           
@@ -148,7 +148,7 @@
           <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-promo.jpeg')">
             <img alt="Menu Promo Manupi" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/menu-promo.jpeg" />
              <!-- Indikator klik -->
-             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
             </div>
           </div>
@@ -209,8 +209,8 @@
     </div>
   </footer>
 
+  <!-- SCRIPT -->
   <script src="assets/js/main.js" defer></script>
-  
   <script>
     // ---------------- MOBILE MENU ----------------
     const btn = document.getElementById('mobile-menu-btn');
@@ -267,11 +267,11 @@
         menuDots.forEach((dot, i) => {
           if (dot) {
             if (i === currentIndex) {
-              dot.classList.remove('bg-white/40', 'w-1.5');
-              dot.classList.add('bg-white/90', 'w-6');
+              dot.classList.remove('bg-primary/30', 'w-1.5');
+              dot.classList.add('bg-primary/80', 'w-6');
             } else {
-              dot.classList.add('bg-white/40', 'w-1.5');
-              dot.classList.remove('bg-white/90', 'w-6');
+              dot.classList.add('bg-primary/30', 'w-1.5');
+              dot.classList.remove('bg-primary/80', 'w-6');
             }
           }
         });
