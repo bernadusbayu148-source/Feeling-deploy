@@ -45,15 +45,14 @@
     }
   </script>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-    rel="stylesheet"
-  />
+  <!-- CSS UNTUK HIDE SCROLLBAR PADA SLIDER -->
+  <style>
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
@@ -62,11 +61,7 @@
   <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-3 max-w-7xl mx-auto">
       <a class="text-xl font-serif italic text-emerald-900" href="index.html">
-        <img
-          alt="Manupi Logo"
-          class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100"
-          src="assets/images/logo.png"
-        />
+        <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
       <nav class="hidden md:flex items-center gap-6">
@@ -76,11 +71,7 @@
       </nav>
 
       <div class="flex items-center gap-2 md:gap-4">
-        <button
-          id="mobile-menu-btn"
-          aria-label="Toggle mobile menu"
-          class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer"
-        >
+        <button id="mobile-menu-btn" aria-label="Toggle mobile menu" class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
           <span id="menu-icon" class="material-symbols-outlined text-xl">menu</span>
         </button>
       </div>
@@ -88,10 +79,7 @@
   </header>
 
   <!-- MOBILE MENU -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[89px] md:top-[105px] left-0 right-0 z-40 shadow-xl transition-all duration-300"
-  >
+  <div id="mobile-menu" class="hidden md:hidden bg-stone-50/95 backdrop-blur-xl border-t border-stone-200 fixed top-[89px] md:top-[105px] left-0 right-0 z-40 shadow-xl transition-all duration-300">
     <div class="flex flex-col px-8 py-6 gap-6">
       <a href="index.html" class="text-stone-500 hover:text-emerald-800 transition-colors border-b border-stone-200 pb-2 uppercase tracking-widest text-sm">Halaman Utama</a>
       <a href="menu.html" class="text-emerald-900 font-bold border-b border-emerald-900/20 pb-2 uppercase tracking-widest text-sm">Sajian Tamu</a>
@@ -115,31 +103,50 @@
       <!-- Grid 2 Gambar -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
         
-        <!-- MENU UTAMA -->
-        <div class="flex flex-col items-center group">
+        <!-- MENU UTAMA (SEKARANG DENGAN SLIDER) -->
+        <div class="flex flex-col items-center group w-full">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
-          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama.jpeg')">
-            <img
-              alt="Menu Utama Manupi"
-              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-              src="assets/images/menu-utama.jpeg"
-            />
-            <!-- Indikator klik (Opsional, agar tamu tahu bisa diklik) -->
-            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
+          
+          <!-- CAROUSEL WRAPPER -->
+          <div class="relative w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl">
+            <div id="menu-utama-carousel" class="flex items-center overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
+              
+              <!-- Foto 1 -->
+              <div class="min-w-full snap-center flex-shrink-0 relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama-1.jpeg')">
+                <img alt="Menu Utama 1" class="w-full h-auto object-cover" src="assets/images/menu-utama-1.jpeg" />
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
+                </div>
+              </div>
+
+              <!-- Foto 2 -->
+              <div class="min-w-full snap-center flex-shrink-0 relative cursor-pointer" onclick="bukaModal('assets/images/menu-utama-2.jpeg')">
+                <img alt="Menu Utama 2" class="w-full h-auto object-cover" src="assets/images/menu-utama-2.jpeg" />
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- DOT INDICATORS -->
+            <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
+               <div class="w-6 h-1.5 rounded-full bg-white/90 transition-all duration-300" id="dot-menu-0"></div>
+               <div class="w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300" id="dot-menu-1"></div>
             </div>
           </div>
+          
+          <!-- PETUNJUK GESER -->
+          <p class="text-center text-xs text-stone-400 mt-4 font-body uppercase tracking-widest flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">swipe</span> Geser untuk melihat
+          </p>
         </div>
 
         <!-- MENU PROMO -->
-        <div class="flex flex-col items-center group">
+        <div class="flex flex-col items-center group w-full">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Promo</h2>
           <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-promo.jpeg')">
-            <img
-              alt="Menu Promo Manupi"
-              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-              src="assets/images/menu-promo.jpeg"
-            />
+            <img alt="Menu Promo Manupi" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/menu-promo.jpeg" />
              <!-- Indikator klik -->
              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
@@ -167,13 +174,8 @@
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
         <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
-          <img
-            alt="Manupi Logo"
-            class="h-10 w-auto object-contain"
-            src="assets/images/logo.png"
-          />
+          <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="assets/images/logo.png" />
         </a>
-
         <p class="text-sm text-stone-600 max-w-xs leading-relaxed">
           © 2026 Rumah Kopi Manupi Banjarbaru Web | Crafted By Senada CreatLabs.
         </p>
@@ -209,31 +211,72 @@
 
   <script src="assets/js/main.js" defer></script>
   
-  <!-- SCRIPT UNTUK POPUP GAMBAR -->
   <script>
+    // ---------------- MOBILE MENU ----------------
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('menu-icon');
+
+    if(btn && menu && icon) {
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+      });
+    }
+
+    // ---------------- SCRIPT UNTUK POPUP GAMBAR (MODAL) ----------------
     const modal = document.getElementById('modal-gambar');
     const gambarModal = document.getElementById('gambar-di-modal');
 
-    // Fungsi untuk membuka modal
     function bukaModal(srcGambar) {
-      gambarModal.src = srcGambar;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
-    }
-
-    // Fungsi untuk menutup modal
-    function tutupModal() {
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto'; // Buka kunci scroll
-      gambarModal.src = ''; // Bersihkan src
-    }
-
-    // Event listener untuk klik tombol X atau klik di luar gambar
-    modal.addEventListener('click', function(e) {
-      if (e.target === this || e.target.closest('#tutup-modal')) {
-        tutupModal();
+      if(gambarModal && modal) {
+        gambarModal.src = srcGambar;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
       }
-    });
+    }
+
+    function tutupModal() {
+      if(modal && gambarModal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto'; // Buka kunci scroll
+        gambarModal.src = ''; // Bersihkan src
+      }
+    }
+
+    if(modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this || e.target.closest('#tutup-modal')) {
+          tutupModal();
+        }
+      });
+    }
+
+    // ---------------- LOGIKA SLIDER (CAROUSEL) MENU UTAMA ----------------
+    const menuCarousel = document.getElementById('menu-utama-carousel');
+    const menuDots = [
+      document.getElementById('dot-menu-0'), 
+      document.getElementById('dot-menu-1')
+    ];
+    
+    if (menuCarousel) {
+      menuCarousel.addEventListener('scroll', () => {
+        const scrollPosition = menuCarousel.scrollLeft;
+        const currentIndex = Math.round(scrollPosition / menuCarousel.clientWidth);
+        
+        menuDots.forEach((dot, i) => {
+          if (dot) {
+            if (i === currentIndex) {
+              dot.classList.remove('bg-white/40', 'w-1.5');
+              dot.classList.add('bg-white/90', 'w-6');
+            } else {
+              dot.classList.add('bg-white/40', 'w-1.5');
+              dot.classList.remove('bg-white/90', 'w-6');
+            }
+          }
+        });
+      });
+    }
   </script>
 </body>
 </html>
