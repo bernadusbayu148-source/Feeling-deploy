@@ -24,15 +24,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Ikon Google Material -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
+  
+  <!-- PUSTAKA QR CODE SCANNER -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 
-<body class="bg-background text-on-background font-body min-h-screen">
+<body class="bg-background text-on-background font-body min-h-screen relative">
 
   <script>
     (function () {
@@ -59,35 +62,32 @@
           <p id="admin-email-display" class="text-sm font-medium text-primary">-</p>
         </div>
 
-        <button
-          id="logout-btn"
-          type="button"
-          class="inline-flex items-center justify-center rounded-xl bg-stone-100 px-4 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-200 transition"
-        >
-          Logout
+        <button id="logout-btn" type="button" class="inline-flex items-center justify-center gap-1 rounded-xl bg-stone-100 px-4 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-200 transition">
+          Logout <span class="material-symbols-outlined text-sm">logout</span>
         </button>
       </div>
     </div>
 
     <section id="admin-section" class="space-y-8">
 
+      <!-- BAGIAN PENCARIAN & TOMBOL SCAN -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Cari Member</h2>
-        <div class="relative">
-          <input
-            id="member-search"
-            type="text"
-            placeholder="Ketik nama member..."
-            autocomplete="off"
-            class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0"
-          />
-          <div
-            id="member-suggestions"
-            class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden"
-          ></div>
+        <h2 class="text-2xl font-serif text-primary mb-4">Cari / Scan Kerabat</h2>
+        <div class="flex flex-col md:flex-row gap-3">
+          <div class="relative flex-grow">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+            <input id="member-search" type="text" placeholder="Ketik nama atau ID member..." autocomplete="off" class="w-full rounded-xl border border-stone-200 bg-white pl-12 pr-4 py-4 text-sm focus:border-emerald-700 focus:ring-0 shadow-inner" />
+            <div id="member-suggestions" class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-xl overflow-hidden"></div>
+          </div>
+          
+          <button id="btn-open-scanner" type="button" class="shrink-0 flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98] shadow-md">
+            <span class="material-symbols-outlined">qr_code_scanner</span>
+            <span>Scan QR</span>
+          </button>
         </div>
       </div>
 
+      <!-- KARTU DETAIL MEMBER (Tetap Sama) -->
       <div id="member-detail-section" class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6">
         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
@@ -119,13 +119,7 @@
           <div class="space-y-4">
             <div>
               <label for="visit-points" class="block text-sm font-medium mb-2">Point (Gunakan minus "-" untuk Tukar Poin)</label>
-              <input
-                id="visit-points"
-                type="text"
-                inputmode="text"
-                placeholder="Contoh: 25 atau -50"
-                class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0 font-bold"
-              />
+              <input id="visit-points" type="text" inputmode="text" placeholder="Contoh: 25 atau -50" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0 font-bold" />
             </div>
             <button id="add-visit-btn" type="button" class="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-container transition">
               Simpan Transaksi
@@ -139,8 +133,9 @@
         </div>
       </div>
 
+      <!-- KARTU TAMBAH MEMBER MANUAL -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
-        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member</h2>
+        <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member Manual</h2>
         <div class="space-y-4">
           <input id="member-name" type="text" placeholder="Nama Member" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0" />
           <input id="member-phone" type="text" placeholder="No. WhatsApp (Contoh: 0812...)" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0" />
@@ -153,6 +148,26 @@
     </section>
   </div>
 
+  <!-- MODAL / POPUP QR SCANNER -->
+  <div id="modal-scanner" class="hidden fixed inset-0 z-[100] bg-stone-900/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-[2rem] overflow-hidden shadow-2xl relative">
+      <div class="p-5 border-b border-stone-100 flex justify-between items-center bg-stone-50">
+        <h3 class="text-lg font-bold text-primary tracking-widest uppercase text-xs">Pindai QR Kerabat</h3>
+        <button id="btn-close-scanner" class="text-stone-400 hover:text-red-600 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+      <div class="p-4 bg-black">
+        <!-- Area Render Kamera -->
+        <div id="qr-reader" class="w-full h-auto mx-auto rounded-xl overflow-hidden border border-stone-700"></div>
+      </div>
+      <div class="p-4 text-center bg-stone-50">
+        <p class="text-xs text-stone-500 font-medium">Arahkan kamera ke QR Code di layar HP kerabat.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING GLOBAL -->
   <div id="global-loading" class="hidden fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center">
     <div class="bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center">
       <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -168,6 +183,6 @@
     })();
   </script>
 
-  <script type="module" src="assets/js/admin.js?v=4"></script>
+  <script type="module" src="assets/js/admin.js?v=5"></script>
 </body>
 </html>
