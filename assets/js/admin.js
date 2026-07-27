@@ -138,9 +138,9 @@ document.getElementById("delete-member-btn")?.addEventListener("click", async ()
 document.addEventListener("DOMContentLoaded", refreshMemberList);
 
 // =========================================================
-// LOGIKA QR CODE SCANNER UNTUK ADMIN
+// LOGIKA QR CODE SCANNER UNTUK ADMIN (FIX IOS/SAFARI)
 // =========================================================
-let html5QrcodeScanner = null;
+let html5QrCode = null;
 
 const btnOpenScanner = document.getElementById('btn-open-scanner');
 const btnCloseScanner = document.getElementById('btn-close-scanner');
@@ -151,16 +151,26 @@ if (btnOpenScanner && modalScanner) {
   btnOpenScanner.addEventListener('click', () => {
     modalScanner.classList.remove('hidden');
     
-    // Inisialisasi Scanner dengan sedikit jeda agar modal terbuka sempurna
+    // Beri sedikit jeda animasi modal sebelum memanggil kamera
     setTimeout(() => {
-      if (!html5QrcodeScanner) {
-        html5QrcodeScanner = new Html5QrcodeScanner(
-          "qr-reader", 
-          { fps: 10, qrbox: {width: 250, height: 250}, aspectRatio: 1.0 },
-          false // Set verbose = false agar tidak memenuhi console
-        );
+      if (!html5QrCode) {
+        html5QrCode = new Html5Qrcode("qr-reader");
       }
-      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+      
+      // Paksa menggunakan kamera belakang (environment)
+      html5QrCode.start(
+        { facingMode: "environment" }, 
+        {
+          fps: 10,
+          qrbox: { width: 250, height: 250 },
+          aspectRatio: 1.0
+        },
+        onScanSuccess,
+        onScanFailure
+      ).catch((err) => {
+        console.error("Gagal memulai kamera:", err);
+        alert("Gagal mengakses kamera. Pastikan Anda telah memberikan izin kamera pada browser/pengaturan HP Anda.");
+      });
     }, 300);
   });
 }
@@ -169,8 +179,12 @@ if (btnCloseScanner && modalScanner) {
   // Tutup Modal & Matikan Kamera
   btnCloseScanner.addEventListener('click', () => {
     modalScanner.classList.add('hidden');
-    if (html5QrcodeScanner) {
-      html5QrcodeScanner.clear().catch(error => console.error("Gagal mematikan kamera", error));
+    if (html5QrCode) {
+      html5QrCode.stop().then(() => {
+        html5QrCode.clear();
+      }).catch((err) => {
+        console.error("Gagal mematikan kamera", err);
+      });
     }
   });
 }
@@ -179,29 +193,29 @@ if (btnCloseScanner && modalScanner) {
 function onScanSuccess(decodedText, decodedResult) {
   // 1. Matikan kamera dan tutup modal
   modalScanner.classList.add('hidden');
-  if (html5QrcodeScanner) {
-    html5QrcodeScanner.clear();
+  if (html5QrCode) {
+    html5QrCode.stop().then(() => {
+      html5QrCode.clear();
+    }).catch(err => console.log(err));
   }
 
-  // 2. Cari member berdasarkan decodedText (Member ID yang ada di QR)
+  // 2. Cari member berdasarkan decodedText (Member ID)
   if (searchInput) {
     searchInput.value = decodedText;
     
-    // Paksa sistem membaca inputan seolah-olah kasir mengetiknya
     const event = new Event('input', { bubbles: true });
     searchInput.dispatchEvent(event);
 
-    // 3. (Fitur Tambahan) Langsung buka profil jika Member ID ditemukan persis
     const keyword = decodedText.toLowerCase().trim();
     const foundMember = allMembers.find(m => m.memberId.toLowerCase() === keyword);
     
     if (foundMember) {
        selectMember(foundMember);
+    } else {
+       alert("Member tidak ditemukan dengan ID: " + decodedText);
     }
   }
 }
 
-// Jika gagal/sedang mencari
-function onScanFailure(error) {
-  // Abaikan pesan error secara diam-diam agar tidak menumpuk di console saat proses mencari QR
-}
+// Abaikan error saat proses memindai agar console tidak penuh
+function onScanFailure(error) {}
