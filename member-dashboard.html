@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dasbor Kerabat – Manupi</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- KONFIGURASI WARNA MANUPI -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#013a13",
+            "primary-container": "#1e5128",
+            "on-primary": "#ffffff",
+            "surface-container": "#f0edea",
+            "background": "#fcf9f6",
+            "on-background": "#1c1c1a",
+          },
+          fontFamily: {
+            "headline": ["Newsreader", "serif"],
+            "body": ["Manrope", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+
+  <!-- PROTEKSI HALAMAN (JIKA BELUM LOGIN, LEMPAR KE HALAMAN LOGIN) -->
+  <script>
+    if (!localStorage.getItem("manupi_memberId")) {
+      window.location.href = "member-login.html";
+    }
+  </script>
+
+  <!-- HEADER -->
+  <header class="py-6 px-6 w-full max-w-md mx-auto flex justify-between items-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      Utama
+    </a>
+    
+    <button id="logout-btn" class="inline-flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors text-sm font-bold uppercase tracking-widest cursor-pointer">
+      Keluar <span class="material-symbols-outlined text-lg">logout</span>
+    </button>
+  </header>
+
+  <!-- MAIN DASHBOARD -->
+  <main class="flex-grow flex flex-col items-center px-6 pb-12 w-full max-w-md mx-auto">
+    
+    <!-- KARTU PROFIL -->
+    <div class="bg-primary w-full rounded-[2rem] p-8 text-center text-white shadow-lg relative overflow-hidden mb-6">
+      <!-- Ornamen Dekorasi -->
+      <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-black/20 rounded-full blur-2xl"></div>
+      
+      <div class="relative z-10">
+        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+          <span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.2em] opacity-80 mb-1">ID Kerabat Manupi</p>
+        <h2 id="dash-id" class="text-2xl font-bold tracking-widest mb-4">-</h2>
+        
+        <h1 id="dash-name" class="text-4xl font-serif leading-tight mb-1">-</h1>
+        <p id="dash-phone" class="text-sm opacity-80">-</p>
+      </div>
+    </div>
+
+    <!-- KARTU QR CODE -->
+    <div class="bg-white w-full rounded-[2rem] border border-stone-200 p-8 shadow-sm text-center flex flex-col items-center">
+      <p class="text-xs font-bold text-stone-400 uppercase tracking-widest mb-6">Tunjukkan QR ke Kasir</p>
+      
+      <div class="p-3 border-2 border-dashed border-stone-200 rounded-2xl mb-6 bg-surface-container-low">
+        <!-- GAMBAR QR CODE AKAN MUNCUL DI SINI -->
+        <img id="dash-qr" src="" alt="QR Code Member" class="w-48 h-48 rounded-xl bg-white p-2 shadow-sm" />
+      </div>
+
+      <p class="text-sm text-stone-500 leading-relaxed max-w-[250px]">
+        Gunakan QR Code ini setiap kali Anda bertamu untuk mengumpulkan poin.
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Ambil data dari penyimpanan browser (Local Storage)
+      const memberId = localStorage.getItem("manupi_memberId");
+      const memberName = localStorage.getItem("manupi_memberName");
+      const memberPhone = localStorage.getItem("manupi_memberPhone");
+
+      // 2. Tampilkan data ke layar
+      if (memberId) {
+        document.getElementById('dash-id').textContent = memberId;
+        // Panggil API pembuat QR Code gratis menggunakan Member ID
+        document.getElementById('dash-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${memberId}&color=013a13`;
+      }
+      if (memberName) document.getElementById('dash-name').textContent = memberName;
+      if (memberPhone) document.getElementById('dash-phone').textContent = memberPhone;
+
+      // 3. Logika Tombol Keluar
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        // Hapus semua data sesi
+        localStorage.removeItem("manupi_memberId");
+        localStorage.removeItem("manupi_memberName");
+        localStorage.removeItem("manupi_memberPhone");
+        
+        // Arahkan kembali ke Halaman Utama
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>
