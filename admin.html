@@ -4,73 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel – Manupi</title>
-
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
-  <!-- KONFIGURASI WARNA MANUPI -->
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#013a13",
-            "primary-container": "#1e5128",
-            "on-primary": "#ffffff"
-          }
-        }
-      }
-    }
+    tailwind.config = { theme: { extend: { colors: { "primary": "#013a13", "primary-container": "#1e5128", "on-primary": "#ffffff" } } } }
   </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Ikon Google Material -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="assets/css/style.css" />
-  
-  <!-- PUSTAKA QR CODE SCANNER -->
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
-
 <body class="bg-background text-on-background font-body min-h-screen relative">
-
   <script>
     (function () {
       const adminId = localStorage.getItem("manupi_adminId");
       const token = localStorage.getItem("manupi_adminToken");
-      if (!adminId || !token) {
-        window.location.href = "admin-login.html";
-      }
+      if (!adminId || !token) window.location.href = "admin-login.html";
     })();
   </script>
-
   <div class="max-w-6xl mx-auto px-6 py-10">
     <div class="mb-8">
       <h1 class="text-4xl md:text-5xl font-serif text-primary mb-2">Admin Panel</h1>
-      <p class="text-sm text-stone-500">
-        Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.
-      </p>
+      <p class="text-sm text-stone-500">Cari member, lihat riwayat visit, tambah visit, atau hapus visit/member.</p>
     </div>
-
     <div id="status-bar" class="mb-6 rounded-2xl border border-stone-200 bg-white/80 px-5 py-4">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <p class="text-xs uppercase tracking-[0.18em] text-stone-400">Admin</p>
           <p id="admin-email-display" class="text-sm font-medium text-primary">-</p>
         </div>
-
         <button id="logout-btn" type="button" class="inline-flex items-center justify-center gap-1 rounded-xl bg-stone-100 px-4 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-200 transition">
           Logout <span class="material-symbols-outlined text-sm">logout</span>
         </button>
       </div>
     </div>
-
     <section id="admin-section" class="space-y-8">
-
-      <!-- BAGIAN PENCARIAN & TOMBOL SCAN -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
         <h2 class="text-2xl font-serif text-primary mb-4">Cari / Scan Kerabat</h2>
         <div class="flex flex-col md:flex-row gap-3">
@@ -79,26 +48,27 @@
             <input id="member-search" type="text" placeholder="Ketik nama atau ID member..." autocomplete="off" class="w-full rounded-xl border border-stone-200 bg-white pl-12 pr-4 py-4 text-sm focus:border-emerald-700 focus:ring-0 shadow-inner" />
             <div id="member-suggestions" class="hidden absolute z-20 mt-2 w-full rounded-2xl border border-stone-200 bg-white shadow-xl overflow-hidden"></div>
           </div>
-          
           <button id="btn-open-scanner" type="button" class="shrink-0 flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98] shadow-md">
             <span class="material-symbols-outlined">qr_code_scanner</span>
             <span>Scan QR</span>
           </button>
         </div>
       </div>
-
-      <!-- KARTU DETAIL MEMBER (Tetap Sama) -->
       <div id="member-detail-section" class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6">
         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
             <h2 id="detail-member-name" class="text-3xl font-serif text-primary">-</h2>
             <p id="detail-member-phone" class="text-sm text-stone-500 mt-1">-</p>
           </div>
-          <button id="delete-member-btn" type="button" class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition">
-            Hapus Member
-          </button>
+          <div class="flex gap-2">
+            <button id="reset-pin-btn" type="button" class="inline-flex items-center justify-center rounded-xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600 transition">
+              Reset PIN
+            </button>
+            <button id="delete-member-btn" type="button" class="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 transition">
+              Hapus Member
+            </button>
+          </div>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4 text-center">
             <p class="text-xs uppercase tracking-[0.18em] text-stone-400 mb-2">Total Point</p>
@@ -113,7 +83,6 @@
             <p id="detail-status" class="text-2xl font-semibold text-primary">Aktif</p>
           </div>
         </div>
-
         <div class="rounded-2xl border border-stone-200 bg-stone-50 p-5">
           <h3 class="text-xl font-serif text-primary mb-2">Tambah / Tukar Poin</h3>
           <div class="space-y-4">
@@ -126,14 +95,11 @@
             </button>
           </div>
         </div>
-
         <div>
           <h3 class="text-2xl font-serif text-primary mb-3">Riwayat Visit</h3>
           <div id="member-log-list" class="space-y-3"></div>
         </div>
       </div>
-
-      <!-- KARTU TAMBAH MEMBER MANUAL -->
       <div class="rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm">
         <h2 class="text-2xl font-serif text-primary mb-2">Tambah Member Manual</h2>
         <div class="space-y-4">
@@ -144,11 +110,8 @@
           </button>
         </div>
       </div>
-
     </section>
   </div>
-
-  <!-- MODAL / POPUP QR SCANNER -->
   <div id="modal-scanner" class="hidden fixed inset-0 z-[100] bg-stone-900/90 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-md rounded-[2rem] overflow-hidden shadow-2xl relative">
       <div class="p-5 border-b border-stone-100 flex justify-between items-center bg-stone-50">
@@ -158,7 +121,6 @@
         </button>
       </div>
       <div class="p-4 bg-black">
-        <!-- Area Render Kamera -->
         <div id="qr-reader" class="w-full h-auto mx-auto rounded-xl overflow-hidden border border-stone-700"></div>
       </div>
       <div class="p-4 text-center bg-stone-50">
@@ -166,15 +128,12 @@
       </div>
     </div>
   </div>
-
-  <!-- LOADING GLOBAL -->
   <div id="global-loading" class="hidden fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center">
     <div class="bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center">
       <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
       <p class="mt-4 text-primary font-bold text-sm tracking-widest uppercase">Mohon Tunggu...</p>
     </div>
   </div>
-
   <script>
     (function () {
       const adminId = localStorage.getItem("manupi_adminId");
@@ -182,7 +141,6 @@
       if (el) el.textContent = adminId || "-";
     })();
   </script>
-
-  <script type="module" src="assets/js/admin.js?v=5"></script>
+  <script type="module" src="assets/js/admin.js?v=6"></script>
 </body>
 </html>
