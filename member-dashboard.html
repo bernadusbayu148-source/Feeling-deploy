@@ -4,123 +4,162 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dasbor Kerabat – Manupi</title>
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
-  <!-- KONFIGURASI WARNA MANUPI -->
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#013a13",
-            "primary-container": "#1e5128",
-            "on-primary": "#ffffff",
-            "surface-container": "#f0edea",
-            "background": "#fcf9f6",
-            "on-background": "#1c1c1a",
-          },
-          fontFamily: {
-            "headline": ["Newsreader", "serif"],
-            "body": ["Manrope", "sans-serif"],
-          }
-        }
-      }
-    }
+    tailwind.config = { theme: { extend: { colors: { "primary": "#013a13", "primary-container": "#1e5128", "on-primary": "#ffffff", "surface-container": "#f0edea", "background": "#fcf9f6", "on-background": "#1c1c1a", }, fontFamily: { "headline": ["Newsreader", "serif"], "body": ["Manrope", "sans-serif"], } } } }
   </script>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
 </head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col relative">
 
-<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
-
-  <!-- PROTEKSI HALAMAN (JIKA BELUM LOGIN, LEMPAR KE HALAMAN LOGIN) -->
   <script>
-    if (!localStorage.getItem("manupi_memberId")) {
-      window.location.href = "member-login.html";
-    }
+    if (!localStorage.getItem("manupi_memberId")) window.location.href = "member-login.html";
   </script>
 
   <!-- HEADER -->
   <header class="py-6 px-6 w-full max-w-md mx-auto flex justify-between items-center">
     <a href="index.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
-      <span class="material-symbols-outlined text-lg">arrow_back</span>
-      Utama
+      <span class="material-symbols-outlined text-lg">arrow_back</span> Utama
     </a>
-    
     <button id="logout-btn" class="inline-flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors text-sm font-bold uppercase tracking-widest cursor-pointer">
       Keluar <span class="material-symbols-outlined text-lg">logout</span>
     </button>
   </header>
 
-  <!-- MAIN DASHBOARD -->
-  <main class="flex-grow flex flex-col items-center px-6 pb-12 w-full max-w-md mx-auto">
+  <main class="flex-grow flex flex-col px-6 pb-12 w-full max-w-md mx-auto">
     
-    <!-- KARTU PROFIL -->
-    <div class="bg-primary w-full rounded-[2rem] p-8 text-center text-white shadow-lg relative overflow-hidden mb-6">
-      <!-- Ornamen Dekorasi -->
-      <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-      <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-black/20 rounded-full blur-2xl"></div>
-      
-      <div class="relative z-10">
-        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
-          <span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
-        </div>
-        <p class="text-[10px] uppercase tracking-[0.2em] opacity-80 mb-1">ID Kerabat Manupi</p>
-        <h2 id="dash-id" class="text-2xl font-bold tracking-widest mb-4">-</h2>
-        
-        <h1 id="dash-name" class="text-4xl font-serif leading-tight mb-1">-</h1>
-        <p id="dash-phone" class="text-sm opacity-80">-</p>
+    <!-- HEADER PROFIL -->
+    <div class="text-center mb-6">
+      <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
+        <span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
+      </div>
+      <h1 id="dash-name" class="text-3xl font-serif text-primary leading-tight mb-1">-</h1>
+      <p id="dash-id" class="text-sm font-bold text-stone-500 uppercase tracking-[0.2em]">-</p>
+    </div>
+
+    <!-- KARTU POIN & PERINGKAT -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
+        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Total Poin</p>
+        <p id="dash-points" class="text-3xl font-bold text-primary">-</p>
+      </div>
+      <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
+        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Peringkat</p>
+        <p id="dash-rank" class="text-3xl font-bold text-primary">-</p>
       </div>
     </div>
 
-    <!-- KARTU QR CODE -->
-    <div class="bg-white w-full rounded-[2rem] border border-stone-200 p-8 shadow-sm text-center flex flex-col items-center">
-      <p class="text-xs font-bold text-stone-400 uppercase tracking-widest mb-6">Tunjukkan QR ke Kasir</p>
-      
-      <div class="p-3 border-2 border-dashed border-stone-200 rounded-2xl mb-6 bg-surface-container-low">
-        <!-- GAMBAR QR CODE AKAN MUNCUL DI SINI -->
-        <img id="dash-qr" src="" alt="QR Code Member" class="w-48 h-48 rounded-xl bg-white p-2 shadow-sm" />
+    <!-- TOMBOL TAMPILKAN QR -->
+    <button id="btn-show-qr" class="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm flex justify-center items-center gap-2 mb-8 shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
+       <span class="material-symbols-outlined">qr_code</span> Tampilkan QR Code
+    </button>
+
+    <!-- RIWAYAT KUNJUNGAN -->
+    <div>
+      <h3 class="text-xl font-serif text-primary mb-4 border-b border-stone-200 pb-2">Riwayat Kunjungan</h3>
+      <div id="dash-history" class="space-y-3">
+         <p class="text-sm text-stone-400 italic text-center py-4 flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Memuat riwayat...
+         </p>
       </div>
-
-      <p class="text-sm text-stone-500 leading-relaxed max-w-[250px]">
-        Gunakan QR Code ini setiap kali Anda bertamu untuk mengumpulkan poin.
-      </p>
     </div>
-
   </main>
 
+  <!-- MODAL POPUP QR CODE -->
+  <div id="modal-qr" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-all duration-300">
+     <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
+        <button id="btn-close-qr" class="absolute top-5 right-5 text-stone-400 hover:text-red-600 transition-colors">
+           <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+        <h2 class="text-2xl font-serif text-primary mb-1 mt-2">QR Kerabat</h2>
+        <p class="text-xs text-stone-500 mb-6 uppercase tracking-widest">Tunjukkan ke Kasir</p>
+        
+        <div class="inline-block p-4 border-2 border-dashed border-stone-200 rounded-2xl bg-surface-container-low mb-4">
+           <img id="qr-image" src="" alt="QR Code" class="w-48 h-48 mix-blend-multiply" />
+        </div>
+        
+        <p id="modal-name" class="text-lg font-serif text-primary">-</p>
+        <p id="modal-id" class="text-sm font-bold text-stone-800 uppercase tracking-widest"></p>
+     </div>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Ambil data dari penyimpanan browser (Local Storage)
+    // ====================================================================
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP BARU ANDA
+    // ====================================================================
+    const SCRIPT_URL = "URL_WEB_APP_ANDA"; 
+
+    document.addEventListener('DOMContentLoaded', async () => {
       const memberId = localStorage.getItem("manupi_memberId");
       const memberName = localStorage.getItem("manupi_memberName");
-      const memberPhone = localStorage.getItem("manupi_memberPhone");
 
-      // 2. Tampilkan data ke layar
       if (memberId) {
         document.getElementById('dash-id').textContent = memberId;
-        // Panggil API pembuat QR Code gratis menggunakan Member ID
-        document.getElementById('dash-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${memberId}&color=013a13`;
+        document.getElementById('modal-id').textContent = memberId;
+        document.getElementById('qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${memberId}&color=013a13`;
       }
-      if (memberName) document.getElementById('dash-name').textContent = memberName;
-      if (memberPhone) document.getElementById('dash-phone').textContent = memberPhone;
+      if (memberName) {
+        document.getElementById('dash-name').textContent = memberName;
+        document.getElementById('modal-name').textContent = memberName;
+      }
 
-      // 3. Logika Tombol Keluar
+      // Logika Popup QR
+      const btnShowQr = document.getElementById('btn-show-qr');
+      const btnCloseQr = document.getElementById('btn-close-qr');
+      const modalQr = document.getElementById('modal-qr');
+
+      btnShowQr.addEventListener('click', () => modalQr.classList.remove('hidden'));
+      btnCloseQr.addEventListener('click', () => modalQr.classList.add('hidden'));
+
+      // Logout
       document.getElementById('logout-btn').addEventListener('click', () => {
-        // Hapus semua data sesi
-        localStorage.removeItem("manupi_memberId");
-        localStorage.removeItem("manupi_memberName");
-        localStorage.removeItem("manupi_memberPhone");
-        
-        // Arahkan kembali ke Halaman Utama
+        localStorage.clear();
         window.location.href = "index.html";
       });
+
+      // Ambil Data Dashboard (Point, Peringkat, Riwayat)
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST', body: JSON.stringify({ action: "getMemberDashboard", payload: { memberId } })
+        });
+        const result = await response.json();
+        
+        if (result.ok) {
+          const { rank, totalPoints, history } = result.data;
+          
+          document.getElementById('dash-points').textContent = totalPoints;
+          document.getElementById('dash-rank').textContent = rank;
+
+          const historyContainer = document.getElementById('dash-history');
+          if (history && history.length > 0) {
+            historyContainer.innerHTML = history.map(v => {
+              const isMinus = v.pointsAdded < 0;
+              const dateObj = new Date(v.timestamp);
+              // Format Tampilan Tanggal & Waktu
+              const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+              const timeStr = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+              return `
+              <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 shadow-sm">
+                <div>
+                  <p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? 'Tukar ' : 'Tambah '}${Math.abs(v.pointsAdded)} Poin</p>
+                  <p class="text-[10px] text-stone-400 mt-0.5">${dateStr} • Pukul ${timeStr}</p>
+                </div>
+                <div class="bg-stone-50 px-3 py-1.5 rounded-lg border border-stone-100">
+                  <span class="material-symbols-outlined text-sm ${isMinus ? 'text-red-500' : 'text-emerald-600'}">${isMinus ? 'remove' : 'add'}</span>
+                </div>
+              </div>`;
+            }).join("");
+          } else {
+            historyContainer.innerHTML = "<p class='text-sm text-stone-400 italic text-center py-4'>Belum ada riwayat kunjungan.</p>";
+          }
+        }
+      } catch (e) {
+        document.getElementById('dash-history').innerHTML = "<p class='text-sm text-red-500 text-center py-4'>Gagal memuat riwayat.</p>";
+      }
     });
   </script>
 </body>
