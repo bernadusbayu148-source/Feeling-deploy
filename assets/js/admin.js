@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwT_rKDh46m7hyl0wWlcN2TflR-2VoOjRsYpIZT51-jxodGTUJgNYYrCsG5QKGK5Q4cbw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec";
 
 const ADMIN_ID = localStorage.getItem("manupi_adminId");
 const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
@@ -136,3 +136,72 @@ document.getElementById("delete-member-btn")?.addEventListener("click", async ()
 });
 
 document.addEventListener("DOMContentLoaded", refreshMemberList);
+
+// =========================================================
+// LOGIKA QR CODE SCANNER UNTUK ADMIN
+// =========================================================
+let html5QrcodeScanner = null;
+
+const btnOpenScanner = document.getElementById('btn-open-scanner');
+const btnCloseScanner = document.getElementById('btn-close-scanner');
+const modalScanner = document.getElementById('modal-scanner');
+
+if (btnOpenScanner && modalScanner) {
+  // Buka Modal & Nyalakan Kamera
+  btnOpenScanner.addEventListener('click', () => {
+    modalScanner.classList.remove('hidden');
+    
+    // Inisialisasi Scanner dengan sedikit jeda agar modal terbuka sempurna
+    setTimeout(() => {
+      if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner(
+          "qr-reader", 
+          { fps: 10, qrbox: {width: 250, height: 250}, aspectRatio: 1.0 },
+          false // Set verbose = false agar tidak memenuhi console
+        );
+      }
+      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    }, 300);
+  });
+}
+
+if (btnCloseScanner && modalScanner) {
+  // Tutup Modal & Matikan Kamera
+  btnCloseScanner.addEventListener('click', () => {
+    modalScanner.classList.add('hidden');
+    if (html5QrcodeScanner) {
+      html5QrcodeScanner.clear().catch(error => console.error("Gagal mematikan kamera", error));
+    }
+  });
+}
+
+// Jika QR Code berhasil dipindai
+function onScanSuccess(decodedText, decodedResult) {
+  // 1. Matikan kamera dan tutup modal
+  modalScanner.classList.add('hidden');
+  if (html5QrcodeScanner) {
+    html5QrcodeScanner.clear();
+  }
+
+  // 2. Cari member berdasarkan decodedText (Member ID yang ada di QR)
+  if (searchInput) {
+    searchInput.value = decodedText;
+    
+    // Paksa sistem membaca inputan seolah-olah kasir mengetiknya
+    const event = new Event('input', { bubbles: true });
+    searchInput.dispatchEvent(event);
+
+    // 3. (Fitur Tambahan) Langsung buka profil jika Member ID ditemukan persis
+    const keyword = decodedText.toLowerCase().trim();
+    const foundMember = allMembers.find(m => m.memberId.toLowerCase() === keyword);
+    
+    if (foundMember) {
+       selectMember(foundMember);
+    }
+  }
+}
+
+// Jika gagal/sedang mencari
+function onScanFailure(error) {
+  // Abaikan pesan error secara diam-diam agar tidak menumpuk di console saat proses mencari QR
+}
