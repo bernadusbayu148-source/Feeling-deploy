@@ -6,7 +6,6 @@ const ADMIN_TOKEN = localStorage.getItem("manupi_adminToken");
 let allMembers = [];
 let selectedMemberId = null;
 
-// --- LOADING UI ---
 function toggleLoading(isLoading, btn) {
   const overlay = document.getElementById("global-loading");
   if (isLoading) {
@@ -65,13 +64,11 @@ window.promptEditVisit = async function(visitId, oldPoints) {
   if (res.ok) { await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
 };
 
-// --- TAMBAH VISIT & REDEEM ---
 document.getElementById("add-visit-btn")?.addEventListener("click", async () => {
   const pointsInput = document.getElementById("visit-points");
   const btn = document.getElementById("add-visit-btn");
   if (!selectedMemberId) return;
 
-  // Pembersihan Input Teks agar hanya angka & minus
   let cleanVal = pointsInput.value.replace(/[^0-9-]/g, '');
   const pts = parseInt(cleanVal);
   if (isNaN(pts) || pts === 0) { alert("Masukkan angka valid!"); return; }
@@ -86,7 +83,6 @@ document.getElementById("add-visit-btn")?.addEventListener("click", async () => 
   if (res.ok) { pointsInput.value = ""; await refreshMemberList(); const updated = allMembers.find(m => m.memberId === selectedMemberId); if (updated) selectMember(updated); }
 });
 
-// --- TAMBAH MEMBER ---
 document.getElementById("add-member-btn")?.addEventListener("click", async () => {
   const nameEl = document.getElementById("member-name"), phoneEl = document.getElementById("member-phone"), btn = document.getElementById("add-member-btn");
   if (!nameEl.value || !phoneEl.value) return;
@@ -96,7 +92,24 @@ document.getElementById("add-member-btn")?.addEventListener("click", async () =>
   if (res.ok) { nameEl.value = ""; phoneEl.value = ""; await refreshMemberList(); alert("Member didaftarkan!"); } else { alert(res.error); }
 });
 
-// --- PENCARIAN & SELEKSI ---
+// --- RESET PIN ---
+document.getElementById("reset-pin-btn")?.addEventListener("click", async () => {
+  if (!selectedMemberId) return;
+  const confirmReset = confirm("Yakin ingin mereset PIN member ini? \n\nSetelah direset, beritahu member untuk membuat PIN baru melalui menu 'Klaim Akun Lama'.");
+  
+  if (confirmReset) {
+    toggleLoading(true);
+    const res = await callApi("resetPin", { payload: { memberId: selectedMemberId } });
+    toggleLoading(false);
+    
+    if (res.ok) {
+      alert("PIN berhasil direset! Silakan arahkan member untuk melakukan Klaim Akun.");
+    } else {
+      alert("Gagal mereset PIN: " + res.error);
+    }
+  }
+});
+
 const searchInput = document.getElementById("member-search"), suggestionsEl = document.getElementById("member-suggestions");
 searchInput?.addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase().trim();
@@ -137,85 +150,46 @@ document.getElementById("delete-member-btn")?.addEventListener("click", async ()
 
 document.addEventListener("DOMContentLoaded", refreshMemberList);
 
-// =========================================================
-// LOGIKA QR CODE SCANNER UNTUK ADMIN (FIX IOS/SAFARI)
-// =========================================================
+// QR Scanner
 let html5QrCode = null;
-
 const btnOpenScanner = document.getElementById('btn-open-scanner');
 const btnCloseScanner = document.getElementById('btn-close-scanner');
 const modalScanner = document.getElementById('modal-scanner');
 
 if (btnOpenScanner && modalScanner) {
-  // Buka Modal & Nyalakan Kamera
   btnOpenScanner.addEventListener('click', () => {
     modalScanner.classList.remove('hidden');
-    
-    // Beri sedikit jeda animasi modal sebelum memanggil kamera
     setTimeout(() => {
-      if (!html5QrCode) {
-        html5QrCode = new Html5Qrcode("qr-reader");
-      }
-      
-      // Paksa menggunakan kamera belakang (environment)
+      if (!html5QrCode) html5QrCode = new Html5Qrcode("qr-reader");
       html5QrCode.start(
         { facingMode: "environment" }, 
-        {
-          fps: 10,
-          qrbox: { width: 250, height: 250 },
-          aspectRatio: 1.0
-        },
+        { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 },
         onScanSuccess,
         onScanFailure
-      ).catch((err) => {
-        console.error("Gagal memulai kamera:", err);
-        alert("Gagal mengakses kamera. Pastikan Anda telah memberikan izin kamera pada browser/pengaturan HP Anda.");
-      });
+      ).catch((err) => { alert("Gagal mengakses kamera."); });
     }, 300);
   });
 }
 
 if (btnCloseScanner && modalScanner) {
-  // Tutup Modal & Matikan Kamera
   btnCloseScanner.addEventListener('click', () => {
     modalScanner.classList.add('hidden');
     if (html5QrCode) {
-      html5QrCode.stop().then(() => {
-        html5QrCode.clear();
-      }).catch((err) => {
-        console.error("Gagal mematikan kamera", err);
-      });
+      html5QrCode.stop().then(() => html5QrCode.clear()).catch(err => console.log(err));
     }
   });
 }
 
-// Jika QR Code berhasil dipindai
-function onScanSuccess(decodedText, decodedResult) {
-  // 1. Matikan kamera dan tutup modal
+function onScanSuccess(decodedText) {
   modalScanner.classList.add('hidden');
   if (html5QrCode) {
-    html5QrCode.stop().then(() => {
-      html5QrCode.clear();
-    }).catch(err => console.log(err));
+    html5QrCode.stop().then(() => html5QrCode.clear()).catch(err => console.log(err));
   }
-
-  // 2. Cari member berdasarkan decodedText (Member ID)
   if (searchInput) {
     searchInput.value = decodedText;
-    
-    const event = new Event('input', { bubbles: true });
-    searchInput.dispatchEvent(event);
-
-    const keyword = decodedText.toLowerCase().trim();
-    const foundMember = allMembers.find(m => m.memberId.toLowerCase() === keyword);
-    
-    if (foundMember) {
-       selectMember(foundMember);
-    } else {
-       alert("Member tidak ditemukan dengan ID: " + decodedText);
-    }
+    searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    const foundMember = allMembers.find(m => m.memberId.toLowerCase() === decodedText.toLowerCase().trim());
+    if (foundMember) selectMember(foundMember);
   }
 }
-
-// Abaikan error saat proses memindai agar console tidak penuh
-function onScanFailure(error) {}
+function onScanFailure() {}
