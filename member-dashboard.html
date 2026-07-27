@@ -13,18 +13,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
   <style>
-    /* Animasi Banner Ultah */
     @keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(0); } }
     .animate-bounce-slow { animation: bounce-slow 3s infinite ease-in-out; }
   </style>
 </head>
 <body class="bg-background text-on-background font-body min-h-screen flex flex-col relative pb-12">
-
   <script>
     if (!localStorage.getItem("manupi_memberId")) window.location.href = "member-login.html";
   </script>
 
-  <!-- BANNER ULANG TAHUN (Sembunyi by default) -->
   <div id="birthday-banner" class="hidden w-full bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 text-amber-900 py-3 px-6 shadow-md text-center relative overflow-hidden">
     <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
     <div class="relative z-10 flex items-center justify-center gap-3 animate-bounce-slow">
@@ -36,7 +33,6 @@
     </div>
   </div>
 
-  <!-- HEADER -->
   <header class="py-6 px-6 w-full max-w-md mx-auto flex justify-between items-center">
     <a href="index.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
       <span class="material-symbols-outlined text-lg">arrow_back</span> Utama
@@ -47,8 +43,6 @@
   </header>
 
   <main class="flex-grow flex flex-col px-6 w-full max-w-md mx-auto">
-    
-    <!-- HEADER PROFIL -->
     <div class="text-center mb-6">
       <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-md relative">
         <span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
@@ -56,7 +50,6 @@
       <h1 id="dash-name" class="text-3xl font-serif text-primary leading-tight mb-1">-</h1>
       <p id="dash-id" class="text-sm font-bold text-stone-500 uppercase tracking-[0.2em] mb-3">-</p>
       
-      <!-- INFO KONTAK & ULTAH -->
       <div class="flex items-center justify-center gap-4 text-xs font-bold text-stone-400 uppercase tracking-widest">
         <div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call</span> <span id="dash-phone">-</span></div>
         <div class="w-1 h-1 bg-stone-300 rounded-full"></div>
@@ -66,7 +59,6 @@
       </div>
     </div>
 
-    <!-- KARTU POIN & PERINGKAT -->
     <div class="grid grid-cols-2 gap-4 mb-6">
       <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
         <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Total Poin</p>
@@ -78,12 +70,10 @@
       </div>
     </div>
 
-    <!-- TOMBOL TAMPILKAN QR -->
     <button id="btn-show-qr" class="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm flex justify-center items-center gap-2 mb-8 shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
        <span class="material-symbols-outlined">qr_code</span> Tampilkan QR Code
     </button>
 
-    <!-- RIWAYAT KUNJUNGAN -->
     <div>
       <h3 class="text-xl font-serif text-primary mb-4 border-b border-stone-200 pb-2">Riwayat Kunjungan</h3>
       <div id="dash-history" class="space-y-3">
@@ -94,7 +84,6 @@
     </div>
   </main>
 
-  <!-- MODAL POPUP QR CODE -->
   <div id="modal-qr" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-all duration-300">
      <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
         <button id="btn-close-qr" class="absolute top-5 right-5 text-stone-400 hover:text-red-600 transition-colors">
@@ -102,17 +91,14 @@
         </button>
         <h2 class="text-2xl font-serif text-primary mb-1 mt-2">QR Kerabat</h2>
         <p class="text-xs text-stone-500 mb-6 uppercase tracking-widest">Tunjukkan ke Kasir</p>
-        
         <div class="inline-block p-4 border-2 border-dashed border-stone-200 rounded-2xl bg-surface-container-low mb-4">
            <img id="qr-image" src="" alt="QR Code" class="w-48 h-48 mix-blend-multiply" />
         </div>
-        
         <p id="modal-name" class="text-lg font-serif text-primary">-</p>
         <p id="modal-id" class="text-sm font-bold text-stone-800 uppercase tracking-widest"></p>
      </div>
   </div>
 
-  <!-- MODAL INPUT ULANG TAHUN -->
   <div id="modal-birthday" class="hidden fixed inset-0 z-[110] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6">
     <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 text-center relative shadow-2xl">
       <button id="btn-close-bday" class="absolute top-4 right-4 text-stone-400 hover:text-red-600 transition-colors">
@@ -123,11 +109,8 @@
       </div>
       <h2 class="text-xl font-serif text-primary mb-1">Kapan Ulang Tahunmu?</h2>
       <p class="text-xs text-stone-500 mb-5 leading-relaxed">Masukkan tanggal lahir untuk mengklaim voucher khusus di hari ulang tahunmu. <b class="text-red-500">Perhatian: Tanggal tidak dapat diubah setelah disimpan.</b></p>
-      
       <input type="date" id="input-bday" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none mb-4 font-bold text-stone-700" />
-      
       <p id="bday-msg" class="text-xs text-center hidden font-medium mb-3"></p>
-      
       <button id="btn-save-bday" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
         Simpan Tanggal
       </button>
@@ -135,17 +118,12 @@
   </div>
 
   <script>
-    // ====================================================================
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP BARU ANDA (YANG SUDAH DI DEPLOY ULANG)
-    // ====================================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec"; 
-
     let globalVisitHistory = [];
     const memberId = localStorage.getItem("manupi_memberId");
 
     document.addEventListener('DOMContentLoaded', async () => {
       const memberName = localStorage.getItem("manupi_memberName");
-
       if (memberId) {
         document.getElementById('dash-id').textContent = memberId;
         document.getElementById('modal-id').textContent = memberId;
@@ -156,13 +134,11 @@
         document.getElementById('modal-name').textContent = memberName;
       }
 
-      // UI Toggles
       document.getElementById('btn-show-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.remove('hidden'));
       document.getElementById('btn-close-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.add('hidden'));
       document.getElementById('btn-close-bday').addEventListener('click', () => document.getElementById('modal-birthday').classList.add('hidden'));
       document.getElementById('logout-btn').addEventListener('click', () => { localStorage.clear(); window.location.href = "index.html"; });
 
-      // Load Data
       await fetchDashboardData();
     });
 
@@ -172,15 +148,12 @@
           method: 'POST', body: JSON.stringify({ action: "getMemberDashboard", payload: { memberId } })
         });
         const result = await response.json();
-        
         if (result.ok) {
           const { rank, totalPoints, history, phone, birthday } = result.data;
-          
           document.getElementById('dash-points').textContent = totalPoints;
           document.getElementById('dash-rank').textContent = rank;
           document.getElementById('dash-phone').textContent = phone || "-";
 
-          // Logika Ulang Tahun
           const bdayDisplay = document.getElementById('dash-birthday');
           if (birthday) {
             const bDate = new Date(birthday);
@@ -188,7 +161,6 @@
             bdayDisplay.classList.remove('text-amber-600', 'cursor-pointer', 'hover:underline');
             bdayDisplay.classList.add('text-stone-500');
             
-            // Cek apakah hari ini ulang tahun
             const today = new Date();
             if (bDate.getDate() === today.getDate() && bDate.getMonth() === today.getMonth()) {
               document.getElementById('birthday-banner').classList.remove('hidden');
@@ -197,35 +169,28 @@
             bdayDisplay.addEventListener('click', () => document.getElementById('modal-birthday').classList.remove('hidden'));
           }
 
-          // Render Riwayat
           globalVisitHistory = history || [];
           renderHistory(false);
-          
         } else {
           document.getElementById('dash-history').innerHTML = `<p class='text-sm text-red-500 text-center py-4'>Error: ${result.error}</p>`;
         }
       } catch (e) {
-        document.getElementById('dash-history').innerHTML = "<p class='text-sm text-red-500 text-center py-4'>Gagal memuat data. Periksa URL API.</p>";
+        document.getElementById('dash-history').innerHTML = "<p class='text-sm text-red-500 text-center py-4'>Gagal memuat data.</p>";
       }
     }
 
-    // FUNGSI RENDER RIWAYAT KUNJUNGAN
     function renderHistory(showAll) {
       const container = document.getElementById('dash-history');
       if (globalVisitHistory.length === 0) {
         container.innerHTML = "<p class='text-sm text-stone-400 italic text-center py-4'>Belum ada riwayat kunjungan.</p>";
         return;
       }
-
-      // Batasi tampilan awal hanya 4 riwayat terbaru
       const displayData = showAll ? globalVisitHistory : globalVisitHistory.slice(0, 4);
-      
       let html = displayData.map(v => {
         const isMinus = v.pointsAdded < 0;
         const dateObj = new Date(v.timestamp);
         const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         const timeStr = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
         return `
         <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 shadow-sm">
           <div>
@@ -238,43 +203,32 @@
         </div>`;
       }).join("");
 
-      // Tambahkan tombol lihat semua / persedikit
       if (!showAll && globalVisitHistory.length > 4) {
         html += `<button onclick="renderHistory(true)" class="w-full text-center text-xs font-bold text-primary mt-4 py-2 hover:underline tracking-widest uppercase">Lihat Semua Riwayat (${globalVisitHistory.length})</button>`;
       } else if (showAll && globalVisitHistory.length > 4) {
         html += `<button onclick="renderHistory(false)" class="w-full text-center text-xs font-bold text-stone-400 mt-4 py-2 hover:underline tracking-widest uppercase">Tampilkan Sedikit</button>`;
       }
-
       container.innerHTML = html;
     }
 
-    // FUNGSI SIMPAN ULANG TAHUN
     document.getElementById('btn-save-bday').addEventListener('click', async function() {
       const bdayVal = document.getElementById('input-bday').value;
       const msgEl = document.getElementById('bday-msg');
-      
       if (!bdayVal) {
         msgEl.textContent = "Silakan pilih tanggal.";
         msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
         return;
       }
-
-      this.disabled = true;
-      this.innerHTML = "Menyimpan...";
-      
+      this.disabled = true; this.innerHTML = "Menyimpan...";
       try {
         const response = await fetch(SCRIPT_URL, {
           method: 'POST', body: JSON.stringify({ action: "setBirthday", payload: { memberId: memberId, birthdayDate: bdayVal } })
         });
         const result = await response.json();
-        
         if (result.ok) {
           msgEl.textContent = "Berhasil disimpan!";
           msgEl.className = "text-xs text-center font-medium mb-3 text-primary block";
-          setTimeout(() => {
-            document.getElementById('modal-birthday').classList.add('hidden');
-            window.location.reload(); // Muat ulang untuk mengecek status ulang tahun
-          }, 1000);
+          setTimeout(() => { document.getElementById('modal-birthday').classList.add('hidden'); window.location.reload(); }, 1000);
         } else {
           msgEl.textContent = result.error;
           msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
