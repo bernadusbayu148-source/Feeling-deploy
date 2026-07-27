@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klaim & Daftar Kerabat – Manupi</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- KONFIGURASI WARNA MANUPI -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#013a13",
+            "primary-container": "#1e5128",
+            "on-primary": "#ffffff",
+            "surface-container": "#f0edea",
+            "background": "#fcf9f6",
+            "on-background": "#1c1c1a",
+          },
+          fontFamily: {
+            "headline": ["Newsreader", "serif"],
+            "body": ["Manrope", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+
+  <style>
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="py-6 px-6 w-full max-w-md mx-auto">
+    <a href="member-login.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      Kembali ke Login
+    </a>
+  </header>
+
+  <!-- MAIN AREA -->
+  <main class="flex-grow flex items-center justify-center px-6 pb-12">
+    <div class="w-full max-w-md">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-serif text-primary mb-2">Akses Kerabat</h1>
+        <p class="text-sm text-stone-500 leading-relaxed">
+          Klaim akun lama Anda atau daftar sebagai kerabat baru Manupi.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-[2rem] border border-stone-200 p-6 md:p-8 shadow-sm">
+        
+        <!-- TABS -->
+        <div class="flex border-b border-stone-200 mb-6">
+          <button id="tab-claim" class="flex-1 pb-3 text-sm font-bold text-primary border-b-2 border-primary transition-all">
+            Klaim Akun
+          </button>
+          <button id="tab-register" class="flex-1 pb-3 text-sm font-bold text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-all">
+            Daftar Baru
+          </button>
+        </div>
+
+        <!-- FORM KLAIM AKUN (MEMBER LAMA) -->
+        <div id="form-claim" class="space-y-5 block">
+          <p class="text-xs text-stone-500 text-center mb-4">Khusus pelanggan yang sudah terdaftar di kasir Manupi.</p>
+          
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">No. WhatsApp Terdaftar</label>
+            <input id="claim-phone" type="number" placeholder="Contoh: 0812..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Buat PIN Baru (6 Angka)</label>
+            <input id="claim-pin" type="password" placeholder="Buat PIN rahasia..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Konfirmasi PIN</label>
+            <input id="claim-pin-confirm" type="password" placeholder="Ulangi PIN di atas..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+
+          <button id="btn-claim" type="button" class="w-full mt-2 rounded-xl bg-primary px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98]">
+            Klaim Akun Saya
+          </button>
+        </div>
+
+        <!-- FORM DAFTAR BARU (MEMBER BARU) -->
+        <div id="form-register" class="space-y-5 hidden">
+          <p class="text-xs text-stone-500 text-center mb-4">Bergabung menjadi kerabat Manupi untuk kumpulkan poin.</p>
+          
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Nama Lengkap</label>
+            <input id="reg-name" type="text" placeholder="Nama Anda..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">No. WhatsApp Aktif</label>
+            <input id="reg-phone" type="number" placeholder="Contoh: 0812..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Buat PIN (6 Angka)</label>
+            <input id="reg-pin" type="password" placeholder="Buat PIN rahasia..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Konfirmasi PIN</label>
+            <input id="reg-pin-confirm" type="password" placeholder="Ulangi PIN di atas..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+          </div>
+
+          <button id="btn-register" type="button" class="w-full mt-2 rounded-xl bg-stone-800 px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-stone-900 transition-all active:scale-[0.98]">
+            Daftar Kerabat
+          </button>
+        </div>
+
+        <!-- PESAN SISTEM -->
+        <p id="system-msg" class="text-xs text-center hidden font-medium mt-4 px-2"></p>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ====================================================================
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP DARI APPS SCRIPT UJI COBA
+    // ====================================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec"; 
+
+    // Elemen Tab
+    const tabClaim = document.getElementById('tab-claim');
+    const tabRegister = document.getElementById('tab-register');
+    const formClaim = document.getElementById('form-claim');
+    const formRegister = document.getElementById('form-register');
+    const msgEl = document.getElementById('system-msg');
+
+    // Fungsi Ganti Tab
+    tabClaim.addEventListener('click', () => {
+      formClaim.classList.remove('hidden'); formClaim.classList.add('block');
+      formRegister.classList.remove('block'); formRegister.classList.add('hidden');
+      tabClaim.className = "flex-1 pb-3 text-sm font-bold text-primary border-b-2 border-primary transition-all";
+      tabRegister.className = "flex-1 pb-3 text-sm font-bold text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-all";
+      msgEl.classList.add('hidden');
+    });
+
+    tabRegister.addEventListener('click', () => {
+      formRegister.classList.remove('hidden'); formRegister.classList.add('block');
+      formClaim.classList.remove('block'); formClaim.classList.add('hidden');
+      tabRegister.className = "flex-1 pb-3 text-sm font-bold text-primary border-b-2 border-primary transition-all";
+      tabClaim.className = "flex-1 pb-3 text-sm font-bold text-stone-400 border-b-2 border-transparent hover:text-stone-600 transition-all";
+      msgEl.classList.add('hidden');
+    });
+
+    // Fungsi Pesan
+    function showMsg(text, type = "success") {
+      msgEl.textContent = text;
+      msgEl.className = "text-xs text-center font-medium mt-4 px-2 " + (type === "error" ? "text-red-600" : type === "process" ? "text-stone-500 animate-pulse" : "text-primary");
+      msgEl.classList.remove("hidden");
+    }
+
+    // Fungsi Kirim Data ke Server
+    async function sendRequest(action, payload, btnElement, btnText) {
+      btnElement.disabled = true;
+      btnElement.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg align-middle mr-2">progress_activity</span> Memproses...';
+      showMsg("Menghubungi server Manupi...", "process");
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: action, payload: payload })
+        });
+        const result = await response.json();
+
+        if (result.ok) {
+          showMsg("Berhasil! Mengalihkan ke halaman Login...", "success");
+          setTimeout(() => { window.location.href = "member-login.html"; }, 1500);
+        } else {
+          showMsg(result.error || "Terjadi kesalahan.", "error");
+          btnElement.disabled = false;
+          btnElement.textContent = btnText;
+        }
+      } catch (error) {
+        showMsg("Gangguan jaringan. Silakan coba lagi.", "error");
+        btnElement.disabled = false;
+        btnElement.textContent = btnText;
+      }
+    }
+
+    // Aksi Klik Klaim Akun
+    document.getElementById('btn-claim').addEventListener('click', function() {
+      const phone = document.getElementById('claim-phone').value.trim();
+      const newPin = document.getElementById('claim-pin').value.trim();
+      const confirmPin = document.getElementById('claim-pin-confirm').value.trim();
+
+      if (!phone || !newPin || !confirmPin) return showMsg("Semua kolom wajib diisi.", "error");
+      if (newPin.length < 6) return showMsg("PIN minimal 6 karakter.", "error");
+      if (newPin !== confirmPin) return showMsg("Konfirmasi PIN tidak cocok.", "error");
+
+      sendRequest("claimAccount", { phone, newPin }, this, "Klaim Akun Saya");
+    });
+
+    // Aksi Klik Daftar Baru
+    document.getElementById('btn-register').addEventListener('click', function() {
+      const name = document.getElementById('reg-name').value.trim();
+      const phone = document.getElementById('reg-phone').value.trim();
+      const pin = document.getElementById('reg-pin').value.trim();
+      const confirmPin = document.getElementById('reg-pin-confirm').value.trim();
+
+      if (!name || !phone || !pin || !confirmPin) return showMsg("Semua kolom wajib diisi.", "error");
+      if (pin.length < 6) return showMsg("PIN minimal 6 karakter.", "error");
+      if (pin !== confirmPin) return showMsg("Konfirmasi PIN tidak cocok.", "error");
+
+      sendRequest("registerMember", { name, phone, pin }, this, "Daftar Kerabat");
+    });
+  </script>
+</body>
+</html>
