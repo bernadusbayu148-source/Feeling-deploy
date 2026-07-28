@@ -1,45 +1,71 @@
 <!DOCTYPE html>
-<html class="light" lang="id">
+<html class="light" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Alamat Rumah - Rumah Kopi Manupi</title>
+  <title>Rumah Kami - Rumah Manupi</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- KONFIGURASI WARNA MANUPI (Ditanam langsung agar tidak gagal dimuat) -->
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary": "#013a13",
+            "tertiary-fixed": "#cbedb4",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#1e5128",
+            "surface-container-low": "#f6f3f0",
+            "surface-bright": "#fcf9f6",
+            "primary-fixed": "#b8f1b9",
             "surface-variant": "#e5e2df",
-            "secondary": "#6d5b4c",
+            "outline-variant": "#c1c9bd",
+            "primary": "#013a13",
+            "secondary-fixed": "#f6decb",
+            "surface-container-highest": "#e5e2df",
+            "on-background": "#1c1c1a",
+            "primary-container": "#1e5128",
+            "on-primary": "#ffffff",
+            "surface-container": "#f0edea",
+            "surface": "#fcf9f6",
             "background": "#fcf9f6",
+            "on-surface": "#1c1c1a",
+            "secondary": "#6d5b4c"
           },
           fontFamily: {
             "headline": ["Newsreader", "serif"],
             "body": ["Manrope", "sans-serif"],
             "label": ["Manrope", "sans-serif"],
+            "chi": ["Chi", "cursive"]
           }
         },
       },
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="assets/css/style.css" rel="stylesheet" />
 </head>
 
-<body class="bg-background text-on-background font-body antialiased">
-  
+<body class="bg-background text-on-background">
+
   <!-- HEADER -->
   <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-[100] border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-3 max-w-7xl mx-auto">
-      
-      <!-- BAGIAN KIRI (LOGO) -->
       <a class="text-xl font-serif italic text-emerald-900 shrink-0" href="index.html">
         <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
-      <!-- BAGIAN TENGAH (NAVIGASI DESKTOP) -->
+      <!-- NAVIGASI DESKTOP -->
       <nav class="hidden md:flex items-center gap-6">
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Halaman Utama</a>
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Sajian Tamu</a>
@@ -48,7 +74,6 @@
 
       <!-- BAGIAN KANAN (AKUN & MENU MOBILE) -->
       <div class="flex items-center gap-2 md:gap-4 shrink-0 relative z-[110]">
-        
         <!-- WRAPPER PROFIL DROPDOWN -->
         <div class="relative inline-block text-left">
           <button id="profile-menu-btn" type="button" class="flex items-center gap-2 p-2 rounded-full hover:bg-emerald-50/50 transition-all text-emerald-900 border border-emerald-900/10 cursor-pointer relative z-20">
@@ -58,13 +83,11 @@
 
           <!-- KOTAK DROPDOWN MENU -->
           <div id="profile-dropdown" class="hidden absolute right-0 mt-3 w-48 origin-top-right rounded-2xl bg-white shadow-xl ring-1 ring-stone-900/10 focus:outline-none z-[120] overflow-hidden border border-stone-100 transition-all">
-            
             <div id="menu-guest" class="py-2 block">
               <p class="px-4 py-2 text-[10px] text-stone-400 uppercase tracking-widest border-b border-stone-50 mb-1">Akses Kerabat</p>
               <a href="member-login.html" class="block px-4 py-2.5 text-sm text-stone-700 hover:bg-emerald-50 hover:text-primary font-bold transition-colors">Masuk (Login)</a>
               <a href="member-register.html" class="block px-4 py-2.5 text-sm text-stone-600 hover:bg-stone-50 transition-colors">Klaim Akun Lama</a>
             </div>
-
             <div id="menu-logged-in" class="py-2 hidden">
               <p class="px-4 py-2 text-[10px] text-stone-400 uppercase tracking-widest border-b border-stone-50 mb-1">Profil Saya</p>
               <a href="member-dashboard.html" class="block px-4 py-2.5 text-sm text-primary hover:bg-emerald-50 font-bold transition-colors">Dasbor & QR Code</a>
@@ -90,58 +113,91 @@
     </div>
   </div>
 
-  <main class="max-w-3xl mx-auto px-6 py-12">
-    
-    <div class="text-center mb-10">
-      <span class="font-label uppercase tracking-widest text-xs text-secondary">RUMAH KOPI MANUPI</span>
-      <h1 class="font-serif text-4xl text-primary mt-2">Bertamu ke Rumah</h1>
-    </div>
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 md:px-8 pt-12 md:pt-20">
+    <!-- HERO TITLE -->
+    <header class="mb-16 md:mb-24">
+      <span class="uppercase tracking-widest text-xs text-primary mb-4 block font-semibold">
+        RUMAH KOPI MANUPI
+      </span>
 
-    <!-- Gambar Halaman Depan -->
-    <div class="w-full rounded-[2rem] overflow-hidden shadow-lg border border-stone-100 mb-8">
-       <img src="assets/images/1_WEB_RKM.jpeg" alt="Suasana Depan Rumah Kopi Manupi" class="w-full h-auto object-cover max-h-96" />
-    </div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl tracking-tight text-primary leading-none font-serif">
+        Bertamu ke Rumah<br />
+      </h1>
+    </header>
 
-    <div class="space-y-8">
-      <!-- Info Alamat -->
-      <div>
-        <h2 class="font-serif text-2xl text-primary mb-3">Alamat Rumah</h2>
-        <p class="text-stone-600 leading-relaxed text-sm md:text-base">
-          JL.Irigasi No.08, RT.001/RW.003, Mentaos,<br/>
-          Kec. Banjarbaru Utara, Kota Banjar Baru,<br/>
-          Kalimantan Selatan 70711
-        </p>
+    <!-- IMAGE + INFO -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <!-- IMAGE -->
+      <div class="lg:col-span-7 rounded-3xl overflow-hidden bg-surface-container-low shadow-sm">
+        <img
+          alt="Manupi Storefront"
+          class="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
+          src="assets/images/lokasi.jpeg"
+        />
       </div>
 
-      <!-- Info Jam -->
-      <div class="border-y border-stone-200 py-6 flex justify-between items-center">
-        <h2 class="font-serif text-2xl text-primary">Jam Bertamu</h2>
-        <div class="text-right">
-          <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">SETIAP HARI</p>
-          <p class="font-bold text-emerald-900 mt-1">07:15 — 23:00</p>
+      <!-- DETAILS -->
+      <div class="lg:col-span-5 flex flex-col justify-between py-2 md:py-4">
+        <div>
+          <div class="space-y-12">
+            <section>
+              <h2 class="text-3xl font-serif text-primary mb-4">Alamat Rumah</h2>
+              <p class="text-lg text-primary leading-relaxed max-w-sm">
+                JL.Irigasi No.08, RT.001/RW.003, Mentaos,<br />
+                Kec. Banjarbaru Utara, Kota Banjar Baru,<br />
+                Kalimantan Selatan 70711
+              </p>
+            </section>
+
+            <section>
+              <h2 class="text-3xl font-serif text-primary mb-4">Jam Bertamu</h2>
+              <ul class="space-y-3">
+                <li class="flex justify-between items-center pb-3 border-b border-outline-variant/20">
+                  <span class="uppercase tracking-widest text-xs text-primary">
+                    Setiap Hari
+                  </span>
+                  <span class="text-primary font-bold">07:15 — 23:00</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <div class="mt-12 lg:mt-10">
+          <a
+            class="group w-full py-6 px-8 bg-primary text-on-primary rounded-xl flex items-center justify-between hover:bg-primary-container transition-all duration-300 shadow-[0_32px_64px_-12px_rgba(1,58,19,0.06)]"
+            href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="uppercase tracking-widest text-sm font-bold">Rute Via Google Maps</span>
+            <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">
+              arrow_forward
+            </span>
+          </a>
         </div>
       </div>
+    </div>
 
-      <!-- Tombol Maps -->
-      <a href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank" class="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm flex justify-between items-center px-6 shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
-        <span>RUTE VIA GOOGLE MAPS</span>
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-
-      <!-- Gambar / Iframe Map -->
-      <div class="w-full rounded-[2rem] overflow-hidden shadow-md border border-stone-100 mt-6 relative h-64 bg-stone-200">
-         <a href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
-           <img src="assets/images/map-preview.jpeg" alt="Peta Lokasi Rumah Kopi Manupi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-           <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
-             Open in Maps <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-           </div>
-         </a>
+    <!-- MAP -->
+    <div class="mt-12 lg:mt-24">
+      <div class="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-lg border border-outline-variant/20 bg-surface-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3448.5322065425835!2d114.83996257426622!3d-3.4312830417314215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de681a21af17945%3A0xbe34c7ad9e43a3de!2sRumah%20Kopi%20Manupi!5e1!3m2!1sen!2sus!4v1777974336731!5m2!1sen!2sus" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 relative z-10">
+  <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
         <a href="index.html" class="text-xl font-serif text-emerald-900 opacity-60 inline-block">
@@ -155,9 +211,9 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a class="text-stone-600 hover:underline transition-all text-sm" href="index.html">Halaman Utama</a>
-          <a class="text-stone-600 hover:underline transition-all text-sm" href="menu.html">Sajian Tamu</a>
-          <a class="text-emerald-800 font-bold hover:underline transition-all text-sm" href="location.html">Alamat rumah</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="index.html">Halaman Utama</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm" href="menu.html">Sajian Tamu</a>
+          <a class="text-emerald-800 hover:underline transition-all text-sm font-bold" href="location.html">Alamat rumah</a>
         </div>
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
@@ -178,16 +234,18 @@
     </div>
   </footer>
 
+  <!-- JS -->
+  <script src="assets/js/main.js" defer></script>
   <script>
     // ---------------- MOBILE MENU LOGIC ----------------
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const icon = document.getElementById('menu-icon');
 
-    if(btn && menu) {
+    if(btn && menu && icon) {
       btn.addEventListener('click', () => {
         menu.classList.toggle('hidden');
-        if(icon) icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+        icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
       });
     }
 
