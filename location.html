@@ -207,17 +207,6 @@
   <!-- SCRIPT -->
   <script src="assets/js/main.js" defer></script>
   <script>
-    // ---------------- MOBILE MENU LOGIC (VARIABLE DIUBAH) ----------------
-    const mobileBtnEl = document.getElementById('mobile-menu-btn');
-    const mobileMenuEl = document.getElementById('mobile-menu');
-    const mobileIconEl = document.getElementById('menu-icon');
-
-    if(mobileBtnEl && mobileMenuEl && mobileIconEl) {
-      mobileBtnEl.addEventListener('click', () => {
-        mobileMenuEl.classList.toggle('hidden');
-        mobileIconEl.textContent = mobileMenuEl.classList.contains('hidden') ? 'menu' : 'close';
-      });
-    }
 
     // ---------------- LOGIKA DROPDOWN PROFIL (VARIABLE DIUBAH) ----------------
     const profBtnEl = document.getElementById('profile-menu-btn');
