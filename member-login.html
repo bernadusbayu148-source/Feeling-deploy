@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masuk Kerabat – Manupi</title>
+  <title>Akses Kerabat – Manupi</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- KONFIGURASI WARNA MANUPI -->
   <script>
     tailwind.config = {
       theme: {
@@ -30,173 +28,218 @@
     }
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
-
+  
   <style>
-    /* CSS sederhana untuk menyembunyikan panah pada input number */
+    /* Hilangkan panah atas/bawah pada input number */
     input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; margin: 0; 
+    }
     input[type=number] { -moz-appearance: textfield; }
   </style>
 </head>
 
-<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col relative">
 
-  <!-- HEADER SIMPLE -->
+  <!-- HEADER -->
   <header class="py-6 px-6 w-full max-w-md mx-auto">
     <a href="index.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
       <span class="material-symbols-outlined text-lg">arrow_back</span>
-      Halaman Utama
+      Kembali ke Utama
     </a>
   </header>
 
-  <!-- MAIN LOGIN AREA -->
+  <!-- KONTEN UTAMA -->
   <main class="flex-grow flex items-center justify-center px-6 pb-12">
     <div class="w-full max-w-md">
       
-      <!-- LOGO & TITLE -->
-      <div class="text-center mb-10">
-        <img alt="Manupi Logo" class="h-16 mx-auto mb-6 object-contain" src="assets/images/logo.png" onerror="this.style.display='none'" />
-        <h1 class="text-4xl font-serif text-primary mb-2">Masuk Ruang Tamu</h1>
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-serif text-primary mb-2">Akses Kerabat</h1>
         <p class="text-sm text-stone-500 leading-relaxed">
-          Masukkan nomor WhatsApp dan PIN Anda untuk melihat ID Kerabat dan Riwayat Kunjungan.
+          Masuk untuk melihat perolehan poin dan akses QR Code kerabat Manupi Anda.
         </p>
       </div>
 
-      <!-- FORM -->
-      <div class="bg-white rounded-[2rem] border border-stone-200 p-6 md:p-8 shadow-sm">
+      <div class="bg-white rounded-[2rem] border border-stone-200 p-6 md:p-8 shadow-sm relative">
         <div class="space-y-5">
-          
-          <!-- No WhatsApp -->
           <div>
-            <label for="member-phone" class="block text-xs uppercase tracking-widest font-bold text-stone-400 mb-2">No. WhatsApp</label>
-            <input id="member-phone" type="number" placeholder="Contoh: 0812..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+            <label for="login-phone" class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">No. WhatsApp</label>
+            <input id="login-phone" type="number" placeholder="Contoh: 08123456789" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
           </div>
 
-          <!-- PIN -->
           <div>
-            <label for="member-pin" class="block text-xs uppercase tracking-widest font-bold text-stone-400 mb-2">PIN Rahasia</label>
-            <div class="relative">
-              <input id="member-pin" type="password" placeholder="Masukkan PIN..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 pr-12 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
-              <button id="toggle-pin-visibility" type="button" class="absolute inset-y-0 right-0 flex items-center justify-center px-4 text-stone-400 hover:text-stone-700">
-                <span id="icon-eye" class="material-symbols-outlined text-xl">visibility</span>
-              </button>
-            </div>
+            <label for="login-pin" class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">PIN Rahasia (6 Angka)</label>
+            <input id="login-pin" type="password" placeholder="Masukkan PIN Anda..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
           </div>
 
-          <!-- Pesan Error/Sukses -->
-          <p id="login-msg" class="text-xs text-center hidden font-medium px-2"></p>
+          <!-- PESAN SISTEM (Loading / Error Ringan) -->
+          <p id="system-msg" class="text-xs text-center hidden font-medium mt-2 px-2"></p>
 
-          <!-- Button Login -->
-          <button id="login-btn" type="button" class="w-full mt-2 rounded-xl bg-primary px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98]">
+          <button id="btn-login" type="button" class="w-full mt-2 rounded-xl bg-primary px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98]">
             Masuk Kerabat
           </button>
           
+          <p class="text-xs text-center text-stone-400 font-medium mt-4">
+            Belum buat PIN? <a href="member-register.html" class="text-primary hover:underline font-bold">Klaim Akun Lama di sini</a>
+          </p>
         </div>
       </div>
-
-      <!-- LINK DAFTAR / KLAIM AKUN -->
-      <div class="mt-8 text-center">
-        <p class="text-sm text-stone-500 mb-2">Belum memiliki PIN atau Akun baru?</p>
-        <a href="member-register.html" class="text-sm font-bold text-primary hover:underline uppercase tracking-widest inline-flex items-center gap-1">
-          Klaim / Daftar Akun <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
-      </div>
-
     </div>
   </main>
 
+  <!-- ========================================== -->
+  <!-- MODAL 1: SALAH PIN 3X (BAHASA GAUL) -->
+  <!-- ========================================== -->
+  <div id="modal-wrong-pin" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-opacity">
+    <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
+      <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-3xl">sentiment_dissatisfied</span>
+      </div>
+      <h2 class="text-2xl font-serif text-primary mb-2">Waduh, Lupa PIN ya? 😅</h2>
+      <p class="text-sm text-stone-500 mb-6 leading-relaxed">
+        Udah 3x salah masukin PIN nih, bestie. Biar aman, mending kamu langsung gas ke <b>Kasir Manupi</b> aja buat minta reset PIN. Santai, abis direset nanti kamu tinggal bikin PIN baru lagi lewat menu Klaim Akun. Yuk bisa yuk!
+      </p>
+      <button id="btn-close-wrong-pin" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
+        Oke, Otw Kasir! 🏃💨
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 2: NOMOR BELUM TERDAFTAR -->
+  <!-- ========================================== -->
+  <div id="modal-not-registered" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-opacity">
+    <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
+      <div class="w-16 h-16 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-3xl">person_off</span>
+      </div>
+      <h2 class="text-2xl font-serif text-primary mb-2">Belum Terdaftar Nih! 🧐</h2>
+      <p class="text-sm text-stone-500 mb-6 leading-relaxed">
+        Nomor WhatsApp kamu belum ada di sistem kita nih. Biar bisa kumpulin poin dan dapetin promo seru, daftar dulu yuk ke Kasir Manupi pas kamu main ke sini!
+      </p>
+      <button id="btn-close-not-registered" class="w-full bg-stone-200 text-stone-700 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-stone-300 transition-all">
+        Siap, Paham!
+      </button>
+    </div>
+  </div>
+
   <script>
     // ====================================================================
-    // GANTI URL DI BAWAH INI DENGAN URL WEB APP DARI APPS SCRIPT UJI COBA
+    // GANTI URL DI BAWAH INI DENGAN URL WEB APP BARU ANDA
     // ====================================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec"; 
+
+    // Variabel untuk melacak kesalahan PIN
+    let failedAttempts = 0;
+    let lastAttemptPhone = "";
+
+    const msgEl = document.getElementById('system-msg');
     
-    // Konfigurasi Penyimpanan Lokal (Local Storage)
-    const KEY_MEMBER_ID = "manupi_memberId";
-    const KEY_MEMBER_NAME = "manupi_memberName";
-    const KEY_MEMBER_PHONE = "manupi_memberPhone";
-
-    const phoneEl = document.getElementById("member-phone");
-    const pinEl = document.getElementById("member-pin");
-    const msgEl = document.getElementById("login-msg");
-    const loginBtn = document.getElementById("login-btn");
-    const toggleEyeBtn = document.getElementById("toggle-pin-visibility");
-    const iconEye = document.getElementById("icon-eye");
-
-    // Fungsi Toggle Tampil PIN
-    toggleEyeBtn.addEventListener("click", () => {
-      if (pinEl.type === "password") {
-        pinEl.type = "text";
-        iconEye.textContent = "visibility_off";
-      } else {
-        pinEl.type = "password";
-        iconEye.textContent = "visibility";
-      }
-    });
-
-    // Fungsi Tampil Pesan
+    // Fungsi Menampilkan Pesan Sistem Ringan
     function showMsg(text, type = "success") {
       msgEl.textContent = text;
-      if(type === "error") {
-        msgEl.className = "text-xs text-center font-medium px-2 text-red-600";
-      } else if (type === "process") {
-        msgEl.className = "text-xs text-center font-medium px-2 text-stone-500 animate-pulse";
-      } else {
-        msgEl.className = "text-xs text-center font-medium px-2 text-primary";
-      }
+      msgEl.className = "text-xs text-center font-medium mt-2 px-2 " + 
+        (type === "error" ? "text-red-600" : type === "process" ? "text-stone-500 animate-pulse" : "text-primary");
       msgEl.classList.remove("hidden");
     }
 
-    // Aksi Klik Tombol Login
-    loginBtn.addEventListener("click", async () => {
-      const phone = phoneEl.value.trim();
-      const pin = pinEl.value.trim();
+    // Fungsi Buka/Tutup Modal
+    function toggleModal(modalId, show) {
+      const modal = document.getElementById(modalId);
+      if (show) {
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
 
-      if (!phone || !pin) return showMsg("Nomor WhatsApp dan PIN wajib diisi.", "error");
+    // Tombol Tutup Modal
+    document.getElementById('btn-close-wrong-pin').addEventListener('click', () => {
+      toggleModal('modal-wrong-pin', false);
+      document.getElementById('login-pin').value = ''; // Kosongkan PIN
+    });
+    
+    document.getElementById('btn-close-not-registered').addEventListener('click', () => {
+      toggleModal('modal-not-registered', false);
+      document.getElementById('login-phone').value = ''; // Kosongkan Nomor
+      document.getElementById('login-pin').value = ''; 
+    });
 
-      // Mengubah state tombol saat memproses
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg align-middle mr-2">progress_activity</span> Memproses...';
-      showMsg("Menghubungi server Manupi...", "process");
+    // Aksi Tombol Login
+    document.getElementById('btn-login').addEventListener('click', async function() {
+      const phoneInput = document.getElementById('login-phone').value.trim();
+      const pinInput = document.getElementById('login-pin').value.trim();
+
+      if (!phoneInput || !pinInput) {
+        return showMsg("Nomor WhatsApp dan PIN wajib diisi.", "error");
+      }
+
+      // Reset hitungan jika pengguna mencoba nomor lain
+      if (phoneInput !== lastAttemptPhone) {
+        failedAttempts = 0;
+        lastAttemptPhone = phoneInput;
+      }
+
+      this.disabled = true;
+      this.innerHTML = '<span class="material-symbols-outlined animate-spin align-middle mr-2 text-sm">progress_activity</span> Memproses...';
+      showMsg("Mencocokkan data...", "process");
 
       try {
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
-            action: 'loginMember',
-            payload: { phone, pin }
+            action: "loginMember",
+            payload: { phone: phoneInput, pin: pinInput }
           })
         });
-
+        
         const result = await response.json();
-
+        
         if (result.ok) {
-          showMsg("Akses diterima! Mengalihkan ke Dasbor...", "success");
+          // JIKA BERHASIL
+          showMsg("Berhasil masuk! Mengalihkan...", "success");
           
-          // Simpan data ke browser agar tetap login
-          localStorage.setItem(KEY_MEMBER_ID, result.data.memberId);
-          localStorage.setItem(KEY_MEMBER_NAME, result.data.name);
-          localStorage.setItem(KEY_MEMBER_PHONE, result.data.phone);
-
-          // Alihkan ke Dasbor Pelanggan dalam 1 detik
-          setTimeout(() => {
-            window.location.href = "member-dashboard.html";
-          }, 1000);
+          // Simpan sesi di browser
+          localStorage.setItem("manupi_memberId", result.data.memberId);
+          localStorage.setItem("manupi_memberName", result.data.name);
+          localStorage.setItem("manupi_memberPhone", result.data.phone);
+          
+          setTimeout(() => { window.location.href = "member-dashboard.html"; }, 1000);
+          
         } else {
-          showMsg(result.error || "Gagal masuk. Periksa kembali No WhatsApp atau PIN.", "error");
-          loginBtn.disabled = false;
-          loginBtn.textContent = "Masuk Kerabat";
+          // JIKA GAGAL / ERROR DARI BACKEND
+          const errorMsg = result.error;
+
+          if (errorMsg === "PIN yang Anda masukkan salah.") {
+            failedAttempts++;
+            if (failedAttempts >= 3) {
+              msgEl.classList.add('hidden'); // Sembunyikan pesan kecil
+              toggleModal('modal-wrong-pin', true); // Munculkan pop-up gaul
+            } else {
+              showMsg(`PIN salah. (Sisa percobaan: ${3 - failedAttempts}x)`, "error");
+            }
+          } 
+          else if (errorMsg === "Nomor WhatsApp tidak terdaftar. Hubungi kasir.") {
+            msgEl.classList.add('hidden');
+            toggleModal('modal-not-registered', true); // Munculkan pop-up belum daftar
+          } 
+          else {
+            // Error lainnya (seperti: Akun dinonaktifkan / Belum diklaim)
+            showMsg(errorMsg, "error");
+          }
+
+          // Kembalikan tombol seperti semula
+          this.disabled = false;
+          this.textContent = "Masuk Kerabat";
         }
       } catch (error) {
-        showMsg("Terjadi kesalahan jaringan. Coba lagi.", "error");
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Masuk Kerabat";
+        showMsg("Gangguan jaringan. Silakan coba lagi.", "error");
+        this.disabled = false;
+        this.textContent = "Masuk Kerabat";
       }
     });
   </script>
