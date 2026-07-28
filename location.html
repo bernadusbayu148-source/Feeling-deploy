@@ -8,7 +8,6 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- KONFIGURASI WARNA MANUPI (Ditanam langsung agar tidak gagal dimuat) -->
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -65,14 +64,12 @@
         <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
-      <!-- NAVIGASI DESKTOP -->
       <nav class="hidden md:flex items-center gap-6">
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Halaman Utama</a>
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Sajian Tamu</a>
         <a class="text-emerald-900 font-bold border-b border-emerald-900 pb-0.5 uppercase tracking-widest text-[10px] md:text-xs" href="location.html">Alamat Rumah</a>
       </nav>
 
-      <!-- BAGIAN KANAN (AKUN & MENU MOBILE) -->
       <div class="flex items-center gap-2 md:gap-4 shrink-0 relative z-[110]">
         <!-- WRAPPER PROFIL DROPDOWN -->
         <div class="relative inline-block text-left">
@@ -115,29 +112,20 @@
 
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-6 md:px-8 pt-12 md:pt-20">
-    <!-- HERO TITLE -->
     <header class="mb-16 md:mb-24">
       <span class="uppercase tracking-widest text-xs text-primary mb-4 block font-semibold">
         RUMAH KOPI MANUPI
       </span>
-
       <h1 class="text-5xl md:text-7xl lg:text-8xl tracking-tight text-primary leading-none font-serif">
         Bertamu ke Rumah<br />
       </h1>
     </header>
 
-    <!-- IMAGE + INFO -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-      <!-- IMAGE -->
       <div class="lg:col-span-7 rounded-3xl overflow-hidden bg-surface-container-low shadow-sm">
-        <img
-          alt="Manupi Storefront"
-          class="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
-          src="assets/images/lokasi.jpeg"
-        />
+        <img alt="Manupi Storefront" class="w-full h-auto object-cover transition-transform duration-700 hover:scale-105" src="assets/images/lokasi.jpeg" />
       </div>
 
-      <!-- DETAILS -->
       <div class="lg:col-span-5 flex flex-col justify-between py-2 md:py-4">
         <div>
           <div class="space-y-12">
@@ -149,14 +137,11 @@
                 Kalimantan Selatan 70711
               </p>
             </section>
-
             <section>
               <h2 class="text-3xl font-serif text-primary mb-4">Jam Bertamu</h2>
               <ul class="space-y-3">
                 <li class="flex justify-between items-center pb-3 border-b border-outline-variant/20">
-                  <span class="uppercase tracking-widest text-xs text-primary">
-                    Setiap Hari
-                  </span>
+                  <span class="uppercase tracking-widest text-xs text-primary">Setiap Hari</span>
                   <span class="text-primary font-bold">07:15 — 23:00</span>
                 </li>
               </ul>
@@ -165,38 +150,24 @@
         </div>
 
         <div class="mt-12 lg:mt-10">
-          <a
-            class="group w-full py-6 px-8 bg-primary text-on-primary rounded-xl flex items-center justify-between hover:bg-primary-container transition-all duration-300 shadow-[0_32px_64px_-12px_rgba(1,58,19,0.06)]"
-            href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a class="group w-full py-6 px-8 bg-primary text-on-primary rounded-xl flex items-center justify-between hover:bg-primary-container transition-all duration-300 shadow-[0_32px_64px_-12px_rgba(1,58,19,0.06)]" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank" rel="noopener noreferrer">
             <span class="uppercase tracking-widest text-sm font-bold">Rute Via Google Maps</span>
-            <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">
-              arrow_forward
-            </span>
+            <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- MAP -->
     <div class="mt-12 lg:mt-24">
       <div class="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-lg border border-outline-variant/20 bg-surface-container">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3448.5322065425835!2d114.83996257426622!3d-3.4312830417314215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de681a21af17945%3A0xbe34c7ad9e43a3de!2sRumah%20Kopi%20Manupi!5e1!3m2!1sen!2sus!4v1777974336731!5m2!1sen!2sus" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
@@ -207,7 +178,6 @@
           © 2026 Rumah Kopi Manupi Banjarbaru Web | Crafted By Senada CreatLabs.
         </p>
       </div>
-
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
@@ -234,38 +204,38 @@
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- SCRIPT -->
   <script src="assets/js/main.js" defer></script>
   <script>
-    // ---------------- MOBILE MENU LOGIC ----------------
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const icon = document.getElementById('menu-icon');
+    // ---------------- MOBILE MENU LOGIC (VARIABLE DIUBAH) ----------------
+    const mobileBtnEl = document.getElementById('mobile-menu-btn');
+    const mobileMenuEl = document.getElementById('mobile-menu');
+    const mobileIconEl = document.getElementById('menu-icon');
 
-    if(btn && menu && icon) {
-      btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    if(mobileBtnEl && mobileMenuEl && mobileIconEl) {
+      mobileBtnEl.addEventListener('click', () => {
+        mobileMenuEl.classList.toggle('hidden');
+        mobileIconEl.textContent = mobileMenuEl.classList.contains('hidden') ? 'menu' : 'close';
       });
     }
 
-    // ---------------- LOGIKA DROPDOWN PROFIL PELANGGAN ----------------
-    const profileBtn = document.getElementById('profile-menu-btn');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    const menuGuest = document.getElementById('menu-guest');
-    const menuLoggedIn = document.getElementById('menu-logged-in');
-    const profileNameDisplay = document.getElementById('profile-name-display');
-    const logoutMemberBtn = document.getElementById('logout-member-btn');
+    // ---------------- LOGIKA DROPDOWN PROFIL (VARIABLE DIUBAH) ----------------
+    const profBtnEl = document.getElementById('profile-menu-btn');
+    const profDropEl = document.getElementById('profile-dropdown');
+    const mGuestEl = document.getElementById('menu-guest');
+    const mLoggedEl = document.getElementById('menu-logged-in');
+    const profNameEl = document.getElementById('profile-name-display');
+    const logoutMemEl = document.getElementById('logout-member-btn');
 
-    if(profileBtn && profileDropdown) {
-      profileBtn.addEventListener('click', (e) => {
+    if(profBtnEl && profDropEl) {
+      profBtnEl.addEventListener('click', (e) => {
         e.stopPropagation(); 
-        profileDropdown.classList.toggle('hidden');
+        profDropEl.classList.toggle('hidden');
       });
 
       document.addEventListener('click', (e) => {
-        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-          profileDropdown.classList.add('hidden');
+        if (!profBtnEl.contains(e.target) && !profDropEl.contains(e.target)) {
+          profDropEl.classList.add('hidden');
         }
       });
     }
@@ -274,13 +244,13 @@
     const loggedInName = localStorage.getItem("manupi_memberName");
 
     if (loggedInId && loggedInName) {
-      if(menuGuest) menuGuest.classList.replace('block', 'hidden');
-      if(menuLoggedIn) menuLoggedIn.classList.replace('hidden', 'block');
-      if(profileNameDisplay) profileNameDisplay.textContent = loggedInName.split(' ')[0];
+      if(mGuestEl) mGuestEl.classList.replace('block', 'hidden');
+      if(mLoggedEl) mLoggedEl.classList.replace('hidden', 'block');
+      if(profNameEl) profNameEl.textContent = loggedInName.split(' ')[0];
     }
 
-    if (logoutMemberBtn) {
-      logoutMemberBtn.addEventListener('click', () => {
+    if (logoutMemEl) {
+      logoutMemEl.addEventListener('click', () => {
         localStorage.removeItem("manupi_memberId");
         localStorage.removeItem("manupi_memberName");
         localStorage.removeItem("manupi_memberPhone");
