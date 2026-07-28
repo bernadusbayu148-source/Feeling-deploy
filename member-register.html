@@ -28,23 +28,36 @@
       <div class="text-center mb-8">
         <h1 class="text-3xl font-serif text-primary mb-2">Klaim Akun Kerabat</h1>
         <p class="text-sm text-stone-500 leading-relaxed">
-          Buat PIN rahasia untuk nomor WhatsApp Anda yang telah didaftarkan oleh kasir Manupi.
+          Buat kata sandi untuk nomor WhatsApp Anda yang telah didaftarkan oleh kasir Manupi.
         </p>
       </div>
       <div class="bg-white rounded-[2rem] border border-stone-200 p-6 md:p-8 shadow-sm">
         <div class="space-y-5">
           <div>
             <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">No. WhatsApp Terdaftar</label>
-            <input id="claim-phone" type="number" placeholder="Contoh: 0812..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+            <input id="claim-phone" type="number" placeholder="Contoh: 08123456789" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
           </div>
+          
           <div>
-            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Buat PIN Baru (6 Angka)</label>
-            <input id="claim-pin" type="password" placeholder="Buat PIN rahasia..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Buat Kata Sandi Baru (Min. 6 Karakter)</label>
+            <div class="relative">
+              <input id="claim-pin" type="password" placeholder="Bebas huruf atau angka..." class="w-full rounded-xl border border-stone-200 bg-surface-container pl-4 pr-12 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+              <button type="button" onclick="togglePass('claim-pin', 'eye-icon-1')" class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-primary p-2 focus:outline-none transition-colors">
+                <span id="eye-icon-1" class="material-symbols-outlined text-xl align-middle">visibility_off</span>
+              </button>
+            </div>
           </div>
+
           <div>
-            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Konfirmasi PIN</label>
-            <input id="claim-pin-confirm" type="password" placeholder="Ulangi PIN di atas..." class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+            <label class="block text-[10px] uppercase tracking-widest font-bold text-stone-400 mb-2">Konfirmasi Kata Sandi</label>
+            <div class="relative">
+              <input id="claim-pin-confirm" type="password" placeholder="Ulangi kata sandi di atas..." class="w-full rounded-xl border border-stone-200 bg-surface-container pl-4 pr-12 py-3.5 text-sm focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all" />
+              <button type="button" onclick="togglePass('claim-pin-confirm', 'eye-icon-2')" class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-primary p-2 focus:outline-none transition-colors">
+                <span id="eye-icon-2" class="material-symbols-outlined text-xl align-middle">visibility_off</span>
+              </button>
+            </div>
           </div>
+
           <p id="system-msg" class="text-xs text-center hidden font-medium mt-2 px-2"></p>
           <button id="btn-claim" type="button" class="w-full mt-2 rounded-xl bg-primary px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition-all active:scale-[0.98]">
             Klaim Akun Saya
@@ -53,11 +66,25 @@
       </div>
     </div>
   </main>
+  
   <script>
     // ====================================================================
     // GANTI URL DI BAWAH INI DENGAN URL WEB APP BARU ANDA
     // ====================================================================
-    const SCRIPT_URL = "URL_WEB_APP_ANDA"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec"; 
+
+    // FUNGSI INTIP KATA SANDI
+    function togglePass(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "visibility";
+      } else {
+        input.type = "password";
+        icon.textContent = "visibility_off";
+      }
+    }
 
     const msgEl = document.getElementById('system-msg');
     function showMsg(text, type = "success") {
@@ -72,8 +99,8 @@
       const confirmPin = document.getElementById('claim-pin-confirm').value.trim();
 
       if (!phone || !newPin || !confirmPin) return showMsg("Semua kolom wajib diisi.", "error");
-      if (newPin.length < 6) return showMsg("PIN minimal 6 karakter.", "error");
-      if (newPin !== confirmPin) return showMsg("Konfirmasi PIN tidak cocok.", "error");
+      if (newPin.length < 6) return showMsg("Kata sandi minimal 6 karakter.", "error");
+      if (newPin !== confirmPin) return showMsg("Konfirmasi kata sandi tidak cocok.", "error");
 
       this.disabled = true;
       this.innerHTML = '<span class="material-symbols-outlined animate-spin align-middle mr-2 text-sm">progress_activity</span> Memproses...';
