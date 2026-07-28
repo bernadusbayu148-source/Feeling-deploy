@@ -1,78 +1,81 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="light" lang="id">
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Sajian Tamu | Rumah Kopi Manupi</title>
-
+  <title>Sajian Tamu - Rumah Kopi Manupi</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
-  <!-- KONFIGURASI WARNA MANUPI -->
   <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "tertiary-fixed": "#cbedb4",
-            "on-tertiary": "#ffffff",
-            "on-primary-fixed-variant": "#1e5128",
-            "surface-container-low": "#f6f3f0",
-            "surface-bright": "#fcf9f6",
-            "primary-fixed": "#b8f1b9",
-            "surface-variant": "#e5e2df",
-            "outline-variant": "#c1c9bd",
             "primary": "#013a13",
-            "secondary-fixed": "#f6decb",
-            "surface-container-highest": "#e5e2df",
-            "on-background": "#1c1c1a",
-            "primary-container": "#1e5128",
-            "on-primary": "#ffffff",
-            "surface-container": "#f0edea",
-            "surface": "#fcf9f6",
+            "surface-variant": "#e5e2df",
+            "secondary": "#6d5b4c",
             "background": "#fcf9f6",
-            "on-surface": "#1c1c1a",
-            "secondary": "#6d5b4c"
           },
           fontFamily: {
             "headline": ["Newsreader", "serif"],
             "body": ["Manrope", "sans-serif"],
             "label": ["Manrope", "sans-serif"],
-            "chi": ["Chi", "cursive"]
           }
         },
       },
     }
   </script>
-
-  <!-- CSS UNTUK HIDE SCROLLBAR PADA SLIDER -->
-  <style>
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
-
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
 </head>
 
-<body class="bg-background text-on-background">
+<body class="bg-background text-on-background font-body antialiased">
+  
   <!-- HEADER -->
-  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
+  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-[100] border-b border-stone-200/50">
     <div class="flex justify-between items-center w-full px-6 md:px-8 py-3 max-w-7xl mx-auto">
-      <a class="text-xl font-serif italic text-emerald-900" href="index.html">
+      
+      <!-- BAGIAN KIRI (LOGO) -->
+      <a class="text-xl font-serif italic text-emerald-900 shrink-0" href="index.html">
         <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
+      <!-- BAGIAN TENGAH (NAVIGASI DESKTOP) -->
       <nav class="hidden md:flex items-center gap-6">
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Halaman Utama</a>
         <a class="text-emerald-900 font-bold border-b border-emerald-900 pb-0.5 uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Sajian Tamu</a>
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="location.html">Alamat Rumah</a>
       </nav>
 
-      <div class="flex items-center gap-2 md:gap-4">
-        <button id="mobile-menu-btn" aria-label="Toggle mobile menu" class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-50 cursor-pointer">
-          <span id="menu-icon" class="material-symbols-outlined text-xl">menu</span>
+      <!-- BAGIAN KANAN (AKUN & MENU MOBILE) -->
+      <div class="flex items-center gap-2 md:gap-4 shrink-0 relative z-[110]">
+        
+        <!-- WRAPPER PROFIL DROPDOWN -->
+        <div class="relative inline-block text-left">
+          <button id="profile-menu-btn" type="button" class="flex items-center gap-2 p-2 rounded-full hover:bg-emerald-50/50 transition-all text-emerald-900 border border-emerald-900/10 cursor-pointer relative z-20">
+            <span class="material-symbols-outlined text-xl md:text-2xl pointer-events-none">account_circle</span>
+            <span id="profile-name-display" class="text-[10px] md:text-xs font-bold uppercase tracking-wider hidden sm:inline pr-1 pointer-events-none">Tamu</span>
+          </button>
+
+          <!-- KOTAK DROPDOWN MENU -->
+          <div id="profile-dropdown" class="hidden absolute right-0 mt-3 w-48 origin-top-right rounded-2xl bg-white shadow-xl ring-1 ring-stone-900/10 focus:outline-none z-[120] overflow-hidden border border-stone-100 transition-all">
+            
+            <div id="menu-guest" class="py-2 block">
+              <p class="px-4 py-2 text-[10px] text-stone-400 uppercase tracking-widest border-b border-stone-50 mb-1">Akses Kerabat</p>
+              <a href="member-login.html" class="block px-4 py-2.5 text-sm text-stone-700 hover:bg-emerald-50 hover:text-primary font-bold transition-colors">Masuk (Login)</a>
+              <a href="member-register.html" class="block px-4 py-2.5 text-sm text-stone-600 hover:bg-stone-50 transition-colors">Klaim Akun Lama</a>
+            </div>
+
+            <div id="menu-logged-in" class="py-2 hidden">
+              <p class="px-4 py-2 text-[10px] text-stone-400 uppercase tracking-widest border-b border-stone-50 mb-1">Profil Saya</p>
+              <a href="member-dashboard.html" class="block px-4 py-2.5 text-sm text-primary hover:bg-emerald-50 font-bold transition-colors">Dasbor & QR Code</a>
+              <button id="logout-member-btn" class="w-full text-left block px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-bold transition-colors cursor-pointer">Keluar (Logout)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOMBOL MOBILE MENU -->
+        <button id="mobile-menu-btn" aria-label="Toggle mobile menu" class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-20 cursor-pointer">
+          <span id="menu-icon" class="material-symbols-outlined text-xl pointer-events-none">menu</span>
         </button>
       </div>
     </div>
@@ -87,87 +90,32 @@
     </div>
   </div>
 
-  <!-- MAIN -->
-  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-    
-    <!-- DAFTAR MENU -->
-    <section class="mb-12 md:mb-16">
-      <!-- Judul Halaman -->
-      <div class="text-center mb-12">
-        <span class="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">RUMAH KOPI MANUPI</span>
-        <h1 class="text-4xl md:text-6xl font-serif text-primary leading-tight mt-3">
-          Sajian Istimewa Tamu 
-        </h1>
-      </div>
-
-      <!-- Grid 2 Gambar -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto items-start">
-        
-        <!-- MENU UTAMA (DENGAN SLIDER YANG LEBIH RAPI) -->
-        <div class="flex flex-col items-center group w-full">
-          <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
-          
-          <div class="relative w-full">
-            <!-- CAROUSEL WRAPPER -->
-            <div id="menu-utama-carousel" class="flex items-start overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth gap-4 pb-2">
-              
-              <!-- Foto 1 -->
-              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-1.jpeg')">
-                <img alt="Menu Utama 1" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-1.jpeg" />
-                <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
-                </div>
-              </div>
-
-              <!-- Foto 2 -->
-              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-2.jpeg')">
-                <img alt="Menu Utama 2" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-2.jpeg" />
-                <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- DOT INDICATORS -->
-            <div class="flex justify-center gap-2 mt-4 pointer-events-none">
-               <div class="w-6 h-1.5 rounded-full bg-primary/80 transition-all duration-300" id="dot-menu-0"></div>
-               <div class="w-1.5 h-1.5 rounded-full bg-primary/30 transition-all duration-300" id="dot-menu-1"></div>
-            </div>
-          </div>
-          
-          <!-- PETUNJUK GESER -->
-          <p class="text-center text-xs text-stone-400 mt-4 font-body uppercase tracking-widest flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-sm">swipe</span> Geser untuk melihat
-          </p>
-        </div>
-
-        <!-- MENU PROMO -->
-        <div class="flex flex-col items-center group w-full">
-          <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Promo</h2>
-          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-promo.jpeg')">
-            <img alt="Menu Promo Manupi" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/menu-promo.jpeg" />
-             <!-- Indikator klik -->
-             <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- MODAL / LIGHTBOX (POPUP GAMBAR) -->
-  <div id="modal-gambar" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8 transition-opacity">
-    <button id="tutup-modal" class="absolute top-4 right-4 md:top-8 md:right-8 text-white hover:text-stone-400 transition-colors p-2 cursor-pointer z-50">
-      <span class="material-symbols-outlined text-3xl md:text-4xl">close</span>
-    </button>
-    <div class="relative w-full max-w-4xl max-h-[90vh] flex justify-center overflow-hidden rounded-xl">
-      <img id="gambar-di-modal" src="" alt="Menu Zoom" class="w-auto h-auto max-w-full max-h-[90vh] object-contain shadow-2xl rounded-xl" />
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <!-- Judul Halaman -->
+    <div class="text-center mb-10">
+      <span class="font-label uppercase tracking-widest text-xs text-secondary">RUMAH KOPI MANUPI</span>
+      <h1 class="font-serif text-4xl text-primary mt-2">Sajian Istimewa Tamu</h1>
     </div>
-  </div>
+
+    <!-- Bagian Menu Utama -->
+    <div class="mb-12">
+      <h2 class="font-serif text-2xl text-primary text-center mb-6 border-b border-stone-200 pb-3 inline-block mx-auto">Menu Utama</h2>
+      <div class="w-full rounded-[2rem] overflow-hidden shadow-lg border border-stone-100">
+         <img src="assets/images/menu-1.jpeg" alt="Menu Utama Manupi" class="w-full h-auto object-contain" />
+      </div>
+      <p class="text-center text-xs text-stone-400 mt-4 font-body uppercase tracking-widest flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-sm">swipe</span> Geser untuk melihat
+      </p>
+    </div>
+
+    <!-- Bagian Menu Promo -->
+    <div class="mb-12">
+      <h2 class="font-serif text-2xl text-primary text-center mb-6 border-b border-stone-200 pb-3 inline-block mx-auto">Menu Promo</h2>
+      <div class="w-full rounded-[2rem] overflow-hidden shadow-lg border border-stone-100">
+         <img src="assets/images/menu-promo.jpeg" alt="Menu Promo Rutinitas Pagi Warga" class="w-full h-auto object-contain" />
+      </div>
+    </div>
+  </main>
 
   <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 relative z-10">
@@ -184,17 +132,15 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-8">
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Navigation</span>
-          <a class="text-emerald-800 hover:underline transition-all text-sm" href="index.html">Halaman Utama</a>
-          <a class="text-emerald-800 hover:underline transition-all text-sm font-bold" href="menu.html">Sajian Tamu</a>
-          <a class="text-emerald-800 hover:underline transition-all text-sm" href="location.html">Alamat rumah</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="index.html">Halaman Utama</a>
+          <a class="text-emerald-800 font-bold hover:underline transition-all text-sm" href="menu.html">Sajian Tamu</a>
+          <a class="text-stone-600 hover:underline transition-all text-sm" href="location.html">Alamat rumah</a>
         </div>
-
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
           <a class="text-stone-600 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
           <a class="text-stone-600 hover:underline transition-all text-sm" href="https://wa.me/6289519035430" target="_blank">WhatsApp</a>
         </div>
-
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
           <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
           <a class="bg-stone-200/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
@@ -209,72 +155,55 @@
     </div>
   </footer>
 
-  <!-- SCRIPT -->
-  <script src="assets/js/main.js" defer></script>
   <script>
-    // ---------------- MOBILE MENU ----------------
+    // ---------------- MOBILE MENU LOGIC ----------------
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const icon = document.getElementById('menu-icon');
 
-    if(btn && menu && icon) {
+    if(btn && menu) {
       btn.addEventListener('click', () => {
         menu.classList.toggle('hidden');
-        icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+        if(icon) icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
       });
     }
 
-    // ---------------- SCRIPT UNTUK POPUP GAMBAR (MODAL) ----------------
-    const modal = document.getElementById('modal-gambar');
-    const gambarModal = document.getElementById('gambar-di-modal');
+    // ---------------- LOGIKA DROPDOWN PROFIL PELANGGAN ----------------
+    const profileBtn = document.getElementById('profile-menu-btn');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const menuGuest = document.getElementById('menu-guest');
+    const menuLoggedIn = document.getElementById('menu-logged-in');
+    const profileNameDisplay = document.getElementById('profile-name-display');
+    const logoutMemberBtn = document.getElementById('logout-member-btn');
 
-    function bukaModal(srcGambar) {
-      if(gambarModal && modal) {
-        gambarModal.src = srcGambar;
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
-      }
-    }
+    if(profileBtn && profileDropdown) {
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        profileDropdown.classList.toggle('hidden');
+      });
 
-    function tutupModal() {
-      if(modal && gambarModal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto'; // Buka kunci scroll
-        gambarModal.src = ''; // Bersihkan src
-      }
-    }
-
-    if(modal) {
-      modal.addEventListener('click', function(e) {
-        if (e.target === this || e.target.closest('#tutup-modal')) {
-          tutupModal();
+      document.addEventListener('click', (e) => {
+        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+          profileDropdown.classList.add('hidden');
         }
       });
     }
 
-    // ---------------- LOGIKA SLIDER (CAROUSEL) MENU UTAMA ----------------
-    const menuCarousel = document.getElementById('menu-utama-carousel');
-    const menuDots = [
-      document.getElementById('dot-menu-0'), 
-      document.getElementById('dot-menu-1')
-    ];
-    
-    if (menuCarousel) {
-      menuCarousel.addEventListener('scroll', () => {
-        const scrollPosition = menuCarousel.scrollLeft;
-        const currentIndex = Math.round(scrollPosition / menuCarousel.clientWidth);
-        
-        menuDots.forEach((dot, i) => {
-          if (dot) {
-            if (i === currentIndex) {
-              dot.classList.remove('bg-primary/30', 'w-1.5');
-              dot.classList.add('bg-primary/80', 'w-6');
-            } else {
-              dot.classList.add('bg-primary/30', 'w-1.5');
-              dot.classList.remove('bg-primary/80', 'w-6');
-            }
-          }
-        });
+    const loggedInId = localStorage.getItem("manupi_memberId");
+    const loggedInName = localStorage.getItem("manupi_memberName");
+
+    if (loggedInId && loggedInName) {
+      if(menuGuest) menuGuest.classList.replace('block', 'hidden');
+      if(menuLoggedIn) menuLoggedIn.classList.replace('hidden', 'block');
+      if(profileNameDisplay) profileNameDisplay.textContent = loggedInName.split(' ')[0];
+    }
+
+    if (logoutMemberBtn) {
+      logoutMemberBtn.addEventListener('click', () => {
+        localStorage.removeItem("manupi_memberId");
+        localStorage.removeItem("manupi_memberName");
+        localStorage.removeItem("manupi_memberPhone");
+        window.location.reload();
       });
     }
   </script>
