@@ -7,7 +7,6 @@
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- KONFIGURASI WARNA MANUPI -->
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -45,7 +44,6 @@
     }
   </script>
 
-  <!-- CSS UNTUK HIDE SCROLLBAR PADA SLIDER -->
   <style>
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -64,23 +62,19 @@
         <img alt="Manupi Logo" class="h-16 md:h-20 w-auto object-contain origin-left scale-125 sm:scale-100" src="assets/images/logo.png" />
       </a>
 
-      <!-- NAVIGASI DESKTOP -->
       <nav class="hidden md:flex items-center gap-6">
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="index.html">Halaman Utama</a>
         <a class="text-emerald-900 font-bold border-b border-emerald-900 pb-0.5 uppercase tracking-widest text-[10px] md:text-xs" href="menu.html">Sajian Tamu</a>
         <a class="text-stone-500 hover:text-emerald-800 transition-colors uppercase tracking-widest text-[10px] md:text-xs" href="location.html">Alamat Rumah</a>
       </nav>
 
-      <!-- BAGIAN KANAN (AKUN & MENU MOBILE) -->
       <div class="flex items-center gap-2 md:gap-4 shrink-0 relative z-[110]">
-        <!-- WRAPPER PROFIL DROPDOWN -->
         <div class="relative inline-block text-left">
           <button id="profile-menu-btn" type="button" class="flex items-center gap-2 p-2 rounded-full hover:bg-emerald-50/50 transition-all text-emerald-900 border border-emerald-900/10 cursor-pointer relative z-20">
             <span class="material-symbols-outlined text-xl md:text-2xl pointer-events-none">account_circle</span>
             <span id="profile-name-display" class="text-[10px] md:text-xs font-bold uppercase tracking-wider hidden sm:inline pr-1 pointer-events-none">Tamu</span>
           </button>
 
-          <!-- KOTAK DROPDOWN MENU -->
           <div id="profile-dropdown" class="hidden absolute right-0 mt-3 w-48 origin-top-right rounded-2xl bg-white shadow-xl ring-1 ring-stone-900/10 focus:outline-none z-[120] overflow-hidden border border-stone-100 transition-all">
             <div id="menu-guest" class="py-2 block">
               <p class="px-4 py-2 text-[10px] text-stone-400 uppercase tracking-widest border-b border-stone-50 mb-1">Akses Kerabat</p>
@@ -95,7 +89,6 @@
           </div>
         </div>
 
-        <!-- TOMBOL MOBILE MENU -->
         <button id="mobile-menu-btn" aria-label="Toggle mobile menu" class="md:hidden p-2 text-emerald-900 hover:bg-emerald-50/50 transition-all rounded-full relative z-20 cursor-pointer">
           <span id="menu-icon" class="material-symbols-outlined text-xl pointer-events-none">menu</span>
         </button>
@@ -114,33 +107,24 @@
 
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-    
-    <!-- DAFTAR MENU -->
     <section class="mb-12 md:mb-16">
-      <!-- Judul Halaman -->
       <div class="text-center mb-12">
         <span class="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">RUMAH KOPI MANUPI</span>
-        <h1 class="text-4xl md:text-6xl font-serif text-primary leading-tight mt-3">
-          Sajian Istimewa Tamu 
-        </h1>
+        <h1 class="text-4xl md:text-6xl font-serif text-primary leading-tight mt-3">Sajian Istimewa Tamu</h1>
       </div>
 
-      <!-- Grid 2 Gambar -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto items-start">
-        
-        <!-- MENU UTAMA -->
         <div class="flex flex-col items-center group w-full">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Utama</h2>
-          
           <div class="relative w-full">
             <div id="menu-utama-carousel" class="flex items-start overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth gap-4 pb-2">
-              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-1.jpeg')">
+              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="window.bukaModal('assets/images/menu-utama-1.jpeg')">
                 <img alt="Menu Utama 1" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-1.jpeg" />
                 <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
                 </div>
               </div>
-              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="bukaModal('assets/images/menu-utama-2.jpeg')">
+              <div class="w-full flex-none snap-center relative cursor-pointer rounded-[2rem] overflow-hidden bg-surface-container shadow-xl" onclick="window.bukaModal('assets/images/menu-utama-2.jpeg')">
                 <img alt="Menu Utama 2" class="w-full h-auto object-contain mx-auto" src="assets/images/menu-utama-2.jpeg" />
                 <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
@@ -157,20 +141,17 @@
           </p>
         </div>
 
-        <!-- MENU PROMO -->
         <div class="flex flex-col items-center group w-full">
           <h2 class="text-2xl font-serif text-primary mb-6 border-b border-primary/20 pb-2 px-4">Menu Promo</h2>
-          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="bukaModal('assets/images/menu-promo.jpeg')">
+          <div class="w-full rounded-[2rem] overflow-hidden bg-surface-container shadow-xl relative cursor-pointer" onclick="window.bukaModal('assets/images/menu-promo.jpeg')">
             <img alt="Menu Promo Manupi" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" src="assets/images/menu-promo.jpeg" />
              <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
               <span class="material-symbols-outlined text-white text-4xl drop-shadow-md">zoom_in</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
-
   </main>
 
   <!-- MODAL / LIGHTBOX -->
@@ -183,7 +164,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="bg-stone-100 w-full rounded-t-3xl mt-12 relative z-10">
     <div class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-start max-w-7xl mx-auto gap-12">
       <div class="space-y-6">
@@ -202,13 +182,11 @@
           <a class="text-emerald-800 hover:underline transition-all text-sm font-bold" href="menu.html">Sajian Tamu</a>
           <a class="text-emerald-800 hover:underline transition-all text-sm" href="location.html">Alamat rumah</a>
         </div>
-
         <div class="flex flex-col gap-4">
           <span class="uppercase tracking-widest text-xs text-stone-400">Connect</span>
           <a class="text-stone-600 hover:underline transition-all text-sm" href="https://www.instagram.com/manupi__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
           <a class="text-stone-600 hover:underline transition-all text-sm" href="https://wa.me/6289519035430" target="_blank">WhatsApp</a>
         </div>
-
         <div class="flex flex-col gap-4 col-span-2 sm:col-span-1">
           <span class="uppercase tracking-widest text-xs text-stone-400">Visit</span>
           <a class="bg-stone-200/50 p-4 rounded-xl hover:bg-stone-200 transition-colors block" href="https://maps.app.goo.gl/w4SkiXUK7CCC7pMP8" target="_blank">
@@ -223,38 +201,38 @@
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- SCRIPT -->
   <script src="assets/js/main.js" defer></script>
   <script>
-    // ---------------- MOBILE MENU ----------------
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const icon = document.getElementById('menu-icon');
+    // ---------------- MOBILE MENU LOGIC (VARIABLE DIUBAH) ----------------
+    const mobileBtnEl = document.getElementById('mobile-menu-btn');
+    const mobileMenuEl = document.getElementById('mobile-menu');
+    const mobileIconEl = document.getElementById('menu-icon');
 
-    if(btn && menu && icon) {
-      btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    if(mobileBtnEl && mobileMenuEl && mobileIconEl) {
+      mobileBtnEl.addEventListener('click', () => {
+        mobileMenuEl.classList.toggle('hidden');
+        mobileIconEl.textContent = mobileMenuEl.classList.contains('hidden') ? 'menu' : 'close';
       });
     }
 
-    // ---------------- LOGIKA DROPDOWN PROFIL PELANGGAN ----------------
-    const profileBtn = document.getElementById('profile-menu-btn');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    const menuGuest = document.getElementById('menu-guest');
-    const menuLoggedIn = document.getElementById('menu-logged-in');
-    const profileNameDisplay = document.getElementById('profile-name-display');
-    const logoutMemberBtn = document.getElementById('logout-member-btn');
+    // ---------------- LOGIKA DROPDOWN PROFIL (VARIABLE DIUBAH) ----------------
+    const profBtnEl = document.getElementById('profile-menu-btn');
+    const profDropEl = document.getElementById('profile-dropdown');
+    const mGuestEl = document.getElementById('menu-guest');
+    const mLoggedEl = document.getElementById('menu-logged-in');
+    const profNameEl = document.getElementById('profile-name-display');
+    const logoutMemEl = document.getElementById('logout-member-btn');
 
-    if(profileBtn && profileDropdown) {
-      profileBtn.addEventListener('click', (e) => {
+    if(profBtnEl && profDropEl) {
+      profBtnEl.addEventListener('click', (e) => {
         e.stopPropagation(); 
-        profileDropdown.classList.toggle('hidden');
+        profDropEl.classList.toggle('hidden');
       });
 
       document.addEventListener('click', (e) => {
-        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-          profileDropdown.classList.add('hidden');
+        if (!profBtnEl.contains(e.target) && !profDropEl.contains(e.target)) {
+          profDropEl.classList.add('hidden');
         }
       });
     }
@@ -263,13 +241,13 @@
     const loggedInName = localStorage.getItem("manupi_memberName");
 
     if (loggedInId && loggedInName) {
-      if(menuGuest) menuGuest.classList.replace('block', 'hidden');
-      if(menuLoggedIn) menuLoggedIn.classList.replace('hidden', 'block');
-      if(profileNameDisplay) profileNameDisplay.textContent = loggedInName.split(' ')[0];
+      if(mGuestEl) mGuestEl.classList.replace('block', 'hidden');
+      if(mLoggedEl) mLoggedEl.classList.replace('hidden', 'block');
+      if(profNameEl) profNameEl.textContent = loggedInName.split(' ')[0];
     }
 
-    if (logoutMemberBtn) {
-      logoutMemberBtn.addEventListener('click', () => {
+    if (logoutMemEl) {
+      logoutMemEl.addEventListener('click', () => {
         localStorage.removeItem("manupi_memberId");
         localStorage.removeItem("manupi_memberName");
         localStorage.removeItem("manupi_memberPhone");
@@ -278,46 +256,47 @@
     }
 
     // ---------------- SCRIPT UNTUK POPUP GAMBAR (MODAL) ----------------
-    const modal = document.getElementById('modal-gambar');
-    const gambarModal = document.getElementById('gambar-di-modal');
+    const modalEl = document.getElementById('modal-gambar');
+    const gambarModalEl = document.getElementById('gambar-di-modal');
 
-    function bukaModal(srcGambar) {
-      if(gambarModal && modal) {
-        gambarModal.src = srcGambar;
-        modal.classList.remove('hidden');
+    // DIEKSPOS KE WINDOW AGAR BISA DIPANGGIL DARI ONCLICK HTML
+    window.bukaModal = function(srcGambar) {
+      if(gambarModalEl && modalEl) {
+        gambarModalEl.src = srcGambar;
+        modalEl.classList.remove('hidden');
         document.body.style.overflow = 'hidden'; 
       }
-    }
+    };
 
-    function tutupModal() {
-      if(modal && gambarModal) {
-        modal.classList.add('hidden');
+    window.tutupModal = function() {
+      if(modalEl && gambarModalEl) {
+        modalEl.classList.add('hidden');
         document.body.style.overflow = 'auto'; 
-        gambarModal.src = ''; 
+        gambarModalEl.src = ''; 
       }
-    }
+    };
 
-    if(modal) {
-      modal.addEventListener('click', function(e) {
+    if(modalEl) {
+      modalEl.addEventListener('click', function(e) {
         if (e.target === this || e.target.closest('#tutup-modal')) {
-          tutupModal();
+          window.tutupModal();
         }
       });
     }
 
     // ---------------- LOGIKA SLIDER (CAROUSEL) MENU UTAMA ----------------
-    const menuCarousel = document.getElementById('menu-utama-carousel');
-    const menuDots = [
+    const carouselEl = document.getElementById('menu-utama-carousel');
+    const dotsEl = [
       document.getElementById('dot-menu-0'), 
       document.getElementById('dot-menu-1')
     ];
     
-    if (menuCarousel) {
-      menuCarousel.addEventListener('scroll', () => {
-        const scrollPosition = menuCarousel.scrollLeft;
-        const currentIndex = Math.round(scrollPosition / menuCarousel.clientWidth);
+    if (carouselEl) {
+      carouselEl.addEventListener('scroll', () => {
+        const scrollPosition = carouselEl.scrollLeft;
+        const currentIndex = Math.round(scrollPosition / carouselEl.clientWidth);
         
-        menuDots.forEach((dot, i) => {
+        dotsEl.forEach((dot, i) => {
           if (dot) {
             if (i === currentIndex) {
               dot.classList.remove('bg-primary/30', 'w-1.5');
