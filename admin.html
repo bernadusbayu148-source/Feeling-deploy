@@ -68,20 +68,17 @@
       <div id="member-detail-section" class="hidden rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-sm space-y-6">
         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           
-          <!-- BAGIAN PROFIL & ULANG TAHUN -->
           <div>
             <h2 id="detail-member-name" class="text-3xl font-serif text-primary">-</h2>
             <div class="flex flex-wrap items-center gap-3 mt-1">
               <p id="detail-member-phone" class="text-sm text-stone-500 font-medium">-</p>
               
-              <!-- Teks Tanggal Lahir -->
               <p id="detail-member-birthday" class="text-xs text-stone-400 font-medium flex items-center gap-1 hidden">
                 <span class="material-symbols-outlined text-[14px]">cake</span>
                 <span id="bday-text"></span>
               </p>
             </div>
             
-            <!-- Lencana Ulang Tahun Hari Ini -->
             <div id="badge-birthday" class="hidden mt-3 inline-flex items-center gap-1.5 bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest animate-pulse border border-amber-200">
               <span class="material-symbols-outlined text-sm">celebration</span> HARI INI ULANG TAHUN!
             </div>
@@ -145,14 +142,22 @@
     </section>
   </div>
   
-  <!-- MODAL SCANNER -->
+  <!-- MODAL SCANNER DENGAN TOMBOL SWITCH KAMERA -->
   <div id="modal-scanner" class="hidden fixed inset-0 z-[100] bg-stone-900/90 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-md rounded-[2rem] overflow-hidden shadow-2xl relative">
       <div class="p-5 border-b border-stone-100 flex justify-between items-center bg-stone-50">
         <h3 class="text-lg font-bold text-primary tracking-widest uppercase text-xs">Pindai QR Kerabat</h3>
-        <button id="btn-close-scanner" class="text-stone-400 hover:text-red-600 transition-colors cursor-pointer">
-          <span class="material-symbols-outlined text-2xl">close</span>
-        </button>
+        
+        <div class="flex items-center gap-4">
+          <!-- Tombol Switch Kamera -->
+          <button id="btn-switch-camera" class="text-stone-400 hover:text-primary transition-colors cursor-pointer" title="Balik Kamera">
+            <span class="material-symbols-outlined text-2xl">flip_camera_ios</span>
+          </button>
+          <!-- Tombol Tutup -->
+          <button id="btn-close-scanner" class="text-stone-400 hover:text-red-600 transition-colors cursor-pointer" title="Tutup">
+            <span class="material-symbols-outlined text-2xl">close</span>
+          </button>
+        </div>
       </div>
       <div class="p-4 bg-black">
         <div id="qr-reader" class="w-full h-auto mx-auto rounded-xl overflow-hidden border border-stone-700"></div>
@@ -178,6 +183,6 @@
       if (el) el.textContent = adminId || "-";
     })();
   </script>
-  <script type="module" src="assets/js/admin.js?v=8"></script>
+  <script type="module" src="assets/js/admin.js?v=9"></script>
 </body>
 </html>
