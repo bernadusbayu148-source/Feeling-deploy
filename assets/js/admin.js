@@ -167,7 +167,6 @@ searchInput?.addEventListener("input", (e) => {
       const div = document.createElement("div");
       div.className = "px-4 py-3 hover:bg-stone-50 cursor-pointer border-b border-stone-100 last:border-0 text-sm flex justify-between items-center";
       
-      // Menambahkan ikon kecil jika hari ini ultah (di dropdown pencarian)
       let bdayIcon = "";
       if (m.birthday) {
         const bDate = new Date(m.birthday);
@@ -210,71 +209,106 @@ function selectMember(member) {
   const bdayText = document.getElementById("bday-text");
   const bdayBadge = document.getElementById("badge-birthday");
   
-  // Sembunyikan by default
   bdayEl.classList.add("hidden");
   bdayBadge.classList.add("hidden");
 
   if (member.birthday) {
     const bDate = new Date(member.birthday);
     bdayText.textContent = bDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
-    bdayEl.classList.remove("hidden"); // Tampilkan teks tanggal lahir
+    bdayEl.classList.remove("hidden"); 
     
-    // Cek apakah hari ini
     const today = new Date();
     if (bDate.getDate() === today.getDate() && bDate.getMonth() === today.getMonth()) {
-       bdayBadge.classList.remove("hidden"); // Tampilkan Lencana!
+       bdayBadge.classList.remove("hidden");
     }
   }
   
   loadVisitHistory(member.memberId);
 }
 
-// FETCH DATA PERTAMA KALI SAAT HALAMAN DIMUAT
 document.addEventListener("DOMContentLoaded", refreshMemberList);
 
 // =========================================================
-// QR SCANNER
+// QR SCANNER DENGAN FITUR SWITCH KAMERA
 // =========================================================
 let html5QrCode = null;
+let currentCameraMode = "environment"; // "environment" = Kamera Belakang, "user" = Kamera Depan
+let isScanning = false;
+
 const btnOpenScanner = document.getElementById('btn-open-scanner');
 const btnCloseScanner = document.getElementById('btn-close-scanner');
+const btnSwitchCamera = document.getElementById('btn-switch-camera'); // Tombol Switch
 const modalScanner = document.getElementById('modal-scanner');
 
+// Fungsi Inti Memulai Scanner
+function startScanner(mode) {
+  if (!html5QrCode) html5QrCode = new Html5Qrcode("qr-reader");
+  
+  const config = { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 };
+  
+  // Jika sedang jalan, hentikan dulu lalu restart
+  if (isScanning) {
+    html5QrCode.stop().then(() => {
+      isScanning = false;
+      html5QrCode.start({ facingMode: mode }, config, onScanSuccess, onScanFailure)
+        .then(() => isScanning = true)
+        .catch(err => console.log(err));
+    });
+  } else {
+    // Jika belum jalan, langsung mulai
+    html5QrCode.start({ facingMode: mode }, config, onScanSuccess, onScanFailure)
+      .then(() => isScanning = true)
+      .catch(err => alert("Gagal mengakses kamera. Pastikan izin kamera telah diberikan."));
+  }
+}
+
+// Buka Modal
 if (btnOpenScanner && modalScanner) {
   btnOpenScanner.addEventListener('click', () => {
     modalScanner.classList.remove('hidden');
     setTimeout(() => {
-      if (!html5QrCode) html5QrCode = new Html5Qrcode("qr-reader");
-      html5QrCode.start(
-        { facingMode: "environment" }, 
-        { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 },
-        onScanSuccess,
-        onScanFailure
-      ).catch((err) => { alert("Gagal mengakses kamera. Pastikan izin kamera telah diberikan."); });
+      currentCameraMode = "environment"; // Selalu mulai dari kamera belakang
+      startScanner(currentCameraMode);
     }, 300);
   });
 }
 
-if (btnCloseScanner && modalScanner) {
-  btnCloseScanner.addEventListener('click', () => {
-    modalScanner.classList.add('hidden');
-    if (html5QrCode) {
-      html5QrCode.stop().then(() => html5QrCode.clear()).catch(err => console.log(err));
-    }
+// Switch Kamera Depan/Belakang
+if (btnSwitchCamera) {
+  btnSwitchCamera.addEventListener('click', () => {
+    currentCameraMode = (currentCameraMode === "environment") ? "user" : "environment";
+    startScanner(currentCameraMode);
   });
 }
 
-function onScanSuccess(decodedText) {
+// Fungsi Menghentikan & Membersihkan Scanner
+function stopScanner() {
   modalScanner.classList.add('hidden');
-  if (html5QrCode) {
-    html5QrCode.stop().then(() => html5QrCode.clear()).catch(err => console.log(err));
+  if (html5QrCode && isScanning) {
+    html5QrCode.stop().then(() => {
+      isScanning = false;
+      html5QrCode.clear();
+    }).catch(err => console.log(err));
   }
+}
+
+// Tutup Modal
+if (btnCloseScanner) {
+  btnCloseScanner.addEventListener('click', stopScanner);
+}
+
+// Jika Sukses Scan
+function onScanSuccess(decodedText) {
+  stopScanner(); // Tutup scanner otomatis
+  
   if (searchInput) {
     searchInput.value = decodedText;
     searchInput.dispatchEvent(new Event('input', { bubbles: true }));
     
+    // Langsung buka profil jika ID presisi
     const foundMember = allMembers.find(m => m.memberId.toLowerCase() === decodedText.toLowerCase().trim());
     if (foundMember) selectMember(foundMember);
   }
 }
+
 function onScanFailure() {}
