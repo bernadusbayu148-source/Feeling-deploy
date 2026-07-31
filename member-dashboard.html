@@ -1,245 +1,345 @@
 <!DOCTYPE html>
-<html lang="id" class="light">
+<html class="light" lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dasbor Kerabat – Manupi</title>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Dasbor Kerabat - Rumah Kopi Manupi</title>
+  
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script>
-    tailwind.config = { theme: { extend: { colors: { "primary": "#013a13", "primary-container": "#1e5128", "on-primary": "#ffffff", "surface-container": "#f0edea", "background": "#fcf9f6", "on-background": "#1c1c1a", }, fontFamily: { "headline": ["Newsreader", "serif"], "body": ["Manrope", "sans-serif"], } } } }
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#013a13",
+            "primary-container": "#1e5128",
+            "background": "#fcf9f6",
+            "secondary": "#6d5b4c"
+          },
+          fontFamily: {
+            "serif": ["Newsreader", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          }
+        },
+      },
+    }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+  <!-- Library untuk Generate QR Code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <style>
-    @keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(0); } }
+    /* Animasi Banner Ultah */
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(-5%); }
+      50% { transform: translateY(0); }
+    }
     .animate-bounce-slow { animation: bounce-slow 3s infinite ease-in-out; }
   </style>
 </head>
-<body class="bg-background text-on-background font-body min-h-screen flex flex-col relative pb-12">
+<body class="bg-background text-stone-800 font-body antialiased min-h-screen pb-12">
+
+  <!-- Skrip Proteksi Login -->
   <script>
-    if (!localStorage.getItem("manupi_memberId")) window.location.href = "member-login.html";
+    const memberId = localStorage.getItem("manupi_memberId");
+    if (!memberId) { window.location.href = "member-login.html"; }
   </script>
 
-  <div id="birthday-banner" class="hidden w-full bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 text-amber-900 py-3 px-6 shadow-md text-center relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-    <div class="relative z-10 flex items-center justify-center gap-3 animate-bounce-slow">
-      <span class="material-symbols-outlined text-3xl">cake</span>
-      <div class="text-left">
-        <h3 class="font-serif text-lg font-bold leading-tight">Selamat Ulang Tahun!</h3>
-        <p class="text-[10px] font-bold uppercase tracking-widest">Tunjukkan pesan ini ke Kasir untuk klaim kejutan</p>
+  <!-- HEADER HEADER -->
+  <header class="bg-stone-50/80 backdrop-blur-xl sticky top-0 z-50 border-b border-stone-200/50">
+    <div class="flex justify-between items-center w-full px-6 md:px-8 py-3 max-w-7xl mx-auto">
+      <a class="text-xl font-serif italic text-emerald-900 shrink-0" href="index.html">
+        <img alt="Manupi Logo" class="h-10 w-auto object-contain" src="assets/images/logo.png" />
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-xs font-bold text-stone-500 hover:text-primary transition-colors uppercase tracking-widest flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">arrow_back</span> KEMBALI
+        </a>
+        <button id="btn-logout" class="text-xs font-bold text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest">
+          Keluar
+        </button>
       </div>
     </div>
-  </div>
-
-  <header class="py-6 px-6 w-full max-w-md mx-auto flex justify-between items-center">
-    <a href="index.html" class="inline-flex items-center gap-2 text-stone-500 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-widest">
-      <span class="material-symbols-outlined text-lg">arrow_back</span> Utama
-    </a>
-    <button id="logout-btn" class="inline-flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors text-sm font-bold uppercase tracking-widest cursor-pointer">
-      Keluar <span class="material-symbols-outlined text-lg">logout</span>
-    </button>
   </header>
 
-  <main class="flex-grow flex flex-col px-6 w-full max-w-md mx-auto">
-    <div class="text-center mb-6">
-      <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-md relative">
-        <span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
-      </div>
-      <h1 id="dash-name" class="text-3xl font-serif text-primary leading-tight mb-1">-</h1>
-      <p id="dash-id" class="text-sm font-bold text-stone-500 uppercase tracking-[0.2em] mb-3">-</p>
+  <main class="max-w-md mx-auto px-6 pt-10">
+    
+    <!-- BANNER ULANG TAHUN (Sembunyi by default) -->
+    <div id="birthday-banner" class="hidden mb-6 bg-gradient-to-r from-amber-200 to-yellow-400 rounded-2xl p-5 shadow-lg border border-amber-300 relative overflow-hidden animate-bounce-slow">
+      <div class="absolute -right-4 -top-4 opacity-30 text-7xl"><span class="material-symbols-outlined">celebration</span></div>
+      <h3 class="font-serif text-2xl text-emerald-900 mb-1 relative z-10">Selamat Ulang Tahun! 🎉</h3>
+      <p class="text-sm text-emerald-800 font-medium relative z-10">Semoga harimu penuh kebahagiaan. Tunjukkan ini ke kasir Manupi untuk kejutan spesialmu hari ini!</p>
+    </div>
+
+    <!-- PROFIL & QR CODE -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-stone-100 p-8 text-center relative overflow-hidden mb-8">
+      <div class="absolute top-0 left-0 w-full h-24 bg-primary/5"></div>
       
-      <div class="flex items-center justify-center gap-4 text-xs font-bold text-stone-400 uppercase tracking-widest">
-        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call</span> <span id="dash-phone">-</span></div>
-        <div class="w-1 h-1 bg-stone-300 rounded-full"></div>
-        <div id="birthday-display" class="flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">cake</span> <span id="dash-birthday" class="text-amber-600 cursor-pointer hover:underline">Atur Ultah</span>
+      <div class="relative z-10 flex flex-col items-center">
+        <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mb-4 shadow-md">
+          <span class="material-symbols-outlined text-3xl">account_circle</span>
         </div>
+        <h1 id="display-name" class="font-serif text-3xl text-primary font-semibold">Tamu</h1>
+        <p id="display-id" class="text-xs font-mono text-stone-400 mt-1 tracking-widest uppercase">-</p>
+        
+        <div class="mt-8 bg-white p-4 rounded-2xl border border-stone-200 shadow-inner inline-block">
+          <!-- Area QR Code -->
+          <div id="qrcode" class="w-48 h-48 flex justify-center items-center"></div>
+        </div>
+        <p class="text-[10px] uppercase tracking-widest text-stone-400 mt-4">Tunjukkan QR ini ke kasir</p>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mb-6">
-      <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
-        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Total Poin</p>
-        <p id="dash-points" class="text-3xl font-bold text-primary">-</p>
+    <!-- POIN & RANK -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <div class="bg-primary text-white rounded-2xl p-5 shadow-sm relative overflow-hidden">
+        <span class="material-symbols-outlined absolute -right-2 -bottom-2 text-6xl opacity-10">toll</span>
+        <p class="text-[10px] uppercase tracking-[0.2em] opacity-80 mb-1">Total Poin</p>
+        <p id="display-points" class="font-serif text-3xl">0</p>
       </div>
-      <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
-        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Peringkat</p>
-        <p id="dash-rank" class="text-3xl font-bold text-primary">-</p>
+      <div class="bg-white border border-stone-100 rounded-2xl p-5 shadow-sm relative overflow-hidden">
+        <span class="material-symbols-outlined absolute -right-2 -bottom-2 text-6xl opacity-5 text-primary">leaderboard</span>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-1">Peringkat</p>
+        <p id="display-rank" class="font-serif text-3xl text-primary">-</p>
       </div>
     </div>
 
-    <button id="btn-show-qr" class="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm flex justify-center items-center gap-2 mb-8 shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
-       <span class="material-symbols-outlined">qr_code</span> Tampilkan QR Code
-    </button>
-
+    <!-- RIWAYAT KUNJUNGAN -->
     <div>
-      <h3 class="text-xl font-serif text-primary mb-4 border-b border-stone-200 pb-2">Riwayat Kunjungan</h3>
-      <div id="dash-history" class="space-y-3">
-         <p class="text-sm text-stone-400 italic text-center py-4 flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined animate-spin">progress_activity</span> Memuat data...
-         </p>
+      <div class="flex justify-between items-end mb-4">
+        <h2 class="font-serif text-2xl text-primary">Riwayat Visit</h2>
+        <span class="text-[10px] uppercase tracking-widest text-stone-400">Terbaru</span>
       </div>
+      <div id="history-container" class="space-y-3">
+        <!-- Riwayat akan dimuat di sini -->
+        <p class="text-sm text-stone-400 italic text-center py-4">Memuat riwayat...</p>
+      </div>
+      <!-- Tombol Lihat Semua (Jika riwayat lebih dari 4) -->
+      <button id="btn-show-all-history" class="hidden w-full mt-4 py-3 bg-stone-100 text-stone-600 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-stone-200 transition-colors">
+        Lihat Semua Riwayat
+      </button>
     </div>
   </main>
 
-  <div id="modal-qr" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-all duration-300">
-     <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
-        <button id="btn-close-qr" class="absolute top-5 right-5 text-stone-400 hover:text-red-600 transition-colors">
-           <span class="material-symbols-outlined text-2xl">close</span>
-        </button>
-        <h2 class="text-2xl font-serif text-primary mb-1 mt-2">QR Kerabat</h2>
-        <p class="text-xs text-stone-500 mb-6 uppercase tracking-widest">Tunjukkan ke Kasir</p>
-        <div class="inline-block p-4 border-2 border-dashed border-stone-200 rounded-2xl bg-surface-container-low mb-4">
-           <img id="qr-image" src="" alt="QR Code" class="w-48 h-48 mix-blend-multiply" />
+  <!-- MODAL PENGATURAN PROFIL (TANGGAL LAHIR & LOKASI) -->
+  <div id="modal-setup-profile" class="hidden fixed inset-0 z-[100] bg-stone-900/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-[2rem] overflow-hidden shadow-2xl relative">
+      <div class="p-6 text-center border-b border-stone-100 bg-emerald-50">
+        <span class="material-symbols-outlined text-4xl text-primary mb-2">person_edit</span>
+        <h3 class="text-xl font-serif text-primary">Lengkapi Profil Anda</h3>
+        <p class="text-xs text-stone-500 mt-1 leading-relaxed">Data ini hanya diisi satu kali untuk keperluan kejutan ulang tahun dan peningkatan layanan Manupi.</p>
+      </div>
+      
+      <div class="p-6 space-y-5">
+        <!-- Input Tanggal Lahir -->
+        <div>
+          <label for="profile-birthday" class="block text-sm font-medium mb-2 text-stone-700">Tanggal Lahir</label>
+          <input id="profile-birthday" type="date" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0" />
         </div>
-        <p id="modal-name" class="text-lg font-serif text-primary">-</p>
-        <p id="modal-id" class="text-sm font-bold text-stone-800 uppercase tracking-widest"></p>
-     </div>
+
+        <!-- Input Asal Daerah Kalsel -->
+        <div>
+          <label for="profile-location" class="block text-sm font-medium mb-2 text-stone-700">Asal Daerah (Tempat Tinggal)</label>
+          <select id="profile-location" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus:border-emerald-700 focus:ring-0">
+            <option value="" disabled selected>Pilih Kabupaten/Kota di Kalsel...</option>
+            <option value="Kota Banjarmasin">Kota Banjarmasin</option>
+            <option value="Kota Banjarbaru">Kota Banjarbaru</option>
+            <option value="Kab. Banjar">Kabupaten Banjar</option>
+            <option value="Kab. Barito Kuala">Kabupaten Barito Kuala</option>
+            <option value="Kab. Tapin">Kabupaten Tapin</option>
+            <option value="Kab. Hulu Sungai Selatan">Kabupaten Hulu Sungai Selatan (HSS)</option>
+            <option value="Kab. Hulu Sungai Tengah">Kabupaten Hulu Sungai Tengah (HST)</option>
+            <option value="Kab. Hulu Sungai Utara">Kabupaten Hulu Sungai Utara (HSU)</option>
+            <option value="Kab. Balangan">Kabupaten Balangan</option>
+            <option value="Kab. Tabalong">Kabupaten Tabalong</option>
+            <option value="Kab. Tanah Laut">Kabupaten Tanah Laut (Tala)</option>
+            <option value="Kab. Tanah Bumbu">Kabupaten Tanah Bumbu (Tanbu)</option>
+            <option value="Kab. Kotabaru">Kabupaten Kotabaru</option>
+          </select>
+        </div>
+
+        <button id="btn-save-profile" type="button" class="w-full rounded-xl bg-primary px-4 py-4 text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-container transition shadow-md flex items-center justify-center gap-2">
+          <span>Simpan Data</span>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div id="modal-birthday" class="hidden fixed inset-0 z-[110] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6">
-    <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 text-center relative shadow-2xl">
-      <button id="btn-close-bday" class="absolute top-4 right-4 text-stone-400 hover:text-red-600 transition-colors">
-         <span class="material-symbols-outlined text-xl">close</span>
-      </button>
-      <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
-        <span class="material-symbols-outlined text-2xl">cake</span>
-      </div>
-      <h2 class="text-xl font-serif text-primary mb-1">Kapan Ulang Tahunmu?</h2>
-      <p class="text-xs text-stone-500 mb-5 leading-relaxed">Masukkan tanggal lahir untuk mengklaim voucher khusus di hari ulang tahunmu. <b class="text-red-500">Perhatian: Tanggal tidak dapat diubah setelah disimpan.</b></p>
-      <input type="date" id="input-bday" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none mb-4 font-bold text-stone-700" />
-      <p id="bday-msg" class="text-xs text-center hidden font-medium mb-3"></p>
-      <button id="btn-save-bday" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
-        Simpan Tanggal
-      </button>
+  <!-- GLOBAL LOADING -->
+  <div id="global-loading" class="hidden fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-[9999] flex items-center justify-center">
+    <div class="bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center">
+      <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      <p class="mt-4 text-primary font-bold text-sm tracking-widest uppercase">Memuat Data...</p>
     </div>
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec"; 
-    let globalVisitHistory = [];
-    const memberId = localStorage.getItem("manupi_memberId");
+    // MASUKKAN URL API TERBARU ANDA DI SINI
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkZF_BzMKra69DLhr64DGwNw_YkT9pyWeflG_8GH1q4RA5pMgM127vMaP6fHMBATX9/exec";
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const memberName = localStorage.getItem("manupi_memberName");
-      if (memberId) {
-        document.getElementById('dash-id').textContent = memberId;
-        document.getElementById('modal-id').textContent = memberId;
-        document.getElementById('qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${memberId}&color=013a13`;
-      }
-      if (memberName) {
-        document.getElementById('dash-name').textContent = memberName;
-        document.getElementById('modal-name').textContent = memberName;
-      }
+    const memName = localStorage.getItem("manupi_memberName");
+    const memId = localStorage.getItem("manupi_memberId");
+    let fullHistoryData = []; // Menyimpan semua riwayat
 
-      document.getElementById('btn-show-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.remove('hidden'));
-      document.getElementById('btn-close-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.add('hidden'));
-      document.getElementById('btn-close-bday').addEventListener('click', () => document.getElementById('modal-birthday').classList.add('hidden'));
-      document.getElementById('logout-btn').addEventListener('click', () => { localStorage.clear(); window.location.href = "index.html"; });
+    // Set Data Dasar di UI
+    document.getElementById("display-name").textContent = memName ? memName.split(' ')[0] : "Tamu";
+    document.getElementById("display-id").textContent = memId || "-";
 
-      await fetchDashboardData();
+    // Buat QR Code
+    if (memId) {
+      new QRCode(document.getElementById("qrcode"), {
+        text: memId,
+        width: 190,
+        height: 190,
+        colorDark : "#013a13",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+    }
+
+    // Logout
+    document.getElementById("btn-logout").addEventListener("click", () => {
+      localStorage.removeItem("manupi_memberId");
+      localStorage.removeItem("manupi_memberName");
+      localStorage.removeItem("manupi_memberPhone");
+      window.location.href = "member-login.html";
     });
 
-    async function fetchDashboardData() {
+    // Toggle Loading
+    function toggleLoading(show) {
+      const el = document.getElementById("global-loading");
+      if (show) el.classList.remove("hidden");
+      else el.classList.add("hidden");
+    }
+
+    // Call API Dasar
+    async function callApi(action, payload = {}) {
       try {
         const response = await fetch(SCRIPT_URL, {
-          method: 'POST', body: JSON.stringify({ action: "getMemberDashboard", payload: { memberId } })
+          method: "POST",
+          body: JSON.stringify({ action, memberId: memId, payload })
         });
-        const result = await response.json();
-        if (result.ok) {
-          const { rank, totalPoints, history, phone, birthday } = result.data;
-          document.getElementById('dash-points').textContent = totalPoints;
-          document.getElementById('dash-rank').textContent = rank;
-          document.getElementById('dash-phone').textContent = phone || "-";
+        return await response.json();
+      } catch (error) {
+        return { ok: false, error: "Gagal terhubung ke server." };
+      }
+    }
 
-          const bdayDisplay = document.getElementById('dash-birthday');
-          if (birthday) {
-            const bDate = new Date(birthday);
-            bdayDisplay.textContent = bDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
-            bdayDisplay.classList.remove('text-amber-600', 'cursor-pointer', 'hover:underline');
-            bdayDisplay.classList.add('text-stone-500');
-            
-            const today = new Date();
-            if (bDate.getDate() === today.getDate() && bDate.getMonth() === today.getMonth()) {
-              document.getElementById('birthday-banner').classList.remove('hidden');
-            }
-          } else {
-            bdayDisplay.addEventListener('click', () => document.getElementById('modal-birthday').classList.remove('hidden'));
+    // Fungsi Render Riwayat
+    function renderHistory(limit = 4) {
+      const container = document.getElementById("history-container");
+      const btnShowAll = document.getElementById("btn-show-all-history");
+      container.innerHTML = "";
+
+      if (fullHistoryData.length === 0) {
+        container.innerHTML = `<p class="text-sm text-stone-400 italic text-center py-6 bg-white rounded-2xl border border-stone-100">Belum ada riwayat kunjungan.</p>`;
+        btnShowAll.classList.add("hidden");
+        return;
+      }
+
+      // Potong data sesuai limit
+      const dataToShow = limit ? fullHistoryData.slice(0, limit) : fullHistoryData;
+
+      dataToShow.forEach(h => {
+        const isMinus = h.pointsAdded < 0;
+        const dateObj = new Date(h.timestamp);
+        const formattedDate = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+        
+        container.innerHTML += `
+          <div class="bg-white border border-stone-100 rounded-2xl p-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center ${isMinus ? 'bg-red-50 text-red-500' : 'bg-emerald-50 text-emerald-600'}">
+                <span class="material-symbols-outlined text-xl">${isMinus ? 'redeem' : 'coffee'}</span>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-stone-800">${isMinus ? 'Tukar Poin' : 'Kunjungan'}</p>
+                <p class="text-[10px] text-stone-400 font-medium">${formattedDate}</p>
+              </div>
+            </div>
+            <p class="font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? '' : '+'}${h.pointsAdded} pts</p>
+          </div>
+        `;
+      });
+
+      // Atur Tombol "Lihat Semua"
+      if (limit && fullHistoryData.length > limit) {
+        btnShowAll.classList.remove("hidden");
+        btnShowAll.onclick = () => renderHistory(null); // Render semua jika diklik
+      } else {
+        btnShowAll.classList.add("hidden");
+      }
+    }
+
+    // Ambil Data Dashboard
+    async function loadDashboard() {
+      toggleLoading(true);
+      const res = await callApi("getMemberDashboard", { memberId: memId });
+      toggleLoading(false);
+
+      if (res.ok) {
+        const data = res.data;
+        document.getElementById("display-points").textContent = data.totalPoints;
+        document.getElementById("display-rank").textContent = "#" + data.rank;
+        
+        // Simpan data riwayat
+        fullHistoryData = data.history || [];
+        renderHistory(4); // Tampilkan 4 terbaru
+
+        // Logika Menampilkan Modal Profil Lengkap
+        const hasBirthday = data.birthday && data.birthday.trim() !== "";
+        const hasLocation = data.location && data.location.trim() !== "";
+
+        if (!hasBirthday || !hasLocation) {
+          // Jika salah satu belum diisi, tampilkan modal
+          document.getElementById("modal-setup-profile").classList.remove("hidden");
+        } else {
+          // Cek Ulang Tahun Hari Ini
+          const bDate = new Date(data.birthday);
+          const today = new Date();
+          if (bDate.getDate() === today.getDate() && bDate.getMonth() === today.getMonth()) {
+            document.getElementById("birthday-banner").classList.remove("hidden");
           }
-
-          globalVisitHistory = history || [];
-          renderHistory(false);
-        } else {
-          document.getElementById('dash-history').innerHTML = `<p class='text-sm text-red-500 text-center py-4'>Error: ${result.error}</p>`;
         }
-      } catch (e) {
-        document.getElementById('dash-history').innerHTML = "<p class='text-sm text-red-500 text-center py-4'>Gagal memuat data.</p>";
+      } else {
+        alert("Gagal memuat data: " + res.error);
       }
     }
 
-    function renderHistory(showAll) {
-      const container = document.getElementById('dash-history');
-      if (globalVisitHistory.length === 0) {
-        container.innerHTML = "<p class='text-sm text-stone-400 italic text-center py-4'>Belum ada riwayat kunjungan.</p>";
+    // Simpan Data Profil
+    document.getElementById("btn-save-profile").addEventListener("click", async () => {
+      const bdayInput = document.getElementById("profile-birthday").value;
+      const locInput = document.getElementById("profile-location").value;
+      const btn = document.getElementById("btn-save-profile");
+
+      if (!bdayInput || !locInput) {
+        alert("Mohon isi Tanggal Lahir dan Asal Daerah Anda.");
         return;
       }
-      const displayData = showAll ? globalVisitHistory : globalVisitHistory.slice(0, 4);
-      let html = displayData.map(v => {
-        const isMinus = v.pointsAdded < 0;
-        const dateObj = new Date(v.timestamp);
-        const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-        const timeStr = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-        return `
-        <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 shadow-sm">
-          <div>
-            <p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? 'Tukar ' : 'Tambah '}${Math.abs(v.pointsAdded)} Poin</p>
-            <p class="text-[10px] text-stone-400 mt-0.5">${dateStr} • Pukul ${timeStr}</p>
-          </div>
-          <div class="bg-stone-50 px-3 py-1.5 rounded-lg border border-stone-100">
-            <span class="material-symbols-outlined text-sm ${isMinus ? 'text-red-500' : 'text-emerald-600'}">${isMinus ? 'remove' : 'add'}</span>
-          </div>
-        </div>`;
-      }).join("");
 
-      if (!showAll && globalVisitHistory.length > 4) {
-        html += `<button onclick="renderHistory(true)" class="w-full text-center text-xs font-bold text-primary mt-4 py-2 hover:underline tracking-widest uppercase">Lihat Semua Riwayat (${globalVisitHistory.length})</button>`;
-      } else if (showAll && globalVisitHistory.length > 4) {
-        html += `<button onclick="renderHistory(false)" class="w-full text-center text-xs font-bold text-stone-400 mt-4 py-2 hover:underline tracking-widest uppercase">Tampilkan Sedikit</button>`;
-      }
-      container.innerHTML = html;
-    }
+      btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Menyimpan...`;
+      btn.disabled = true;
 
-    document.getElementById('btn-save-bday').addEventListener('click', async function() {
-      const bdayVal = document.getElementById('input-bday').value;
-      const msgEl = document.getElementById('bday-msg');
-      if (!bdayVal) {
-        msgEl.textContent = "Silakan pilih tanggal.";
-        msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
-        return;
-      }
-      this.disabled = true; this.innerHTML = "Menyimpan...";
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST', body: JSON.stringify({ action: "setBirthday", payload: { memberId: memberId, birthdayDate: bdayVal } })
-        });
-        const result = await response.json();
-        if (result.ok) {
-          msgEl.textContent = "Berhasil disimpan!";
-          msgEl.className = "text-xs text-center font-medium mb-3 text-primary block";
-          setTimeout(() => { document.getElementById('modal-birthday').classList.add('hidden'); window.location.reload(); }, 1000);
-        } else {
-          msgEl.textContent = result.error;
-          msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
-          this.disabled = false; this.innerHTML = "Simpan Tanggal";
-        }
-      } catch (e) {
-        msgEl.textContent = "Gagal menghubungi server.";
-        msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
-        this.disabled = false; this.innerHTML = "Simpan Tanggal";
+      const res = await callApi("updateProfile", { 
+        memberId: memId, 
+        birthdayDate: bdayInput,
+        location: locInput
+      });
+
+      btn.disabled = false;
+      btn.innerHTML = `<span>Simpan Data</span>`;
+
+      if (res.ok) {
+        document.getElementById("modal-setup-profile").classList.add("hidden");
+        // Reload dashboard untuk mengecek ultah
+        loadDashboard();
+      } else {
+        alert("Gagal menyimpan data profil: " + res.error);
       }
     });
+
+    // Jalankan Saat Halaman Dimuat
+    document.addEventListener("DOMContentLoaded", loadDashboard);
   </script>
 </body>
 </html>
