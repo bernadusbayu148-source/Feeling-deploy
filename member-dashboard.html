@@ -22,6 +22,7 @@
     if (!localStorage.getItem("manupi_memberId")) window.location.href = "member-login.html";
   </script>
 
+  <!-- BANNER ULTAH -->
   <div id="birthday-banner" class="hidden w-full bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 text-amber-900 py-3 px-6 shadow-md text-center relative overflow-hidden">
     <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
     <div class="relative z-10 flex items-center justify-center gap-3 animate-bounce-slow">
@@ -50,19 +51,23 @@
       <h1 id="dash-name" class="text-3xl font-serif text-primary leading-tight mb-1">-</h1>
       <p id="dash-id" class="text-sm font-bold text-stone-500 uppercase tracking-[0.2em] mb-3">-</p>
       
-      <!-- DATA PROFIL (HP, LOKASI, ULTAH) -->
-      <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-stone-400 uppercase tracking-widest mt-2">
-        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call</span> <span id="dash-phone">-</span></div>
+      <!-- NAVIGASI DATA DIRI (DIPISAH) -->
+      <div class="flex items-center justify-center gap-2 md:gap-3 text-[10px] font-bold text-stone-400 uppercase tracking-widest flex-wrap">
+        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">call</span> <span id="dash-phone">-</span></div>
         <div class="w-1 h-1 bg-stone-300 rounded-full"></div>
-        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> <span id="dash-location">-</span></div>
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">location_on</span> 
+          <span id="dash-location" class="text-amber-600 cursor-pointer hover:underline">Atur Daerah</span>
+        </div>
         <div class="w-1 h-1 bg-stone-300 rounded-full"></div>
-        <div id="birthday-display" class="flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">cake</span> <span id="dash-birthday" class="text-amber-600 cursor-pointer hover:underline">Atur Profil</span>
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">cake</span> 
+          <span id="dash-birthday" class="text-amber-600 cursor-pointer hover:underline">Atur Ultah</span>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mb-6 mt-4">
+    <div class="grid grid-cols-2 gap-4 mb-6">
       <div class="bg-white rounded-[2rem] border border-stone-200 p-5 text-center shadow-sm">
         <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Total Poin</p>
         <p id="dash-points" class="text-3xl font-bold text-primary">-</p>
@@ -87,7 +92,7 @@
     </div>
   </main>
 
-  <!-- MODAL QR CODE (Asli milik Anda) -->
+  <!-- MODAL QR -->
   <div id="modal-qr" class="hidden fixed inset-0 z-[100] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6 transition-all duration-300">
      <div class="bg-white w-full max-w-sm rounded-[2rem] p-8 text-center relative shadow-2xl">
         <button id="btn-close-qr" class="absolute top-5 right-5 text-stone-400 hover:text-red-600 transition-colors">
@@ -103,48 +108,57 @@
      </div>
   </div>
 
-  <!-- MODAL PENGISIAN PROFIL (Diperbarui dengan Lokasi) -->
+  <!-- MODAL 1: ULANG TAHUN -->
   <div id="modal-birthday" class="hidden fixed inset-0 z-[110] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6">
     <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 text-center relative shadow-2xl">
       <button id="btn-close-bday" class="absolute top-4 right-4 text-stone-400 hover:text-red-600 transition-colors">
          <span class="material-symbols-outlined text-xl">close</span>
       </button>
       <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
-        <span class="material-symbols-outlined text-2xl">person_edit</span>
+        <span class="material-symbols-outlined text-2xl">cake</span>
       </div>
-      <h2 class="text-xl font-serif text-primary mb-1">Lengkapi Profilmu</h2>
-      <p class="text-[11px] text-stone-500 mb-5 leading-relaxed">Masukkan tanggal lahir dan daerah asal. <b class="text-red-500">Perhatian: Data ini tidak dapat diubah setelah disimpan.</b></p>
-      
-      <!-- Input Tanggal Lahir -->
-      <div class="text-left mb-3">
-        <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Tanggal Lahir</label>
-        <input type="date" id="input-bday" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none font-bold text-stone-700" />
-      </div>
-
-      <!-- Input Lokasi Kalsel -->
-      <div class="text-left mb-4">
-        <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Asal Daerah</label>
-        <select id="input-location" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none font-bold text-stone-700">
-          <option value="" disabled selected>Pilih Kabupaten/Kota di Kalsel...</option>
-          <option value="Kota Banjarmasin">Kota Banjarmasin</option>
-          <option value="Kota Banjarbaru">Kota Banjarbaru</option>
-          <option value="Kab. Banjar">Kabupaten Banjar</option>
-          <option value="Kab. Barito Kuala">Kabupaten Barito Kuala</option>
-          <option value="Kab. Tapin">Kabupaten Tapin</option>
-          <option value="Kab. Hulu Sungai Selatan">Kabupaten Hulu Sungai Selatan</option>
-          <option value="Kab. Hulu Sungai Tengah">Kabupaten Hulu Sungai Tengah</option>
-          <option value="Kab. Hulu Sungai Utara">Kabupaten Hulu Sungai Utara</option>
-          <option value="Kab. Balangan">Kabupaten Balangan</option>
-          <option value="Kab. Tabalong">Kabupaten Tabalong</option>
-          <option value="Kab. Tanah Laut">Kabupaten Tanah Laut</option>
-          <option value="Kab. Tanah Bumbu">Kabupaten Tanah Bumbu</option>
-          <option value="Kab. Kotabaru">Kabupaten Kotabaru</option>
-        </select>
-      </div>
-
+      <h2 class="text-xl font-serif text-primary mb-1">Tanggal Lahir</h2>
+      <p class="text-xs text-stone-500 mb-5 leading-relaxed">Masukkan tanggal lahir untuk mengklaim kejutan di hari spesialmu. <b class="text-red-500">Perhatian: Tidak dapat diubah.</b></p>
+      <input type="date" id="input-bday" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none mb-4 font-bold text-stone-700" />
       <p id="bday-msg" class="text-xs text-center hidden font-medium mb-3"></p>
       <button id="btn-save-bday" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
-        Simpan Data
+        Simpan Tanggal
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ASAL DAERAH -->
+  <div id="modal-location" class="hidden fixed inset-0 z-[110] bg-stone-900/80 backdrop-blur-sm flex justify-center items-center p-6">
+    <div class="bg-white w-full max-w-sm rounded-[2rem] p-6 text-center relative shadow-2xl">
+      <button id="btn-close-loc" class="absolute top-4 right-4 text-stone-400 hover:text-red-600 transition-colors">
+         <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+      <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3">
+        <span class="material-symbols-outlined text-2xl">location_on</span>
+      </div>
+      <h2 class="text-xl font-serif text-primary mb-1">Asal Daerah</h2>
+      <p class="text-xs text-stone-500 mb-5 leading-relaxed">Dari mana asalmu? Pilih kabupaten/kota tempat tinggalmu saat ini. <b class="text-red-500">Perhatian: Tidak dapat diubah.</b></p>
+      
+      <select id="input-location" class="w-full rounded-xl border border-stone-200 bg-surface-container px-4 py-3 text-sm focus:border-primary outline-none mb-4 font-bold text-stone-700">
+        <option value="" disabled selected>Pilih Kabupaten/Kota di Kalsel...</option>
+        <option value="Kota Banjarmasin">Kota Banjarmasin</option>
+        <option value="Kota Banjarbaru">Kota Banjarbaru</option>
+        <option value="Kab. Banjar">Kabupaten Banjar</option>
+        <option value="Kab. Barito Kuala">Kabupaten Barito Kuala</option>
+        <option value="Kab. Tapin">Kabupaten Tapin</option>
+        <option value="Kab. Hulu Sungai Selatan">Kabupaten Hulu Sungai Selatan</option>
+        <option value="Kab. Hulu Sungai Tengah">Kabupaten Hulu Sungai Tengah</option>
+        <option value="Kab. Hulu Sungai Utara">Kabupaten Hulu Sungai Utara</option>
+        <option value="Kab. Balangan">Kabupaten Balangan</option>
+        <option value="Kab. Tabalong">Kabupaten Tabalong</option>
+        <option value="Kab. Tanah Laut">Kabupaten Tanah Laut</option>
+        <option value="Kab. Tanah Bumbu">Kabupaten Tanah Bumbu</option>
+        <option value="Kab. Kotabaru">Kabupaten Kotabaru</option>
+      </select>
+
+      <p id="loc-msg" class="text-xs text-center hidden font-medium mb-3"></p>
+      <button id="btn-save-loc" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-all">
+        Simpan Daerah
       </button>
     </div>
   </div>
@@ -166,9 +180,15 @@
         document.getElementById('modal-name').textContent = memberName;
       }
 
+      // Pembuka Modal
       document.getElementById('btn-show-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.remove('hidden'));
+      
+      // Penutup Modal
       document.getElementById('btn-close-qr').addEventListener('click', () => document.getElementById('modal-qr').classList.add('hidden'));
       document.getElementById('btn-close-bday').addEventListener('click', () => document.getElementById('modal-birthday').classList.add('hidden'));
+      document.getElementById('btn-close-loc').addEventListener('click', () => document.getElementById('modal-location').classList.add('hidden'));
+      
+      // Logout
       document.getElementById('logout-btn').addEventListener('click', () => { localStorage.clear(); window.location.href = "index.html"; });
 
       await fetchDashboardData();
@@ -180,33 +200,38 @@
           method: 'POST', body: JSON.stringify({ action: "getMemberDashboard", payload: { memberId } })
         });
         const result = await response.json();
+        
         if (result.ok) {
-          // Menarik data location juga dari backend
           const { rank, totalPoints, history, phone, birthday, location } = result.data;
-          
           document.getElementById('dash-points').textContent = totalPoints;
           document.getElementById('dash-rank').textContent = rank;
           document.getElementById('dash-phone').textContent = phone || "-";
-          
-          // Menampilkan lokasi (atau "Belum Diisi" jika kosong)
-          const locationDisplay = document.getElementById('dash-location');
-          locationDisplay.textContent = location || "Belum Diisi";
 
+          // Logika Tampilan Lokasi
+          const locDisplay = document.getElementById('dash-location');
+          if (location) {
+            locDisplay.textContent = location;
+            locDisplay.classList.remove('text-amber-600', 'cursor-pointer', 'hover:underline');
+            locDisplay.classList.add('text-stone-400');
+          } else {
+            locDisplay.textContent = "Atur Daerah";
+            locDisplay.addEventListener('click', () => document.getElementById('modal-location').classList.remove('hidden'));
+          }
+
+          // Logika Tampilan Tanggal Lahir
           const bdayDisplay = document.getElementById('dash-birthday');
-          
-          // Cek apakah kedua data (ultah & lokasi) sudah diisi
-          if (birthday && location) {
+          if (birthday) {
             const bDate = new Date(birthday);
-            bdayDisplay.textContent = bDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
+            bdayDisplay.textContent = bDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
             bdayDisplay.classList.remove('text-amber-600', 'cursor-pointer', 'hover:underline');
-            bdayDisplay.classList.add('text-stone-500');
+            bdayDisplay.classList.add('text-stone-400');
             
             const today = new Date();
             if (bDate.getDate() === today.getDate() && bDate.getMonth() === today.getMonth()) {
               document.getElementById('birthday-banner').classList.remove('hidden');
             }
           } else {
-            // Jika salah satu belum diisi, biarkan tombol "Atur Profil" aktif
+            bdayDisplay.textContent = "Atur Ultah";
             bdayDisplay.addEventListener('click', () => document.getElementById('modal-birthday').classList.remove('hidden'));
           }
 
@@ -252,22 +277,19 @@
       container.innerHTML = html;
     }
 
+    // SIMPAN ULANG TAHUN
     document.getElementById('btn-save-bday').addEventListener('click', async function() {
       const bdayVal = document.getElementById('input-bday').value;
-      const locVal = document.getElementById('input-location').value;
       const msgEl = document.getElementById('bday-msg');
-      
-      if (!bdayVal || !locVal) {
-        msgEl.textContent = "Silakan lengkapi tanggal lahir dan daerah asal.";
+      if (!bdayVal) {
+        msgEl.textContent = "Silakan pilih tanggal.";
         msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
         return;
       }
-      
       this.disabled = true; this.innerHTML = "Menyimpan...";
       try {
         const response = await fetch(SCRIPT_URL, {
-          // Memanggil action updateProfile yang sudah kita buat di Code.gs
-          method: 'POST', body: JSON.stringify({ action: "updateProfile", payload: { memberId: memberId, birthdayDate: bdayVal, location: locVal } })
+          method: 'POST', body: JSON.stringify({ action: "updateProfile", payload: { memberId: memberId, birthdayDate: bdayVal } })
         });
         const result = await response.json();
         if (result.ok) {
@@ -277,12 +299,43 @@
         } else {
           msgEl.textContent = result.error;
           msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
-          this.disabled = false; this.innerHTML = "Simpan Data";
+          this.disabled = false; this.innerHTML = "Simpan Tanggal";
         }
       } catch (e) {
         msgEl.textContent = "Gagal menghubungi server.";
         msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
-        this.disabled = false; this.innerHTML = "Simpan Data";
+        this.disabled = false; this.innerHTML = "Simpan Tanggal";
+      }
+    });
+
+    // SIMPAN LOKASI DAERAH
+    document.getElementById('btn-save-loc').addEventListener('click', async function() {
+      const locVal = document.getElementById('input-location').value;
+      const msgEl = document.getElementById('loc-msg');
+      if (!locVal) {
+        msgEl.textContent = "Silakan pilih asal daerah.";
+        msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
+        return;
+      }
+      this.disabled = true; this.innerHTML = "Menyimpan...";
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST', body: JSON.stringify({ action: "updateProfile", payload: { memberId: memberId, location: locVal } })
+        });
+        const result = await response.json();
+        if (result.ok) {
+          msgEl.textContent = "Berhasil disimpan!";
+          msgEl.className = "text-xs text-center font-medium mb-3 text-primary block";
+          setTimeout(() => { document.getElementById('modal-location').classList.add('hidden'); window.location.reload(); }, 1000);
+        } else {
+          msgEl.textContent = result.error;
+          msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
+          this.disabled = false; this.innerHTML = "Simpan Daerah";
+        }
+      } catch (e) {
+        msgEl.textContent = "Gagal menghubungi server.";
+        msgEl.className = "text-xs text-center font-medium mb-3 text-red-500 block";
+        this.disabled = false; this.innerHTML = "Simpan Daerah";
       }
     });
   </script>
