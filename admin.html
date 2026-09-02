@@ -121,9 +121,32 @@
             </button>
           </div>
         </div>
+
+        <!-- FITUR BARU KLAIM LEVEL PRESTISE -->
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <h3 class="text-xl font-serif text-amber-900 mb-1">Klaim Prestise (Level)</h3>
+          <p class="text-[11px] text-amber-700 mb-4 leading-snug">Poin utama tidak akan terpotong saat klaim. Tombol otomatis terkunci jika riwayat klaim pada level tersebut sudah tercatat.</p>
+          <div class="space-y-3" id="claim-buttons-container">
+            <button data-level="1" data-min="161" class="claim-lvl-btn w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition shadow-sm flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed">
+              <span>Level 1</span> <span class="text-[10px] bg-amber-600 px-2 py-1 rounded-md uppercase tracking-widest">Min. 161 pts</span>
+            </button>
+            <button data-level="2" data-min="501" class="claim-lvl-btn w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition shadow-sm flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed">
+              <span>Level 2</span> <span class="text-[10px] bg-amber-600 px-2 py-1 rounded-md uppercase tracking-widest">Min. 501 pts</span>
+            </button>
+            <button data-level="3" data-min="751" class="claim-lvl-btn w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition shadow-sm flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed">
+              <span>Level 3</span> <span class="text-[10px] bg-amber-600 px-2 py-1 rounded-md uppercase tracking-widest">Min. 751 pts</span>
+            </button>
+            <button data-level="4" data-min="1001" class="claim-lvl-btn w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition shadow-sm flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed">
+              <span>Level 4</span> <span class="text-[10px] bg-amber-600 px-2 py-1 rounded-md uppercase tracking-widest">Min. 1001 pts</span>
+            </button>
+            <button data-level="5" data-min="1501" class="claim-lvl-btn w-full rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition shadow-sm flex justify-between items-center disabled:opacity-50 disabled:cursor-not-allowed">
+              <span>Level 5</span> <span class="text-[10px] bg-amber-600 px-2 py-1 rounded-md uppercase tracking-widest">Min. 1501 pts</span>
+            </button>
+          </div>
+        </div>
         
         <div>
-          <h3 class="text-2xl font-serif text-primary mb-3">Riwayat Visit</h3>
+          <h3 class="text-2xl font-serif text-primary mb-3 mt-4">Riwayat Visit</h3>
           <div id="member-log-list" class="space-y-3"></div>
         </div>
       </div>
@@ -183,6 +206,6 @@
       if (el) el.textContent = adminId || "-";
     })();
   </script>
-  <script type="module" src="assets/js/admin.js?v=9"></script>
+  <script type="module" src="assets/js/admin.js?v=10"></script>
 </body>
 </html>
