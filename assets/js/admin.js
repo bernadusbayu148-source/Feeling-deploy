@@ -60,7 +60,7 @@ async function loadVisitHistory(memberId) {
   logList.innerHTML = "<p class='text-xs p-4 text-center animate-pulse'>Memuat riwayat...</p>";
   const res = await callApi("listVisits", { memberId });
   
-  let claimedLevels = []; // Menyimpan level yang sudah diklaim
+  let claimedLevels = []; // Menyimpan level yang sudah diklaim sebagai angka
   
   if (res.ok && res.data.length > 0) {
     logList.innerHTML = res.data.map(v => {
@@ -68,11 +68,12 @@ async function loadVisitHistory(memberId) {
       
       // Jika ini adalah transaksi klaim (ada text note)
       if (v.note && v.note.startsWith("Claim reward level")) {
-        const lvl = v.note.replace("Claim reward level ", "").trim();
-        claimedLevels.push(lvl); // Catat bahwa level ini sudah pernah diambil
+        const lvlStr = v.note.replace("Claim reward level ", "").trim();
+        const lvlInt = parseInt(lvlStr, 10);
+        if (!isNaN(lvlInt)) claimedLevels.push(lvlInt); // Catat angka levelnya
       }
       
-      // Tampilan nama riwayat (tampilkan note jika ada, jika tidak tampilkan angka)
+      // Tampilan nama riwayat
       const displayTitle = v.note ? `<span class="text-amber-600 font-bold"><span class="material-symbols-outlined text-[12px] align-middle mr-1">star</span>${v.note}</span>` : `${isMinus ? '' : '+'}${v.pointsAdded} Points`;
       
       return `
@@ -87,17 +88,19 @@ async function loadVisitHistory(memberId) {
     }).join("");
   } else { logList.innerHTML = "<p class='text-sm text-stone-400 italic p-4 text-center'>Belum ada riwayat.</p>"; }
   
-  // LOGIKA PENGUNCIAN TOMBOL KLAIM LEVEL
+  // LOGIKA PENGUNCIAN TOMBOL (Mencari Level Tertinggi)
+  const maxClaimedLevel = claimedLevels.length > 0 ? Math.max(...claimedLevels) : 0;
+  
   const claimBtns = document.querySelectorAll('.claim-lvl-btn');
   const curMember = allMembers.find(m => m.memberId === memberId);
   const curPts = curMember ? curMember.totalPoints : 0;
   
   claimBtns.forEach(btn => {
-     const lvl = btn.getAttribute('data-level');
-     const minPts = parseInt(btn.getAttribute('data-min'));
+     const lvl = parseInt(btn.getAttribute('data-level'), 10);
+     const minPts = parseInt(btn.getAttribute('data-min'), 10);
      
-     // Skenario 1: Sudah pernah diklaim
-     if (claimedLevels.includes(lvl)) {
+     // Skenario 1: Level ini atau level di bawahnya sudah hangus karena ada klaim level lebih tinggi
+     if (lvl <= maxClaimedLevel) {
          btn.disabled = true;
          btn.className = "claim-lvl-btn w-full rounded-xl bg-stone-200 px-4 py-3 text-sm font-semibold text-stone-500 transition shadow-sm flex justify-between items-center cursor-not-allowed border border-stone-300";
          btn.innerHTML = `<span>Level ${lvl}</span> <span class="text-[10px] bg-stone-300 px-2 py-1 rounded-md uppercase tracking-widest text-stone-600"><span class="material-symbols-outlined text-[10px] align-middle mr-0.5">check_circle</span>Selesai</span>`;
