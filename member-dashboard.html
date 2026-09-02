@@ -257,14 +257,26 @@
         const dateObj = new Date(v.timestamp);
         const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         const timeStr = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        
+        // Logika Penggantian Judul Jika Ini Transaksi Klaim Reward (Punya note)
+        let titleHtml = `<p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? 'Tukar ' : 'Tambah '}${Math.abs(v.pointsAdded)} Poin</p>`;
+        let iconHtml = `<span class="material-symbols-outlined text-sm ${isMinus ? 'text-red-500' : 'text-emerald-600'}">${isMinus ? 'remove' : 'add'}</span>`;
+        let boxColor = "bg-stone-50 border-stone-100";
+        
+        if (v.note) {
+           titleHtml = `<p class="text-sm font-bold text-amber-600">${v.note}</p>`;
+           iconHtml = `<span class="material-symbols-outlined text-sm text-amber-600">military_tech</span>`; // Ikon Prestise Medali
+           boxColor = "bg-amber-100 border-amber-200";
+        }
+
         return `
         <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-stone-100 shadow-sm">
           <div>
-            <p class="text-sm font-bold ${isMinus ? 'text-red-500' : 'text-primary'}">${isMinus ? 'Tukar ' : 'Tambah '}${Math.abs(v.pointsAdded)} Poin</p>
+            ${titleHtml}
             <p class="text-[10px] text-stone-400 mt-0.5">${dateStr} • Pukul ${timeStr}</p>
           </div>
-          <div class="bg-stone-50 px-3 py-1.5 rounded-lg border border-stone-100">
-            <span class="material-symbols-outlined text-sm ${isMinus ? 'text-red-500' : 'text-emerald-600'}">${isMinus ? 'remove' : 'add'}</span>
+          <div class="${boxColor} px-3 py-1.5 rounded-lg border">
+            ${iconHtml}
           </div>
         </div>`;
       }).join("");
